@@ -14,10 +14,10 @@ CREATE TABLE "user" (
 
 CREATE TABLE "cardiac_arrest" (
     "id" SERIAL PRIMARY KEY,
-    "arrest" VARCHAR (30) NOT NULL
+    "type" VARCHAR (30) NOT NULL
 );
 
-INSERT INTO "cardiac_arrest" ("arrest")
+INSERT INTO "cardiac_arrest" ("type")
 VALUES
 ('No'),
 ('Yes, Prior to EMS Arrival'),
@@ -25,10 +25,10 @@ VALUES
 
 CREATE TABLE "cardiac_arrest_etiology" (
     "id" SERIAL PRIMARY KEY,
-    "etiology" VARCHAR (40)
+    "type" VARCHAR (40)
 );
 
-INSERT INTO "cardiac_arrest_etiology" ("etiology")
+INSERT INTO "cardiac_arrest_etiology" ("type")
 VALUES
 ('Cardiac (presumed)'),
 ('Drowning/Submersion'),
@@ -41,10 +41,10 @@ VALUES
 
 CREATE TABLE "cardiac_arrest_witness" (
     "id" SERIAL PRIMARY KEY,
-    "witness" VARCHAR (30)
+    "type" VARCHAR (30)
 );
 
-INSERT INTO "cardiac_arrest_witness" ("witness")
+INSERT INTO "cardiac_arrest_witness" ("type")
 VALUES
 ('None'),
 ('Family Member'),
@@ -53,10 +53,10 @@ VALUES
 
 CREATE TABLE "AED_use_prior" (
     "id" SERIAL PRIMARY KEY,
-    "used" VARCHAR (30)
+    "type" VARCHAR (30)
 );
 
-INSERT INTO "AED_use_prior" ("used")
+INSERT INTO "AED_use_prior" ("type")
 VALUES
 ('No'),
 ('Yes, without defibrillation'),
@@ -86,10 +86,10 @@ VALUES
 
 CREATE TABLE "spontaneous_circulation"(
     "id" SERIAL PRIMARY KEY,
-    "circulation" VARCHAR (50)
+    "type" VARCHAR (50)
 );
 
-INSERT INTO "spontaneous_circulation" ("circulation")
+INSERT INTO "spontaneous_circulation" ("type")
 VALUES
 ('No'),
 ('Yes, at arrival of ED'),
@@ -98,10 +98,10 @@ VALUES
 
 CREATE TABLE "CPR_stopped" (
     "id" SERIAL PRIMARY KEY,
-    "reason" VARCHAR (60)
+    "type" VARCHAR (60)
 );
 
-INSERT INTO "CPR_stopped" ("reason")
+INSERT INTO "CPR_stopped" ("type")
 VALUES
 ('DNR'),
 ('Medical Control Order'),
@@ -110,12 +110,12 @@ VALUES
 ('Protocol/Policy Requirements Completed'),
 ('Return of Spontaneous Circulation (pulse or BP noted)');
 
-CREATE TABLE "resuscitatioin_attempt" (
+CREATE TABLE "resuscitation_attempt" (
     "id" SERIAL PRIMARY KEY,
     "type" VARCHAR (50)
 );
 
-INSERT INTO "resuscitatioin_attempt" ("type")
+INSERT INTO "resuscitation_attempt" ("type")
 VALUES
 ('Attempted Defibrillation'),
 ('Attempted Ventilation'),
@@ -126,10 +126,10 @@ VALUES
 
 CREATE TABLE "AED_applicator" (
     "id" SERIAL PRIMARY KEY,
-    "applicator" VARCHAR (40)
+    "type" VARCHAR (40)
 );
 
-INSERT INTO "AED_applicator" ("applicator")
+INSERT INTO "AED_applicator" ("type")
 VALUES
 ('Bystander'),
 ('Family Member'),
@@ -141,10 +141,10 @@ VALUES
 
 CREATE TABLE "AED_initiator" (
     "id" SERIAL PRIMARY KEY,
-    "initiator" VARCHAR (40)
+    "type" VARCHAR (40)
 );
 
-INSERT INTO "AED_initiator" ("initiator")
+INSERT INTO "AED_initiator" ("type")
 VALUES
 ('Bystander'),
 ('Family Member'),
@@ -156,10 +156,10 @@ VALUES
 
 CREATE TABLE "AED_defibrillator" (
     "id" SERIAL PRIMARY KEY,
-    "defibrillator" VARCHAR (40)
+    "type" VARCHAR (40)
 );
 
-INSERT INTO "AED_defibrillator" ("defibrillator")
+INSERT INTO "AED_defibrillator" ("type")
 VALUES
 ('Bystander'),
 ('Family Member'),
@@ -171,10 +171,10 @@ VALUES
 
 CREATE TABLE "gender" (
     "id" SERIAL PRIMARY KEY,
-    "gender" VARCHAR (45)
+    "type" VARCHAR (45)
 );
 
-INSERT INTO "gender" ("gender")
+INSERT INTO "gender" ("type")
 VALUES
 ('Female'),
 ('Male'),
@@ -185,10 +185,10 @@ VALUES
 
 CREATE TABLE "race" (
     "id" SERIAL PRIMARY KEY,
-    "race" VARCHAR (50)
+    "type" VARCHAR (50)
 );
 
-INSERT INTO "race" ("race")
+INSERT INTO "race" ("type")
 VALUES
 ('American Indian or Alaska Native'),
 ('Asian'),
@@ -199,10 +199,10 @@ VALUES
 
 CREATE TABLE "age_units" (
     "id" SERIAL PRIMARY KEY,
-    "unit" VARCHAR (10)
+    "type" VARCHAR (10)
 );
 
-INSERT INTO "age_units" ("unit")
+INSERT INTO "age_units" ("type")
 VALUES
 ('Days'),
 ('Hours'),
@@ -212,10 +212,10 @@ VALUES
 
 CREATE TABLE "anatomic_location" (
     "id" SERIAL PRIMARY KEY,
-    "location" VARCHAR(20)
+    "type" VARCHAR(20)
 );
 
-INSERT INTO "anatomic_location" ("location")
+INSERT INTO "anatomic_location" ("type")
 VALUES
 ('Abdomen'),
 ('Back'),
@@ -229,10 +229,10 @@ VALUES
 
 CREATE TABLE "organ_system" (
     "id" SERIAL PRIMARY KEY,
-    "system" VARCHAR (40)
+    "type" VARCHAR (40)
 );
 
-INSERT INTO "organ_system" ("system")
+INSERT INTO "organ_system" ("type")
 VALUES
 ('Behavioral/Psychiatric'),
 ('Cardiovascular'),
@@ -248,10 +248,10 @@ VALUES
 
 CREATE TABLE "initial_acuity" (
     "id" SERIAL PRIMARY KEY,
-    "acuity" VARCHAR (40)
+    "type" VARCHAR (40)
 );
 
-INSERT INTO "initial_acuity" ("acuity")
+INSERT INTO "initial_acuity" ("type")
 VALUES
 ('Critical-red'),
 ('Emergent-Yellow'),
@@ -261,10 +261,10 @@ VALUES
 
 CREATE TABLE "alcohol_drug_use" (
     "id" SERIAL PRIMARY KEY,
-    "indicators" VARCHAR (60)
+    "type" VARCHAR (60)
 );
 
-INSERT INTO "alcohol_drug_use" ("indicators")
+INSERT INTO "alcohol_drug_use" ("type")
 VALUES
 ('Alcohol Containers/Paraphernalia at Scene'),
 ('Drug Paraphernalia at Scene'),
@@ -275,10 +275,10 @@ VALUES
 
 CREATE TABLE "final_acuity" (
     "id" SERIAL PRIMARY KEY,
-    "acuity" VARCHAR (50)
+    "type" VARCHAR (50)
 );
 
-INSERT INTO "final_acuity" ("acuity")
+INSERT INTO "final_acuity" ("type")
 VALUES
 ('Critical (red)'),
 ('Emergent (Yellow)'),
@@ -289,10 +289,10 @@ VALUES
 
 CREATE TABLE "procedure_performer" (
     "id" SERIAL PRIMARY KEY,
-    "role" VARCHAR (50)
+    "type" VARCHAR (50)
 );
 
-INSERT INTO "procedure_performer" ("role")
+INSERT INTO "procedure_performer" ("type")
 VALUES
 ('Advance Emergency Medical Technician (AEMT)'),
 ('Emergency Medical Technician- Intermediate'),
@@ -317,10 +317,10 @@ VALUES
 
 CREATE TABLE "responsiveness_level" (
     "id" SERIAL PRIMARY KEY,
-    "level" VARCHAR (20)
+    "type" VARCHAR (20)
 );
 
-INSERT INTO "responsiveness_level" ("level")
+INSERT INTO "responsiveness_level" ("type")
 VALUES
 ('Alert'),
 ('Verbal'),
@@ -329,10 +329,10 @@ VALUES
 
 CREATE TABLE "pain_scale" (
     "id" SERIAL PRIMARY KEY,
-    "score" int
+    "type" int
 );
 
-INSERT INTO "pain_scale" ("score")
+INSERT INTO "pain_scale" ("type")
 VALUES
 (0),
 (1),
@@ -348,10 +348,10 @@ VALUES
 
 CREATE TABLE "stroke_score" (
     "id" SERIAL PRIMARY KEY,
-    "score" VARCHAR (20)
+    "type" VARCHAR (20)
 );
 
-INSERT INTO "stroke_score" ("score")
+INSERT INTO "stroke_score" ("type")
 VALUES
 ('Negative'),
 ('Non-Conclusive'),
@@ -359,10 +359,10 @@ VALUES
 
 CREATE TABLE "stroke_scale" (
     "id" SERIAL PRIMARY KEY,
-    "score" VARCHAR (60)
+    "type" VARCHAR (60)
 );
 
-INSERT INTO "stroke_scale" ("score")
+INSERT INTO "stroke_scale" ("type")
 VALUES
 ('Cincinnati Prehospital Stroke Scale (CPSS)'),
 ('Los Angeles Prehospital Stroke Screen (LAPSS)'),
@@ -379,10 +379,10 @@ VALUES
 
 CREATE TABLE "med_admin_route" (
     "id" SERIAL PRIMARY KEY,
-    "route" VARCHAR (40)
+    "type" VARCHAR (40)
 );
 
-INSERT INTO "med_admin_route" ("route")
+INSERT INTO "med_admin_route" ("type")
 VALUES
 ('Blow-By'),
 ('Buccal'),
@@ -425,10 +425,10 @@ VALUES
 
 CREATE TABLE "med_dosage_units" (
     "id" SERIAL PRIMARY KEY,
-    "units" VARCHAR (50)
+    "type" VARCHAR (50)
 );
 
-INSERT INTO "med_dosage_units" ("units")
+INSERT INTO "med_dosage_units" ("type")
 VALUES
 ('Grams(gms)'),
 ('Inches(in)'),
@@ -459,10 +459,10 @@ VALUES
 
 CREATE TABLE "med_admin_by" (
     "id" SERIAL PRIMARY KEY,
-    "person" VARCHAR (50)
+    "type" VARCHAR (50)
 );
 
-INSERT INTO "med_admin_by" ("person")
+INSERT INTO "med_admin_by" ("type")
 VALUES
 ('Advanced Emergency Medical Technician (AEMT)'),
 ('Emergency Medical Technician- Intermediate'),
@@ -514,10 +514,10 @@ VALUES
 
 CREATE TABLE "triage_cat" (
     "id" SERIAL PRIMARY KEY,
-    "category" VARCHAR (10)
+    "type" VARCHAR (10)
 );
 
-INSERT INTO "triage_cat" ("category")
+INSERT INTO "triage_cat" ("type")
 VALUES
 ('Emergency'),
 ('Priority'),
@@ -540,10 +540,10 @@ VALUES
 
 CREATE TABLE "transport_mode" (
     "id" SERIAL PRIMARY KEY,
-    "mode" VARCHAR (50)
+    "type" VARCHAR (50)
 );
 
-INSERT INTO "transport_mode" ("mode")
+INSERT INTO "transport_mode" ("type")
 VALUES
 ('Emergent (Immediate Response)'),
 ('Emergent Downgraded to Non-Emergent'),
@@ -552,10 +552,10 @@ VALUES
 
 CREATE TABLE "transport_method" (
     "id" SERIAL PRIMARY KEY,
-    "method" VARCHAR (40)
+    "type" VARCHAR (40)
 );
 
-INSERT INTO "transport_method" ("method")
+INSERT INTO "transport_method" ("type")
 VALUES
 ('Air Medical-Fixed Wing'),
 ('Air Medical-Rotor Craft'),
