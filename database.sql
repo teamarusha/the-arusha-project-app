@@ -660,3 +660,57 @@ VALUES
 ('Trauma-Obvious Death'),
 ('Trauma-Fall'),
 ('Trauma-Other');
+
+CREATE TABLE "injury_type" (
+    "id" SERIAL PRIMARY KEY,
+    "type" VARCHAR (30)
+);
+
+INSERT INTO "injury_type" ("type")
+VALUES
+('Ankle Injury'),
+('Burn, NOS'),
+('Concussion, with LOC'),
+('Concussion, without LOC'),
+('Early complication of trauma'),
+('Facial injury'),
+('Foot injury'),
+('Forearm injury'),
+('Head injury'),
+('Hemorrhage'),
+('Hip Injury'),
+('Injury, unspecified'),
+('Lower back injury'),
+('Lower leg injury'),
+('Multiple injuries'),
+('Neck injury'),
+('Pelvis injury'),
+('Shoulder/ upper arm injury'),
+('Thigh injury'),
+('Thorax injury'),
+('Wrist/hand/finger injury');
+
+CREATE TABLE "injury_cause" (
+    "id" SERIAL PRIMARY KEY,
+    "type" VARCHAR (30)
+);
+
+INSERT INTO "injury_cause" ("type")
+VALUES
+('Animal'),
+('Asphyxiation'),
+('Bodily Force'),
+('Drowning'),
+('Environmental'),
+('Fall, Intent'),
+('Law Enforcement'),
+('Mechanical Force'),
+('MVC, Non-Traffic Related'),
+('MVC, Traffic Related'),
+('Other'),
+('Pedal Cyclist'),
+('Poisoning'),
+('Sharp Objects'),
+('Tools/Devices');
+
+
