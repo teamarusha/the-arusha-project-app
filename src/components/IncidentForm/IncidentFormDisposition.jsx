@@ -37,17 +37,22 @@ const IncidentFormDisposition = () => {
 
     return(
         <div>
-            <TextField label="Transportation Disposition" onChange={( event ) =>
-                setTransportDisposition( event.target.value )} value={ transportDisposition }>
+            <TextField id="outlined-basic" label="Transportation Disposition" 
+                variant="outlined" onChange={( event ) =>
+                setTransportDisposition( event.target.value )} 
+                value={ transportDisposition }>
             </TextField>
-            <TextField label="EMS Transport Method" onChange={( event ) => 
-                setTransportMethod( event.target.value )} value={ transportMethod }>
+            <TextField id="outlined-basic" label="EMS Transport Method" variant="outlined"
+                onChange={( event ) => setTransportMethod( event.target.value )} 
+                value={ transportMethod }>
             </TextField>
-            <TextField label="Transport Mode From Scene" onChange={( event ) => 
+            <TextField id="outlined-basic" label="Transport Mode From Scene" 
+                variant="outlined" onChange={( event ) => 
                 setTransportMode( event.target.value )} value={ transportMode }>
             </TextField>
-            <TextField label="Type of Destination" onChange={( event ) => 
-                setDestinationType( event.target.value )} value={ destinationType }>
+            <TextField id="outlined-basic" label="Type of Destination" variant="outlined"
+                onChange={( event ) => setDestinationType( event.target.value )} 
+                value={ destinationType }>
             </TextField>
         </div>
     );

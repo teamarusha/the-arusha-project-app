@@ -45,13 +45,16 @@ const IncidentFormResponse = () => {
                 onChange={submitCookie}>
                     {}
             </TextField> */}
-            <TextField label="Name of Crew" onChange={( event ) => 
-                setCrew( event.target.value )} value={ crew }>
+            <TextField id="outlined-basic" label="Name of Crew" variant="outlined" 
+                onChange={( event ) => setCrew( event.target.value )} 
+                value={ crew }>
             </TextField>
-            <TextField label="Triage Category" onChange={( event ) => 
-                setTriageCat( event.target.value )} value={ triageCat }>
+            <TextField id="outlined-basic" label="Triage Category" variant="outlined" 
+                onChange={( event ) => setTriageCat( event.target.value )} 
+                value={ triageCat }>
             </TextField>
-            <TextField label="Type of Service Requested" onChange={( event ) => 
+            <TextField id="outlined-basic" label="Type of Service Requested" 
+                variant="outlined" onChange={( event ) => 
                 setServiceType( event.target.value )} value={ serviceType }>
             </TextField>
         </div>

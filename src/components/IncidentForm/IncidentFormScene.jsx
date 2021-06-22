@@ -37,13 +37,16 @@ const IncidentFormScene = () => {
 
     return(
         <div>
-            <TextField label="Number of Patients" onChange={( event ) => 
-                setPatientNumbers(event.target.value)} value={ patientNumbers }>
+            <TextField id="outlined-basic" label="Number of Patients" variant="outlined"
+                onChange={( event ) => setPatientNumbers(event.target.value)} 
+                value={ patientNumbers }>
             </TextField>
-            <TextField label="Possible Injury" onChange={( event ) => 
-                setPossibleInjury(event.target.value)} value={ possibleInjury }>
+            <TextField id="outlined-basic" label="Possible Injury" variant="outlined" 
+                onChange={( event ) => setPossibleInjury(event.target.value)} 
+                value={ possibleInjury }>
             </TextField>
-            <TextField label="Alcohol and Drug Use Indicators" onChange={( event ) =>
+            <TextField id="outlined-basic" label="Alcohol and Drug Use Indicators" 
+                variant="outlined" onChange={( event ) => 
                 setAlcoholDrugIndicators( event.target.value )} value={ alcoholDrugIndicators }>
             </TextField>
         </div>
