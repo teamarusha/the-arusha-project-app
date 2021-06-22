@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
+import ReduxCookie from '../ReduxCookie/ReduxCookie';
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,14 @@ function App() {
             path="/about"
           >
             <AboutPage />
+          </Route>
+
+          <Route
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/dropdown"
+          >
+            <ReduxCookie />
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
