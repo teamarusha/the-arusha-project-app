@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import PatientHome from '../PatientHome/PatientHome';
+import PatientDemographics from '../PatientDemographics/PatientDemographics';
 
 import './App.css';
 
@@ -110,6 +111,14 @@ function App() {
           path="/patientHome"
           >
             <PatientHome />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+          exact
+          path="/patientDemographics"
+          >
+            <PatientDemographics />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
