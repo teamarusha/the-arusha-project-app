@@ -9,27 +9,21 @@ import { TextField } from "@material-ui/core";
 const TreatmentMedsForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-
-    const [ medication, setMedication ] = useState('');
-    const [ routeAdministered, setRouteAdministered ] = useState('');
-    const [ dosage, setDosage ] = useState('');
-    const [ units, setUnits ] = useState('');
-    const [ medsResponse, setMedsResponse ] = useState('');
-    const [ medsAdminBy, setMedsAdminBy ] = useState('');
+    const { id } = useParams();
 
     function cookieForm(props) {
-        const [ cookie, setCookie ] = useCookies([ 'Incident' ]);
+        const [ cookie, setCookie ] = useCookies([ 'medication' ]);
         let [ localCookie, setLocalCookie ] = useState( cookie );
         // let [ render, setRender ] = useState('');
     }
     // To render on page load
     useEffect(() => {
-        // console.log( 'Params id:', id );
+        console.log( 'Params id:', id );
         console.log( 'Cookie Mirror', localCookie );
         console.log( 'THE cookie', cookie );
-        // if( id >= 0 ) {
-        //     setRender( true );
-        // }
+        if( cookie[`${id}medication`] >= 0 ) {
+            setRender( true );
+        }
     }, []);
     
     function submitCookie(newCookie) {
@@ -38,31 +32,60 @@ const TreatmentMedsForm = () => {
         setCookie( newCookie.key, newCookie.item, { path: '/' });
     }
 
+    function addMedication() {
+        if ( cookie[`${id}medication`] === undefined) {
+            submitCookie({ key: `${id}medication1`, item: '' });
+            submitCookie({ key: `${id}routeAdministered`, item: '' });
+            submitCookie({ key: `${id}dosage`, item: '' });
+            submitCookie({ key: `${id}units`, item: '' });
+            submitCookie({ key: `${id}medicationResponse`, item: ''});
+            submitCookie({ key: `${id}medsAdminBy`, item: '' });
+
+            submitCookie({ key: `${id}medication`, item: [1] });
+            setRender(true);
+            // history.push(`/medication/${id}`);
+        } else {
+            let newMedicationID = cookie.medication.length + 1;
+            submitCookie({ key: `${id}medication${newMedicationID}`, item: '' });
+            submitCookie({ key: `${id}routeAdministered${newMedicationID}`, item: '' });
+            submitCookie({ key: `${id}dosage${newMedicationID}`, item: '' });
+            submitCookie({ key: `${id}units${newMedicationID}`, item: '' });
+            submitCookie({ key: `${id}medicationResponse${newMedicationID}`})
+            submitCookie({ key: `${id}medsAdminBy${newMedicationID}`, item: '' });
+            submitCookie({ key: `medication`, item: [...cookie.medication, newMedicationID] });
+        }
+    }
+
     return(
         <div>
             <TextField id="outlined-basic" label="Medication Administered" 
-                variant="outlined" onChange={( event ) =>
-                setMedication( event.target.value )} 
-                value={ medication }>
+                variant="outlined" value={ localCookie[`${id}medication`]}
+                onChange={( event ) => submitCookie({ key: `${id}medication`,
+                item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Administered Route" 
-                variant="outlined" onChange={( event ) => 
-                setRouteAdministered( event.target.value )} value={ routeAdministered }>
+                variant="outlined" value={ localCookie[`${id}routeAdministered`]}
+                onChange={( event ) => submitCookie({ key: `${id}routeAdministered`,
+                item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Dosage" variant="outlined" 
-                onChange={( event ) => setDosage( event.target.value )} 
-                value={ dosage }>
+                value={ localCookie[`${id}dosage`]}
+                onChange={( event ) => submitCookie({ key: `{id}dosage`, 
+                item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Units" variant="outlined"
-                onChange={( event ) => setUnits( event.target.value )} value={ units }>
+                value={ localCookie[`${id}units`]} onChange={( event ) => 
+                submitCookie({ key: `${id}units`, item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Response to Medication" 
-                variant="outlined" onChange={( event ) => 
-                setMedsResponse( event.target.value )} value={ medsResponse }>
+                variant="outlined" value={ localCookie[`${id}medicationResponse`]}
+                onChange={( event ) => submitCookie({ key: `${id}medicationResponse`,
+                item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Role/Type of Person Administering 
-                Medication" variant="outlined" onChange={( event ) => 
-                setMedsAdminBy( event.target.value )} value={ medsAdminBy }>
+                Medication" variant="outlined" value={ localCookie[`${id}medsAdminBy`]}
+                onChange={( event ) => submitCookie({ key: `${id}medsAdminBy`, 
+                item: event.target.value })}>
             </TextField>
         </div>
     );

@@ -37,7 +37,7 @@ const TreatmentProcedureForm = () => {
             submitCookie({ key: `${id}procedure1`, item: '' });
             submitCookie({ key: `${id}procedureAttempts`, item: '' });
             submitCookie({ key: `${id}successfulProcedure`, item: '' });
-            submitCookie({ key: `${id}responseToProcedure`, item: 1 });
+            submitCookie({ key: `${id}responseToProcedure`, item: '' });
             submitCookie({ key: `${id}procedurePerformedBy`, item: '' });
 
             submitCookie({ key: `${id}procedureArray`, item: [1] });
@@ -48,7 +48,7 @@ const TreatmentProcedureForm = () => {
             submitCookie({ key: `${id}procedure${newProcedureID}`, item: '' });
             submitCookie({ key: `${id}procedureAttempts${newProcedureID}`, item: '' });
             submitCookie({ key: `${id}successfulProcedure${newProcedureID}`, item: '' });
-            submitCookie({ key: `${id}responseToProcedure${newProcedureID}`, item: newProcedureID });
+            submitCookie({ key: `${id}responseToProcedure${newProcedureID}`, item: '' });
             submitCookie({ key: `${id}procedurePerformedBy${newProcedureID}`, item: '' });
             submitCookie({ key: `procedureArray`, item: [...cookie.procedure, newProcedureID] });
         }
