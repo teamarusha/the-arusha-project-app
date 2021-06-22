@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useCookies } from "react-cookie";
 
 //Material UI imports
 import { TextField } from "@material-ui/core";
 
 const IncidentFormResponse = () => {
-    const dispatch = useDispatch();
-    const history = useHistory();
-
-    const [ crew, setCrew ] = useState('');
-    const [ triageCat, setTriageCat ] = useState();
-    const [ serviceType, setServiceType ] = useState();
+    const { id } = useParams();
 
     function cookieForm(props) {
         const [ cookie, setCookie ] = useCookies([ 'Incident' ]);
@@ -24,7 +18,7 @@ const IncidentFormResponse = () => {
 
     // To render on page load
     useEffect(() => {
-        // console.log( 'Params id:', id );
+        console.log( 'Params id:', id );
         console.log( 'Cookie Mirror', localCookie );
         console.log( 'THE cookie', cookie );
         // if( id >= 0 ) {
@@ -41,21 +35,19 @@ const IncidentFormResponse = () => {
 
     return (
         <div>
-            {/* <TextField select label="response" value={}
-                onChange={submitCookie}>
-                    {}
-            </TextField> */}
             <TextField id="outlined-basic" label="Name of Crew" variant="outlined" 
-                onChange={( event ) => setCrew( event.target.value )} 
-                value={ crew }>
+                value={ localCookie[`${id}crew`]} onChange={( event ) => 
+                submitCookie({ key: `${id}alcoholDrugIndicators`, 
+                item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Triage Category" variant="outlined" 
-                onChange={( event ) => setTriageCat( event.target.value )} 
-                value={ triageCat }>
+                value={ localCookie[`${id}triageCat`]} onChange={( event ) => 
+                submitCookie({ key: `${id}triageCat`, item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Type of Service Requested" 
-                variant="outlined" onChange={( event ) => 
-                setServiceType( event.target.value )} value={ serviceType }>
+                variant="outlined" value={ localCookie[`${id}serviceType`]}
+                onChange={( event ) => submitCookie({ key: `${id}serviceType`, 
+                item: event.target.value })}>
             </TextField>
         </div>
     );
