@@ -22,6 +22,10 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 import PatientHome from '../PatientHome/PatientHome';
 import PatientDemographics from '../PatientDemographics/PatientDemographics';
+import PatientSymptoms from '../PatientSymptoms/PatientSymptoms';
+import PatientMedical from '../PatientMedical/PatientMedical';
+import PatientInjury from '../PatientInjury/PatientInjury';
+import PatientCardiac from '../PatientCardiac/PatientCardiac';
 
 import './App.css';
 
@@ -119,6 +123,38 @@ function App() {
           path="/patientDemographics"
           >
             <PatientDemographics />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+          exact
+          path="/patientInjury"
+          >
+            <PatientInjury />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+          exact
+          path="/patientMedical"
+          >
+            <PatientMedical />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+          exact
+          path="/patientSymptoms"
+          >
+            <PatientSymptoms />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+          exact
+          path="/patientCardiacArrest"
+          >
+            <PatientCardiac />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
