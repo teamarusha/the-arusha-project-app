@@ -1,0 +1,9 @@
+.mobileLogo {
+    margin-left: auto;
+    position: static;
+}
+
+.browserLogo {
+    margin-right: auto;
+    position: static;
+}
