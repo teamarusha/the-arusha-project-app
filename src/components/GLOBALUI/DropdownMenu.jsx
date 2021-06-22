@@ -1,35 +1,20 @@
 import React from "react";
-import { Menu, MenuItem } from "@material-ui/core";
 import { useState } from "react";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-
-import { makeStyles } from "@material-ui/core/styles";
+import globalUseStyle from "./globalUseStyles";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
 import Grid from "@material-ui/core/Grid";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
-}));
 
 function DropDown() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const globalStyle = globalUseStyle();
+  
+  const [open, setOpen] = useState(false);
 
   const handleClick = (e) => {
     setOpen(!open);
@@ -44,7 +29,7 @@ function DropDown() {
             Nested List Items
           </ListSubheader>
         }
-        className={classes.root}
+        className={globalStyle.dropdown.root}
       >
         <Grid container justify="center">
 
@@ -55,7 +40,7 @@ function DropDown() {
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItem button className={classes.nested}>
+                <ListItem button className={globalStyle.dropdown.nested}>
                   <ListItemText primary="diagnosis 1" />
                 </ListItem>
               </List>
