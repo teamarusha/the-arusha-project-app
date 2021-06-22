@@ -34,7 +34,7 @@ function DropDown() {
         <Grid container justify="center">
 
           <Grid item>
-            <ListItem button onClick={(e) => setOpen({e.currentTarget})}>
+            <ListItem button onClick={handleClick}>
               <ListItemText primary="Clinical Dropdown 1" />
               {open ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
@@ -42,20 +42,6 @@ function DropDown() {
               <List component="div" disablePadding>
                 <ListItem button className={globalStyle.dropdown.nested}>
                   <ListItemText primary="diagnosis 1" />
-                </ListItem>
-              </List>
-            </Collapse>
-          </Grid>
-
-          <Grid item>
-            <ListItem button >
-              <ListItemText primary="Clinical Dropdown 2" />
-              {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                <ListItem button className={classes.nested}>
-                  <ListItemText primary="diagnosis 2" />
                 </ListItem>
               </List>
             </Collapse>
