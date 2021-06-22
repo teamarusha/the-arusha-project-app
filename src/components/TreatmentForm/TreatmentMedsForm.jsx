@@ -58,6 +58,9 @@ const TreatmentMedsForm = () => {
 
     return(
         <div>
+            <Button size="small" color="primary" variant="contained" onClick={addMedication}>
+                Add Medication
+            </Button>
             <TextField id="outlined-basic" label="Medication Administered" 
                 variant="outlined" value={ localCookie[`${id}medication`]}
                 onChange={( event ) => submitCookie({ key: `${id}medication`,

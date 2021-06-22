@@ -56,6 +56,9 @@ const TreatmentProcedureForm = () => {
 
     return(
         <div>
+            <Button size="small" color="primary" variant="contained" onClick={addProcedure}>
+                Add Procedure
+            </Button>
             <TextField id="outlined-basic" label="Procedure Attempted" 
                 variant="outlined" value={ localCookie[`${id}procedure`]}
                 onChange={( event ) => submitCookie({ key: `${id}procedure`,
