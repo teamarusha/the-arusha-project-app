@@ -9,26 +9,21 @@ import { TextField } from "@material-ui/core";
 const TreatmentProcedureForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-
-    const [ procedure, setProcedure ] = useState('');
-    const [ numAttempts, setNumAttempts ] = useState('');
-    const [ successful, setSuccessful ] = useState('');
-    const [ procedureResponse, setProcedureResponse ] = useState('');
-    const [ procedureAdminBy, setProcedureAdminBy ] = useState('');
+    const { id } = useParams();
 
     function cookieForm(props) {
-        const [ cookie, setCookie ] = useCookies([ 'Incident' ]);
+        const [ cookie, setCookie ] = useCookies([ 'procedureArray' ]);
         let [ localCookie, setLocalCookie ] = useState( cookie );
-        // let [ render, setRender ] = useState('');
+        let [ render, setRender ] = useState('');
     }
     // To render on page load
     useEffect(() => {
-        // console.log( 'Params id:', id );
+        console.log( 'Params id:', id );
         console.log( 'Cookie Mirror', localCookie );
         console.log( 'THE cookie', cookie );
-        // if( id >= 0 ) {
-        //     setRender( true );
-        // }
+        if( cookie[`${id}procedureArray`] >= 0 ) {
+            setRender( true );
+        }
     }, []);
     
     function submitCookie(newCookie) {
@@ -37,28 +32,54 @@ const TreatmentProcedureForm = () => {
         setCookie( newCookie.key, newCookie.item, { path: '/' });
     }
 
+    function addProcedure() {
+        if ( cookie[`${id}procedureArray`] === undefined) {
+            submitCookie({ key: `${id}procedure1`, item: '' });
+            submitCookie({ key: `${id}procedureAttempts`, item: '' });
+            submitCookie({ key: `${id}successfulProcedure`, item: '' });
+            submitCookie({ key: `${id}responseToProcedure`, item: 1 });
+            submitCookie({ key: `${id}procedurePerformedBy`, item: '' });
+
+            submitCookie({ key: `${id}procedureArray`, item: [1] });
+            setRender(true);
+            // history.push(`/treatment/${id}`);
+        } else {
+            let newProcedureID = cookie.procedure.length + 1;
+            submitCookie({ key: `${id}procedure${newProcedureID}`, item: '' });
+            submitCookie({ key: `${id}procedureAttempts${newProcedureID}`, item: '' });
+            submitCookie({ key: `${id}successfulProcedure${newProcedureID}`, item: '' });
+            submitCookie({ key: `${id}responseToProcedure${newProcedureID}`, item: newProcedureID });
+            submitCookie({ key: `${id}procedurePerformedBy${newProcedureID}`, item: '' });
+            submitCookie({ key: `procedureArray`, item: [...cookie.procedure, newProcedureID] });
+        }
+    }
+
     return(
         <div>
             <TextField id="outlined-basic" label="Procedure Attempted" 
-                variant="outlined" onChange={( event ) =>
-                setProcedure( event.target.value )} 
-                value={ procedure }>
+                variant="outlined" value={ localCookie[`${id}procedure`]}
+                onChange={( event ) => submitCookie({ key: `${id}procedure`,
+                item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Number of Procedure Attempts" 
-                variant="outlined" onChange={( event ) => 
-                setNumAttempts( event.target.value )} value={ numAttempts }>
+                variant="outlined" value={ localCookie[`${id}procedureAttempts`]}
+                onChange={( event ) => submitCookie({ key: `${id}procedureAttempts`,
+                item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Procedure Successful" 
-                variant="outlined" onChange={( event ) => 
-                setSuccessful( event.target.value )} value={ successful }>
+                variant="outlined" value={ localCookie[`${id}successfulProcedure`]}
+                onChange={( event ) => submitCookie({ key: `${id}successfulProcedure`,
+                item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Response to Procedure" 
-                variant="outlined" onChange={( event ) => 
-                setProcedureResponse( event.target.value )} value={ procedureResponse }>
+                variant="outlined" value={ localCookie[`${id}responseToProcedure`]}
+                onChange={( event ) => submitCookie({ key: `${id}responseToProcedure`,
+                item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Role/Type of Person Performing
-                Procedure" variant="outlined" onChange={( event ) => 
-                setProcedureAdminBy( event.target.value )} value={ procedureAdminBy }>
+                Procedure" variant="outlined" value={ localCookie[`${id}procedurePerformedBy`]}
+                onChange={( event ) => submitCookie({ key: `$id}procedurePerformedBy`, 
+                item: event.target.value })}>
             </TextField>
         </div>
     );
