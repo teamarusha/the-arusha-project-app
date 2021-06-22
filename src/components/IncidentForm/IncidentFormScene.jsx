@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router";
 import { useCookies } from "react-cookie";
 
 //Material UI imports
+import { TextField } from "@material-ui/core";
 
 const IncidentFormScene = () => {
     const dispatch = useDispatch();
