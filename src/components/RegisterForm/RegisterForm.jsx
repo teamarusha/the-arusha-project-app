@@ -13,7 +13,7 @@ function RegisterForm() {
 
   const registerUser = (event) => {
     event.preventDefault();
-
+    console.log(firstName, lastName, regionID);
     dispatch({
       type: 'REGISTER',
       payload: {
