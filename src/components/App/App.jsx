@@ -20,6 +20,8 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+import PatientHome from '../PatientHome/PatientHome';
+
 import './App.css';
 
 function App() {
@@ -100,6 +102,14 @@ function App() {
             authRedirect="/user"
           >
             <LandingPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+          exact
+          path="/patientHome"
+          >
+            <PatientHome />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
