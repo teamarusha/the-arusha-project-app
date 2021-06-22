@@ -19,6 +19,16 @@ const globalUseStyle = makeStyles((theme) => ({
       ...theme.mixins.toolbar,
       marginBottom: '2em',
     },
+    dropdown: {
+      root: {
+        width: "100%",
+        maxWidth: 360,
+        backgroundColor: theme.palette.background.paper,
+      },
+      nested: {
+        paddingLeft: theme.spacing(4),
+      },
+    }
   }
 }));
 
