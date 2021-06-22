@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useCookies } from "react-cookie";
 
 //Material UI imports
-import { TextField } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 
 const TreatmentProcedureForm = () => {
-    const dispatch = useDispatch();
-    const history = useHistory();
     const { id } = useParams();
 
     function cookieForm(props) {
