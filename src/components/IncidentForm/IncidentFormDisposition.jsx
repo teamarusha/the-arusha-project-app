@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router";
+
 import { useCookies } from "react-cookie";
 
 //Material UI imports
 
 const IncidentFormDisposition = () => {
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+
     const { id } = useParams();
+
 
     function cookieForm(props) {
         const [ cookie, setCookie ] = useCookies([ 'Incident' ]);
@@ -15,6 +23,7 @@ const IncidentFormDisposition = () => {
     // To render on page load
     useEffect(() => {
         console.log( 'Params id:', id );
+
         console.log( 'Cookie Mirror', localCookie );
         console.log( 'THE cookie', cookie );
         // if( id >= 0 ) {
