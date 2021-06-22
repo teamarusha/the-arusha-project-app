@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useCookies } from "react-cookie";
 
 //Material UI imports
 import { TextField } from "@material-ui/core";
 
 const IncidentFormDisposition = () => {
-
+    const { id } = useParams();
 
     function cookieForm(props) {
         const [ cookie, setCookie ] = useCookies([ 'Incident' ]);
@@ -16,7 +15,7 @@ const IncidentFormDisposition = () => {
     }
     // To render on page load
     useEffect(() => {
-        // console.log( 'Params id:', id );
+        console.log( 'Params id:', id );
         console.log( 'Cookie Mirror', localCookie );
         console.log( 'THE cookie', cookie );
         // if( id >= 0 ) {

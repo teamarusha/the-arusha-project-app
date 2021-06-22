@@ -1,18 +1,13 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useCookies } from "react-cookie";
 
 //Material UI imports
 import { TextField } from "@material-ui/core";
 
 const IncidentFormScene = () => {
-    const dispatch = useDispatch();
-    const history = useHistory();
+    const { id } = useParams();
 
-    const [ patientNumbers, setPatientNumbers ] = useState('');
-    const [ possibleInjury, setPossibleInjury ] = useState('');
-    const [ alcoholDrugIndicators, setAlcoholDrugIndicators ] = useState('');
 
     function cookieForm(props) {
         const [ cookie, setCookie ] = useCookies([ 'Incident' ]);
@@ -22,7 +17,7 @@ const IncidentFormScene = () => {
 
     // To render on page load
     useEffect(() => {
-        // console.log( 'Params id:', id );
+        console.log( 'Params id:', id );
         console.log( 'Cookie Mirror', localCookie );
         console.log( 'THE cookie', cookie );
         // if( id >= 0 ) {
@@ -39,16 +34,19 @@ const IncidentFormScene = () => {
     return(
         <div>
             <TextField id="outlined-basic" label="Number of Patients" variant="outlined"
-                onChange={( event ) => setPatientNumbers(event.target.value)} 
-                value={ patientNumbers }>
+                value={ localCookie[`${id}patientNumbers`]}
+                onChange={( event ) => submitCookie({ key: `${id}patientNumbers`,
+                item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Possible Injury" variant="outlined" 
-                onChange={( event ) => setPossibleInjury(event.target.value)} 
-                value={ possibleInjury }>
+                value={ localCookie[`${id}possibleInjury`]}
+                onChange={( event ) => submitCookie({ key: `${id}possibleInjury`,
+                item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Alcohol and Drug Use Indicators" 
-                variant="outlined" onChange={( event ) => 
-                setAlcoholDrugIndicators( event.target.value )} value={ alcoholDrugIndicators }>
+                variant="outlined" value={ localCookie[`${id}alcoholDrugIndicators`]}
+                onChange={( event ) => submitCookie({ key: `${id}alcoholDrugIndicators`,
+                item: event.target.value })}>
             </TextField>
         </div>
     );
