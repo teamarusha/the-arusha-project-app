@@ -8,10 +8,18 @@ import { MenuItem } from '@material-ui/core';
 
 function PatientInjury() {
 
+    function handleTimeStamp() {
+        const timestamp = Date.now(); // This would be the timestamp you want to format
+        console.log(new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit', 
+        day: '2-digit', hour: '2-digit', 
+        minute: '2-digit', second: '2-digit'}).format(timestamp));
+    }
+
     return (
         <div className="container">
             <h2>Patient Injury Form:</h2>
-            <button>What's Gucci</button><br /><br />
+            <button onClick={handleTimeStamp}>What's Gucci</button><br /><br />
+            <p>Time</p>
 
             <InputLabel 
                 id="demo-simple-select-autowidth-label">Cause of Injury</InputLabel>
