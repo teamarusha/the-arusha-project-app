@@ -84,64 +84,60 @@ const VitalsForm = () => {
                 item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Heart Rate" variant="outlined"
-                value={ localCookie[`${id}heartRate`]}
-                onChange={( event ) => submitCookie({ key: 
-                `${id}heartRate`, item: event.target.value })}>
+                value={ localCookie[`${id}heartRate`]} onChange={( event ) => 
+                submitCookie({ key: `${id}heartRate`, item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" label="Pulse Oximetry" 
-                variant="outlined" value={ localCookie[`${id}pulseOximetry`]}
-                onChange={( event ) => submitCookie({ key: 
-                `${id}pulseOximetry`, item: event.target.value })}>
+            <TextField id="outlined-basic" label="Pulse Oximetry" variant="outlined" 
+                value={ localCookie[`${id}pulseOximetry`]} onChange={( event ) => 
+                submitCookie({ key: `${id}pulseOximetry`, item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Respiratory Rate" variant="outlined"
-                value={ localCookie[`${id}respiratoryRate`]}
-                onChange={( event ) => submitCookie({ key:
-                `${id}respiratoryRate`, item: event.target.value })}>
+                value={ localCookie[`${id}respiratoryRate`]} onChange={( event ) => 
+                submitCookie({ key: `${id}respiratoryRate`, item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Blood Glucose Level" variant="outlined"
-                value={ localCookie[`${id}bloodGlucoseLevel`]}
-                onChange={( event ) => submitCookie({ key:
-                `${id}bloodGlucoseLevel`, item: event.target.value })}>
+                value={ localCookie[`${id}bloodGlucoseLevel`]} onChange={( event ) => 
+                submitCookie({ key: `${id}bloodGlucoseLevel`, item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" select label="Glasgow Coma Score-Eye" variant="outlined"
-                value={ localCookie[`${id}glasgowComaScoreEye`]}
-                onChange={( event ) => submitCookie({ key:
-                `${id}glasgowComaScoreEye`, item: event.target.value })}>
+            <TextField id="outlined-basic" label="Glasgow Coma Score-Eye" 
+                variant="outlined" value={ localCookie[`${id}glasgowComaScoreEye`]}
+                onChange={( event ) => submitCookie({ key: `${id}glasgowComaScoreEye`, 
+                item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" select label="Glasgow Coma Score-Verbal" variant="outlined"
-                value={ localCookie[`${id}glasgowComaScoreVerbal`]}
-                onChange={( event ) => submitCookie({ key:
-                `${id}glasgowComaScoreVerbal`, item: event.target.value })}>
+            <TextField id="outlined-basic"  label="Glasgow Coma Score-Verbal" 
+                variant="outlined" value={ localCookie[`${id}glasgowComaScoreVerbal`]}
+                onChange={( event ) => submitCookie({ key: `${id}glasgowComaScoreVerbal`, 
+                item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" select label="Glasgow Coma Score-Motor" variant="outlined"
-                value={ localCookie[`${id}glasgowComaScoreMotor`]}
-                onChange={( event ) => submitCookie({ key:
-                `${id}glasgowComaScoreMotor`, item: event.target.value })}>
+            <TextField id="outlined-basic" label="Glasgow Coma Score-Motor" variant="outlined"
+                value={ localCookie[`${id}glasgowComaScoreMotor`]} onChange={( event ) => 
+                submitCookie({ key: `${id}glasgowComaScoreMotor`, 
+                item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" select label="Glasgow Coma Score-Qualifier" variant="outlined"
-                value={ localCookie[`${id}glasgowComaScoreQualifier`]}
+            <TextField id="outlined-basic" label="Glasgow Coma Score-Qualifier" 
+                variant="outlined" value={ localCookie[`${id}glasgowComaScoreQualifier`]}
                 onChange={( event ) => submitCookie({ key:
                 `${id}glasgowComaScoreQualifier`, item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" select label="Level of Responsiveness" variant="outlined"
-                value={ localCookie[`${id}responsivenessLevel`]}
-                onChange={( event ) => submitCookie({ key:
-                `${id}responsivenessLevel`, item: event.target.value })}>
+            <TextField id="outlined-basic" select label="Level of Responsiveness" 
+                variant="outlined" value={ localCookie[`${id}responsivenessLevel`]}
+                onChange={( event ) => submitCookie({ key: `${id}responsivenessLevel`, 
+                item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" select label="Pain Scale Score" variant="outlined"
-                value={ localCookie[`${id}painScaleScore`]}
-                onChange={( event ) => submitCookie({ key:
-                `${id}painScaleScore`, item: event.target.value })}>
+            <TextField id="outlined-basic" select label="Pain Scale Score" 
+                variant="outlined" value={ localCookie[`${id}painScaleScore`]}
+                onChange={( event ) => submitCookie({ key: `${id}painScaleScore`, 
+                item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" select label="Stroke Scale Score" variant="outlined"
-                value={ localCookie[`${id}strokeScaleScore`]}
-                onChange={( event ) => submitCookie({ key:
-                `${id}strokeScaleScore`, item: event.target.value })}>
+            <TextField id="outlined-basic" select label="Stroke Scale Score" 
+                variant="outlined" value={ localCookie[`${id}strokeScaleScore`]}
+                onChange={( event ) => submitCookie({ key: `${id}strokeScaleScore`, 
+                item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" select label="stroke Scale Type" variant="outlined"
-                value={ localCookie[`${id}strokeScaleType`]}
-                onChange={( event ) => submitCookie({ key:
-                `${id}strokeScaleType`, item: event.target.value })}>
+            <TextField id="outlined-basic" select label="stroke Scale Type" 
+                variant="outlined" value={ localCookie[`${id}strokeScaleType`]}
+                onChange={( event ) => submitCookie({ key: `${id}strokeScaleType`, 
+                item: event.target.value })}>
             </TextField>
         </div>
     );
