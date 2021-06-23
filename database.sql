@@ -52,6 +52,7 @@ CREATE TABLE disposition (
 
 CREATE TABLE patient (
     id SERIAL PRIMARY KEY,
+    patient_incident_id integer REFERENCES “incident”
     first_name varchar(100),
     last_name varchar(100),
     address varchar(100),
