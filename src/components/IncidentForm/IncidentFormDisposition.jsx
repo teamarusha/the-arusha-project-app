@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
+
 import { useCookies } from "react-cookie";
 
 //Material UI imports
 
 const IncidentFormDisposition = () => {
+
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [ transportDisposition, setTransportDisposition ] = useState('');
-    const [ transportMethod, setTransportMethod ] = useState('');
-    const [ transportMode, setTransportMode ] = useState('');
-    const [ destinationType, setDestinationType ] = useState('');
+    const { id } = useParams();
+
 
     function cookieForm(props) {
         const [ cookie, setCookie ] = useCookies([ 'Incident' ]);
@@ -21,7 +22,8 @@ const IncidentFormDisposition = () => {
     }
     // To render on page load
     useEffect(() => {
-        // console.log( 'Params id:', id );
+        console.log( 'Params id:', id );
+
         console.log( 'Cookie Mirror', localCookie );
         console.log( 'THE cookie', cookie );
         // if( id >= 0 ) {
@@ -38,21 +40,24 @@ const IncidentFormDisposition = () => {
     return(
         <div>
             <TextField id="outlined-basic" label="Transportation Disposition" 
-                variant="outlined" onChange={( event ) =>
-                setTransportDisposition( event.target.value )} 
-                value={ transportDisposition }>
+                variant="outlined" value={ localCookie[`${id}transportDisposition`]}
+                onChange={( event ) => submitCookie({ key: `{id}transportDisposition`,
+                item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="EMS Transport Method" variant="outlined"
-                onChange={( event ) => setTransportMethod( event.target.value )} 
-                value={ transportMethod }>
+                value={ localCookie[`${id}transportMethod`]}
+                onChange={( event ) => submitCookie({ key: 
+                `${id}transportMethod`, item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Transport Mode From Scene" 
-                variant="outlined" onChange={( event ) => 
-                setTransportMode( event.target.value )} value={ transportMode }>
+                variant="outlined" value={ localCookie[`${id}transportMode`]}
+                onChange={( event ) => submitCookie({ key: 
+                `${id}transportMode`, item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" label="Type of Destination" variant="outlined"
-                onChange={( event ) => setDestinationType( event.target.value )} 
-                value={ destinationType }>
+                value={ localCookie[`${id}destinationType`]}
+                onChange={( event ) => submitCookie({ key:
+                `${id}destinationType`, item: event.target.value })}>
             </TextField>
         </div>
     );
