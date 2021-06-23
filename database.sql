@@ -309,6 +309,32 @@ VALUES
 ('Law Enforcement'),
 ('Family Member');
 
+CREATE TABLE "procedure_list" (
+    "id" SERIAL PRIMARY KEY,
+    "type" VARCHAR (50)
+);
+
+INSERT INTO "procedure_list" ("type")
+VALUES
+('Administration (Drug, fluid, gas)'),
+('Airway, Basic'),
+('Airway, Advanced'),
+('Assessment'),
+('Assessment, Cardiac'),
+('Cardiac'),
+('Environmental'),
+('Gastrointestinal'),
+('Glycemic Management'),
+('Immobilization'),
+('Other'),
+('Pain'),
+('Patient Positioning'),
+('Spinal Procedures'),
+('Transfer of Care'),
+('Vascular Access'),
+('Vital Signs'),
+('Wound Care');
+
 CREATE TABLE "responsiveness_level" (
     "id" SERIAL PRIMARY KEY,
     "type" VARCHAR (20)
@@ -722,7 +748,7 @@ CREATE TABLE incident (
 	user_id integer REFERENCES "user",
 	incident_type_id integer REFERENCES "incident_type",
 	crew_id varchar(50),
-	category varchar(50),
+	triage_cat_id integer REFERENCES "triage_cat",
 	unit_notified varchar(50),
 	unit_enroute varchar(50),
 	unit_arrived_scene varchar(50),
