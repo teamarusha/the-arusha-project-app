@@ -10,7 +10,7 @@ const IncidentFormScene = () => {
 
 
     function cookieForm(props) {
-        const [ cookie, setCookie ] = useCookies([ 'Incident' ]);
+        const [ cookie, setCookie ] = useCookies([ 'scene' ]);
         let [ localCookie, setLocalCookie ] = useState( cookie );
         // let [ render, setRender ] = useState('');
     }

@@ -17,7 +17,7 @@ const IncidentFormDisposition = () => {
 
 
     function cookieForm(props) {
-        const [ cookie, setCookie ] = useCookies([ 'Incident' ]);
+        const [ cookie, setCookie ] = useCookies([ 'disposition' ]);
         let [ localCookie, setLocalCookie ] = useState( cookie );
         // let [ render, setRender ] = useState('');
     }
