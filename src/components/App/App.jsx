@@ -21,6 +21,8 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
+import IncidentFormScene from '../IncidentForm/IncidentFormScene';
+// import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +46,20 @@ function App() {
             path="/about"
           >
             <AboutPage />
+          </Route>
+
+          {/* <Route
+            exact
+            path="/incident/response"
+          >
+            <IncidentFormResponse />
+          </Route> */}
+
+           <Route
+            exact
+            path="/incident/scene"
+          >
+            <IncidentFormScene />
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
@@ -101,6 +117,9 @@ function App() {
           >
             <LandingPage />
           </ProtectedRoute>
+          {/* <ProtectedRoute>
+            <IncidentFormResponse />
+          </ProtectedRoute> */}
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

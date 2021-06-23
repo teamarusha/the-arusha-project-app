@@ -37,8 +37,7 @@ const IncidentFormResponse = () => {
         <div>
             <TextField id="outlined-basic" label="Name of Crew" variant="outlined" 
                 value={ localCookie[`${id}crew`]} onChange={( event ) => 
-                submitCookie({ key: `${id}alcoholDrugIndicators`, 
-                item: event.target.value })}>
+                submitCookie({ key: `${id}crew`, item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" select label="Triage Category" variant="outlined" 
                 value={ localCookie[`${id}triageCat`]} onChange={( event ) => 
