@@ -40,22 +40,22 @@ const IncidentFormDisposition = () => {
 
     return(
         <div>
-            <TextField id="outlined-basic" label="Transportation Disposition" 
+            <TextField id="outlined-basic" select label="Transportation Disposition" 
                 variant="outlined" value={ localCookie[`${id}transportDisposition`]}
                 onChange={( event ) => submitCookie({ key: `{id}transportDisposition`,
                 item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" label="EMS Transport Method" variant="outlined"
+            <TextField id="outlined-basic" select label="EMS Transport Method" variant="outlined"
                 value={ localCookie[`${id}transportMethod`]}
                 onChange={( event ) => submitCookie({ key: 
                 `${id}transportMethod`, item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" label="Transport Mode From Scene" 
+            <TextField id="outlined-basic" select label="Transport Mode From Scene" 
                 variant="outlined" value={ localCookie[`${id}transportMode`]}
                 onChange={( event ) => submitCookie({ key: 
                 `${id}transportMode`, item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" label="Type of Destination" variant="outlined"
+            <TextField id="outlined-basic" select label="Type of Destination" variant="outlined"
                 value={ localCookie[`${id}destinationType`]}
                 onChange={( event ) => submitCookie({ key:
                 `${id}destinationType`, item: event.target.value })}>
