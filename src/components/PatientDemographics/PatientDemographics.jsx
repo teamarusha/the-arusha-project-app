@@ -14,7 +14,7 @@ function PatientDemographics() {
             <button>Yooooo</button> <br /><br />
 
             <TextField id="outlined-basic" label="First Name" variant="outlined">
-            </TextField> &nbsp;
+            </TextField> &nbsp;<br /><br />
             <TextField id="outlined-basic" label="Last Name" variant="outlined">
             </TextField> <br /><br />
             
@@ -48,9 +48,9 @@ function PatientDemographics() {
                     <MenuItem value={20}>African-American</MenuItem>
                     <MenuItem value={30}>American Indian</MenuItem>
                 </Select> <br /><br />
-
+            <p>Date of Birth calendar goes here</p>
             <TextField id="outlined-basic" label="State of Residence" variant="outlined">
-            </TextField> &nbsp;
+            </TextField> &nbsp; <br /><br />
             <TextField id="outlined-basic" label="County of Residence" variant="outlined">
             </TextField>
 
