@@ -16,7 +16,57 @@ function ReduxCookie() {
     }, [])
 
     useEffect(() => {
-        setCookie("dropdowns", dropdowns, { path: '/' });
+        if (dropdowns.go === true) {
+            let incidentDropdowns = [
+                "incident_type",
+                "alcohol_drug_use",
+                "transport_disposition",
+                "transport_mode",
+                "transport_method",
+                "destination_type",
+                "final_acuity",
+                "triage_cat",
+                "primary_impression",
+            ]
+            let patientDropdowns = [
+                "gender",
+                "race",
+                "age_units",
+                "anatomic_location",
+                "organ_system",
+                "initial_acuity",
+                "injury_type",
+                "injury_cause",
+                "cardiac_arrest",
+                "cardiac_arrest_etiology",
+                "cardiac_arrest_witness",
+                "AED_use_prior",
+                "CPR_type",
+                "spontaneous_circulation",
+                "CPR_stopped",
+                "resuscitation_attempt",
+                "AED_applicator",
+                "AED_initiator",
+                "AED_defibrillator",
+            ]
+            let treatmentDropdowns = [
+                "med_admin_route",
+                "med_dosage_units",
+                "med_admin_by",
+                "procedure_performer",
+                "procedure_list",
+                "responsiveness_level",
+                "pain_scale",
+                "stroke_score",
+                "stroke_scale",
+            ];
+            console.log('dropdowns cookifying');
+
+            for (let table of patientDropdowns){
+                submitCookie({key: table, thing: dropdowns[table]});
+            }
+
+        }
     }, [dropdowns.go])
 
 
@@ -50,12 +100,12 @@ function ReduxCookie() {
                             taken in by the submit function */}
                     {/* From database, the structure will be:
                             <option value="(id from database table)">(Second Column value from database table)</option> */}
-                    <option value="">--- DEFAULT SELECTION --- </option>
+                    <option value={0}>--- DEFAULT SELECTION --- </option>
 
-                    {dropdowns["transport_disposition"].map(selection =>
+                    {dropdowns.go && dropdowns["gender"].map(selection =>
                         <option value={selection.id}>{selection.type}</option>
                     )}
-                    
+
                 </select>
             }
         </>
