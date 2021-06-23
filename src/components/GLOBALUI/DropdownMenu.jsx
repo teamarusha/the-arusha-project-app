@@ -1,56 +1,73 @@
 import React from "react";
-import { useState } from "react";
 import globalUseStyle from "./globalUseStyles";
-import ListSubheader from "@material-ui/core/ListSubheader";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import Collapse from "@material-ui/core/Collapse";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import Grid from "@material-ui/core/Grid";
+import Divider from "@material-ui/core/Divider";
+import InboxIcon from "@material-ui/icons/Inbox";
+import DraftsIcon from "@material-ui/icons/Drafts";
 
 
-function DropDown() {
+
+export default function ControlledAccordions() {
   const globalStyle = globalUseStyle();
-  
-  const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = React.useState(false);
+  const [selectedID, setSelectedID] = React.useState(false);
 
-  const handleClick = (e) => {
-    setOpen(!open);
+  const handleListItemClick = (event, id) => {
+    setSelectedID(id);
   };
 
-  return (
-    <>
-      <List
-        aria-labelledby="nested-list-subheader"
-        subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
-            Nested List Items
-          </ListSubheader>
-        }
-        className={globalStyle.dropdown.root}
-      >
-        <Grid container justify="center">
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
-          <Grid item>
-            <ListItem button onClick={handleClick}>
-              <ListItemText primary="Clinical Dropdown 1" />
-              {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                <ListItem button className={globalStyle.dropdown.nested}>
-                  <ListItemText primary="diagnosis 1" />
+  const data = [
+    {
+      id: 1,
+      heading: "Panel 1",
+      secondary: "diagnosis 1",
+    },
+    {
+      id: 2,
+      heading: "Panel 2",
+      secondary: "diagnosis 2",
+    },
+  ];
+
+  return (
+    <div className={globalStyle.dropdown.root}>
+      {data.map((accordion) => {
+        const { id, heading, secondary } = accordion;
+        return (
+          <Accordion
+            expanded={expanded === id}
+            key={id}
+            onChange={handleChange(id)}
+          >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography className={globalStyle.dropdown.heading}>{heading}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <List component="nav" aria-label="main mailbox folders">
+                <ListItem
+                  button
+                  selected={selectedID === id}
+                  onClick={(event) => handleListItemClick(event, id)}
+                >
+                  <ListItemText primary={secondary} />
                 </ListItem>
               </List>
-            </Collapse>
-          </Grid>
-
-        </Grid>
-      </List>
-    </>
+            </AccordionDetails>
+          </Accordion>
+        );
+      })}
+    </div>
   );
 }
-
-export default DropDown;
