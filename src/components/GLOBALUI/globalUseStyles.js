@@ -5,6 +5,9 @@ const globalUseStyle = makeStyles((theme) => ({
     justifyContent: 'space-around',
     margin: theme.spacing(1),
   },
+  button: {
+    backgroundColor: !'orange',
+  },
   input: {
     marginBottom: theme.spacing(1),
     marginTop: theme.spacing(1),
@@ -25,8 +28,10 @@ const globalUseStyle = makeStyles((theme) => ({
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
       },
-      nested: {
-        paddingLeft: theme.spacing(4),
+      heading: {
+        fontSize: theme.typography.pxToRem(15),
+        flexBasis: "33.33%",
+        flexShrink: 0,
       },
     }
   }
