@@ -40,11 +40,11 @@ const IncidentFormResponse = () => {
                 submitCookie({ key: `${id}alcoholDrugIndicators`, 
                 item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" label="Triage Category" variant="outlined" 
+            <TextField id="outlined-basic" select label="Triage Category" variant="outlined" 
                 value={ localCookie[`${id}triageCat`]} onChange={( event ) => 
                 submitCookie({ key: `${id}triageCat`, item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" label="Type of Service Requested" 
+            <TextField id="outlined-basic" select label="Type of Service Requested" 
                 variant="outlined" value={ localCookie[`${id}serviceType`]}
                 onChange={( event ) => submitCookie({ key: `${id}serviceType`, 
                 item: event.target.value })}>

@@ -19,8 +19,17 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Admin from '../Admin/Admin';
+
+import PatientHome from '../PatientHome/PatientHome';
+import PatientDemographics from '../PatientDemographics/PatientDemographics';
+import PatientSymptoms from '../PatientSymptoms/PatientSymptoms';
+import PatientMedical from '../PatientMedical/PatientMedical';
+import PatientInjury from '../PatientInjury/PatientInjury';
+import PatientCardiac from '../PatientCardiac/PatientCardiac';
 
 import './App.css';
+import ReduxCookie from '../ReduxCookie/ReduxCookie';
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +55,14 @@ function App() {
             <AboutPage />
           </Route>
 
+          <Route
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/dropdown"
+          >
+            <ReduxCookie />
+          </Route>
+
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -56,6 +73,14 @@ function App() {
             path="/user"
           >
             <UserPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/admin"
+          >
+            <Admin />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -100,6 +125,54 @@ function App() {
             authRedirect="/user"
           >
             <LandingPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+          exact
+          path="/patientHome"
+          >
+            <PatientHome />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+          exact
+          path="/patientDemographics"
+          >
+            <PatientDemographics />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+          exact
+          path="/patientInjury"
+          >
+            <PatientInjury />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+          exact
+          path="/patientMedical"
+          >
+            <PatientMedical />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+          exact
+          path="/patientSymptoms"
+          >
+            <PatientSymptoms />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+          exact
+          path="/patientCardiacArrest"
+          >
+            <PatientCardiac />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}

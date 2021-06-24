@@ -38,12 +38,12 @@ const IncidentFormScene = () => {
                 onChange={( event ) => submitCookie({ key: `${id}patientNumbers`,
                 item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" label="Possible Injury" variant="outlined" 
+            <TextField id="outlined-basic" select label="Possible Injury" variant="outlined" 
                 value={ localCookie[`${id}possibleInjury`]}
                 onChange={( event ) => submitCookie({ key: `${id}possibleInjury`,
                 item: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" label="Alcohol and Drug Use Indicators" 
+            <TextField id="outlined-basic" select label="Alcohol and Drug Use Indicators" 
                 variant="outlined" value={ localCookie[`${id}alcoholDrugIndicators`]}
                 onChange={( event ) => submitCookie({ key: `${id}alcoholDrugIndicators`,
                 item: event.target.value })}>

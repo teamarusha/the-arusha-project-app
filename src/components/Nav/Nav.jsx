@@ -28,16 +28,22 @@ function Nav() {
         </Link>
 
         {user.id && (
-          <>
+          <div>
             <Link className="navLink" to="/info">
               Info Page
             </Link>
             <LogOutButton className="navLink" />
-          </>
+          </div>
         )}
 
         <Link className="navLink" to="/about">
           About
+        </Link>
+        <Link className="navLink" to ="/patientHome">
+          Patient Home
+        </Link>
+        <Link className="navLink" to="/dropdown">
+          ReduxCookie
         </Link>
       </div>
     </div>
