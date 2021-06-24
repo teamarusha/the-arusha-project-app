@@ -77,24 +77,44 @@ const IncidentFormDisposition = () => {
                 variant="outlined" value={ localIncident[`transportDisposition`]}
                 onChange={( event ) => submitValue({ key: `transportDisposition`,
                 thing: event.target.value })}>
+            {dropdowns['transport_disposition'].map(item => 
+                <MenuItem key={'transport_disposition'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
 
             <TextField id="outlined-basic" select label="EMS Transport Method" 
                 variant="outlined" value={ localIncident[`transportMethod`]}
                 onChange={( event ) => submitValue({ key: `transportMethod`, 
                 thing: event.target.value })}>
+            {dropdowns['transport_method'].map(item => 
+                <MenuItem key={'transport_method'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
 
             <TextField id="outlined-basic" select label="Transport Mode From Scene" 
                 variant="outlined" value={ localIncident[`transportMode`]}
                 onChange={( event ) => submitValue({ key: `transportMode`, 
                 thing: event.target.value })}>
+            {dropdowns['transport_mode'].map(item => 
+                <MenuItem key={'transport_mode'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
 
             <TextField id="outlined-basic" select label="Type of Destination" 
                 variant="outlined" value={ localIncident[`destinationType`]}
                 onChange={( event ) => submitValue({ key: `destinationType`, 
                 thing: event.target.value })}>
+            {dropdowns['destination_type'].map(item => 
+                <MenuItem key={'destination_type'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
             </div>
             }
