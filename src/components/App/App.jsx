@@ -21,8 +21,9 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
-import IncidentFormScene from '../IncidentForm/IncidentFormScene';
 import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
+import IncidentFormDisposition from '../IncidentForm/IncidentFormDisposition';
+import IncidentFormScene from '../IncidentForm/IncidentFormScene';
 import ReduxCookie from '../ReduxCookie/ReduxCookie';
 
 function App() {
@@ -56,12 +57,19 @@ function App() {
             <IncidentFormResponse />
           </Route>
 
-           {/* <Route
+           <Route
             exact
             path="/incident/scene"
           >
             <IncidentFormScene />
-          </Route> */}
+          </Route>
+
+          <Route
+            exact
+            path="/incident/disposition"
+          >
+            <IncidentFormDisposition />
+          </Route>
 
           <Route
             // shows AboutPage at all times (logged in or not)
@@ -129,6 +137,14 @@ function App() {
           
           {/* <ProtectedRoute>
             <IncidentFormResponse />
+          </ProtectedRoute> */}
+
+          {/* <ProtectedRoute>
+            <IncidentFormScene />
+          </ProtectedRoute> */}
+
+           {/* <ProtectedRoute>
+            <IncidentFormDisposition />
           </ProtectedRoute> */}
 
           {/* If none of the other routes matched, we will show a 404. */}

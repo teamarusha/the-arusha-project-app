@@ -40,12 +40,16 @@ function Nav() {
           About
         </Link>
 
-        {/* <Link className="navLink" to="/incident/response">
+        <Link className="navLink" to="/incident/response">
           Incident Response
-        </Link> */}
+        </Link>
 
         <Link className="navLink" to="/incident/scene">
           Incident Scene
+        </Link>
+
+        <Link className="navLink" to="/incident/disposition">
+          Incident Disposition
         </Link>
         
         <Link className="navLink" to="/dropdown">

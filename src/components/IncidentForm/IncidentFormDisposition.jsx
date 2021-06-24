@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
+import { useSelector } from "react-redux";
 
 //Material UI imports
 import { TextField } from "@material-ui/core";
 
 const IncidentFormDisposition = () => {
 
-    function localStorage(props) {
         let [localIncident, setLocalIncident] = useState(JSON.parse(localStorage.getItem('incident')));
         // let [render, setRender] = useState(false);
         // const { id } = useParams();
         // const history = useHistory();
-    }
+        const dropdowns = useSelector(store => store.dropdowns);
+
     // To render on page load
     useEffect(() => {
         // console.log( 'Params id:', id );
@@ -34,6 +35,22 @@ const IncidentFormDisposition = () => {
         // localStorage.setItem(`${newParameter.key}`, JSON.stringify(newParameter.thing));
     }
 
+    let [localDropdownMirror, setLocalDropdownMirror] = useState(JSON.parse(localStorage.getItem('dropdowns')));
+
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('dropdowns')) === null ){
+            dispatch({ type: 'GET_DROPDOWNS' })
+        } else {
+            dispatch({type: 'SET_DROPDOWNS', payload: localDropdownMirror})
+        }
+    }, []);
+
+    useEffect(() => {
+        if (dropdowns.go === true) {
+            localStorage.setItem('dropdowns', JSON.stringify(dropdowns));
+        }
+    }, [dropdowns.go]);
+
     return(
         <div>
             <TextField id="outlined-basic" label="Destination State" variant="outlined"
@@ -52,7 +69,9 @@ const IncidentFormDisposition = () => {
                 thing: event.target.value})}>
             </TextField>
 
-            <TextField id="outlined-basic" select label="Transportation Disposition" 
+            { dropdowns.go &&
+            <>
+                <TextField id="outlined-basic" select label="Transportation Disposition" 
                 variant="outlined" value={ localIncident[`transportDisposition`]}
                 onChange={( event ) => submitValue({ key: `transportDisposition`,
                 thing: event.target.value })}>
@@ -75,6 +94,8 @@ const IncidentFormDisposition = () => {
                 onChange={( event ) => submitValue({ key: `destinationType`, 
                 thing: event.target.value })}>
             </TextField>
+            </>
+            }
             
         </div>
     );

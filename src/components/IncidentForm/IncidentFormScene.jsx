@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
+import { useSelector } from "react-redux";
 
 //Material UI imports
 import { TextField } from "@material-ui/core";
 
 const IncidentFormScene = () => {
-    const { id } = useParams();
 
-
-    function LocalStorageTemplate(props) {
         let [localIncident, setLocalIncident] = useState(JSON.parse(localStorage.getItem('incident')));
-        let [render, setRender] = useState(false)
+        let [render, setRender] = useState(false);
         const { id } = useParams();
         const history = useHistory();
+        const dropdowns = useSelector(store => store.dropdowns);
 
     // To render on page load
     useEffect(() => {
@@ -32,6 +31,22 @@ const IncidentFormScene = () => {
 
         // localStorage.setItem(`${newParameter.key}`, JSON.stringify(newParameter.thing));
     }
+
+    let [localDropdownMirror, setLocalDropdownMirror] = useState(JSON.parse(localStorage.getItem('dropdowns')));
+
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('dropdowns')) === null ){
+            dispatch({ type: 'GET_DROPDOWNS' })
+        } else {
+            dispatch({type: 'SET_DROPDOWNS', payload: localDropdownMirror})
+        }
+    }, []);
+
+    useEffect(() => {
+        if (dropdowns.go === true) {
+            localStorage.setItem('dropdowns', JSON.stringify(dropdowns));
+        }
+    }, [dropdowns.go]);
 
     return(
         <div>
@@ -57,6 +72,8 @@ const IncidentFormScene = () => {
                 thing: event.target.value})}>
             </TextField>
 
+            { dropdowns.go &&
+            <>
             <TextField id="outlined-basic" select label="Possible Injury" 
                 variant="outlined" value={ localIncident[`possibleInjury`]}
                 onChange={( event ) => submitValue({ key: `possibleInjury`,
@@ -68,6 +85,8 @@ const IncidentFormScene = () => {
                 onChange={( event ) => submitValue({ key: `alcoholDrugIndicators`,
                 thing: event.target.value })}>
             </TextField>
+            </>
+            }
             
         </div>
     );

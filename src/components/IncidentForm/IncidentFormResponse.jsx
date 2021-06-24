@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
+import { useSelector } from "react-redux";
 
 //Material UI imports
 import { TextField } from "@material-ui/core";
 
 const IncidentFormResponse = () => {
 
-    function localStorage(props) {
         let [localIncident, setLocalIncident] = useState(JSON.parse(localStorage.getItem('incident')));
         // let [render, setRender] = useState(false);
         // const { id } = useParams();
         // const history = useHistory();
-    }
+        const dropdowns = useSelector(store => store.dropdowns);
 
     // To render on page load
     useEffect(() => {
@@ -34,6 +34,23 @@ const IncidentFormResponse = () => {
 
         // localStorage.setItem(`${newParameter.key}`, JSON.stringify(newParameter.thing));
     }
+
+    let [localDropdownMirror, setLocalDropdownMirror] = useState(JSON.parse(localStorage.getItem('dropdowns')));
+
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('dropdowns')) === null ){
+            dispatch({ type: 'GET_DROPDOWNS' })
+        } else {
+            dispatch({type: 'SET_DROPDOWNS', payload: localDropdownMirror})
+        }
+    }, []);
+
+    useEffect(() => {
+        if (dropdowns.go === true) {
+            localStorage.setItem('dropdowns', JSON.stringify(dropdowns));
+        }
+    }, [dropdowns.go]);
+
     return (
         <div>
             <TextField id="outlined-basic" label="Name of Crew" variant="outlined" 
@@ -42,6 +59,8 @@ const IncidentFormResponse = () => {
                 thing: event.target.value })}>
             </TextField>
 
+            { dropdowns.go &&
+            <>
             <TextField id="outlined-basic" select label="Triage Category" variant="outlined" 
                 value={ localIncident[`triageCat`]} onChange={( event ) => 
                 submitValue({ key: `triageCat`, thing: event.target.value })}>
@@ -52,6 +71,8 @@ const IncidentFormResponse = () => {
                 onChange={( event ) => submitValue({ key: `serviceType`, 
                 thing: event.target.value })}>
             </TextField>
+            </>
+            }
 
         </div>
     );
