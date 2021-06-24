@@ -1,4 +1,6 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // ----- Material UI -----
 import { InputLabel } from '@material-ui/core';
@@ -7,11 +9,35 @@ import { MenuItem } from '@material-ui/core';
 
 function PatientCardiac() {
 
+    const dispatch = useDispatch();
+    const dropdowns = useSelector((store) => store.dropdowns);
+
+    let [localDropdownMirror, setLocalDropdownMirror] = useState(JSON.parse(localStorage.getItem('dropdowns')));
+
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('dropdowns')) === null ){
+            dispatch({ type: 'GET_DROPDOWNS' })
+        } else {
+            dispatch({type: 'SET_DROPDOWNS', payload: localDropdownMirror})
+        }
+    }, []);
+
+    useEffect(() => {
+        if (dropdowns.go === true) {
+            localStorage.setItem('dropdowns', JSON.stringify(dropdowns));
+        }
+    }, [dropdowns.go]);
+
+
+
+
     return (
         <div className="container">
             <h2>Patient Cardiac Arrest Form:</h2>
             <button>911 Heart Probz</button> <br /><br />
 
+            {dropdowns.go &&
+            <div>
             <InputLabel 
             id="demo-simple-select-autowidth-label">Cardiac Arrest?</InputLabel>
                 <Select
@@ -24,9 +50,9 @@ function PatientCardiac() {
                     <MenuItem value="">
                     <em>None</em>
                     </MenuItem>
-                    <MenuItem value={10}>Option 1</MenuItem>
-                    <MenuItem value={20}>Option 2</MenuItem>
-                    <MenuItem value={30}>Option 3</MenuItem>
+                    {dropdowns['cardiac_arrest'].map(item => <MenuItem key={'cardiac_arrest'+ item.id} value={item.id}>{item.type}</MenuItem>)}
+                    {/* <MenuItem value={10}>Option 1</MenuItem> */}
+                    
                 </Select> <br /><br />
 
                 <InputLabel 
@@ -217,7 +243,8 @@ function PatientCardiac() {
                     <MenuItem value={20}>Option 2</MenuItem>
                     <MenuItem value={30}>Option 3</MenuItem>
                 </Select> <br /><br />
-
+                </div>
+                }
         </div>
     )
 }
