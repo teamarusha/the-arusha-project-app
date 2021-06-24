@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-function LocalStorageTemplate(props) {
+function LocalStorageTemplate() {
 
     // Only thing we ever manipulate. Look below at line 40 - useEffect
     // We need to be really selective about when we set the mirror state to be what is in storage
     let [localPatientMirror, setLocalPatientMirror] = useState(JSON.parse(localStorage.getItem('patients')));
-    let [render, setRender] = useState(false)
+    let [render, setRender] = useState(false);
     const { id } = useParams();
     const history = useHistory();
 
@@ -19,7 +19,7 @@ function LocalStorageTemplate(props) {
 
         // If the user comes to this page without a patient ID, get redirected to patient 1
         if (!id) {
-            history.push('/patient/1')
+            history.push('/patient/1');
         }
 
         // If they get redirected from patient 1 AND they have already entered values, skip this step
