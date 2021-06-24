@@ -120,30 +120,55 @@ const TreatmentProcedureForm = () => {
                 variant="outlined" value={ localTreatment[`procedure`]}
                 onChange={( event ) => submitValue({ key: `procedure`,
                 thing: event.target.value })}>
+            {dropdowns['procedure_list'].map(item => 
+                <MenuItem key={'procedure_list'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
 
             <TextField id="outlined-basic" select label="Number of Procedure Attempts" 
                 variant="outlined" value={ localTreatment[`procedureAttempts`]}
                 onChange={( event ) => submitValue({ key: `procedureAttempts`,
                 thing: event.target.value })}>
+            {dropdowns['procedure_attempted'].map(item => 
+                <MenuItem key={'procedure_attempted'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
 
             <TextField id="outlined-basic" select label="Procedure Successful" 
                 variant="outlined" value={ localTreatment[`successfulProcedure`]}
                 onChange={( event ) => submitValue({ key: `successfulProcedure`,
                 thing: event.target.value })}>
+            {dropdowns['procedure_successful'].map(item => 
+                <MenuItem key={'procedure_successful'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
 
             <TextField id="outlined-basic" select label="Response to Procedure" 
                 variant="outlined" value={ localTreatment[`responseToProcedure`]}
                 onChange={( event ) => submitValue({ key: `responseToProcedure`,
                 thing: event.target.value })}>
+            {dropdowns['procedure_response'].map(item => 
+                <MenuItem key={'procedure_response'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
 
             <TextField id="outlined-basic" select label="Role/Type of Person Performing
                 Procedure" variant="outlined" value={ localTreatment[`procedurePerformedBy`]}
                 onChange={( event ) => submitValue({ key: `procedurePerformedBy`, 
                 thing: event.target.value })}>
+            {dropdowns['procedure_performer'].map(item => 
+                <MenuItem key={'procedure_performer'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
             </div>
             }
