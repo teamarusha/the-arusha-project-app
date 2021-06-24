@@ -55,48 +55,45 @@ function Admin() {
     // };
 
     function handleClick(row) {
-        history.push('/savedlist/${row.id}')
+        // history.push('/reports/${}')
     }
 
     return (
-            JSON.stringify(reports)
-            // <table>
-            //     <thead>
-            //         <tr>
-            //             <th>Date</th>
-            //             <th>Time</th>
-            //             <th>Patient</th>
-            //             <th>Responder</th>
-            //             <th>Report</th>
-            //         </tr>
-            //     </thead>
-             
-//                 {reports.map((row) => 
-//    <tr key={row.patient.id}> 
-    // <tr>
-    //     <td>{moment(row.incident.unit_notified).format('DD/MM/YYYY')}</td>
-    //     <td>{moment(row.incident.unit_notified).format('HH:MM:SS')}</td>
-    //     <td>{row.patient.first_name} {row.patient.last_name}</td>
-    //     <td>{row.user.first_name} {row.user.last_name}</td>
-    //     <td><button onClick={handleClick}>Report</button></td>
-    // </tr>
-//  )}
+        // JSON.stringify(reports)
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Patient</th>
+                    <th>Responder</th>
+                    <th>Report</th>
+                </tr>
+            </thead>
+            <tbody>
+                {reports.map((row) =>
+                    <tr key={row.id}>
 
-        // </table>
+                        <td>{moment(row.unit_notified).format('DD/MM/YYYY')}</td>
+                        <td>{moment(row.unit_notified).format('HH:MM:SS')}</td>
+                        <td>{row.patient_first_name} {row.patient_last_name}</td>
+                        <td>{row.user_first_name} {row.user_last_name}</td>
+                        <td><button onClick={handleClick(row)}>Report</button></td>
+                    </tr>
+                )}
+            </tbody>
+        </table>
         //     <Paper className={classes.root}>
         //     <TableContainer className={classes.container}>
         //        <Table stickyHeader aria-label="sticky table">
         //             <TableHead>
         //                <TableRow>
-        //                     {columns.map((column) => (
-        //                         <TableCell
-        //                             key={column.id}
-        //                             align={column.align}
-        //                             style={{ minWidth: column.minWidth }}
-        //                         >
-        //                             {column.label}
-        //                         </TableCell>
-        //                     ))}
+        //                   
+        //                         <TableCell>Date</TableCell>
+        
+        //                             
+        //                              
+        //                   
         //                 </TableRow>
         //             </TableHead>
         //             <TableBody>
@@ -127,7 +124,7 @@ function Admin() {
         //         onChangeRowsPerPage={handleChangeRowsPerPage}
         //     />
         // </Paper>
-    
+
     )
 }
 
