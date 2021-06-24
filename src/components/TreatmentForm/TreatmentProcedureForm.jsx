@@ -19,28 +19,28 @@ const TreatmentProcedureForm = () => {
         if (!id) {
             history.push('/treatment/procedure/1');
         }
-
         // If they get redirected from patient 1 AND they have already entered values, skip this step
         // If they are redirected here from /patients, initialize the first patient
         else if (id == 1 && JSON.parse(localStorage.getItem('treatment')) === null) {
-            setLocalTreatment({ "1treatmentArray": [1], "1procedure1": '', "1procedureAttempts1": '', '1birthDate': '', '1bloodType': '' });
+            setLocalTreatment({ "1treatmentArray": [1], "1procedure1": '', 
+            "1procedureAttempts1": '', "1successfulProcedure1": '', 
+            "1responseToProcedure1": '', "1procedurePerformedBy1": '' });
             setRender(true);
         }
-
         // Otherwise, we allow the render as there should be data in storage
         else {
             setRender(true);
         }
         }, []);
     
-   // Runs whenever localPatientMirror is changed, updated, manipulated at all
+    // Runs whenever localPatientMirror is changed, updated, manipulated at all
     // This way they will always be the same as long as it is the mirror that is being changed
     useEffect(() => {
         console.log('UPDATING browser storage', localTreatment);
         localStorage.setItem('treatment', JSON.stringify(localTreatment));
     }, [localTreatment]);
 
-      // Only handles when a value is changed by keystroke/inputfield clicks. 
+    // Only handles when a value is changed by keystroke/inputfield clicks. 
     // Does NOT handle initialization of new data.
     function submitValue(newParameter) {
         console.log('Updating parameter in submitValue', newParameter.key, newParameter.thing);
@@ -64,12 +64,13 @@ const TreatmentProcedureForm = () => {
             ...localTreatment,
             'treatmentArray': [...localTreatment.treatmentArray, newProcedureID],
             [newProcedureID + 'procedure1']: '',
-            [newProcedureID + 'procedureAttempts']: '',
-            [newProcedureID + 'successfulProcedure']: '',
-            [newProcedureID + 'responseToProcedure']: '',
-            [newProcedureID + 'procedurePerformedBy']: ''
+            [newProcedureID + 'procedureAttempts1']: '',
+            [newProcedureID + 'successfulProcedure1']: '',
+            [newProcedureID + 'responseToProcedure1']: '',
+            [newProcedureID + 'procedurePerformedBy1']: ''
         })
     }
+    
     // Simply redirects to the patient page of a new patient 
     // based on their position in the patientArray
     function changePatient(patientNumber) {
@@ -122,7 +123,7 @@ const TreatmentProcedureForm = () => {
                 onChange={( event ) => submitValue({ key: `procedurePerformedBy`, 
                 thing: event.target.value })}>
             </TextField>
-            
+
         </div>
     );
 };
