@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 import PatientDemographics from '../PatientDemographics/PatientDemographics';
 import PatientMedical from '../PatientMedical/PatientMedical';
+import PatientSymptoms from '../PatientSymptoms/PatientSymptoms';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -80,6 +81,25 @@ function PatientHome() {
         </AccordionSummary>
         <AccordionDetails>
             <PatientMedical />
+          {/* <Typography>
+            Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
+            diam eros in elit. Pellentesque convallis laoreet laoreet.
+          </Typography> */}
+        </AccordionDetails>
+      </Accordion>
+      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2bh-content"
+          id="panel2bh-header"
+        >
+          <Typography className={classes.heading}>Symptoms</Typography>
+          <Typography className={classes.secondaryHeading}>
+            You can click me too.
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+            <PatientSymptoms />
           {/* <Typography>
             Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
             diam eros in elit. Pellentesque convallis laoreet laoreet.
