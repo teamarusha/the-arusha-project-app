@@ -2,6 +2,7 @@ import { all, takeEvery } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
+import reportsSaga from './reports.saga';
 import getDropdowns from './getDropdowns.saga';
 
 // rootSaga is the primary saga.
@@ -16,6 +17,7 @@ export default function* rootSaga() {
   yield all([
     loginSaga(), // login saga is now registered
     registrationSaga(),
-    userSaga()
+    userSaga(),
+    reportsSaga(),
   ]);
 }
