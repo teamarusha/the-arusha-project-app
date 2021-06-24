@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { useCookies } from "react-cookie";
+import { useHistory, useParams } from "react-router";
 
 //Material UI imports
 import { TextField } from "@material-ui/core";
@@ -8,36 +7,27 @@ import { TextField } from "@material-ui/core";
 const IncidentFormResponse = () => {
     const { id } = useParams();
 
-    function cookieForm(props) {
-        const [ cookie, setCookie ] = useCookies([ 'response' ]);
-        let [ localCookie, setLocalCookie ] = useState( cookie );
-        // let [ render, setRender ] = useState('');
+    function localStorage(props) {
+        let [localPatientMirror, setLocalPatientMirror] = useState(JSON.parse(localStorage.getItem('response')));
+        let [render, setRender] = useState(false);
+        const { id } = useParams();
+        const history = useHistory();
     }
-
-
 
     // To render on page load
     useEffect(() => {
-        console.log( 'Params id:', id );
-        console.log( 'Cookie Mirror', localCookie );
-        console.log( 'THE cookie', cookie );
-        // if( id >= 0 ) {
-        //     setRender( true );
-        // }
+        // console.log( 'Params id:', id );
+        console.log( 'Cookie Mirror', localPatientMirror );
+        console.log( 'Patient Storage', JSON.parse(localStorage.getItem('response')));
     }, []);
-
-    function submitCookie(newCookie) {
-        console.log('setting THE cookie', newCookie.key, newCookie.item );
-        setLocalCookie({ ...localCookie, [ newCookie.key ] : newCookie.item });
-        setCookie( newCookie.key, newCookie.item, { path: '/' });
-    }
 
 
     return (
         <div>
             <TextField id="outlined-basic" label="Name of Crew" variant="outlined" 
                 value={ localCookie[`${id}crew`]} onChange={( event ) => 
-                submitCookie({ key: `${id}crew`, item: event.target.value })}>
+                submitCookie({ key: `${id}alcoholDrugIndicators`, 
+                item: event.target.value })}>
             </TextField>
             <TextField id="outlined-basic" select label="Triage Category" variant="outlined" 
                 value={ localCookie[`${id}triageCat`]} onChange={( event ) => 
