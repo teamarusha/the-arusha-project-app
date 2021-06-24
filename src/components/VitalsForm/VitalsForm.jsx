@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { useCookies } from "react-cookie";
 
 //Material UI imports
 import { TextField, Button } from "@material-ui/core";
@@ -10,15 +9,12 @@ const VitalsForm = () => {
 
     const dispatch = useDispatch();
     const history = useHistory();
-
     const { id } = useParams();
+    const dropdowns
 
+    let [localVitals, setLocalVitals] = useState(JSON.parse(localStorage.getItem('vitals')));
+    let [render, setRender] = useState(false);
 
-    function cookieForm(props) {
-        const [ cookie, setCookie ] = useCookies([ 'vitals' ]);
-        let [ localCookie, setLocalCookie ] = useState( cookie );
-        // let [ render, setRender ] = useState('');
-    }
     // To render on page load
     useEffect(() => {
         console.log( 'Params id:', id );
