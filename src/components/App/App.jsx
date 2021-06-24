@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Admin from '../Admin/Admin';
 
 import PatientHome from '../PatientHome/PatientHome';
 import PatientDemographics from '../PatientDemographics/PatientDemographics';
@@ -72,6 +73,14 @@ function App() {
             path="/user"
           >
             <UserPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/admin"
+          >
+            <Admin />
           </ProtectedRoute>
 
           <ProtectedRoute
