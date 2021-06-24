@@ -66,12 +66,22 @@ const IncidentFormResponse = () => {
             <TextField id="outlined-basic" select label="Triage Category" variant="outlined" 
                 value={ localIncident[`triageCat`]} onChange={( event ) => 
                 submitValue({ key: `triageCat`, thing: event.target.value })}>
+            {dropdowns['triage_cat'].map(item => 
+                <MenuItem key={'triage_cat'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
 
             <TextField id="outlined-basic" select label="Type of Service Requested" 
                 variant="outlined" value={ localIncident[`serviceType`]}
                 onChange={( event ) => submitValue({ key: `serviceType`, 
                 thing: event.target.value })}>
+            {dropdowns['incident_type'].map(item => 
+                <MenuItem key={'incident_type'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
             </div>
             }
