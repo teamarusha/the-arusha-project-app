@@ -6,15 +6,14 @@ import RegisterForm from '../RegisterForm/RegisterForm';
 
 function RegisterPage() {
   const history = useHistory();
+  
 
   return (
     <ThemeProvider theme={createMuiTheme}>
-      
-      
-      
       <RegisterForm />
-
       
+      <Grid container justify='center'>
+      <Grid item >
         <Link
           variant='body1'
           component="button"
@@ -24,9 +23,9 @@ function RegisterPage() {
           color='secondary'
         >
           Login
-        </Link>
-      
-   
+      </Link>
+      </Grid>
+      </Grid>
     </ThemeProvider>
   );
 }

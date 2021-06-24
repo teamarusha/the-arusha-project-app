@@ -44,15 +44,15 @@ function RegisterForm() {
       <Grid container spacing={2} justify='center' >
 
         <Grid container >
-        {/* <Grid item xs={3} sm={3} md={3} lg={3} xl={3}></Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} alignContent='center'>
-            <Typography variant='h3'>The Arusha Project</Typography>
-        </Grid> */}
         
         <Grid item xs={4} sm={4} md={4} lg={4} xl={4}></Grid>
         <Grid item xs={4} sm={4} md={4} lg={4} xl={4} alignContent='center' >
              <KOPIMobileLogo/>  
         </Grid>
+        <br />
+        <br />
+        <br />
+        
         <Grid item xs={4} sm={4} md={4} lg={4} xl={4}></Grid>
         
         <Grid item xs={12}></Grid>
@@ -69,6 +69,8 @@ function RegisterForm() {
         </Typography>
       )}
       <Grid item xs={12} >
+      <br />
+     
           <TextField
           label="First Name"
             type="text"
@@ -135,7 +137,7 @@ function RegisterForm() {
             type="submit"
             name="submit"
             value="Register"
-            
+            size="large"
             variant="contained"
             color="secondary"
             className={globalStyle.submit}
