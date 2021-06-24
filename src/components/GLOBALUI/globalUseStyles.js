@@ -24,6 +24,7 @@ const globalUseStyle = makeStyles((theme) => ({
       ...theme.mixins.toolbar,
       marginBottom: '2em',
     },
+    // DROPDOWN MENU STYLING DEPENDENCIES
     dropdown: {
           root: {
             width: "100%",
@@ -37,6 +38,7 @@ const globalUseStyle = makeStyles((theme) => ({
           },
           
     },
+    // REGISTRATION STYLING DEPENDENCIES
     register : {
       submit: {
         margin: theme.spacing(3, 1, 2, 1),
