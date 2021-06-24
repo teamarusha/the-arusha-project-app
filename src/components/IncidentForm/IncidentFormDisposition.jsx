@@ -1,77 +1,81 @@
 import { useEffect, useState } from "react";
-
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-
-import { useCookies } from "react-cookie";
 
 //Material UI imports
 import { TextField } from "@material-ui/core";
 
 const IncidentFormDisposition = () => {
 
-    const dispatch = useDispatch();
-    const history = useHistory();
-
-    const { id } = useParams();
-
-
-    function cookieForm(props) {
-        const [ cookie, setCookie ] = useCookies([ 'disposition' ]);
-        let [ localCookie, setLocalCookie ] = useState( cookie );
-        // let [ render, setRender ] = useState('');
+    function localStorage(props) {
+        let [localIncident, setLocalIncident] = useState(JSON.parse(localStorage.getItem('incident')));
+        // let [render, setRender] = useState(false);
+        // const { id } = useParams();
+        // const history = useHistory();
     }
     // To render on page load
     useEffect(() => {
-        console.log( 'Params id:', id );
-
-        console.log( 'Cookie Mirror', localCookie );
-        console.log( 'THE cookie', cookie );
-        // if( id >= 0 ) {
-        //     setRender( true );
-        // }
+        // console.log( 'Params id:', id );
+        console.log( 'Cookie Mirror', localIncident );
+        console.log( 'Incident Storage', JSON.parse(localStorage.getItem('incident')));
     }, []);
     
-    function submitCookie(newCookie) {
-        console.log('setting THE cookie', newCookie.key, newCookie.item );
-        setLocalCookie({ ...localCookie, [ newCookie.key ] : newCookie.item });
-        setCookie( newCookie.key, newCookie.item, { path: '/' });
+    useEffect(() => {
+        console.log('UPDATING browser storage', localIncident);
+        localStorage.setItem('incident', JSON.stringify(localIncident));
+    }, [localIncident]);
+
+    // Only handles when a value is changed by keystroke/inputfield clicks. 
+    // Does NOT handle initialization of new data.
+    function submitValue(newParameter) {
+        console.log('Updating parameter in submitValue', newParameter.key, newParameter.thing);
+
+        setLocalIncident({ ...localIncident, [newParameter.key]: newParameter.thing });
+
+        // localStorage.setItem(`${newParameter.key}`, JSON.stringify(newParameter.thing));
     }
 
     return(
         <div>
             <TextField id="outlined-basic" label="Destination State" variant="outlined"
-            value={ [`destinationState`]} onChange={( event ) => ({ key: `destinationState`,
-            thing: event.target.value})}>
+                value={ localIncident[`destinationState`]} onChange={( event ) => 
+                submitValue({ key: `destinationState`, thing: event.target.value})}>
             </TextField>
+
             <TextField id="outlined-basic" label="Destination County" variant="outlined"
-            value={ [`destinationCounty`]} onChange={( event ) => ({ key: `destinationCounty`,
-            thing: event.target.value})}>
+                value={ localIncident[`destinationCounty`]} onChange={( event ) => 
+                submitValue({ key: `destinationCounty`, thing: event.target.value})}>
             </TextField>
-            <TextField id="outlined-basic" label="Destination Zip Code" variant="outlined"
-            value={ [`destinationZipCode`]} onChange={( event ) => ({ key: `destinationZipCode`,
-            thing: event.target.value})}>
+
+            <TextField id="outlined-basic" label="Destination Zip Code" 
+                variant="outlined" value={ localIncident[`destinationZipCode`]} 
+                onChange={( event ) => submitValue({ key: `destinationZipCode`,
+                thing: event.target.value})}>
             </TextField>
+
             <TextField id="outlined-basic" select label="Transportation Disposition" 
-                variant="outlined" value={ localCookie[`${id}transportDisposition`]}
-                onChange={( event ) => submitCookie({ key: `{id}transportDisposition`,
-                item: event.target.value })}>
+                variant="outlined" value={ localIncident[`transportDisposition`]}
+                onChange={( event ) => submitValue({ key: `transportDisposition`,
+                thing: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" select label="EMS Transport Method" variant="outlined"
-                value={ localCookie[`${id}transportMethod`]}
-                onChange={( event ) => submitCookie({ key: 
-                `${id}transportMethod`, item: event.target.value })}>
+
+            <TextField id="outlined-basic" select label="EMS Transport Method" 
+                variant="outlined" value={ localIncident[`transportMethod`]}
+                onChange={( event ) => submitValue({ key: `transportMethod`, 
+                thing: event.target.value })}>
             </TextField>
+
             <TextField id="outlined-basic" select label="Transport Mode From Scene" 
-                variant="outlined" value={ localCookie[`${id}transportMode`]}
-                onChange={( event ) => submitCookie({ key: 
-                `${id}transportMode`, item: event.target.value })}>
+                variant="outlined" value={ localIncident[`transportMode`]}
+                onChange={( event ) => submitValue({ key: `transportMode`, 
+                thing: event.target.value })}>
             </TextField>
-            <TextField id="outlined-basic" select label="Type of Destination" variant="outlined"
-                value={ localCookie[`${id}destinationType`]}
-                onChange={( event ) => submitCookie({ key:
-                `${id}destinationType`, item: event.target.value })}>
+
+            <TextField id="outlined-basic" select label="Type of Destination" 
+                variant="outlined" value={ localIncident[`destinationType`]}
+                onChange={( event ) => submitValue({ key: `destinationType`, 
+                thing: event.target.value })}>
             </TextField>
+            
         </div>
     );
 };

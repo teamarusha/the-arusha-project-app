@@ -17,12 +17,12 @@ const IncidentFormScene = () => {
     // To render on page load
     useEffect(() => {
         console.log( 'Params id:', id );
-        console.log( 'Cookie Mirror', localIncident );
+        console.log( 'Incident Storage', JSON.parse(localStorage.getItem('incident')));
     }, []);
 
     useEffect(() => {
         console.log('UPDATING browser storage', localIncident);
-        localStorage.setItem('patients', JSON.stringify(localIncident));
+        localStorage.setItem('incident', JSON.stringify(localIncident));
     }, [localIncident]);
 
    function submitValue(newParameter) {

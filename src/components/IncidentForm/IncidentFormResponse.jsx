@@ -5,7 +5,6 @@ import { useHistory, useParams } from "react-router";
 import { TextField } from "@material-ui/core";
 
 const IncidentFormResponse = () => {
-    const { id } = useParams();
 
     function localStorage(props) {
         let [localIncident, setLocalIncident] = useState(JSON.parse(localStorage.getItem('incident')));
@@ -23,10 +22,10 @@ const IncidentFormResponse = () => {
 
     useEffect(() => {
         console.log('UPDATING browser storage', localIncident);
-        localStorage.setItem('response', JSON.stringify(localIncident));
+        localStorage.setItem('incident', JSON.stringify(localIncident));
     }, [localIncident]);
 
-        // Only handles when a value is changed by keystroke/inputfield clicks. 
+    // Only handles when a value is changed by keystroke/inputfield clicks. 
     // Does NOT handle initialization of new data.
     function submitValue(newParameter) {
         console.log('Updating parameter in submitValue', newParameter.key, newParameter.thing);
@@ -53,7 +52,7 @@ const IncidentFormResponse = () => {
                 onChange={( event ) => submitValue({ key: `serviceType`, 
                 thing: event.target.value })}>
             </TextField>
-            
+
         </div>
     );
 };
