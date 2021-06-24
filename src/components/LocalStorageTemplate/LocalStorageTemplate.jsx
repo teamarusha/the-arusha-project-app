@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 function LocalStorageTemplate(props) {
 
-    // Only thing we ever manipulate. Look below at line 39 - useEffect
+    // Only thing we ever manipulate. Look below at line 40 - useEffect
     // We need to be really selective about when we set the mirror state to be what is in storage
     let [localPatientMirror, setLocalPatientMirror] = useState(JSON.parse(localStorage.getItem('patients')));
     let [render, setRender] = useState(false)
@@ -80,10 +80,9 @@ function LocalStorageTemplate(props) {
         history.push(`/patient/${patientNumber}`);
     }
 
-
     return (
         <>
-            <p>Local Cookie Mirror: {JSON.stringify(localPatientMirror)}</p>
+            <p>Local Mirror: {JSON.stringify(localPatientMirror)}</p>
             <p>Storage: {JSON.stringify(localPatientMirror)}</p>
 
             {

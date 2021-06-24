@@ -1,6 +1,6 @@
 const dropdowns = (state = {go: false}, action) => {
     switch (action.type) {
-      case 'SET_DROPDOWN_MIRROR':
+      case 'SET_DROPDOWNS':
         return action.payload;
       case 'ADD_DROPDOWN_OBJECT':
         return {...state, [action.payload.key]: action.payload.value}

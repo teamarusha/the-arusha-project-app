@@ -1,18 +1,22 @@
 import { useState, useEffect } from "react";
-import { useCookies } from 'react-cookie';
 import { useDispatch, useSelector } from "react-redux";
 
 
 function ReduxCookie() {
+
     const dropdowns = useSelector(store => store.dropdowns);
     const dispatch = useDispatch();
 
 
-    const [cookie, setCookie, removePatientsCookie] = useCookies(['dropdowns']);
-    let [localCookie, setLocalCookie] = useState(JSON.parse(localStorage.getItem('dropdowns')));
+
+    let [localDropdownMirror, setLocalDropdownMirror] = useState(JSON.parse(localStorage.getItem('dropdowns')));
 
     useEffect(() => {
-        dispatch({ type: 'GET_DROPDOWNS' })
+        if (JSON.parse(localStorage.getItem('dropdowns')) === null ){
+            dispatch({ type: 'GET_DROPDOWNS' })
+        } else {
+            dispatch({type: 'SET_DROPDOWNS', payload: localDropdownMirror})
+        }
     }, []);
 
     useEffect(() => {
@@ -21,20 +25,15 @@ function ReduxCookie() {
         }
     }, [dropdowns.go]);
 
-
-    function submitCookie(newCookie) {
-        console.log('setting THE cookie', newCookie.key, newCookie.thing);
-
-        setLocalCookie({ ...localCookie, [newCookie.key]: newCookie.thing });
-
-        setCookie(newCookie.key, newCookie.thing, { path: '/' });
-    }
-
     return (
         <>
-            <p>Local Cookie Mirror: {JSON.stringify(localCookie['cardiac_arrest'])}</p>
-            <p>Local Storage dropdowns: {localStorage.getItem('dropdowns')}</p>
-            <p>Dropdown Reducer: {JSON.stringify(dropdowns)}</p>
+            {dropdowns.go &&
+                <>
+                    <p>Local Cookie Mirror: {JSON.stringify(dropdowns['cardiac_arrest'])}</p>
+                    <p>Local Storage dropdowns: {localStorage.getItem('dropdowns')}</p>
+                    <p>Dropdown Reducer: {JSON.stringify(dropdowns)}</p>
+                </>
+            }
 
 
 
