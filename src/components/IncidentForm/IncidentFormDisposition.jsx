@@ -1,6 +1,7 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 //Material UI imports
 import { TextField } from "@material-ui/core";
@@ -11,6 +12,7 @@ const IncidentFormDisposition = () => {
         // let [render, setRender] = useState(false);
         // const { id } = useParams();
         // const history = useHistory();
+        const dispatch = useDispatch();
         const dropdowns = useSelector(store => store.dropdowns);
 
     // To render on page load
@@ -70,7 +72,7 @@ const IncidentFormDisposition = () => {
             </TextField>
 
             { dropdowns.go &&
-            <>
+            <div>
                 <TextField id="outlined-basic" select label="Transportation Disposition" 
                 variant="outlined" value={ localIncident[`transportDisposition`]}
                 onChange={( event ) => submitValue({ key: `transportDisposition`,
@@ -94,7 +96,7 @@ const IncidentFormDisposition = () => {
                 onChange={( event ) => submitValue({ key: `destinationType`, 
                 thing: event.target.value })}>
             </TextField>
-            </>
+            </div>
             }
             
         </div>

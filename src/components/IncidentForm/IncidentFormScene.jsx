@@ -1,6 +1,7 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 //Material UI imports
 import { TextField } from "@material-ui/core";
@@ -8,9 +9,10 @@ import { TextField } from "@material-ui/core";
 const IncidentFormScene = () => {
 
         let [localIncident, setLocalIncident] = useState(JSON.parse(localStorage.getItem('incident')));
-        let [render, setRender] = useState(false);
+        // let [render, setRender] = useState(false);
         const { id } = useParams();
-        const history = useHistory();
+        const dispatch = useDispatch();
+        // const history = useHistory();
         const dropdowns = useSelector(store => store.dropdowns);
 
     // To render on page load
@@ -73,7 +75,7 @@ const IncidentFormScene = () => {
             </TextField>
 
             { dropdowns.go &&
-            <>
+            <div>
             <TextField id="outlined-basic" select label="Possible Injury" 
                 variant="outlined" value={ localIncident[`possibleInjury`]}
                 onChange={( event ) => submitValue({ key: `possibleInjury`,
@@ -85,7 +87,7 @@ const IncidentFormScene = () => {
                 onChange={( event ) => submitValue({ key: `alcoholDrugIndicators`,
                 thing: event.target.value })}>
             </TextField>
-            </>
+            </div>
             }
             
         </div>
