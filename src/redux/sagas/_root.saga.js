@@ -4,6 +4,7 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import reportsSaga from './reports.saga';
 import getDropdowns from './getDropdowns.saga';
+import postIncident from './postIncident.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -14,6 +15,7 @@ import getDropdowns from './getDropdowns.saga';
 // and login triggers setting the user
 export default function* rootSaga() {
   yield takeEvery('GET_DROPDOWNS', getDropdowns);
+  yield takeEvery('POST_INCIDENT', postIncident);
   yield all([
     loginSaga(), // login saga is now registered
     registrationSaga(),
