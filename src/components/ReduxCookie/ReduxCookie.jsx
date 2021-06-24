@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -26,18 +27,18 @@ function ReduxCookie() {
     }, [dropdowns.go]);
 
     return (
-        <>
+        <div>
             {dropdowns.go &&
-                <>
+                <div>
                     <p>Local Cookie Mirror: {JSON.stringify(dropdowns['cardiac_arrest'])}</p>
                     <p>Local Storage dropdowns: {localStorage.getItem('dropdowns')}</p>
                     <p>Dropdown Reducer: {JSON.stringify(dropdowns)}</p>
-                </>
+                </div>
             }
 
 
 
-        </>
+        </div>
     )
 }
 
