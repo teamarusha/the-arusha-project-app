@@ -44,10 +44,13 @@ function Nav() {
           Incident Response
         </Link> */}
 
-<Link className="navLink" to="/incident/scene">
+        <Link className="navLink" to="/incident/scene">
           Incident Scene
         </Link>
         
+        <Link className="navLink" to="/dropdown">
+          ReduxCookie
+        </Link>
       </div>
     </div>
   );

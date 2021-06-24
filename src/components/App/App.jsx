@@ -23,6 +23,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import './App.css';
 import IncidentFormScene from '../IncidentForm/IncidentFormScene';
 // import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
+import ReduxCookie from '../ReduxCookie/ReduxCookie';
 
 function App() {
   const dispatch = useDispatch();
@@ -60,6 +61,13 @@ function App() {
             path="/incident/scene"
           >
             <IncidentFormScene />
+          </Route>
+          <Route
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/dropdown"
+          >
+            <ReduxCookie />
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
