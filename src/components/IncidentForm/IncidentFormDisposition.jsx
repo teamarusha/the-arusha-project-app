@@ -40,6 +40,18 @@ const IncidentFormDisposition = () => {
 
     return(
         <div>
+            <TextField id="outlined-basic" label="Destination State" variant="outlined"
+            value={ [`destinationState`]} onChange={( event ) => ({ key: `destinationState`,
+            thing: event.target.value})}>
+            </TextField>
+            <TextField id="outlined-basic" label="Destination County" variant="outlined"
+            value={ [`destinationCounty`]} onChange={( event ) => ({ key: `destinationCounty`,
+            thing: event.target.value})}>
+            </TextField>
+            <TextField id="outlined-basic" label="Destination Zip Code" variant="outlined"
+            value={ [`destinationZipCode`]} onChange={( event ) => ({ key: `destinationZipCode`,
+            thing: event.target.value})}>
+            </TextField>
             <TextField id="outlined-basic" select label="Transportation Disposition" 
                 variant="outlined" value={ localCookie[`${id}transportDisposition`]}
                 onChange={( event ) => submitCookie({ key: `{id}transportDisposition`,

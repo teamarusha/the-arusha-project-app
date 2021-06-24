@@ -22,7 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
 import IncidentFormScene from '../IncidentForm/IncidentFormScene';
-// import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
+import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
 import ReduxCookie from '../ReduxCookie/ReduxCookie';
 
 function App() {
@@ -49,19 +49,20 @@ function App() {
             <AboutPage />
           </Route>
 
-          {/* <Route
+          <Route
             exact
             path="/incident/response"
           >
             <IncidentFormResponse />
-          </Route> */}
+          </Route>
 
-           <Route
+           {/* <Route
             exact
             path="/incident/scene"
           >
             <IncidentFormScene />
-          </Route>
+          </Route> */}
+
           <Route
             // shows AboutPage at all times (logged in or not)
             exact

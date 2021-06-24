@@ -38,6 +38,18 @@ const IncidentFormScene = () => {
                 onChange={( event ) => submitCookie({ key: `${id}patientNumbers`,
                 item: event.target.value })}>
             </TextField>
+            <TextField id="outlined-basic" label="Incident State" variant="outlined"
+            value={ [`incidentState`]} onChange={( event ) => ({ key: `incidentState`,
+            thing: event.target.value})}>
+            </TextField>
+            <TextField id="outlined-basic" label="Incident County" variant="outlined"
+            value={ [`incidentCounty`]} onChange={( event ) => ({ key: `incidentCounty`,
+            thing: event.target.value})}>
+            </TextField>
+            <TextField id="outlined-basic" label="Incident Zip Code" variant="outlined"
+            value={ [`incidentZipCode`]} onChange={( event ) => ({ key: `incidentZipCode`,
+            thing: event.target.value})}>
+            </TextField>
             <TextField id="outlined-basic" select label="Possible Injury" variant="outlined" 
                 value={ localCookie[`${id}possibleInjury`]}
                 onChange={( event ) => submitCookie({ key: `${id}possibleInjury`,
