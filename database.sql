@@ -1,167 +1,3 @@
--- USER is a reserved keyword with Postgres
--- You must use double quotes in every query that user is in:
--- ex. SELECT * FROM "user";
--- Otherwise you will have errors!
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL,
-    "first_name" VARCHAR (80) NOT NULL,
-    "last_name" VARCHAR (80) NOT NULL,
-    "region_id" NUMERIC NOT NULL
-);
-
-CREATE TABLE incident (
-	id SERIAL PRIMARY KEY,
-	user_id integer REFERENCES "user",
-	incident_type_id integer REFERENCES "incident_type",
-	crew_id varchar(50),
-	category varchar(50),
-	unit_notified varchar(50),
-	unit_enroute varchar(50),
-	unit_arrived_scene varchar(50),
-	arrived_patient varchar(50),
-	unit_left_scene varchar(50),
-	arrived_destination varchar(50),
-	transfer_of_care varchar(50),
-	unit_in_service varchar(50),
-	incident_summary varchar(20000)
-);
-
-CREATE TABLE scene (
-	id SERIAL PRIMARY KEY,
-	incident_scene_id integer REFERENCES "incident",
-	incident_state varchar (100),
-	incident_zip varchar(100),
-	incident_county varchar(100),
-	possible_injury varchar(10),
-	alcohol_drug_use_id integer REFERENCES "alcohol_drug_use"
-);
-
-CREATE TABLE disposition (
-	id SERIAL PRIMARY KEY,
-	incident_disposition_id integer REFERENCES "incident",
-	destination_state varchar(100),
-	destination_county varchar(100),
-	destination_zip varchar(100),
-	transport_disposition_id integer REFERENCES "transport_disposition",
-	transport_method_id integer REFERENCES "transport_method",
-	transport_mode_id integer REFERENCES "transport_mode",
-	destination_type_id integer REFERENCES "destination_type"
-);
-
-CREATE TABLE patient (
-    id SERIAL PRIMARY KEY,
-    patient_incident_id integer REFERENCES “incident”
-    first_name varchar(100),
-    last_name varchar(100),
-    address varchar(100),
-    home_county varchar(100),
-    home_state varchar(100),
-    home_zip varchar(100),
-    gender_id integer REFERENCES "gender",
-    race_id integer REFERENCES "race",
-    age integer,
-    age_units_id integer REFERENCES "age_units"
-);
-
-CREATE TABLE medicalConditions (
-	id SERIAL PRIMARY KEY,
-	patient_condition_id integer REFERENCES "patient",
-	medical_conditions varchar(100)
-);
-
-CREATE TABLE currentMedication (
-	id SERIAL PRIMARY KEY,
-	patient_medication_id integer REFERENCES "patient",
-	medication varchar(100)
-);
-
-CREATE TABLE allergies (
-	id SERIAL PRIMARY KEY,
-	patient_allergy_id integer REFERENCES "patient",
-	allergy varchar(100)
-);
-
-CREATE TABLE symptoms (
-	id SERIAL PRIMARY KEY,
-	patient_symptoms_id integer REFERENCES "patient",
-	anatomic_location_id integer REFERENCES "anatomic_location",
-	organ_system_id integer REFERENCES "organ_system",
-	time_symptom_onset varchar(50),
-	time_last_known_well varchar(50),
-	primary_symptom varchar(100),
-	other_symptoms varchar(200),
-	initial_acuity_id integer REFERENCES "initial_acuity",
-	final_acuity_id integer REFERENCES "final_acuity",
-	primary_impression_id integer REFERENCES "primary_impression"
-);
-
-CREATE TABLE injury (
-	id SERIAL PRIMARY KEY,
-	patient_injury_id integer REFERENCES "patient",
-	injury_type_id integer REFERENCES "injury_type",
-	injury_cause_id integer REFERENCES "injury_cause"
-);
-
-CREATE TABLE cardiacArrest (
-    id SERIAL PRIMARY KEY,
-    cardiac_arrest_id integer REFERENCES "cardiac_arrest",
-    cardiac_arrest_etiology_id integer REFERENCES "cardiac_arrest_etiology",
-    resuscitation_attempt_id integer REFERENCES "resuscitation_attempt",
-    cardiac_arrest_witness_id integer REFERENCES "cardiac_arrest_witness",
-    AED_use_prior_id integer REFERENCES "AED_use_prior",
-    CPR_type_id integer REFERENCES "CPR_type",
-    spontaneous_circulation_id integer REFERENCES "spontaneous_circulation",
-    time_cardiac_arrest varchar(50),
-    CPR_stopped_id integer REFERENCES "CPR_stopped",
-    AED_initiator_id integer REFERENCES "AED_initiator",
-    AED_applicator_id integer REFERENCES "AED_applicator",
-    AED_defibrillator_id integer REFERENCES "AED_defibrillator"
-);
-
-CREATE TABLE medication (
-	id SERIAL PRIMARY KEY,
-	patient_medication_id integer REFERENCES "patient",
-	medication varchar(50),
-	med_admin_route_id integer REFERENCES "med_admin_route",
-	med_admin_by_id integer REFERENCES "med_admin_by",
-	med_dosage integer,
-	med_dosage_units_id integer REFERENCES "med_dosage_units",
-	med_response varchar(10),
-	med_timestamp varchar(100)
-);
-
-CREATE TABLE "procedure" (
-	id SERIAL PRIMARY KEY,
-	patient_procedure_id integer REFERENCES "patient",
-	procedure_name_id integer REFERENCES "procedure_list",
-	procedure_attempts integer,
-	procedure_successful BOOLEAN,
-	procedure_response varchar(10),
-	procedure_performer_id integer REFERENCES "procedure_performer",
-	procedure_timestamp varchar(100)
-);
-
-CREATE TABLE vitals (
-	id SERIAL PRIMARY KEY,
-	patient_vitals_id integer REFERENCES "patient",
-	systolic_BP varchar(50),
-	heart_rate varchar(50),
-	pulse_oximetry varchar(50),
-	respiratory_rate varchar(50),
-	blood_glucose varchar(50),
-	glasgow_eye varchar(50),
-	glasgow_verbal varchar(50),
-	glasgow_motor varchar(50),
-	glasgow_qualifier varchar(50),
-	responsiveness_level_id integer REFERENCES "responsiveness_level",
-	pain_scale_id integer REFERENCES "pain_scale",
-	stroke_score_id integer REFERENCES "stroke_score",
-	stroke_scale_id integer REFERENCES "stroke_scale",
-	vitals_timestamp varchar(100)
-);
-
 -- Create database name "arusha_project"
 -- There are several tables to add:
 
@@ -183,11 +19,11 @@ CREATE TABLE "cardiac_arrest_etiology" (
 
 INSERT INTO "cardiac_arrest_etiology" ("type")
 VALUES
-('Cardiac (presumed)'),
+('Cardiac (Presumed)'),
 ('Drowning/Submersion'),
 ('Drug Overdose'),
 ('Electrocution'),
-('Exsanguination-Medical (non-traumatic'),
+('Exsanguination-Medical (Non-Traumatic)'),
 ('Other'),
 ('Respiratory/Asphyxia'),
 ('Traumatic Cause');
@@ -196,6 +32,7 @@ CREATE TABLE "cardiac_arrest_witness" (
     "id" SERIAL PRIMARY KEY,
     "type" VARCHAR (30)
 );
+
 
 INSERT INTO "cardiac_arrest_witness" ("type")
 VALUES
@@ -206,14 +43,14 @@ VALUES
 
 CREATE TABLE "AED_use_prior" (
     "id" SERIAL PRIMARY KEY,
-    "type" VARCHAR (30)
+    "type" VARCHAR (50)
 );
 
 INSERT INTO "AED_use_prior" ("type")
 VALUES
 ('No'),
-('Yes, without defibrillation'),
-('Yes, with defibrillation');
+('Yes, Applied without Defibrillation'),
+('Yes, with Defibrillation');
 
 CREATE TABLE "CPR_type" (
     "id" SERIAL PRIMARY KEY,
@@ -245,9 +82,9 @@ CREATE TABLE "spontaneous_circulation"(
 INSERT INTO "spontaneous_circulation" ("type")
 VALUES
 ('No'),
-('Yes, at arrival of ED'),
-('Yes, prior to arrival'),
-('Yes, sustained for 20 minutes');
+('Yes, At Arrival at the ED'),
+('Yes, Prior to Arrival at the ED'),
+('Yes, Sustained for 20 Consecutive Minutes');
 
 CREATE TABLE "CPR_stopped" (
     "id" SERIAL PRIMARY KEY,
@@ -401,15 +238,15 @@ VALUES
 
 CREATE TABLE "initial_acuity" (
     "id" SERIAL PRIMARY KEY,
-    "type" VARCHAR (40)
+    "type" VARCHAR (50)
 );
 
 INSERT INTO "initial_acuity" ("type")
 VALUES
-('Critical-red'),
-('Emergent-Yellow'),
-('Lower_Acuity-Green'),
-('Dead without Resuscitation Efforts-Black'),
+('Critical (red)'),
+('Emergent (Yellow)'),
+('Lower Acuity (Green)'),
+('Dead without Resuscitation Efforts (Black)'),
 ('Non-Acute/Routine');
 
 CREATE TABLE "alcohol_drug_use" (
@@ -433,12 +270,48 @@ CREATE TABLE "final_acuity" (
 
 INSERT INTO "final_acuity" ("type")
 VALUES
-('Critical (red)'),
+('Critical (Red)'),
 ('Emergent (Yellow)'),
 ('Lower Acuity (Green)'),
 ('Dead without Resuscitation Efforts (Black)'),
 ('Dead with Resuscitation Efforts (Black)'),
 ('Non-Acute/Routine');
+
+CREATE TABLE "possible_injury" (
+	"id" SERIAL PRIMARY KEY,
+	"type" VARCHAR (50)
+);
+
+INSERT INTO "possible_injury" ("type")
+VALUES
+('No'),
+('Unknown'),
+('Yes');
+
+CREATE TABLE "procedure_list" (
+    "id" SERIAL PRIMARY KEY,
+    "type" VARCHAR (50)
+);
+INSERT INTO "procedure_list" ("type")
+VALUES
+('Administration (Drug, fluid, gas)'),
+('Airway, Basic'),
+('Airway, Advanced'),
+('Assessment'),
+('Assessment, Cardiac'),
+('Cardiac'),
+('Environmental'),
+('Gastrointestinal'),
+('Glycemic Management'),
+('Immobilization'),
+('Other'),
+('Pain'),
+('Patient Positioning'),
+('Spinal Procedures'),
+('Transfer of Care'),
+('Vascular Access'),
+('Vital Signs'),
+('Wound Care');
 
 CREATE TABLE "procedure_performer" (
     "id" SERIAL PRIMARY KEY,
@@ -466,34 +339,28 @@ VALUES
 ('Patient'),
 ('Lay Person'),
 ('Law Enforcement'),
-('Family Member');
+('Family Member'),
+('Fire Personnel (non EMS)');
 
-CREATE TABLE "procedure_list" (
-    "id" SERIAL PRIMARY KEY,
-    "type" VARCHAR (50)
+CREATE TABLE "procedures_attempted" (
+	"id" SERIAL PRIMARY KEY,
+	"type" int
 );
 
-INSERT INTO "procedure_list" ("type")
+INSERT INTO "procedures_attempted" ("type")
 VALUES
-('Administration (Drug, fluid, gas)'),
-('Airway, Basic'),
-('Airway, Advanced'),
-('Assessment'),
-('Assessment, Cardiac'),
-('Cardiac'),
-('Environmental'),
-('Gastrointestinal'),
-('Glycemic Management'),
-('Immobilization'),
-('Other'),
-('Pain'),
-('Patient Positioning'),
-('Spinal Procedures'),
-('Transfer of Care'),
-('Vascular Access'),
-('Vital Signs'),
-('Wound Care');
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9),
+(10);
 
+ 
 CREATE TABLE "responsiveness_level" (
     "id" SERIAL PRIMARY KEY,
     "type" VARCHAR (20)
@@ -636,6 +503,38 @@ VALUES
 ('Units per Kilogram (units/kg)'),
 ('Milligrams per Hour (mg/hr)');
 
+CREATE TABLE "med_response" (
+	"id" SERIAL PRIMARY KEY,
+	"type" VARCHAR (50)
+);
+
+INSERT INTO "med_response" ("type")
+VALUES
+('Improved'),
+('Unchanged'),
+('Worse');
+
+CREATE TABLE "procedure_response" (
+	"id" SERIAL PRIMARY KEY,
+	"type" VARCHAR (50)
+);
+
+INSERT INTO "procedure_response" ("type")
+VALUES
+('Improved'),
+('Unchanged'),
+('Worse');
+
+CREATE TABLE "procedure_successful" (
+    "id" SERIAL PRIMARY KEY,
+    "type" VARCHAR (30) NOT NULL
+);
+
+INSERT INTO "procedure_successful" ("type")
+VALUES
+('No'),
+('Yes');
+
 CREATE TABLE "med_admin_by" (
     "id" SERIAL PRIMARY KEY,
     "type" VARCHAR (50)
@@ -691,16 +590,7 @@ VALUES
 ('Evaluation for Special Referral/Intake Programs'),
 ('Administrative Operations');
 
-CREATE TABLE "triage_cat" (
-    "id" SERIAL PRIMARY KEY,
-    "type" VARCHAR (10)
-);
 
-INSERT INTO "triage_cat" ("type")
-VALUES
-('Emergency'),
-('Priority'),
-('Queue');
 
 CREATE TABLE "transport_disposition" (
     "id" SERIAL PRIMARY KEY,
@@ -745,6 +635,19 @@ VALUES
 ('Ground-Mass Casualty Bus/Vehicle'),
 ('Ground-Wheelchair Van'),
 ('Water-Boat');
+
+CREATE TABLE "triage_cat" (
+    "id" SERIAL PRIMARY KEY,
+    "type" VARCHAR (10)
+);
+
+
+INSERT INTO "triage_cat" ("type")
+VALUES
+('Emergency'),
+('Priority'),
+('Queue');
+
 
 CREATE TABLE "destination_type" (
     "id" SERIAL PRIMARY KEY,
@@ -897,8 +800,8 @@ CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
-    "first_name" VARCHAR (80) NOT NULL,
-    "last_name" VARCHAR (80) NOT NULL,
+    "user_first_name" VARCHAR (80) NOT NULL,
+    "user_last_name" VARCHAR (80) NOT NULL,
     "region_id" NUMERIC NOT NULL
 );
 
@@ -906,18 +809,19 @@ CREATE TABLE incident (
 	id SERIAL PRIMARY KEY,
 	user_id integer REFERENCES "user",
 	incident_type_id integer REFERENCES "incident_type",
-	crew_id varchar(50),
+	crew_id numeric,
 	triage_cat_id integer REFERENCES "triage_cat",
-	unit_notified varchar(50),
-	unit_enroute varchar(50),
-	unit_arrived_scene varchar(50),
-	arrived_patient varchar(50),
-	unit_left_scene varchar(50),
-	arrived_destination varchar(50),
-	transfer_of_care varchar(50),
-	unit_in_service varchar(50),
+	unit_notified timestamp,
+	unit_enroute timestamp,
+	unit_arrived_scene timestamp,
+	arrived_patient timestamp,
+	unit_left_scene timestamp,
+	arrived_destination timestamp,
+	transfer_of_care timestamp,
+	unit_in_service timestamp,
 	incident_summary varchar(20000)
 );
+
 
 CREATE TABLE scene (
 	id SERIAL PRIMARY KEY,
@@ -925,7 +829,7 @@ CREATE TABLE scene (
 	incident_state varchar (100),
 	incident_zip varchar(100),
 	incident_county varchar(100),
-	possible_injury varchar(10),
+	possible_injury_id integer REFERENCES "possible_injury",
 	alcohol_drug_use_id integer REFERENCES "alcohol_drug_use"
 );
 
@@ -941,20 +845,23 @@ CREATE TABLE disposition (
 	destination_type_id integer REFERENCES "destination_type"
 );
 
+
 CREATE TABLE patient (
     id SERIAL PRIMARY KEY,
     patient_incident_id integer REFERENCES "incident",
-    first_name varchar(100),
-    last_name varchar(100),
+    patient_first_name varchar(100),
+    patient_last_name varchar(100),
     address varchar(100),
     home_county varchar(100),
     home_state varchar(100),
     home_zip varchar(100),
     gender_id integer REFERENCES "gender",
     race_id integer REFERENCES "race",
+    date_of_birth date,
     age integer,
     age_units_id integer REFERENCES "age_units"
 );
+
 
 CREATE TABLE medicalConditions (
 	id SERIAL PRIMARY KEY,
@@ -979,8 +886,8 @@ CREATE TABLE symptoms (
 	patient_symptoms_id integer REFERENCES "patient",
 	anatomic_location_id integer REFERENCES "anatomic_location",
 	organ_system_id integer REFERENCES "organ_system",
-	time_symptom_onset varchar(50),
-	time_last_known_well varchar(50),
+	time_symptom_onset timestamp,
+	time_last_known_well timestamp,
 	primary_symptom varchar(100),
 	other_symptoms varchar(200),
 	initial_acuity_id integer REFERENCES "initial_acuity",
@@ -1004,7 +911,7 @@ CREATE TABLE cardiacArrest (
     AED_use_prior_id integer REFERENCES "AED_use_prior",
     CPR_type_id integer REFERENCES "CPR_type",
     spontaneous_circulation_id integer REFERENCES "spontaneous_circulation",
-    time_cardiac_arrest varchar(50),
+    time_cardiac_arrest timestamp,
     CPR_stopped_id integer REFERENCES "CPR_stopped",
     AED_initiator_id integer REFERENCES "AED_initiator",
     AED_applicator_id integer REFERENCES "AED_applicator",
@@ -1019,19 +926,19 @@ CREATE TABLE medication (
 	med_admin_by_id integer REFERENCES "med_admin_by",
 	med_dosage integer,
 	med_dosage_units_id integer REFERENCES "med_dosage_units",
-	med_response varchar(10),
-	med_timestamp varchar(100)
+	med_response_id integer REFERENCES "med_response",
+	med_timestamp timestamp
 );
 
 CREATE TABLE "procedure" (
 	id SERIAL PRIMARY KEY,
 	patient_procedure_id integer REFERENCES "patient",
 	procedure_name_id integer REFERENCES "procedure_list",
-	procedure_attempts integer,
-	procedure_successful BOOLEAN,
-	procedure_response varchar(10),
+	procedure_attempts_id integer REFERENCES "procedures_attempted",
+	procedure_successful integer REFERENCES "procedure_successful",
+	procedure_response integer REFERENCES "procedure_response",
 	procedure_performer_id integer REFERENCES "procedure_performer",
-	procedure_timestamp varchar(100)
+	procedure_timestamp timestamp
 );
 
 CREATE TABLE vitals (
@@ -1050,9 +957,5 @@ CREATE TABLE vitals (
 	pain_scale_id integer REFERENCES "pain_scale",
 	stroke_score_id integer REFERENCES "stroke_score",
 	stroke_scale_id integer REFERENCES "stroke_scale",
-	vitals_timestamp varchar(100)
+	vitals_timestamp timestamp
 );
-
-
-
-
