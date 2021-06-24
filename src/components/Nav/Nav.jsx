@@ -42,6 +42,9 @@ function Nav() {
         <Link className="navLink" to ="/patientHome">
           Patient Home
         </Link>
+        <Link className="navLink" to="/dropdown">
+          ReduxCookie
+        </Link>
       </div>
     </div>
   );

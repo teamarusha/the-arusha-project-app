@@ -4,7 +4,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import KOPIMobileLogo from "../Logo/KOPIMobileLogo";
-import { makeStyles } from "@material-ui/styles";
+import globalUseStyle from "./globalUseStyles";
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 
@@ -23,16 +23,11 @@ function ElevationScroll(props) {
   });
 }
 
-const useStyles = makeStyles((theme) => ({
-  toolbarMargin: {
-    ...theme.mixins.toolbar,
-    marginBottom: '2em',
-  },
-}));
 
 export default function Header(props) {
-
-  const classes = useStyles();
+  
+  const globalStyle = globalUseStyle();
+  
 
   return (
     <React.Fragment>
@@ -44,7 +39,7 @@ export default function Header(props) {
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-      <div className={classes.toolbarMargin} />
+      <div className={globalStyle.nav.toolbarMargin} />
     </React.Fragment>
   );
 }
