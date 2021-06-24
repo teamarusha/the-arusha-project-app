@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
 //Material UI imports
 import { TextField, Button } from "@material-ui/core";
@@ -10,6 +11,8 @@ const TreatmentMedsForm = () => {
     let [render, setRender] = useState(false);
     const { id } = useParams();
     const history = useHistory();
+    const dispatch = useDispatch();
+    const dropdowns = useSelector(store => store.dropdowns);
 
     // Runs once when the component mounts
     useEffect(() => {
@@ -79,6 +82,22 @@ const TreatmentMedsForm = () => {
         history.push(`/treatment/${patientNumber}`);
     }
 
+    let [localDropdownMirror, setLocalDropdownMirror] = useState(JSON.parse(localStorage.getItem('dropdowns')));
+
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('dropdowns')) === null ){
+            dispatch({ type: 'GET_DROPDOWNS' })
+        } else {
+            dispatch({type: 'SET_DROPDOWNS', payload: localDropdownMirror})
+        }
+    }, []);
+
+    useEffect(() => {
+        if (dropdowns.go === true) {
+            localStorage.setItem('dropdowns', JSON.stringify(dropdowns));
+        }
+    }, [dropdowns.go]);
+
     return(
         <div>
             {
@@ -102,11 +121,13 @@ const TreatmentMedsForm = () => {
                 thing: event.target.value })}>
             </TextField>
 
-            <TextField id="outlined-basic" label="Administered Route" 
+           { dropdowns.go &&
+            <TextField id="outlined-basic" select label="Administered Route" 
                 variant="outlined" value={ localTreatment[`routeAdministered`]}
                 onChange={( event ) => submitValue({ key: `routeAdministered`,
                 thing: event.target.value })}>
             </TextField>
+            }
 
             <TextField id="outlined-basic" label="Dosage" variant="outlined" 
                 value={ localTreatment[`dosage`]}
@@ -114,22 +135,26 @@ const TreatmentMedsForm = () => {
                 thing: event.target.value })}>
             </TextField>
 
-            <TextField id="outlined-basic" label="Units" variant="outlined"
+            { dropdowns.go &&
+            <div>
+            <TextField id="outlined-basic" select label="Units" variant="outlined"
                 value={ localTreatment[`units`]} onChange={( event ) => 
                 submitValue({ key: `units`, thing: event.target.value })}>
             </TextField>
 
-            <TextField id="outlined-basic" label="Response to Medication" 
+            <TextField id="outlined-basic" select label="Response to Medication" 
                 variant="outlined" value={ localTreatment[`medicationResponse`]}
                 onChange={( event ) => submitValue({ key: `medicationResponse`,
                 thing: event.target.value })}>
             </TextField>
 
-            <TextField id="outlined-basic" label="Role/Type of Person Administering 
+            <TextField id="outlined-basic" select label="Role/Type of Person Administering 
                 Medication" variant="outlined" value={ localTreatment[`medsAdminBy`]}
                 onChange={( event ) => submitValue({ key: `medsAdminBy`, 
                 thing: event.target.value })}>
             </TextField>
+            </div>
+            }
 
         </div>
     );

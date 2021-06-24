@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
 //Material UI imports
 import { TextField, Button } from "@material-ui/core";
@@ -9,6 +10,8 @@ const TreatmentProcedureForm = () => {
     let [render, setRender] = useState(false);
     const { id } = useParams();
     const history = useHistory();
+    const dispatch = useDispatch();
+    const dropdowns = useSelector(store => store.dropdowns);
 
     // Runs once when the component mounts
     useEffect(() => {
@@ -70,12 +73,29 @@ const TreatmentProcedureForm = () => {
             [newProcedureID + 'procedurePerformedBy1']: ''
         })
     }
-    
+
     // Simply redirects to the patient page of a new patient 
     // based on their position in the patientArray
     function changePatient(patientNumber) {
         history.push(`/treatment/${patientNumber}`);
     }
+
+
+    let [localDropdownMirror, setLocalDropdownMirror] = useState(JSON.parse(localStorage.getItem('dropdowns')));
+
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('dropdowns')) === null ){
+            dispatch({ type: 'GET_DROPDOWNS' })
+        } else {
+            dispatch({type: 'SET_DROPDOWNS', payload: localDropdownMirror})
+        }
+    }, []);
+
+    useEffect(() => {
+        if (dropdowns.go === true) {
+            localStorage.setItem('dropdowns', JSON.stringify(dropdowns));
+        }
+    }, [dropdowns.go]);
 
     return(
         <div>
@@ -94,36 +114,39 @@ const TreatmentProcedureForm = () => {
                 Add Procedure
             </Button>
 
-            <TextField id="outlined-basic" label="Procedure Attempted" 
+            { dropdowns.go &&
+            <div>
+                <TextField id="outlined-basic" select label="Procedure Attempted" 
                 variant="outlined" value={ localTreatment[`procedure`]}
                 onChange={( event ) => submitValue({ key: `procedure`,
                 thing: event.target.value })}>
             </TextField>
 
-            <TextField id="outlined-basic" label="Number of Procedure Attempts" 
+            <TextField id="outlined-basic" select label="Number of Procedure Attempts" 
                 variant="outlined" value={ localTreatment[`procedureAttempts`]}
                 onChange={( event ) => submitValue({ key: `procedureAttempts`,
                 thing: event.target.value })}>
             </TextField>
 
-            <TextField id="outlined-basic" label="Procedure Successful" 
+            <TextField id="outlined-basic" select label="Procedure Successful" 
                 variant="outlined" value={ localTreatment[`successfulProcedure`]}
                 onChange={( event ) => submitValue({ key: `successfulProcedure`,
                 thing: event.target.value })}>
             </TextField>
 
-            <TextField id="outlined-basic" label="Response to Procedure" 
+            <TextField id="outlined-basic" select label="Response to Procedure" 
                 variant="outlined" value={ localTreatment[`responseToProcedure`]}
                 onChange={( event ) => submitValue({ key: `responseToProcedure`,
                 thing: event.target.value })}>
             </TextField>
 
-            <TextField id="outlined-basic" label="Role/Type of Person Performing
+            <TextField id="outlined-basic" select label="Role/Type of Person Performing
                 Procedure" variant="outlined" value={ localTreatment[`procedurePerformedBy`]}
                 onChange={( event ) => submitValue({ key: `procedurePerformedBy`, 
                 thing: event.target.value })}>
             </TextField>
-
+            </div>
+            }
         </div>
     );
 };
