@@ -80,12 +80,22 @@ const IncidentFormScene = () => {
                 variant="outlined" value={ localIncident[`possibleInjury`]}
                 onChange={( event ) => submitValue({ key: `possibleInjury`,
                 thing: event.target.value })}>
+            {dropdowns['possible_injury'].map(item => 
+                <MenuItem key={'possible_injury'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
 
             <TextField id="outlined-basic" select label="Alcohol and Drug Use Indicators" 
                 variant="outlined" value={ localIncident[`alcoholDrugIndicators`]}
                 onChange={( event ) => submitValue({ key: `alcoholDrugIndicators`,
                 thing: event.target.value })}>
+            {dropdowns['alcohol_drug_use'].map(item => 
+                <MenuItem key={'alcohol_drug_use'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
             </div>
             }
