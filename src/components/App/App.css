@@ -96,6 +96,7 @@ Form Treatment
 -------------------------------------------------------------------------------- */
 
 .formPanel {
+  text-align:center ;
   box-sizing: border-box;
   width: 400px;
   max-width: 100%;
