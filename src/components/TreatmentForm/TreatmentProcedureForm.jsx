@@ -25,9 +25,9 @@ const TreatmentProcedureForm = () => {
         // If they get redirected from patient 1 AND they have already entered values, skip this step
         // If they are redirected here from /patients, initialize the first patient
         else if (id == 1 && JSON.parse(localStorage.getItem('treatment')) === null) {
-            setLocalTreatment({ "1treatmentArray": [1], "1procedure1": '', 
-            "1procedureAttempts1": '', "1successfulProcedure1": '', 
-            "1responseToProcedure1": '', "1procedurePerformedBy1": '' });
+            setLocalTreatment({ "1treatmentArray": [1], [id + "procedure1"]: '', 
+            [id + "procedureAttempts1"]: '', [id + "successfulProcedure1"]: '', 
+            [id + "responseToProcedure1"]: '', [id + "procedurePerformedBy1"]: '' });
             setRender(true);
         }
         // Otherwise, we allow the render as there should be data in storage
@@ -66,11 +66,11 @@ const TreatmentProcedureForm = () => {
         setLocalTreatment({
             ...localTreatment,
             'treatmentArray': [...localTreatment.treatmentArray, newProcedureID],
-            [newProcedureID + 'procedure1']: '',
-            [newProcedureID + 'procedureAttempts1']: '',
-            [newProcedureID + 'successfulProcedure1']: '',
-            [newProcedureID + 'responseToProcedure1']: '',
-            [newProcedureID + 'procedurePerformedBy1']: ''
+            [id + 'procedure' + newProcedureID]: '',
+            [id + 'procedureAttempts' + newProcedureID]: '',
+            [id + 'successfulProcedure' + newProcedureID]: '',
+            [id + 'responseToProcedure' + newProcedureID]: '',
+            [id + 'procedurePerformedBy' + newProcedureID]: ''
         })
     }
 

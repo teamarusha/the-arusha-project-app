@@ -26,9 +26,9 @@ const TreatmentMedsForm = () => {
         // If they get redirected from patient 1 AND they have already entered values, skip this step
         // If they are redirected here from /patients, initialize the first patient
         else if (id == 1 && JSON.parse(localStorage.getItem('treatment')) === null) {
-            setLocalTreatment({ "1medicationArray": [1], "1medication1": '',
-             "1routeAdministered1": '', "1dosage1": '', "1units1": '', 
-             "1medicationResponse1": '', "1medsAdminBy1": '' });
+            setLocalTreatment({ "1medicationArray": [1], [id + "medication1"]: '',
+             [id + "routeAdministered1"]: '', [id + "dosage1"]: '', [id + "units1"]: '', 
+             [id +"medicationResponse1"]: '', [id +"medsAdminBy1"]: '' });
             setRender(true);
         }
         // Otherwise, we allow the render as there should be data in storage
@@ -66,13 +66,13 @@ const TreatmentMedsForm = () => {
         // We do this in order to not have inputs stagnate as you chose a new patient to edit
         setLocalTreatment({
             ...localTreatment,
-            'treatmentArray': [...localTreatment.medicationArray, newMedicationID],
-            [newMedicationID + 'medication1']: '',
-            [newMedicationID + 'routeAdministered1']: '',
-            [newMedicationID + 'dosage1']: '',
-            [newMedicationID + 'units1']: '',
-            [newMedicationID + 'medicationResponse1']: '',
-            [newMedicationID + 'medsAdminBy1']: ''
+            'treatmentArray': [...localTreatment[id + "medicationArray"], newMedicationID],
+            [id + 'medication' + newMedicationID]: '',
+            [id + 'routeAdministered' + newMedicationID]: '',
+            [id + 'dosage' + newMedicationID]: '',
+            [id + 'units' + newMedicationID]: '',
+            [id + 'medicationResponse' + newMedicationID]: '',
+            [id + 'medsAdminBy' + newMedicationID]: ''
         })
     }
 
@@ -126,6 +126,11 @@ const TreatmentMedsForm = () => {
                 variant="outlined" value={ localTreatment[`routeAdministered`]}
                 onChange={( event ) => submitValue({ key: `routeAdministered`,
                 thing: event.target.value })}>
+            {dropdowns['med_admin_route'].map(item => 
+                <MenuItem key={'med_admin_route'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
             }
 
@@ -140,18 +145,33 @@ const TreatmentMedsForm = () => {
             <TextField id="outlined-basic" select label="Units" variant="outlined"
                 value={ localTreatment[`units`]} onChange={( event ) => 
                 submitValue({ key: `units`, thing: event.target.value })}>
+            {dropdowns['med_dosage_units'].map(item => 
+                <MenuItem key={'med_dosage_units'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
 
             <TextField id="outlined-basic" select label="Response to Medication" 
                 variant="outlined" value={ localTreatment[`medicationResponse`]}
                 onChange={( event ) => submitValue({ key: `medicationResponse`,
                 thing: event.target.value })}>
+            {dropdowns['med_response'].map(item => 
+                <MenuItem key={'med_response'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
 
             <TextField id="outlined-basic" select label="Role/Type of Person Administering 
                 Medication" variant="outlined" value={ localTreatment[`medsAdminBy`]}
                 onChange={( event ) => submitValue({ key: `medsAdminBy`, 
                 thing: event.target.value })}>
+            {dropdowns['med_admin_by'].map(item => 
+                <MenuItem key={'med_admin_by'+ item.id} value={item.id}>
+                    {item.type}
+                </MenuItem>)
+            }
             </TextField>
             </div>
             }
