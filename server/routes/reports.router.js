@@ -2,20 +2,20 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-//get report info for admin table display
-// router.get('/', (req, res) => {
+// get report info for admin table display
+router.get('/', (req, res) => {
   
-//     let queryText = `SELECT i.unit_notified, p.first_name, p.last_name, u.first_name, u.last_name, p.id FROM incident i 
-//     JOIN patient p ON p.patient_incident_id = i.id
-//     JOIN "user" u ON u.id = i.user_id; ORDER BY i.unit_notified`;
-//     pool.query(queryText).then(result => {
-//       // Sends back the results in an array
-//       res.send(result.rows);
-//     })
-//       .catch(error => {
-//         console.log('error getting reports', error);
-//         res.sendStatus(500);
-//       });
-//   });
+    let queryText = `SELECT incident.unit_notified, patient.first_name, patient.last_name, "user".first_name, "user".last_name, patient.id FROM incident
+    JOIN patient ON patient.patient_incident_id = incident.id
+    JOIN "user" ON "user".id = incident.user_id ORDER BY incident.unit_notified`;
+    pool.query(queryText).then(result => {
+      // Sends back the results in an array
+      res.send(result.rows);
+    })
+      .catch(error => {
+        console.log('error getting reports', error);
+        res.sendStatus(500);
+      });
+  });
 
 module.exports = router;

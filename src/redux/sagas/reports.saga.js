@@ -8,6 +8,7 @@ function* fetchReports() {
       //keep the response in a variable to access later
       const response = yield axios.get('/api/reports')
       //when its done successfully then 'dispatch' the action to set reducer
+      console.log(response.data)
       yield put({ type: 'SET_REPORTS', payload: response.data })
   
     } catch (error) {

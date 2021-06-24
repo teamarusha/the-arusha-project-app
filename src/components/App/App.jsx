@@ -47,13 +47,13 @@ function App() {
             <AboutPage />
           </Route>
 
-          <Route
+          {/* <Route
             // shows AboutPage at all times (logged in or not)
             exact
             path="/admin"
           >
             <Admin />
-          </Route>
+          </Route> */}
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -67,13 +67,13 @@ function App() {
             <UserPage />
           </ProtectedRoute>
 
-          {/* <ProtectedRoute
+          <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/admin"
           >
             <Admin />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
