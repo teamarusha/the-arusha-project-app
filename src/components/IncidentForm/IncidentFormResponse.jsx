@@ -18,7 +18,7 @@ const IncidentFormResponse = () => {
     useEffect(() => {
         // console.log( 'Params id:', id );
         console.log( 'Cookie Mirror', localIncident );
-        console.log( 'Patient Storage', JSON.parse(localStorage.getItem('incident')));
+        console.log( 'Incident Storage', JSON.parse(localStorage.getItem('incident')));
     }, []);
 
     useEffect(() => {
@@ -40,17 +40,20 @@ const IncidentFormResponse = () => {
             <TextField id="outlined-basic" label="Name of Crew" variant="outlined" 
                 value={ localIncident[`crew`]} onChange={( event ) => 
                 submitValue({ key: `crew`, 
-                item: event.target.value })}>
+                thing: event.target.value })}>
             </TextField>
+
             <TextField id="outlined-basic" select label="Triage Category" variant="outlined" 
                 value={ localIncident[`triageCat`]} onChange={( event ) => 
-                submitValue({ key: `triageCat`, item: event.target.value })}>
+                submitValue({ key: `triageCat`, thing: event.target.value })}>
             </TextField>
+
             <TextField id="outlined-basic" select label="Type of Service Requested" 
                 variant="outlined" value={ localIncident[`serviceType`]}
                 onChange={( event ) => submitValue({ key: `serviceType`, 
-                item: event.target.value })}>
+                thing: event.target.value })}>
             </TextField>
+            
         </div>
     );
 };
