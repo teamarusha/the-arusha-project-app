@@ -113,6 +113,7 @@ function Drawer(props) {
          </ListItem>
         {/* <Link className="navLink" to="/about">
           About
+
         </Link> */}
         <ListItem divider component={Link} to="/patientHome" classes={{root: classes.item}}>
            <ListItemText classes={{primary: classes.text}}> Patient Home </ListItemText>
@@ -120,9 +121,7 @@ function Drawer(props) {
              <ChevronRightIcon fontSize='large'/>
             </ListItemSecondaryAction>
          </ListItem>
-        {/* <Link className="navLink" to ="/patientHome">
-          Patient Home
-        </Link> */}
+
             <ListItem divider component={Link} to="/dropdown" classes={{root: classes.item}}>
            <ListItemText classes={{primary: classes.text}}> ReduxCookie </ListItemText>
             <ListItemSecondaryAction edge="end">
