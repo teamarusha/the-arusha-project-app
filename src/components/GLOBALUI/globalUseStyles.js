@@ -64,4 +64,3 @@ const globalUseStyle = makeStyles((theme) => ({
 }));
 
 export default globalUseStyle;
-

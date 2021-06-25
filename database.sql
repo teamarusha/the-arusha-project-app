@@ -863,15 +863,15 @@ CREATE TABLE patient (
 );
 
 
-CREATE TABLE medicalConditions (
+CREATE TABLE medicalconditions (
 	id SERIAL PRIMARY KEY,
 	patient_condition_id integer REFERENCES "patient",
 	medical_conditions varchar(100)
 );
 
-CREATE TABLE currentMedication (
+CREATE TABLE currentmedication (
 	id SERIAL PRIMARY KEY,
-	patient_medication_id integer REFERENCES "patient",
+	patient_current_med_id integer REFERENCES "patient",
 	medication varchar(100)
 );
 
@@ -902,7 +902,7 @@ CREATE TABLE injury (
 	injury_cause_id integer REFERENCES "injury_cause"
 );
 
-CREATE TABLE cardiacArrest (
+CREATE TABLE cardiacarrest (
     id SERIAL PRIMARY KEY,
     cardiac_arrest_id integer REFERENCES "cardiac_arrest",
     cardiac_arrest_etiology_id integer REFERENCES "cardiac_arrest_etiology",

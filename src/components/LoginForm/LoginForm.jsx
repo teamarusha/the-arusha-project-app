@@ -47,15 +47,15 @@ function LoginForm() {
     <br />
     <br />
     
-    <Grid item xs={4} sm={4} md={4} lg={4} xl={4}></Grid>
+    <Grid item xs={4} sm={4} md={4} lg={4} xl={4}/>
     
-    <Grid item xs={12}></Grid>
+    <Grid item xs={12}/>
 
-    <Grid item xs={3} sm={3} md={3} lg={3} xl={3}></Grid>
+    <Grid item xs={3} sm={3} md={3} lg={3} xl={3}/>
     <Grid item xs={6} sm={6} md={6} lg={6} xl={6} alignContent='center'>
       <Typography variant='h4'>Login</Typography>
       </Grid>
-    <Grid item xs={3} sm={3} md={3} lg={3} xl={3}></Grid>
+    <Grid item xs={3} sm={3} md={3} lg={3} xl={3}/>
         </Grid>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
@@ -63,7 +63,6 @@ function LoginForm() {
         </h3>
       )}
  <Grid item xs={12} >
-  <br />
 <TextField
         label="Username"
         type="text"

@@ -28,6 +28,8 @@ import PatientMedical from '../PatientMedical/PatientMedical';
 import PatientInjury from '../PatientInjury/PatientInjury';
 import PatientCardiac from '../PatientCardiac/PatientCardiac';
 
+import {ThemeProvider} from '@material-ui/styles';
+import createMuiTheme from '../GLOBALUI/Theme';
 import './App.css';
 import TreatmentMedsForm from '../TreatmentForm/TreatmentMedsForm';
 import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
@@ -44,7 +46,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <ThemeProvider theme={createMuiTheme}>
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -225,7 +227,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-      </div>
+      </ThemeProvider>
     </Router>
   );
 }
