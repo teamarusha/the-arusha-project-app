@@ -202,9 +202,8 @@ function PatientCardiac() {
                     <MenuItem value="">
                     <em>None</em>
                     </MenuItem>
-                    <MenuItem value={10}>Option 1</MenuItem>
-                    <MenuItem value={20}>Option 2</MenuItem>
-                    <MenuItem value={30}>Option 3</MenuItem>
+                    {dropdowns['aed_initiator'].map(item => <MenuItem key={'aed_initiator'+ item.id} 
+                    value={item.id}>{item.type}</MenuItem>)}
                 </Select> <br /><br />
 
                 <InputLabel 
@@ -219,9 +218,8 @@ function PatientCardiac() {
                     <MenuItem value="">
                     <em>None</em>
                     </MenuItem>
-                    <MenuItem value={10}>Option 1</MenuItem>
-                    <MenuItem value={20}>Option 2</MenuItem>
-                    <MenuItem value={30}>Option 3</MenuItem>
+                    {dropdowns['aed_applicator'].map(item => <MenuItem key={'aed_applicator'+ item.id} 
+                    value={item.id}>{item.type}</MenuItem>)}
                 </Select> <br /><br />
 
                 <InputLabel 
@@ -236,9 +234,8 @@ function PatientCardiac() {
                     <MenuItem value="">
                     <em>None</em>
                     </MenuItem>
-                    <MenuItem value={10}>Option 1</MenuItem>
-                    <MenuItem value={20}>Option 2</MenuItem>
-                    <MenuItem value={30}>Option 3</MenuItem>
+                    {dropdowns['aed_defibrillator'].map(item => <MenuItem key={'aed_defibrillator'+ item.id} 
+                    value={item.id}>{item.type}</MenuItem>)}
                 </Select> <br /><br />
                 </div>
                 }

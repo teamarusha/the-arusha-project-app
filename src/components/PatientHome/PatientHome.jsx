@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PatientDemographics from '../PatientDemographics/PatientDemographics';
+import PatientMedical from '../PatientMedical/PatientMedical';
+import PatientSymptoms from '../PatientSymptoms/PatientSymptoms';
 
 // ----- Material UI -----
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,9 +11,6 @@ import { AccordionDetails } from '@material-ui/core';
 import { AccordionSummary } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
-import PatientDemographics from '../PatientDemographics/PatientDemographics';
-import PatientMedical from '../PatientMedical/PatientMedical';
-import PatientSymptoms from '../PatientSymptoms/PatientSymptoms';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -87,7 +87,7 @@ function PatientHome() {
           </Typography> */}
         </AccordionDetails>
       </Accordion>
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2bh-content"
