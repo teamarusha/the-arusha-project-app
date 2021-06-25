@@ -8,30 +8,22 @@ const {
 
 // ____________________POST THE INCIDENT FORM____________________
 router.post('/', rejectUnauthenticated, async (req, res) => {
-    // IMPORTANT VARIABLES FOR A QUERY
+    // IMPORTANT VARIABLES FOR A QUERY - user id
     const user = req.user.id
     const sampleStamp = '2021-03-23 12:23:33';
-    const patients = req.body.patients;
 
     const connection = await pool.connect();
 
 
     try {
-
+        // Destructure req.body for ease of insert
         const {
             incident,
-            scene,
-            disposition,
             patients,
-            medicalconditions,
-            currentmedications,
-            allergies,
-            symptoms, injury,
-            cardiacarrest,
-            medications,
-            procedures,
+            treatments,
             vitals
         } = req.body;
+
         // THE ORDER FOR BIG INSERT STATEMENT
         // incident
         const incidentValues = {
@@ -135,6 +127,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
                 RETURNING id;`;
 
+        // ANOTHER SUPER IMPORTANT THING - Patient ID array 
+        // holds patient's actual id from the database
         const returnPatientIDs = [];
 
         await Promise.all(
@@ -160,8 +154,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                 })
             )
         );
-        // medicalConditions
 
+        // medicalConditions
         const medCondQuery = `INSERT INTO medicalconditions ("patient_condition_id","medical_conditions")
                 VALUES ($1, $2)`;
 
@@ -169,32 +163,76 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             returnPatientIDs.map((patientID, i) => {
 
                 let medCondValues = [
-                    patients[i].patient_incident_id,
-                    patients[i].patient_first_name
+                    patientID,
+                    patients[i].conditions
                 ];
 
                 return connection.query(medCondQuery, medCondValues);
             })
 
         );
+
         // currentMedications
-        const medCondQuery = `INSERT INTO currentmedication ("patient_medication_id","medical_conditions")
+        const currMedQuery = `INSERT INTO currentmedication ("patient_medication_id","medical_conditions")
                 VALUES ($1, $2)`;
 
         await Promise.all(
             returnPatientIDs.map((patientID, i) => {
 
-                let medCondValues = [
-                    patients[i].patient_incident_id,
-                    patients[i].patient_first_name
+                let currMedValues = [
+                    patientID,
+                    patients[i].medication
                 ];
 
-                return connection.query(medCondQuery, medCondValues);
+                return connection.query(currMedQuery, currMedValues);
             })
 
         );
+
         // allergies
+        const allergyQuery = `INSERT INTO currentmedication ("patient_medication_id","medical_conditions")
+                VALUES ($1, $2)`;
+
+        await Promise.all(
+            returnPatientIDs.map((patientID, i) => {
+
+                let allergyValues = [
+                    patientID,
+                    patients[i].allergies
+                ];
+
+                return connection.query(allergyQuery, allergyValues);
+            })
+
+        );
+
         // symptoms
+        const symptomQuery = `INSERT INTO symptoms ("patient_symptoms_id",
+        "anatomic_location_id","organ_system_id","time_symptom_onset",
+        "time_last_known_well","primary_symptom","other_symptoms","initial_acuity_id",
+        "final_acuity_id","primary_impression_id")
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
+
+        await Promise.all(
+            returnPatientIDs.map((patientID, i) => {
+
+                let symptomValues = [
+                    patientID,
+                    patients[String(i+1)+'anatomic_location_id'],
+                    patients[String(i+1)+'organ_system_id'],
+                    patients[String(i+1)+'time_symptom_onset'],
+                    patients[String(i+1)+'time_last_known_well'],
+                    patients[String(i+1)+'primary_symptom'],
+                    patients[String(i+1)+'anatomic_location_id'].
+                    patients[String(i+1)+'anatomic_location_id'],
+                    patients[String(i+1)+'anatomic_location_id'],
+                    patients[String(i+1)+'anatomic_location_id']
+                ];
+
+                return connection.query(symptomQuery, symptomValues);
+            })
+
+        );
         // injury
         // cardiacArrest
         // medication
