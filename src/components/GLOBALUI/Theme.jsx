@@ -34,6 +34,9 @@ export default createMuiTheme({
             fontFamily: 'Red Hat Display',
             fontWeight: 600,
         },
+        body1: {
+            color:'black'
+        }
     }
     
 })
