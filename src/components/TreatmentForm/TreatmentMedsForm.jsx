@@ -1,9 +1,10 @@
+import React from 'react';
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 //Material UI imports
-import { TextField, Button } from "@material-ui/core";
+import { Accordion, AccordionDetails, Button, Grid, MenuItem, Paper, TextField } from "@material-ui/core";
 
 const TreatmentMedsForm = () => {
 
@@ -100,7 +101,7 @@ const TreatmentMedsForm = () => {
 
     return(
         <div>
-            {
+            {/* {
                 render ?
                     localPatientMirror.patientArray.map(value =>
                         <button key={`${value}changePatient`} disabled={id == value} onClick={() => changePatient(value)}>
@@ -109,7 +110,7 @@ const TreatmentMedsForm = () => {
                     )
                     :
                     ''
-            }
+            } */}
 
             <Button size="small" color="primary" variant="contained" onClick={addMedication}>
                 Add Medication
