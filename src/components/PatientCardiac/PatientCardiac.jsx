@@ -152,8 +152,8 @@ function PatientCardiac() {
                     <MenuItem value="">
                     <em>None</em>
                     </MenuItem>
-                    {dropdowns['CPR_type'].map(item => <MenuItem key={'CPR_type'+ item.id} 
-                    value={item.id}>{item.type}</MenuItem>)}
+                    {/* {dropdowns['CPR_type'].map(item => <MenuItem key={'CPR_type'+ item.id} 
+                    value={item.id}>{item.type}</MenuItem>)} */}
                 </Select> <br /><br />
 
                 <InputLabel 
