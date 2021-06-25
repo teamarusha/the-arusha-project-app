@@ -29,6 +29,9 @@ import PatientInjury from '../PatientInjury/PatientInjury';
 import PatientCardiac from '../PatientCardiac/PatientCardiac';
 
 import './App.css';
+// import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
+// import IncidentFormDisposition from '../IncidentForm/IncidentFormDisposition';
+// import IncidentFormScene from '../IncidentForm/IncidentFormScene';
 import ReduxCookie from '../ReduxCookie/ReduxCookie';
 
 function App() {
@@ -54,6 +57,27 @@ function App() {
           >
             <AboutPage />
           </Route>
+
+          {/* <Route
+            exact
+            path="/incident/response"
+          >
+            <IncidentFormResponse />
+          </Route>
+
+           <Route
+            exact
+            path="/incident/scene"
+          >
+            <IncidentFormScene />
+          </Route>
+
+          <Route
+            exact
+            path="/incident/disposition"
+          >
+            <IncidentFormDisposition />
+          </Route> */}
 
           <Route
             // shows AboutPage at all times (logged in or not)
@@ -126,6 +150,18 @@ function App() {
           >
             <LandingPage />
           </ProtectedRoute>
+          
+          {/* <ProtectedRoute>
+            <IncidentFormResponse />
+          </ProtectedRoute> */}
+
+          {/* <ProtectedRoute>
+            <IncidentFormScene />
+          </ProtectedRoute> */}
+
+           {/* <ProtectedRoute>
+            <IncidentFormDisposition />
+          </ProtectedRoute> */}
 
           <ProtectedRoute
 

@@ -136,8 +136,8 @@ function PatientCardiac() {
                     <MenuItem value="">
                     <em>None</em>
                     </MenuItem>
-                    {/* {dropdowns['AED_use_prior'].map(item => <MenuItem key={'AED_use_prior'+ item.id} 
-                    value={item.id}>{item.type}</MenuItem>)} */}
+                    {dropdowns['aed_use_prior'].map(item => <MenuItem key={'aed_use_prior'+ item.id} 
+                    value={item.id}>{item.type}</MenuItem>)}
                 </Select> <br /><br />
 
                 <InputLabel 
@@ -152,8 +152,8 @@ function PatientCardiac() {
                     <MenuItem value="">
                     <em>None</em>
                     </MenuItem>
-                    {/* {dropdowns['CPR_type'].map(item => <MenuItem key={'CPR_type'+ item.id} 
-                    value={item.id}>{item.type}</MenuItem>)} */}
+                    {dropdowns['cpr_type'].map(item => <MenuItem key={'cpr_type'+ item.id} 
+                    value={item.id}>{item.type}</MenuItem>)}
                 </Select> <br /><br />
 
                 <InputLabel 
@@ -168,9 +168,8 @@ function PatientCardiac() {
                     <MenuItem value="">
                     <em>None</em>
                     </MenuItem>
-                    <MenuItem value={10}>Option 1</MenuItem>
-                    <MenuItem value={20}>Option 2</MenuItem>
-                    <MenuItem value={30}>Option 3</MenuItem>
+                    {dropdowns['spontaneous_circulation'].map(item => <MenuItem key={'spontaneous_circulation'+ item.id} 
+                    value={item.id}>{item.type}</MenuItem>)}
                 </Select> <br /><br />
 
                 <p>Cardiac Arrest calendar goes here</p> <br /><br />
