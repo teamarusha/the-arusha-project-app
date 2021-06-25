@@ -11,6 +11,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     // IMPORTANT VARIABLES FOR A QUERY
     const user = req.user.id
     const sampleStamp = '2021-03-23 12:23:33';
+    const patients = req.body.patients;
 
     const connection = await pool.connect();
 
@@ -100,8 +101,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         INSERT INTO disposition ("incident_disposition_id","destination_state",
         "destination_zip","destination_county", "transport_disposition_id",
         "transport_method_id", "transport_mode_id","destination_type_id")
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-        RETURNING id;`,
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`,
             [
                 dispositionQuery.incident_disposition_id,
                 dispositionQuery.destination_state,
@@ -113,6 +113,36 @@ router.post('/', rejectUnauthenticated, (req, res) => {
                 dispositionQuery.destination_type_id
             ]);
         // patient
+        const patientQuery = `INSERT INTO patient ("patient_incident_id","patient_first_name",
+                "patient_last_name","address", "home_county","home_state", "home_zip","gender_id",
+                race_id, date_of_birth, age, age_units_id)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+                RETURNING id;`
+        await Promise.all(
+            patients.patientArray.map((patient, i) => {
+
+                let patientValues = [
+                    patients[i].patient_incident_id,
+                    patients[i].patient_first_name,
+                    patients[i].patient_last_name,
+                    patients[i].address,
+                    patients[i].home_county,
+                    patients[i].home_state,
+                    patients[i].home_zip,
+                    patients[i].gender_id,
+                    patients[i].race_id,
+                    patients[i].date_of_birth,
+                    patients[i].age,
+                    patients[i].age_units_id
+                ];
+
+                await client.query(patientQuery, patientValues);
+
+
+            })
+        )
+
+
         // medicalConditions
         // currentMedications
         // allergies
@@ -124,8 +154,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         // vitals
 
         // FOR FOR LOOPS ONLY - Patient, medication, procedure, vitals
-        // await Promise.all(
-        // )
+
 
         await client.query('COMMIT')
         res.sendStatus(201);
