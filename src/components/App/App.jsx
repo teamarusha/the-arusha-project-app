@@ -29,6 +29,7 @@ import PatientInjury from '../PatientInjury/PatientInjury';
 import PatientCardiac from '../PatientCardiac/PatientCardiac';
 
 import './App.css';
+import TreatmentMedsForm from '../TreatmentForm/TreatmentMedsForm';
 import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
 import IncidentFormDisposition from '../IncidentForm/IncidentFormDisposition';
 import IncidentFormScene from '../IncidentForm/IncidentFormScene';
@@ -77,6 +78,13 @@ function App() {
             path="/incident/disposition"
           >
             <IncidentFormDisposition />
+          </Route>
+
+          <Route
+          exact
+          path="/treatment/meds/:id"
+          >
+            <TreatmentMedsForm />
           </Route>
 
           <Route

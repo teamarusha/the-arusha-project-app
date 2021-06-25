@@ -4,7 +4,9 @@ import { useHistory, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 //Material UI imports
-import { TextField, MenuItem } from "@material-ui/core";
+import { Grid, MenuItem, TextField } from "@material-ui/core";
+
+import useStyles from "./Styles";
 
 const IncidentFormResponse = () => {
 
@@ -14,6 +16,9 @@ const IncidentFormResponse = () => {
         // const history = useHistory();
         const dispatch = useDispatch();
         const dropdowns = useSelector(store => store.dropdowns);
+        const classes = useStyles();
+        const [ expanded, setExpanded ] = useState(false);
+        const [ selectedId, setSelectedId ] = useState(false);
 
     // To render on page load
     useEffect(() => {
@@ -53,8 +58,30 @@ const IncidentFormResponse = () => {
         }
     }, [dropdowns.go]);
 
+    const handleListItemClick = (event, id) => {
+        setSelectedID(id);
+      };
+    
+      const handleChange = (panel) => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false);
+      };
+
     return (
-        <div>
+        <Grid Container justify='center' className={classes.root}>
+            <Grid item xs={12} s={6} m={4}>
+                <Accordion
+                    expanded={expanded === id}
+                    key={id}
+                    onChange={handleChange(id)}
+                >
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography className={classes.header}>"Name of Crew"</Typography>
+                    </AccordionSummary>
+                    <Paper className={classes.paper}>
+                    <AccordionDetails className={classes.rootExpanded}>
+                    </AccordionDetails>
+
+
             <TextField id="outlined-basic" label="Name of Crew" variant="outlined" 
                 value={ localIncident[`crew`]} onChange={( event ) => 
                 submitValue({ key: `crew`, 
@@ -85,8 +112,8 @@ const IncidentFormResponse = () => {
             </TextField>
             </div>
             }
-
-        </div>
+            </Grid>
+        </Grid>
     );
 };
 

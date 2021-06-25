@@ -51,6 +51,10 @@ function Nav() {
         <Link className="navLink" to="/incident/disposition">
           Incident Disposition
         </Link>
+
+        <Link className="navLink" to="/treatment/meds/:id">
+          Treatment Medication
+        </Link>
         
         <Link className="navLink" to ="/patientHome">
           Patient Home
