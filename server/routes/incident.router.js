@@ -162,35 +162,37 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         );
         // medicalConditions
 
-        const medCondQuery = `INSERT INTO medicalconditions ("patient_incident_id","patient_first_name",
-                "patient_last_name","address", "home_county","home_state", "home_zip","gender_id",
-                race_id, date_of_birth, age, age_units_id)
-                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
-                RETURNING id;`;
+        const medCondQuery = `INSERT INTO medicalconditions ("patient_condition_id","medical_conditions")
+                VALUES ($1, $2)`;
 
         await Promise.all(
-            returnPatientIDs.map((patient, i) => {
+            returnPatientIDs.map((patientID, i) => {
 
-                let patientValues = [
+                let medCondValues = [
                     patients[i].patient_incident_id,
-                    patients[i].patient_first_name,
-                    patients[i].patient_last_name,
-                    patients[i].address,
-                    patients[i].home_county,
-                    patients[i].home_state,
-                    patients[i].home_zip,
-                    patients[i].gender_id,
-                    patients[i].race_id,
-                    patients[i].date_of_birth,
-                    patients[i].age,
-                    patients[i].age_units_id
+                    patients[i].patient_first_name
                 ];
 
-                return connection.query(patientQuery, patientValues);
+                return connection.query(medCondQuery, medCondValues);
             })
 
         );
         // currentMedications
+        const medCondQuery = `INSERT INTO currentmedication ("patient_medication_id","medical_conditions")
+                VALUES ($1, $2)`;
+
+        await Promise.all(
+            returnPatientIDs.map((patientID, i) => {
+
+                let medCondValues = [
+                    patients[i].patient_incident_id,
+                    patients[i].patient_first_name
+                ];
+
+                return connection.query(medCondQuery, medCondValues);
+            })
+
+        );
         // allergies
         // symptoms
         // injury

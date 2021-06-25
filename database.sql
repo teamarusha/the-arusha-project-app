@@ -871,7 +871,7 @@ CREATE TABLE medicalconditions (
 
 CREATE TABLE currentmedication (
 	id SERIAL PRIMARY KEY,
-	patient_medication_id integer REFERENCES "patient",
+	patient_current_med_id integer REFERENCES "patient",
 	medication varchar(100)
 );
 
