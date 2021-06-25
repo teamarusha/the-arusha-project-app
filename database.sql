@@ -41,23 +41,23 @@ VALUES
 ('Healthcare Provider'),
 ('Bystander');
 
-CREATE TABLE "AED_use_prior" (
+CREATE TABLE "aed_use_prior" (
     "id" SERIAL PRIMARY KEY,
     "type" VARCHAR (50)
 );
 
-INSERT INTO "AED_use_prior" ("type")
+INSERT INTO "aed_use_prior" ("type")
 VALUES
 ('No'),
 ('Yes, Applied without Defibrillation'),
 ('Yes, with Defibrillation');
 
-CREATE TABLE "CPR_type" (
+CREATE TABLE "cpr_type" (
     "id" SERIAL PRIMARY KEY,
     "type" VARCHAR (50)
 );
 
-INSERT INTO "CPR_type" ("type")
+INSERT INTO "cpr_type" ("type")
 VALUES
 ('Compressions- Manual'),
 ('Compressions- External Band Type Device'),
@@ -86,12 +86,12 @@ VALUES
 ('Yes, Prior to Arrival at the ED'),
 ('Yes, Sustained for 20 Consecutive Minutes');
 
-CREATE TABLE "CPR_stopped" (
+CREATE TABLE "cpr_stopped" (
     "id" SERIAL PRIMARY KEY,
     "type" VARCHAR (60)
 );
 
-INSERT INTO "CPR_stopped" ("type")
+INSERT INTO "cpr_stopped" ("type")
 VALUES
 ('DNR'),
 ('Medical Control Order'),
@@ -114,12 +114,12 @@ VALUES
 ('Not Attempted-DNR Orders'),
 ('Not Attempted-Signs of Circulation');
 
-CREATE TABLE "AED_applicator" (
+CREATE TABLE "aed_applicator" (
     "id" SERIAL PRIMARY KEY,
     "type" VARCHAR (40)
 );
 
-INSERT INTO "AED_applicator" ("type")
+INSERT INTO "aed_applicator" ("type")
 VALUES
 ('Bystander'),
 ('Family Member'),
@@ -129,12 +129,12 @@ VALUES
 ('First Responder (non-EMS Fire)'),
 ('EMS Responder (transport EMS)');
 
-CREATE TABLE "AED_initiator" (
+CREATE TABLE "aed_initiator" (
     "id" SERIAL PRIMARY KEY,
     "type" VARCHAR (40)
 );
 
-INSERT INTO "AED_initiator" ("type")
+INSERT INTO "aed_initiator" ("type")
 VALUES
 ('Bystander'),
 ('Family Member'),
@@ -144,12 +144,12 @@ VALUES
 ('First Responder (non-EMS Fire)'),
 ('EMS Responder (transport EMS)');
 
-CREATE TABLE "AED_defibrillator" (
+CREATE TABLE "aed_defibrillator" (
     "id" SERIAL PRIMARY KEY,
     "type" VARCHAR (40)
 );
 
-INSERT INTO "AED_defibrillator" ("type")
+INSERT INTO "aed_defibrillator" ("type")
 VALUES
 ('Bystander'),
 ('Family Member'),
@@ -908,14 +908,14 @@ CREATE TABLE cardiacArrest (
     cardiac_arrest_etiology_id integer REFERENCES "cardiac_arrest_etiology",
     resuscitation_attempt_id integer REFERENCES "resuscitation_attempt",
     cardiac_arrest_witness_id integer REFERENCES "cardiac_arrest_witness",
-    AED_use_prior_id integer REFERENCES "AED_use_prior",
-    CPR_type_id integer REFERENCES "CPR_type",
+    aed_use_prior_id integer REFERENCES "aed_use_prior",
+    cpr_type_id integer REFERENCES "cpr_type",
     spontaneous_circulation_id integer REFERENCES "spontaneous_circulation",
     time_cardiac_arrest timestamp,
-    CPR_stopped_id integer REFERENCES "CPR_stopped",
-    AED_initiator_id integer REFERENCES "AED_initiator",
-    AED_applicator_id integer REFERENCES "AED_applicator",
-    AED_defibrillator_id integer REFERENCES "AED_defibrillator"
+    cpr_stopped_id integer REFERENCES "cpr_stopped",
+    aed_initiator_id integer REFERENCES "aed_initiator",
+    aed_applicator_id integer REFERENCES "aed_applicator",
+    aed_defibrillator_id integer REFERENCES "aed_defibrillator"
 );
 
 CREATE TABLE medication (
