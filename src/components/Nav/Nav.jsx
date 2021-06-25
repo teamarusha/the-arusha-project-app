@@ -111,8 +111,33 @@ function Drawer(props) {
              <ChevronRightIcon fontSize='large'/>
             </ListItemSecondaryAction>
          </ListItem>
+         <ListItem divider component={Link} to="/incident" classes={{root: classes.item}}>
+           <ListItemText classes={{primary: classes.text}}> Incident Form </ListItemText>
+            <ListItemSecondaryAction edge="end">
+             <ChevronRightIcon fontSize='large'/>
+            </ListItemSecondaryAction>
+         </ListItem>
+         
         {/* <Link className="navLink" to="/about">
           About
+        </Link>
+
+        <Link className="navLink" to="/incident/scene">
+          Incident Scene
+        </Link>
+
+        <Link className="navLink" to="/incident/disposition">
+          Incident Disposition
+        </Link>
+
+        <Link className="navLink" to="/treatment/meds/:id">
+          Treatment Medication
+        </Link>
+        
+        <Link className="navLink" to ="/patientHome">
+          Patient Home
+        </Link>
+        <Link className="navLink" to="/dropdown">
 
         </Link> */}
         <ListItem divider component={Link} to="/patientHome" classes={{root: classes.item}}>
