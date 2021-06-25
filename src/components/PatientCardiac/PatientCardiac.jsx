@@ -186,9 +186,8 @@ function PatientCardiac() {
                     <MenuItem value="">
                     <em>None</em>
                     </MenuItem>
-                    <MenuItem value={10}>Option 1</MenuItem>
-                    <MenuItem value={20}>Option 2</MenuItem>
-                    <MenuItem value={30}>Option 3</MenuItem>
+                    {dropdowns['cpr_stopped'].map(item => <MenuItem key={'aed_use_prior'+ item.id} 
+                    value={item.id}>{item.type}</MenuItem>)}
                 </Select> <br /><br />
 
                 <InputLabel 
