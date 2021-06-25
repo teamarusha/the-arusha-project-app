@@ -4,7 +4,9 @@ import { useHistory, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 //Material UI imports
-import { Grid, MenuItem, TextField } from "@material-ui/core";
+import { Accordion, AccordionDetails, AccordionSummary, 
+     Grid, MenuItem, Paper, TextField, Typography } from "@material-ui/core";
+import { ExpandMoreIcon } from "@material-ui/icons/ExpandMore";
 
 import useStyles from "./Styles";
 
@@ -12,7 +14,7 @@ const IncidentFormResponse = () => {
 
         let [localIncident, setLocalIncident] = useState(JSON.parse(localStorage.getItem('incident')));
         // let [render, setRender] = useState(false);
-        // const { id } = useParams();
+        const { id } = useParams();
         // const history = useHistory();
         const dispatch = useDispatch();
         const dropdowns = useSelector(store => store.dropdowns);
@@ -59,7 +61,7 @@ const IncidentFormResponse = () => {
     }, [dropdowns.go]);
 
     const handleListItemClick = (event, id) => {
-        setSelectedID(id);
+        setSelectedId(id);
       };
     
       const handleChange = (panel) => (event, isExpanded) => {
@@ -67,26 +69,12 @@ const IncidentFormResponse = () => {
       };
 
     return (
-        <Grid Container justify='center' className={classes.root}>
-            <Grid item xs={12} s={6} m={4}>
-                <Accordion
-                    expanded={expanded === id}
-                    key={id}
-                    onChange={handleChange(id)}
-                >
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography className={classes.header}>"Name of Crew"</Typography>
-                    </AccordionSummary>
-                    <Paper className={classes.paper}>
-                    <AccordionDetails className={classes.rootExpanded}>
-                    </AccordionDetails>
-
-
-            <TextField id="outlined-basic" label="Name of Crew" variant="outlined" 
+        <div>
+            {/* <TextField id="outlined-basic" label="Name of Crew" variant="outlined" 
                 value={ localIncident[`crew`]} onChange={( event ) => 
                 submitValue({ key: `crew`, 
                 thing: event.target.value })}>
-            </TextField>
+            </TextField> */}
 
             { dropdowns.go &&
             <div>
@@ -112,8 +100,7 @@ const IncidentFormResponse = () => {
             </TextField>
             </div>
             }
-            </Grid>
-        </Grid>
+        </div>
     );
 };
 

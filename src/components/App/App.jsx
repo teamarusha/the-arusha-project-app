@@ -32,6 +32,7 @@ import {ThemeProvider} from '@material-ui/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
 import './App.css';
 import TreatmentMedsForm from '../TreatmentForm/TreatmentMedsForm';
+import IncidentHome from '../IncidentForm/IncidentHome';
 import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
 import IncidentFormDisposition from '../IncidentForm/IncidentFormDisposition';
 import IncidentFormScene from '../IncidentForm/IncidentFormScene';
@@ -59,34 +60,6 @@ function App() {
             path="/about"
           >
             <AboutPage />
-          </Route>
-
-          <Route
-            exact
-            path="/incident/response"
-          >
-            <IncidentFormResponse />
-          </Route>
-
-           <Route
-            exact
-            path="/incident/scene"
-          >
-            <IncidentFormScene />
-          </Route>
-
-          <Route
-            exact
-            path="/incident/disposition"
-          >
-            <IncidentFormDisposition />
-          </Route>
-
-          <Route
-          exact
-          path="/treatment/meds/:id"
-          >
-            <TreatmentMedsForm />
           </Route>
 
           <Route
@@ -161,17 +134,21 @@ function App() {
             <LandingPage />
           </ProtectedRoute>
           
-          {/* <ProtectedRoute>
+          <ProtectedRoute>
             <IncidentFormResponse />
-          </ProtectedRoute> */}
+          </ProtectedRoute> 
 
-          {/* <ProtectedRoute>
+          <ProtectedRoute>
             <IncidentFormScene />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
-           {/* <ProtectedRoute>
+          <ProtectedRoute>
             <IncidentFormDisposition />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
+
+          <ProtectedRoute>
+            <IncidentHome />
+          </ProtectedRoute>
 
           <ProtectedRoute
 

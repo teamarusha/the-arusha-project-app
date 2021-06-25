@@ -111,13 +111,15 @@ function Drawer(props) {
              <ChevronRightIcon fontSize='large'/>
             </ListItemSecondaryAction>
          </ListItem>
+         <ListItem divider component={Link} to="/incident" classes={{root: classes.item}}>
+           <ListItemText classes={{primary: classes.text}}> Incident Form </ListItemText>
+            <ListItemSecondaryAction edge="end">
+             <ChevronRightIcon fontSize='large'/>
+            </ListItemSecondaryAction>
+         </ListItem>
+         
         {/* <Link className="navLink" to="/about">
           About
-<<<<<<< HEAD
-        </Link>
-
-        <Link className="navLink" to="/incident/response">
-          Incident Response
         </Link>
 
         <Link className="navLink" to="/incident/scene">
@@ -136,7 +138,6 @@ function Drawer(props) {
           Patient Home
         </Link>
         <Link className="navLink" to="/dropdown">
-=======
 
         </Link> */}
         <ListItem divider component={Link} to="/patientHome" classes={{root: classes.item}}>
@@ -153,7 +154,6 @@ function Drawer(props) {
             </ListItemSecondaryAction>
          </ListItem>
         {/* <Link className="navLink" to="/dropdown">
->>>>>>> master
           ReduxCookie
         </Link> */}
     </List>
