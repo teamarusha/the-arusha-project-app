@@ -31,6 +31,7 @@ import TreatmentHome from "../TreatmentForm/TreatmentHome";
 
 import { ThemeProvider } from "@material-ui/styles";
 import createMuiTheme from "../GLOBALUI/Theme";
+
 import "./App.css";
 import TreatmentMedsForm from "../TreatmentForm/TreatmentMedsForm";
 import IncidentHome from "../IncidentForm/IncidentHome";
@@ -69,6 +70,13 @@ function App() {
             path="/dropdown"
           >
             <ReduxCookie />
+          </Route>
+
+          <Route exact path="/incident">
+            <IncidentHome />
+          </Route>
+          <Route path="/incident/:id">
+            <IncidentHome />
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
@@ -135,20 +143,20 @@ function App() {
             <LandingPage />
           </ProtectedRoute>
 
-          <ProtectedRoute>
+          <ProtectedRoute path="/incidentHome" authRedirect="/user">
+            <IncidentHome />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/incidentResponse" authRedirect="/user">
             <IncidentFormResponse />
           </ProtectedRoute>
 
-          <ProtectedRoute>
+          <ProtectedRoute path="/incidentScene" authRedirect="/user">
             <IncidentFormScene />
           </ProtectedRoute>
 
-          <ProtectedRoute>
+          <ProtectedRoute path="/incidentDisposition" authRedirect="/user">
             <IncidentFormDisposition />
-          </ProtectedRoute>
-
-          <ProtectedRoute>
-            <IncidentHome />
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/patientHome">
