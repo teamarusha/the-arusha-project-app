@@ -914,11 +914,7 @@ CREATE TABLE injury (
 
 CREATE TABLE cardiacarrest (
     id SERIAL PRIMARY KEY,
-<<<<<<< HEAD
-    cardiac_patient_id integer REFERENCES "patient",
-=======
     patient_cardiac_id integer REFERENCES "patient",
->>>>>>> b762d596fed3d71287350bca353feeefc4de3a54
     cardiac_arrest_id integer REFERENCES "cardiac_arrest",
     cardiac_arrest_etiology_id integer REFERENCES "cardiac_arrest_etiology",
     resuscitation_attempt_id integer REFERENCES "resuscitation_attempt",

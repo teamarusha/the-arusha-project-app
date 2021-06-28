@@ -75,20 +75,20 @@ function IncidentHome() {
     console.log('Incident Storage:', JSON.parse(localStorage.getItem('incident')));
 
 
-    if (JSON.parse(localStorage.getItem('incident')).initialized === undefined) {
+    if (JSON.parse(localStorage.getItem('incident')) === null) {
       setLocalIncident(
         {
           initialized: true,
           crew: "",
           triageCat: "",
-          serviceType: "",
+          incidentService: "",
           destinationState: "",
           destinationCounty: "",
           destinationZipCode: "",
           transportDisposition: "",
           transportMethod: "",
           transportMode: "",
-          destinationType: "",
+          destinationFacility: "",
           patientNumbers: "",
           incidentState: "",
           incidentCounty: "",
@@ -118,7 +118,7 @@ function IncidentHome() {
       <p>
         {localStorage.getItem("incident")}
       </p>
-      
+
       <IncidentFormResponse
         localIncident={localIncident}
         setLocalIncident={setLocalIncident}
@@ -130,7 +130,12 @@ function IncidentHome() {
         setLocalIncident={setLocalIncident}
         render={render}
       />
-      {/* <IncidentFormScene localIncident={localIncident} setLocalIncident={setLocalIncident} render={render} /> */}
+
+      <IncidentFormScene
+        localIncident={localIncident}
+        setLocalIncident={setLocalIncident}
+        render={render}
+      />
     </div>
 
     // <Grid Container justify="center" className={classes.root}>

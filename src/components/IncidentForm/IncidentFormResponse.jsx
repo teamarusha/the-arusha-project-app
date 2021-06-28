@@ -27,7 +27,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
     const [expanded, setExpanded] = useState(false);
     const [selectedId, setSelectedId] = useState(false);
 
-    
+
     // This useEffect will watch localIncident and update localStorage
     // whenever localIncident changes 
     useEffect(() => {
@@ -50,17 +50,11 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
         });
     }
 
-    //   const handleListItemClick = (event, id) => {
-    //     setSelectedId(id);
-    //   };
-
-    //   const handleChange = (panel) => (event, isExpanded) => {
-    //     setExpanded(isExpanded ? panel : false);
-    //   };
+    
 
     return (
         <div>
-            
+
             {render &&
                 <TextField
                     id="outlined-basic"
@@ -87,7 +81,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
                     >
                         {dropdowns["triage_cat"].map((item) => (
                             <MenuItem key={"triage_cat" + item.id} value={item.id}>
-                                {item.type}
+                                {item["triage_cat_type"]}
                             </MenuItem>
                         ))}
                     </TextField>
@@ -97,14 +91,14 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
                         select
                         label="Type of Service Requested"
                         variant="outlined"
-                        value={localIncident[`serviceType`]}
+                        value={localIncident[`incidentService`]}
                         onChange={(event) =>
-                            submitValue({ key: `serviceType`, thing: event.target.value })
+                            submitValue({ key: `incidentService`, thing: event.target.value })
                         }
                     >
-                        {dropdowns["incident_type"].map((item) => (
-                            <MenuItem key={"incident_type" + item.id} value={item.id}>
-                                {item.type}
+                        {dropdowns["incident_service"].map((item) => (
+                            <MenuItem key={"incident_service" + item.id} value={item.id}>
+                                {item["incident_service_type"]}
                             </MenuItem>
                         ))}
                     </TextField>

@@ -37,25 +37,29 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident, render }) =>
 
     return (
         <div>
-            <TextField id="outlined-basic" label="Destination State" variant="outlined"
-                value={localIncident[`destinationState`]} onChange={(event) =>
-                    submitValue({ key: `destinationState`, thing: event.target.value })}>
-            </TextField>
+            {render &&
+                <div>
+                    <TextField id="outlined-basic" label="Destination State" variant="outlined"
+                        value={localIncident[`destinationState`]} onChange={(event) =>
+                            submitValue({ key: `destinationState`, thing: event.target.value })}>
+                    </TextField>
 
-            <TextField id="outlined-basic" label="Destination County" variant="outlined"
-                value={localIncident[`destinationCounty`]} onChange={(event) =>
-                    submitValue({ key: `destinationCounty`, thing: event.target.value })}>
-            </TextField>
+                    <TextField id="outlined-basic" label="Destination County" variant="outlined"
+                        value={localIncident[`destinationCounty`]} onChange={(event) =>
+                            submitValue({ key: `destinationCounty`, thing: event.target.value })}>
+                    </TextField>
 
-            <TextField id="outlined-basic" label="Destination Zip Code"
-                variant="outlined" value={localIncident[`destinationZipCode`]}
-                onChange={(event) => submitValue({
-                    key: `destinationZipCode`,
-                    thing: event.target.value
-                })}>
-            </TextField>
+                    <TextField id="outlined-basic" label="Destination Zip Code"
+                        variant="outlined" value={localIncident[`destinationZipCode`]}
+                        onChange={(event) => submitValue({
+                            key: `destinationZipCode`,
+                            thing: event.target.value
+                        })}>
+                    </TextField>
+                </div>
+            }
 
-            {dropdowns.go &&
+            {dropdowns.go && render &&
                 <div>
                     <TextField id="outlined-basic" select label="Transportation Disposition"
                         variant="outlined" value={localIncident[`transportDisposition`]}
@@ -65,7 +69,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident, render }) =>
                         })}>
                         {dropdowns['transport_disposition'].map(item =>
                             <MenuItem key={'transport_disposition' + item.id} value={item.id}>
-                                {item.type}
+                                {item["transport_disposition_type"]}
                             </MenuItem>)
                         }
                     </TextField>
@@ -78,7 +82,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident, render }) =>
                         })}>
                         {dropdowns['transport_method'].map(item =>
                             <MenuItem key={'transport_method' + item.id} value={item.id}>
-                                {item.type}
+                                {item["transport_method_type"]}
                             </MenuItem>)
                         }
                     </TextField>
@@ -91,20 +95,20 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident, render }) =>
                         })}>
                         {dropdowns['transport_mode'].map(item =>
                             <MenuItem key={'transport_mode' + item.id} value={item.id}>
-                                {item.type}
+                                {item["transport_mode_type"]}
                             </MenuItem>)
                         }
                     </TextField>
 
                     <TextField id="outlined-basic" select label="Type of Destination"
-                        variant="outlined" value={localIncident[`destinationType`]}
+                        variant="outlined" value={localIncident[`destinationFacility`]}
                         onChange={(event) => submitValue({
-                            key: `destinationType`,
+                            key: `destinationFacility`,
                             thing: event.target.value
                         })}>
-                        {dropdowns['destination_type'].map(item =>
-                            <MenuItem key={'destination_type' + item.id} value={item.id}>
-                                {item.type}
+                        {dropdowns['destination_facility'].map(item =>
+                            <MenuItem key={'destination_facility' + item.id} value={item.id}>
+                                {item["destination_facility_type"]}
                             </MenuItem>)
                         }
                     </TextField>
