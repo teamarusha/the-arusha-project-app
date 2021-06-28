@@ -8,8 +8,6 @@ function ReduxCookie() {
     const dropdowns = useSelector(store => store.dropdowns);
     const dispatch = useDispatch();
 
-
-
     let [localDropdownMirror, setLocalDropdownMirror] = useState(JSON.parse(localStorage.getItem('dropdowns')));
 
     useEffect(() => {
@@ -26,8 +24,15 @@ function ReduxCookie() {
         }
     }, [dropdowns.go]);
 
+    function triggerMastodon() {
+        dispatch({type: 'POST_INCIDENT'})
+    }
+
     return (
         <div>
+            <button onClick={triggerMastodon}>
+                Mastodon
+            </button>
             {dropdowns.go &&
                 <div>
                     <p>Local Cookie Mirror: {JSON.stringify(dropdowns['cardiac_arrest'])}</p>

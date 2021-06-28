@@ -4,29 +4,25 @@ import { useHistory, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 //Material UI imports
-import { TextField } from "@material-ui/core";
+import { TextField, MenuItem } from "@material-ui/core";
 
-const IncidentFormScene = () => {
+const IncidentFormScene = ({ localIncident, setLocalIncident, render }) => {
 
-        let [localIncident, setLocalIncident] = useState(JSON.parse(localStorage.getItem('incident')));
-        // let [render, setRender] = useState(false);
-        const { id } = useParams();
-        const dispatch = useDispatch();
-        // const history = useHistory();
-        const dropdowns = useSelector(store => store.dropdowns);
+    // let [localIncident, setLocalIncident] = useState(JSON.parse(localStorage.getItem('incident')));
+    // let [render, setRender] = useState(false);
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    // const history = useHistory();
+    const dropdowns = useSelector(store => store.dropdowns);
 
-    // To render on page load
-    useEffect(() => {
-        console.log( 'Params id:', id );
-        console.log( 'Incident Storage', JSON.parse(localStorage.getItem('incident')));
-    }, []);
+
 
     useEffect(() => {
         console.log('UPDATING browser storage', localIncident);
         localStorage.setItem('incident', JSON.stringify(localIncident));
     }, [localIncident]);
 
-   function submitValue(newParameter) {
+    function submitValue(newParameter) {
         console.log('Updating parameter in submitValue', newParameter.key, newParameter.thing);
 
         setLocalIncident({ ...localIncident, [newParameter.key]: newParameter.thing });
@@ -34,72 +30,67 @@ const IncidentFormScene = () => {
         // localStorage.setItem(`${newParameter.key}`, JSON.stringify(newParameter.thing));
     }
 
-    let [localDropdownMirror, setLocalDropdownMirror] = useState(JSON.parse(localStorage.getItem('dropdowns')));
-
-    useEffect(() => {
-        if (JSON.parse(localStorage.getItem('dropdowns')) === null ){
-            dispatch({ type: 'GET_DROPDOWNS' })
-        } else {
-            dispatch({type: 'SET_DROPDOWNS', payload: localDropdownMirror})
-        }
-    }, []);
-
-    useEffect(() => {
-        if (dropdowns.go === true) {
-            localStorage.setItem('dropdowns', JSON.stringify(dropdowns));
-        }
-    }, [dropdowns.go]);
-
-    return(
+    return (
         <div>
-            <TextField id="outlined-basic" label="Number of Patients" 
-                variant="outlined" value={ localIncident[`patientNumbers`]}
-                onChange={( event ) => submitValue({ key: `patientNumbers`,
-                thing: event.target.value })}>
-            </TextField>
+            {render &&
+                <div>
+                    <TextField id="outlined-basic" label="Number of Patients"
+                        variant="outlined" value={localIncident[`patientNumbers`]}
+                        onChange={(event) => submitValue({
+                            key: `patientNumbers`,
+                            thing: event.target.value
+                        })}>
+                    </TextField>
 
-            <TextField id="outlined-basic" label="Incident State" variant="outlined"
-                value={ localIncident[`incidentState`]} onChange={( event ) => 
-                submitValue({ key: `incidentState`, thing: event.target.value})}>
-            </TextField>
+                    <TextField id="outlined-basic" label="Incident State" variant="outlined"
+                        value={localIncident[`incidentState`]} onChange={(event) =>
+                            submitValue({ key: `incidentState`, thing: event.target.value })}>
+                    </TextField>
 
-            <TextField id="outlined-basic" label="Incident County" variant="outlined"
-                value={ localIncident[`incidentCounty`]} onChange={( event ) => 
-                submitValue({ key: `incidentCounty`, thing: event.target.value})}>
-            </TextField>
+                    <TextField id="outlined-basic" label="Incident County" variant="outlined"
+                        value={localIncident[`incidentCounty`]} onChange={(event) =>
+                            submitValue({ key: `incidentCounty`, thing: event.target.value })}>
+                    </TextField>
 
-            <TextField id="outlined-basic" label="Incident Zip Code" 
-                variant="outlined" value={ localIncident[`incidentZipCode`]} 
-                onChange={( event ) => submitValue({ key: `incidentZipCode`,
-                thing: event.target.value})}>
-            </TextField>
-
-            { dropdowns.go &&
-            <div>
-            <TextField id="outlined-basic" select label="Possible Injury" 
-                variant="outlined" value={ localIncident[`possibleInjury`]}
-                onChange={( event ) => submitValue({ key: `possibleInjury`,
-                thing: event.target.value })}>
-            {dropdowns['possible_injury'].map(item => 
-                <MenuItem key={'possible_injury'+ item.id} value={item.id}>
-                    {item.type}
-                </MenuItem>)
+                    <TextField id="outlined-basic" label="Incident Zip Code"
+                        variant="outlined" value={localIncident[`incidentZipCode`]}
+                        onChange={(event) => submitValue({
+                            key: `incidentZipCode`,
+                            thing: event.target.value
+                        })}>
+                    </TextField>
+                </div>
             }
-            </TextField>
+            {dropdowns.go && render &&
+                <div>
+                    <TextField id="outlined-basic" select label="Possible Injury"
+                        variant="outlined" value={localIncident[`possibleInjury`]}
+                        onChange={(event) => submitValue({
+                            key: `possibleInjury`,
+                            thing: event.target.value
+                        })}>
+                        {dropdowns['possible_injury'].map(item =>
+                            <MenuItem key={'possible_injury' + item.id} value={item.id}>
+                                {item["possible_injury_type"]}
+                            </MenuItem>)
+                        }
+                    </TextField>
 
-            <TextField id="outlined-basic" select label="Alcohol and Drug Use Indicators" 
-                variant="outlined" value={ localIncident[`alcoholDrugIndicators`]}
-                onChange={( event ) => submitValue({ key: `alcoholDrugIndicators`,
-                thing: event.target.value })}>
-            {dropdowns['alcohol_drug_use'].map(item => 
-                <MenuItem key={'alcohol_drug_use'+ item.id} value={item.id}>
-                    {item.type}
-                </MenuItem>)
+                    <TextField id="outlined-basic" select label="Alcohol and Drug Use Indicators"
+                        variant="outlined" value={localIncident[`alcoholDrugIndicators`]}
+                        onChange={(event) => submitValue({
+                            key: `alcoholDrugIndicators`,
+                            thing: event.target.value
+                        })}>
+                        {dropdowns['alcohol_drug_use'].map(item =>
+                            <MenuItem key={'alcohol_drug_use' + item.id} value={item.id}>
+                                {item["alcohol_drug_use_type"]}
+                            </MenuItem>)
+                        }
+                    </TextField>
+                </div>
             }
-            </TextField>
-            </div>
-            }
-            
+
         </div>
     );
 };

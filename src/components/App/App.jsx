@@ -28,10 +28,14 @@ import PatientMedical from '../PatientMedical/PatientMedical';
 import PatientInjury from '../PatientInjury/PatientInjury';
 import PatientCardiac from '../PatientCardiac/PatientCardiac';
 
+import { ThemeProvider } from '@material-ui/styles';
+import createMuiTheme from '../GLOBALUI/Theme';
 import './App.css';
-// import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
-// import IncidentFormDisposition from '../IncidentForm/IncidentFormDisposition';
-// import IncidentFormScene from '../IncidentForm/IncidentFormScene';
+import TreatmentMedsForm from '../TreatmentForm/TreatmentMedsForm';
+import IncidentHome from '../IncidentForm/IncidentHome';
+import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
+import IncidentFormDisposition from '../IncidentForm/IncidentFormDisposition';
+import IncidentFormScene from '../IncidentForm/IncidentFormScene';
 import ReduxCookie from '../ReduxCookie/ReduxCookie';
 
 function App() {
@@ -43,7 +47,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <ThemeProvider theme={createMuiTheme}>
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -58,33 +62,24 @@ function App() {
             <AboutPage />
           </Route>
 
-          {/* <Route
-            exact
-            path="/incident/response"
-          >
-            <IncidentFormResponse />
-          </Route>
-
-           <Route
-            exact
-            path="/incident/scene"
-          >
-            <IncidentFormScene />
-          </Route>
-
-          <Route
-            exact
-            path="/incident/disposition"
-          >
-            <IncidentFormDisposition />
-          </Route> */}
-
           <Route
             // shows AboutPage at all times (logged in or not)
             exact
             path="/dropdown"
           >
             <ReduxCookie />
+          </Route>
+
+          <Route
+            exact
+            path="/incident"
+          >
+            <IncidentHome />
+          </Route>
+          <Route
+            path="/incident/:id"
+          >
+            <IncidentHome />
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
@@ -150,63 +145,70 @@ function App() {
           >
             <LandingPage />
           </ProtectedRoute>
-          
+
           {/* <ProtectedRoute>
             <IncidentFormResponse />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
-          {/* <ProtectedRoute>
+          <ProtectedRoute>
             <IncidentFormScene />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
-           {/* <ProtectedRoute>
+          <ProtectedRoute>
             <IncidentFormDisposition />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            path="/incident"
+            authRedirect="/user"
+          >
+            <IncidentHome />
           </ProtectedRoute> */}
 
           <ProtectedRoute
 
-          exact
-          path="/patientHome"
+            exact
+            path="/patientHome"
           >
             <PatientHome />
           </ProtectedRoute>
 
           <ProtectedRoute
 
-          exact
-          path="/patientDemographics"
+            exact
+            path="/patientDemographics"
           >
             <PatientDemographics />
           </ProtectedRoute>
 
           <ProtectedRoute
 
-          exact
-          path="/patientInjury"
+            exact
+            path="/patientInjury"
           >
             <PatientInjury />
           </ProtectedRoute>
 
           <ProtectedRoute
 
-          exact
-          path="/patientMedical"
+            exact
+            path="/patientMedical"
           >
             <PatientMedical />
           </ProtectedRoute>
 
           <ProtectedRoute
 
-          exact
-          path="/patientSymptoms"
+            exact
+            path="/patientSymptoms"
           >
             <PatientSymptoms />
           </ProtectedRoute>
 
           <ProtectedRoute
 
-          exact
-          path="/patientCardiacArrest"
+            exact
+            path="/patientCardiacArrest"
           >
             <PatientCardiac />
           </ProtectedRoute>
@@ -217,7 +219,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-      </div>
+      </ThemeProvider>
     </Router>
   );
 }

@@ -10,7 +10,7 @@ function* postIncident( action ) {
 
     try {
 
-        yield axios.post(`/api/incident`, action.payload);
+        yield axios.post(`/api/incident`, {nonsense: true});
         
         console.log('POST WORKED');
         

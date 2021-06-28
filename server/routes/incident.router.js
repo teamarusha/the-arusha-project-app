@@ -8,163 +8,448 @@ const {
 
 // ____________________POST THE INCIDENT FORM____________________
 router.post('/', rejectUnauthenticated, async (req, res) => {
-    // IMPORTANT VARIABLES FOR A QUERY
-    // const user = req.user.id
-    // const sampleStamp = '2021-03-23 12:23:33';
-    // const patients = req.body.patients;
+    // IMPORTANT VARIABLES FOR A QUERY - user id
+    const user = req.user.id
+    const sampleStamp = '2021-03-23 12:23:33';
 
-    // const connection = await pool.connect();
-
-
-    // try {
-    //     // THE ORDER FOR BIG INSERT STATEMENT
-    //     // incident
-    //     const incidentQuery = {
-    //         user_id: user,
-    //         incident_type_id: 5,
-    //         crew_id: 1,
-    //         triage_cat_id: 2,
-    //         unit_notified: sampleStamp,
-    //         unit_enroute: sampleStamp,
-    //         unit_arrived_scene: sampleStamp,
-    //         arrived_patient: sampleStamp,
-    //         unit_left_scene: sampleStamp,
-    //         arrived_destination: sampleStamp,
-    //         transfer_of_care: sampleStamp,
-    //         unit_in_service: sampleStamp,
-    //         incident_summary: "It went well"
-
-    //     };
-
-    //     await connection.query('BEGIN');
-    //     const incidentInsertResults = await client.query(`
-    //     INSERT INTO incident ("user_id","incident_type_id","crew_id","triage_cat_id",
-    //     "unit_notified","unit_enroute","unit_arrived_scene","arrived_patient",
-    //     "unit_left_scene","arrived_destination","transfer_of_care","unit_in_service",
-    //     "incident_summary")
-    //     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
-    //     RETURNING id;`,
-    //         [
-    //             incidentQuery.user_id,
-    //             incidentQuery.incident_type_id,
-    //             incidentQuery.crew_id,
-    //             incidentQuery.triage_cat_id,
-    //             incidentQuery.unit_notified,
-    //             incidentQuery.unit_enroute,
-    //             incidentQuery.unit_arrived_scene,
-    //             incidentQuery.arrived_patient,
-    //             incidentQuery.unit_left_scene,
-    //             incidentQuery.arrived_destination,
-    //             incidentQuery.transfer_of_care,
-    //             incidentQuery.unit_in_service,
-    //             incidentQuery.incident_summary
-    //         ]);
-
-    //     // ANOTHER VERY IMPORTANT PARAMETER
-    //     const incidentID = incidentInsertResults[0].id;
-
-    //     // scene
-    //     const sceneQuery = {
-    //         incident_scene_id: incidentID,
-    //         incident_state: "Minnesota",
-    //         incident_zip: 55409,
-    //         incident_county: "Hennepin",
-    //         possible_injury_id: 3,
-    //         alcohol_drug_use_id: 5
-    //     };
-
-    //     await connection.query(`
-    //     INSERT INTO scene ("incident_scene_id","incident_state","incident_zip","incident_county",
-    //     "possible_injury_id","alcohol_drug_use_id")
-    //     VALUES ($1, $2, $3, $4, $5, $6);`,
-    //         [
-    //             sceneQuery.incident_scene_id,
-    //             sceneQuery.incident_state,
-    //             sceneQuery.incident_zip,
-    //             sceneQuery.incident_county,
-    //             sceneQuery.possible_injury_id,
-    //             sceneQuery.alcohol_drug_use_id
-    //         ]);
-    //     // disposition
-    //     const dispositionQuery = {
-    //         incident_disposition_id: incidentID,
-    //         destination_state: "Minnesota",
-    //         destination_zip: 55044,
-    //         destination_county: "Dakota",
-    //         transport_disposition_id: 2,
-    //         transport_method_id: 2,
-    //         transport_mode_id: 3,
-    //         destination_type_id: 2
-    //     };
-
-    //     await connection.query(`
-    //     INSERT INTO disposition ("incident_disposition_id","destination_state",
-    //     "destination_zip","destination_county", "transport_disposition_id",
-    //     "transport_method_id", "transport_mode_id","destination_type_id")
-    //     VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`,
-    //         [
-    //             dispositionQuery.incident_disposition_id,
-    //             dispositionQuery.destination_state,
-    //             dispositionQuery.destination_zip,
-    //             dispositionQuery.destination_county,
-    //             dispositionQuery.transport_disposition_id,
-    //             dispositionQuery.transport_method_id,
-    //             dispositionQuery.transport_mode_id,
-    //             dispositionQuery.destination_type_id
-    //         ]);
-    //     // patient
-    //     const patientQuery = `INSERT INTO patient ("patient_incident_id","patient_first_name",
-    //             "patient_last_name","address", "home_county","home_state", "home_zip","gender_id",
-    //             race_id, date_of_birth, age, age_units_id)
-    //             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
-    //             RETURNING id;`
-    //     await Promise.all(
-    //         patients.patientArray.map((patient, i) => {
-
-    //             let patientValues = [
-    //                 patients[i].patient_incident_id,
-    //                 patients[i].patient_first_name,
-    //                 patients[i].patient_last_name,
-    //                 patients[i].address,
-    //                 patients[i].home_county,
-    //                 patients[i].home_state,
-    //                 patients[i].home_zip,
-    //                 patients[i].gender_id,
-    //                 patients[i].race_id,
-    //                 patients[i].date_of_birth,
-    //                 patients[i].age,
-    //                 patients[i].age_units_id
-    //             ];
-
-    //             await connection.query(patientQuery, patientValues);
+    const connection = await pool.connect();
+    console.log('req.body', req.body);
 
 
-    //         })
-    //     )
+
+    try {
+        // Destructure req.body for ease of insert
+        const {
+            incident,
+            patients,
+            treatments,
+            vitals
+        } = req.body;
+
+        // THE ORDER FOR BIG INSERT STATEMENT
+        // incident
+        const incidentValues = {
+            user_id: user,
+            incident_type_id: 5,
+            crew_id: 1,
+            triage_cat_id: 2,
+            unit_notified: sampleStamp,
+            unit_enroute: sampleStamp,
+            unit_arrived_scene: sampleStamp,
+            arrived_patient: sampleStamp,
+            unit_left_scene: sampleStamp,
+            arrived_destination: sampleStamp,
+            transfer_of_care: sampleStamp,
+            unit_in_service: sampleStamp,
+            incident_summary: "It went well"
+
+        };
+
+        await connection.query('BEGIN');
+        const incidentInsertResults = await client.query(`
+            INSERT INTO incident ("user_id","incident_type_id","crew_id","triage_cat_id",
+            "unit_notified","unit_enroute","unit_arrived_scene","arrived_patient",
+            "unit_left_scene","arrived_destination","transfer_of_care","unit_in_service",
+            "incident_summary")
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+            RETURNING id;`,
+            [
+                incidentValues.user_id,
+                incidentValues.incident_type_id,
+                incidentValues.crew_id,
+                incidentValues.triage_cat_id,
+                incidentValues.unit_notified,
+                incidentValues.unit_enroute,
+                incidentValues.unit_arrived_scene,
+                incidentValues.arrived_patient,
+                incidentValues.unit_left_scene,
+                incidentValues.arrived_destination,
+                incidentValues.transfer_of_care,
+                incidentValues.unit_in_service,
+                incidentValues.incident_summary
+            ]);
+
+        // ANOTHER VERY IMPORTANT PARAMETER
+        const incidentID = incidentInsertResults[0].id;
+
+        // scene
+        const sceneQuery = {
+            incident_scene_id: incidentID,
+            incident_state: "Minnesota",
+            incident_zip: 55409,
+            incident_county: "Hennepin",
+            possible_injury_id: 3,
+            alcohol_drug_use_id: 5
+        };
+
+        await connection.query(`
+            INSERT INTO scene ("incident_scene_id","incident_state","incident_zip","incident_county",
+            "possible_injury_id","alcohol_drug_use_id")
+            VALUES ($1, $2, $3, $4, $5, $6);`,
+            [
+                sceneQuery.incident_scene_id,
+                sceneQuery.incident_state,
+                sceneQuery.incident_zip,
+                sceneQuery.incident_county,
+                sceneQuery.possible_injury_id,
+                sceneQuery.alcohol_drug_use_id
+            ]);
+        // disposition
+        const dispositionValues = {
+            incident_disposition_id: incidentID,
+            destination_state: "Minnesota",
+            destination_zip: 55044,
+            destination_county: "Dakota",
+            transport_disposition_id: 2,
+            transport_method_id: 2,
+            transport_mode_id: 3,
+            destination_type_id: 2
+        };
+
+        await connection.query(`
+            INSERT INTO disposition ("incident_disposition_id","destination_state",
+            "destination_zip","destination_county", "transport_disposition_id",
+            "transport_method_id", "transport_mode_id","destination_type_id")
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`,
+            [
+                dispositionValues.incident_disposition_id,
+                dispositionValues.destination_state,
+                dispositionValues.destination_zip,
+                dispositionValues.destination_county,
+                dispositionValues.transport_disposition_id,
+                dispositionValues.transport_method_id,
+                dispositionValues.transport_mode_id,
+                dispositionValues.destination_type_id
+            ]);
+
+        // patient
+        const patientQuery = `INSERT INTO patient ("patient_incident_id","patient_first_name",
+                "patient_last_name","address", "home_county","home_state", "home_zip","gender_id",
+                race_id, date_of_birth, age, age_units_id)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+                RETURNING id;`;
+
+        const samplePatients = [
+            {
+                patient_incident_id: 1,
+                patient_first_name: 'Charlie',
+                patient_last_name: 'Stokes',
+                address: '1234 Nicollet Ave',
+                home_county: 'Hennepin',
+                home_state: 'MN',
+                home_zip: '55409',
+                gender_id: 2,
+                race_id: 3,
+                date_of_birth: sampleStamp,
+                age: 29,
+                age_units_id: 1
+            }, {
+                patient_incident_id: 1,
+                patient_first_name: 'Chloe',
+                patient_last_name: 'Everson',
+                address: '4321 Nicollet Ave',
+                home_county: 'Hennepin',
+                home_state: 'MN',
+                home_zip: '55409',
+                gender_id: 1,
+                race_id: 2,
+                date_of_birth: sampleStamp,
+                age: 28,
+                age_units_id: 1
+            }, {
+                patient_incident_id: 1,
+                patient_first_name: 'Eyram',
+                patient_last_name: 'Tay',
+                address: '3142 Nicollet Ave',
+                home_county: 'Hennepin',
+                home_state: 'MN',
+                home_zip: '55409',
+                gender_id: 2,
+                race_id: 1,
+                date_of_birth: sampleStamp,
+                age: 27,
+                age_units_id: 1
+            }
+        ]
+
+        // ANOTHER SUPER IMPORTANT THING - Patient ID array 
+        // holds patient's actual id from the database
+        const returnPatientIDs = [];
+
+        const patientReturn = await Promise.all(
+
+            samplePatients.map((patient, i) => {
+
+                let patientValues = [
+                    patient.patient_incident_id,
+                    patient.patient_first_name,
+                    patient.patient_last_name,
+                    patient.address,
+                    patient.home_county,
+                    patient.home_state,
+                    patient.home_zip,
+                    patient.gender_id,
+                    patient.race_id,
+                    patient.date_of_birth,
+                    patient.age,
+                    patient.age_units_id
+                ];
+
+                return connection.query(patientQuery, patientValues);
+            })
+
+        );
+
+        // Puts returned ids into 
+        for (let newReturn of patientReturn) {
+            console.log('newReturn.rows[0].id', newReturn.rows[0].id);
+            returnPatientIDs.push(newReturn.rows[0].id);
+        }
+        console.log('1');
+        console.log('2');
+        console.log('3');
+        console.log('4');
+        console.log('5');
+        console.log('returnPatientIDs', returnPatientIDs);
 
 
-    //     // medicalConditions
-    //     // currentMedications
-    //     // allergies
-    //     // symptoms
-    //     // injury
-    //     // cardiacArrest
-    //     // medication
-    //     // procedure
-    //     // vitals
+        // medicalConditions
+        const medCondQuery = `INSERT INTO medicalconditions ("patient_condition_id","medical_conditions")
+                VALUES ($1, $2)`;
 
-    //     // FOR FOR LOOPS ONLY - Patient, medication, procedure, vitals
+        await Promise.all(
+            returnPatientIDs.map((patientID, i) => {
+
+                let medCondValues = [
+                    patientID,
+                    patients[String(i+1)+'conditions']
+                ];
+
+                return connection.query(medCondQuery, medCondValues);
+            })
+
+        );
+
+        // currentMedications
+        const currMedQuery = `INSERT INTO currentmedication ("patient_medication_id","medical_conditions")
+                VALUES ($1, $2)`;
+
+        await Promise.all(
+            returnPatientIDs.map((patientID, i) => {
+
+                let currMedValues = [
+                    patientID,
+                    patients[String(i+1)+'medication']
+                ];
+
+                return connection.query(currMedQuery, currMedValues);
+            })
+
+        );
+
+        // allergies
+        const allergyQuery = `INSERT INTO currentmedication ("patient_medication_id","medical_conditions")
+                VALUES ($1, $2)`;
+
+        await Promise.all(
+            returnPatientIDs.map((patientID, i) => {
+
+                let allergyValues = [
+                    patientID,
+                    patients[String(i+1)+'allergies']
+                ];
+
+                return connection.query(allergyQuery, allergyValues);
+            })
+
+        );
+
+        // symptoms
+        const symptomQuery = `INSERT INTO symptoms ("patient_symptoms_id",
+        "anatomic_location_id","organ_system_id","time_symptom_onset",
+        "time_last_known_well","primary_symptom","other_symptoms","initial_acuity_id",
+        "final_acuity_id","primary_impression_id")
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
+
+        await Promise.all(
+            returnPatientIDs.map((patientID, i) => {
+                
+                let symptomValues = [
+                    patientID,
+                    patients[String(i + 1) + 'anatomic_location_id'],
+                    patients[String(i + 1) + 'organ_system_id'],
+                    patients[String(i + 1) + 'time_symptom_onset'],
+                    patients[String(i + 1) + 'time_last_known_well'],
+                    patients[String(i + 1) + 'primary_symptom'],
+                    patients[String(i + 1) + 'other_symptoms'],
+                    patients[String(i + 1) + 'initial_acuity_id'],
+                    patients[String(i + 1) + 'final_acuity_id'],
+                    patients[String(i + 1) + 'primary_impression_id']
+                ];
+
+                return connection.query(symptomQuery, symptomValues);
+            })
+
+        );
+        // injury
+        const injuryQuery = `INSERT INTO injury ("patient_injury_id",
+        "injury_type_id","injury_cause_id")
+        VALUES ($1, $2, $3);`;
+
+        await Promise.all(
+            returnPatientIDs.map((patientID, i) => {
+
+                let injuryValues = [
+                    patientID,
+                    patients[String(i + 1) + 'injury_type_id'],
+                    patients[String(i + 1) + 'injury_cause_id']
+                ];
+
+                return connection.query(injuryQuery, injuryValues);
+            })
+
+        );
+        // cardiacArrest
+        const cardiacQuery = `INSERT INTO symptoms ("cardiac_patient_id",
+        "cardiac_arrest_id","cardiac_arrest_etiology_id","resuscitation_attempt_id",
+        "cardiac_arrest_witness_id","aed_use_prior_id","cpr_type_id","spontaneous_circulation_id",
+        "time_cardiac_arrest","cpr_stopped_id", "aed_initiator_id", "aed_applicator_id", "aed_defibrillator_id")
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);`;
+
+        await Promise.all(
+            returnPatientIDs.map((patientID, i) => {
+
+                let cardiacValues = [
+                    patientID,
+                    patients[String(i + 1) + 'cardiac_arrest_id'],
+                    patients[String(i + 1) + 'cardiac_arrest_etiology_id'],
+                    patients[String(i + 1) + 'resuscitation_attempt_id'],
+                    patients[String(i + 1) + 'cardiac_arrest_witness_id'],
+                    patients[String(i + 1) + 'aed_use_prior_id'],
+                    patients[String(i + 1) + 'cpr_type_id'],
+                    patients[String(i + 1) + 'spontaneous_circulation_id'],
+                    patients[String(i + 1) + 'time_cardiac_arrest'],
+                    patients[String(i + 1) + 'cpr_stopped_id'],
+                    patients[String(i + 1) + 'aed_initiator_id'],
+                    patients[String(i + 1) + 'aed_applicator_id'],
+                    patients[String(i + 1) + 'aed_defibrillator_id']
+                ];
+
+                return connection.query(cardiacQuery, cardiacValues);
+            })
+
+        );
+        // medication
+        const medTreatmentQuery = `INSERT INTO medication ("patient_medication_id",
+        "medication","med_admin_route_id","med_admin_by_id",
+        "med_dosage","med_dosage_units_id","med_response_id","med_timestamp")
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
+
+        await Promise.all(
+            // First we map (loop) through all of the patients,
+            // patientID is the returned patient ID from the database
+            // i will be the way we index the patient number from the client side
+            // 
+            // It is important to note that the naming convention for client side 
+            // attributes is as follows: 
+            // patient number(not patient ID from database)+attribute name+attribute number
+            // 
+            // So for the third medication treatment for patient 2 the attributes would be...
+            // 2medication3
+            returnPatientIDs.map((patientID, i) => {
+
+                treatments[String(i+1)+"medicationArray"].map(med => {
+
+                    let medTreatmentValues = [
+                        patientID,
+                        patients[String(i + 1) + 'medication'+ med],
+                        patients[String(i + 1) + 'med_admin_route_id'+ med],
+                        patients[String(i + 1) + 'med_admin_by_id'+ med],
+                        patients[String(i + 1) + 'med_dosage'+ med],
+                        patients[String(i + 1) + 'med_dosage_units_id'+ med],
+                        patients[String(i + 1) + 'med_response_id'+ med],
+                        patients[String(i + 1) + 'med_timestamp'+ med]
+                    ];
+                    
+                    return connection.query(medTreatmentQuery, medTreatmentValues);
+                });
+            })
+        );
+        // procedure
+        const procedureQuery = `INSERT INTO procedure ("patient_procedure_id",
+        "procedure_name_id","procedure_attempts_id","procedure_successful",
+        "procedure_response","procedure_performer_id","procedure_timestamp")
+        VALUES ($1, $2, $3, $4, $5, $6, $7);`;
+
+        await Promise.all(
+            // this query is much the same as the 
+            returnPatientIDs.map((patientID, i) => {
+
+                treatments[String(i+1)+"procedureArray"].map(proc => {
+
+                    let procedureValues = [
+                        patientID,
+                        patients[String(i + 1) + 'procedure_name_id'+ proc],
+                        patients[String(i + 1) + 'procedure_attempts_id'+ proc],
+                        patients[String(i + 1) + 'procedure_successful'+ proc],
+                        patients[String(i + 1) + 'procedure_response'+ proc],
+                        patients[String(i + 1) + 'procedure_performer_id'+ proc],
+                        patients[String(i + 1) + 'procedure_timestamp'+ proc]
+                    ];
+                    
+                    return connection.query(procedureQuery, procedureValues);
+                });
+            })
+        );
+        // vitals
+        const vitalQuery = `INSERT INTO procedure ("patient_vitals_id",
+        "systolic_BP","heart_rate","pulse_oximetry","respiratory_rate",
+        "blood_glucose","glasgow_eye", "glasgow_verbal", "glasgow_motor",
+        "glasgow_qualifier", "responsiveness_level_id", "pain_scale_id",
+        "stroke_score_id", "stroke_scale_id", "vitals_timestamp")
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15);`;
+
+        
+        
+        await Promise.all(
+            // this query is much the same as the 
+            returnPatientIDs.map((patientID, i) => {
+
+                vitals[String(i+1)+"vitalsArray"].map(proc => {
+
+                    let vitalValues = [
+                        patientID,
+                        patients[String(i + 1) + 'systolic_BP'+ proc],
+                        patients[String(i + 1) + 'heart_rate'+ proc],
+                        patients[String(i + 1) + 'pulse_oximetry'+ proc],
+                        patients[String(i + 1) + 'respiratory_rate'+ proc],
+                        patients[String(i + 1) + 'blood_glucose'+ proc],
+                        patients[String(i + 1) + 'glasgow_eye'+ proc],
+                        patients[String(i + 1) + 'glasgow_verbal'+ proc],
+                        patients[String(i + 1) + 'glasgow_motor'+ proc],
+                        patients[String(i + 1) + 'glasgow_qualifier'+ proc],
+                        patients[String(i + 1) + 'responsiveness_level_id'+ proc],
+                        patients[String(i + 1) + 'pain_scale_id'+ proc],
+                        patients[String(i + 1) + 'stroke_score_id'+ proc],
+                        patients[String(i + 1) + 'stroke_scale_id'+ proc],
+                        patients[String(i + 1) + 'vitals_timestamp'+ proc]
+                    ];
+                    
+                    return connection.query(vitalQuery, vitalValues);
+                });
+            })
+        );
 
 
-    //     await connection.query('COMMIT')
-    //     res.sendStatus(201);
-    // } catch (error) {
-    //     await connection.query('ROLLBACK')
-    //     console.log('Error POST /api/incident', error);
-    //     res.sendStatus(500);
-    // } finally {
-    //     connection.release()
-    // }
+        await connection.query('COMMIT')
+        res.sendStatus(201);
+    } catch (error) {
+        await connection.query('ROLLBACK')
+        console.log('Error POST /api/incident', error);
+        res.sendStatus(500);
+    } finally {
+        connection.release()
+    }
 
 });
 
