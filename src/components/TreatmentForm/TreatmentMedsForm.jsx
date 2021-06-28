@@ -1,27 +1,11 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 //Material UI imports
-import {
-  Accordion,
-  AccordionDetails,
-  Button,
-  Grid,
-  MenuItem,
-  Paper,
-  TextField,
-} from "@material-ui/core";
+import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 
 const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
-  // let [localTreatment, setLocalTreatment] = useState(
-  //   JSON.parse(localStorage.getItem("treatment"))
-  // );
-  // let [render, setRender] = useState(false);
-  // const { id } = useParams();
-  // const history = useHistory();
-  const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);
 
   // Runs whenever localPatientMirror is changed, updated, manipulated at all
@@ -49,7 +33,11 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
   }
 
   return (
-    <div>
+    <div className="container">
+      <h2>Medication Form</h2>
+      <br />
+      <br />
+
       {render && (
         <div>
           <TextField
@@ -61,99 +49,99 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
               submitValue({ key: `medication`, thing: event.target.value })
             }
           ></TextField>
+          &nbsp;
+          <br />
+          <br />
           {dropdowns.go && render && (
             <div>
-              <TextField
-                id="outlined-basic"
-                select
-                label="Administered Route"
-                variant="outlined"
-                value={localTreatment[`routeAdministered`]}
-                onChange={(event) =>
-                  submitValue({
-                    key: `routeAdministered`,
-                    thing: event.target.value,
-                  })
-                }
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Administered Route
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
               >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
                 {dropdowns["med_admin_route"].map((item) => (
                   <MenuItem key={"med_admin_route" + item.id} value={item.id}>
                     {item["med_admin_route_type"]}
                   </MenuItem>
                 ))}
-              </TextField>
-            </div>
-          )}
-          <TextField
-            id="outlined-basic"
-            label="Dosage"
-            variant="outlined"
-            value={localTreatment[`dosage`]}
-            onChange={(event) =>
-              submitValue({ key: `dosage`, thing: event.target.value })
-            }
-          ></TextField>
-          {dropdowns.go && render && (
-            <div>
+              </Select>
+              <br />
+              <br />
               <TextField
                 id="outlined-basic"
-                select
-                label="Dosage Units"
+                label="Dosage"
                 variant="outlined"
-                value={localTreatment[`units`]}
+                value={localTreatment[`dosage`]}
                 onChange={(event) =>
-                  submitValue({
-                    key: `units`,
-                    thing: event.target.value,
-                  })
+                  submitValue({ key: `dosage`, thing: event.target.value })
                 }
+              ></TextField>
+              <br />
+              <br />
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Dosage Units
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
               >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
                 {dropdowns["med_dosage_units"].map((item) => (
                   <MenuItem key={"med_dosage_units" + item.id} value={item.id}>
                     {item["med_dosage_units_type"]}
                   </MenuItem>
                 ))}
-              </TextField>
-              <TextField
-                id="outlined-basic"
-                select
-                label="Response to Medication"
-                variant="outlined"
-                value={localTreatment[`med_response`]}
-                onChange={(event) =>
-                  submitValue({
-                    key: `med_response`,
-                    thing: event.target.value,
-                  })
-                }
+              </Select>
+              <br />
+              <br />
+              <InputLabel id="demo-simple-autowidth-label">
+                Response to Medication
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
               >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
                 {dropdowns["med_response"].map((item) => (
                   <MenuItem key={"med_response" + item.id} value={item.id}>
                     {item["med_response_type"]}
                   </MenuItem>
                 ))}
-              </TextField>
-              <TextField
-                id="outlined-basic"
-                select
-                label="Role/Type of Person Administering Medication"
-                variant="outlined"
-                value={localTreatment[`medsAdminBy`]}
-                onChange={(event) =>
-                  submitValue({
-                    key: `medsAdminBy`,
-                    thing: event.target.value,
-                  })
-                }
+              </Select>
+              <br />
+              <br />
+              <InputLabel id="demo-simple-autowidth-label">
+                Role/Type of Person Administering Medication
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
               >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
                 {dropdowns["med_admin_by"].map((item) => (
                   <MenuItem key={"med_admin_by" + item.id} value={item.id}>
                     {item["med_admin_by_type"]}
                   </MenuItem>
                 ))}
-              </TextField>
+              </Select>
             </div>
           )}
+          ;
         </div>
       )}
     </div>
