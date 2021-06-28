@@ -32,7 +32,7 @@ function PatientDemographics() {
     return (
         <div className="container">
             <h2>Patient Demographics Form:</h2>
-            <button>Yooooo</button> <br /><br />
+            <br /><br />
 
             {dropdowns.go &&
             <div>
