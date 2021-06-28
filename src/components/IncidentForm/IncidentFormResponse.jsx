@@ -92,7 +92,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
           >
             {dropdowns["triage_cat"].map((item) => (
               <MenuItem key={"triage_cat" + item.id} value={item.id}>
-                {item.type}
+                {item["triage_cat_type"]}
               </MenuItem>
             ))}
           </TextField>
@@ -107,11 +107,11 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
               submitValue({ key: `serviceType`, thing: event.target.value })
             }
           >
-            {/* {dropdowns["incident_type"].map((item) => (
-              <MenuItem key={"incident_type" + item.id} value={item.id}>
-                {item.type}
+            {dropdowns["incident_service"].map((item) => (
+              <MenuItem key={"incident_service" + item.id} value={item.id}>
+                {item["incident_service_type"]}
               </MenuItem>
-            ))} */}
+            ))}
           </TextField>
         </div>
       )}
