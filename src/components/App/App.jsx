@@ -1,41 +1,42 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   HashRouter as Router,
   Route,
   Redirect,
   Switch,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
+import Nav from "../Nav/Nav";
+import Footer from "../Footer/Footer";
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
-import Admin from '../Admin/Admin';
+import AboutPage from "../AboutPage/AboutPage";
+import UserPage from "../UserPage/UserPage";
+import InfoPage from "../InfoPage/InfoPage";
+import LandingPage from "../LandingPage/LandingPage";
+import LoginPage from "../LoginPage/LoginPage";
+import RegisterPage from "../RegisterPage/RegisterPage";
+import Admin from "../Admin/Admin";
 
-import PatientHome from '../PatientHome/PatientHome';
-import PatientDemographics from '../PatientDemographics/PatientDemographics';
-import PatientSymptoms from '../PatientSymptoms/PatientSymptoms';
-import PatientMedical from '../PatientMedical/PatientMedical';
-import PatientInjury from '../PatientInjury/PatientInjury';
-import PatientCardiac from '../PatientCardiac/PatientCardiac';
+import PatientHome from "../PatientHome/PatientHome";
+import PatientDemographics from "../PatientDemographics/PatientDemographics";
+import PatientSymptoms from "../PatientSymptoms/PatientSymptoms";
+import PatientMedical from "../PatientMedical/PatientMedical";
+import PatientInjury from "../PatientInjury/PatientInjury";
+import PatientCardiac from "../PatientCardiac/PatientCardiac";
+import TreatmentHome from "../TreatmentForm/TreatmentHome";
 
-import './App.css';
-import ReduxCookie from '../ReduxCookie/ReduxCookie';
+import "./App.css";
+import ReduxCookie from "../ReduxCookie/ReduxCookie";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
 
   return (
@@ -127,52 +128,32 @@ function App() {
             <LandingPage />
           </ProtectedRoute>
 
-          <ProtectedRoute
-
-          exact
-          path="/patientHome"
-          >
+          <ProtectedRoute exact path="/patientHome">
             <PatientHome />
           </ProtectedRoute>
 
-          <ProtectedRoute
-
-          exact
-          path="/patientDemographics"
-          >
+          <ProtectedRoute exact path="/patientDemographics">
             <PatientDemographics />
           </ProtectedRoute>
 
-          <ProtectedRoute
-
-          exact
-          path="/patientInjury"
-          >
+          <ProtectedRoute exact path="/patientInjury">
             <PatientInjury />
           </ProtectedRoute>
 
-          <ProtectedRoute
-
-          exact
-          path="/patientMedical"
-          >
+          <ProtectedRoute exact path="/patientMedical">
             <PatientMedical />
           </ProtectedRoute>
 
-          <ProtectedRoute
-
-          exact
-          path="/patientSymptoms"
-          >
+          <ProtectedRoute exact path="/patientSymptoms">
             <PatientSymptoms />
           </ProtectedRoute>
 
-          <ProtectedRoute
-
-          exact
-          path="/patientCardiacArrest"
-          >
+          <ProtectedRoute exact path="/patientCardiacArrest">
             <PatientCardiac />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/treatment/home">
+            <TreatmentHome />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
