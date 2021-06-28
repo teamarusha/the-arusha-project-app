@@ -147,7 +147,7 @@ const TreatmentProcedureForm = () => {
           <TextField
             id="outlined-basic"
             select
-            label="Procedure Attempted"
+            label="Procedure Type"
             variant="outlined"
             value={localTreatment[`procedure`]}
             onChange={(event) =>
@@ -174,8 +174,8 @@ const TreatmentProcedureForm = () => {
               })
             }
           >
-            {dropdowns["procedure_attempted"].map((item) => (
-              <MenuItem key={"procedure_attempted" + item.id} value={item.id}>
+            {dropdowns["procedures_attempted"].map((item) => (
+              <MenuItem key={"procedures_attempted" + item.id} value={item.id}>
                 {item.type}
               </MenuItem>
             ))}
