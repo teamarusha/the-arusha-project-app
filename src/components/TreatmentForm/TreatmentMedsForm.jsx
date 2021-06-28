@@ -4,7 +4,15 @@ import { useHistory, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 //Material UI imports
-import { Button, MenuItem, TextField } from "@material-ui/core";
+import {
+  Accordion,
+  AccordionDetails,
+  Button,
+  Grid,
+  MenuItem,
+  Paper,
+  TextField,
+} from "@material-ui/core";
 
 const TreatmentMedsForm = () => {
   let [localTreatment, setLocalTreatment] = useState(
@@ -188,34 +196,64 @@ const TreatmentMedsForm = () => {
 
       {dropdowns.go && (
         <div>
+          {render
+            ? localPatientMirror.patientArray.map((value) => (
+                <button
+                  key={`${value}changePatient`}
+                  disabled={id == value}
+                  onClick={() => changePatient(value)}
+                >
+                  Edit Patient {value}
+                </button>
+              ))
+            : ""}
+          <Button
+            size="small"
+            color="primary"
+            variant="contained"
+            onClick={addMedication}
+          >
+            Add Medication
+          </Button>
           <TextField
             id="outlined-basic"
-            select
-            label="Units"
+            label="Medication Administered"
             variant="outlined"
-            value={localTreatment[`units`]}
+            value={localTreatment[`medication`]}
             onChange={(event) =>
-              submitValue({ key: `units`, thing: event.target.value })
+              submitValue({ key: `medication`, thing: event.target.value })
             }
+          ></TextField>
+          {dropdowns.go && (
+            <TextField
+              id="outlined-basic"
+              select
+              label="Administered Route"
+              variant="outlined"
+              value={localTreatment[`routeAdministered`]}
+              onChange={(event) =>
+                submitValue({
+                  key: `routeAdministered`,
+                  thing: event.target.value,
+                })
+              }
+            >
+              {dropdowns["med_admin_route"].map((item) => (
+                <MenuItem key={"med_admin_route" + item.id} value={item.id}>
+                  {item.type}
+                </MenuItem>
+              ))}
+            </TextField>
+          )}
           >
-            {dropdowns["med_dosage_units"].map((item) => (
-              <MenuItem key={"med_dosage_units" + item.id} value={item.id}>
-                {item.type}
-              </MenuItem>
-            ))}
-          </TextField>
-
           <TextField
             id="outlined-basic"
             select
             label="Response to Medication"
             variant="outlined"
-            value={localTreatment[`medicationResponse`]}
+            value={localTreatment[`med_response`]}
             onChange={(event) =>
-              submitValue({
-                key: `medicationResponse`,
-                thing: event.target.value,
-              })
+              submitValue({ key: `med_response`, thing: event.target.value })
             }
           >
             {dropdowns["med_response"].map((item) => (
@@ -224,7 +262,6 @@ const TreatmentMedsForm = () => {
               </MenuItem>
             ))}
           </TextField>
-
           <TextField
             id="outlined-basic"
             select

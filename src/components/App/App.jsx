@@ -29,7 +29,14 @@ import PatientInjury from "../PatientInjury/PatientInjury";
 import PatientCardiac from "../PatientCardiac/PatientCardiac";
 import TreatmentHome from "../TreatmentForm/TreatmentHome";
 
+import { ThemeProvider } from "@material-ui/styles";
+import createMuiTheme from "../GLOBALUI/Theme";
 import "./App.css";
+import TreatmentMedsForm from "../TreatmentForm/TreatmentMedsForm";
+import IncidentHome from "../IncidentForm/IncidentHome";
+import IncidentFormResponse from "../IncidentForm/IncidentFormResponse";
+import IncidentFormDisposition from "../IncidentForm/IncidentFormDisposition";
+import IncidentFormScene from "../IncidentForm/IncidentFormScene";
 import ReduxCookie from "../ReduxCookie/ReduxCookie";
 
 function App() {
@@ -41,7 +48,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <ThemeProvider theme={createMuiTheme}>
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -128,6 +135,22 @@ function App() {
             <LandingPage />
           </ProtectedRoute>
 
+          <ProtectedRoute>
+            <IncidentFormResponse />
+          </ProtectedRoute>
+
+          <ProtectedRoute>
+            <IncidentFormScene />
+          </ProtectedRoute>
+
+          <ProtectedRoute>
+            <IncidentFormDisposition />
+          </ProtectedRoute>
+
+          <ProtectedRoute>
+            <IncidentHome />
+          </ProtectedRoute>
+
           <ProtectedRoute exact path="/patientHome">
             <PatientHome />
           </ProtectedRoute>
@@ -162,7 +185,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-      </div>
+      </ThemeProvider>
     </Router>
   );
 }
