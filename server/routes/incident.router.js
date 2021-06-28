@@ -129,7 +129,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
                 RETURNING id;`;
 
-        const patients = [
+        const samplePatients = [
             {
                 patient_incident_id: 1,
                 patient_first_name: 'Charlie',
@@ -178,7 +178,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         const patientReturn = await Promise.all(
 
-            patients.map((patient, i) => {
+            samplePatients.map((patient, i) => {
 
                 let patientValues = [
                     patient.patient_incident_id,

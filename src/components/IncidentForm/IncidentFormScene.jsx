@@ -15,11 +15,7 @@ const IncidentFormScene = () => {
         // const history = useHistory();
         const dropdowns = useSelector(store => store.dropdowns);
 
-    // To render on page load
-    useEffect(() => {
-        console.log( 'Params id:', id );
-        console.log( 'Incident Storage', JSON.parse(localStorage.getItem('incident')));
-    }, []);
+    
 
     useEffect(() => {
         console.log('UPDATING browser storage', localIncident);

@@ -8,8 +8,6 @@ function ReduxCookie() {
     const dropdowns = useSelector(store => store.dropdowns);
     const dispatch = useDispatch();
 
-
-
     let [localDropdownMirror, setLocalDropdownMirror] = useState(JSON.parse(localStorage.getItem('dropdowns')));
 
     useEffect(() => {

@@ -18,9 +18,7 @@ import { ExpandMoreIcon } from "@material-ui/icons/ExpandMore";
 
 import useStyles from "./Styles";
 
-const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
-    // let [localIncident, setLocalIncident] = useState(JSON.parse(localStorage.getItem('incident')));
-    let [render, setRender] = useState(false);
+const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
     const { id } = useParams();
     // const history = useHistory();
     const dispatch = useDispatch();
@@ -29,18 +27,9 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
     const [expanded, setExpanded] = useState(false);
     const [selectedId, setSelectedId] = useState(false);
 
-    // // To render on page load
-    // useEffect(() => {
-    //     // console.log( 'Params id:', id );
-    //     console.log( 'Cookie Mirror', localIncident );
-    //     console.log( 'Incident Storage', JSON.parse(localStorage.getItem('incident')));
-
-    //     if ( JSON.parse(localStorage.getItem('incident')) === null) {
-    //         setLocalIncident({ "crew": '', "triageCat": '', 'serviceType': '' });
-    //         setRender(true);
-    //     }
-    // }, []);
-
+    
+    // This useEffect will watch localIncident and update localStorage
+    // whenever localIncident changes 
     useEffect(() => {
         console.log("UPDATING browser storage", localIncident);
         localStorage.setItem("incident", JSON.stringify(localIncident));
@@ -59,27 +48,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
             ...localIncident,
             [newParameter.key]: newParameter.thing,
         });
-
-        // localStorage.setItem(`${newParameter.key}`, JSON.stringify(newParameter.thing));
     }
-
-    let [localDropdownMirror, setLocalDropdownMirror] = useState(
-        JSON.parse(localStorage.getItem("dropdowns"))
-    );
-
-    useEffect(() => {
-        if (JSON.parse(localStorage.getItem("dropdowns")) === null) {
-            dispatch({ type: "GET_DROPDOWNS" });
-        } else {
-            dispatch({ type: "SET_DROPDOWNS", payload: localDropdownMirror });
-        }
-    }, []);
-
-    useEffect(() => {
-        if (dropdowns.go === true) {
-            localStorage.setItem("dropdowns", JSON.stringify(dropdowns));
-        }
-    }, [dropdowns.go]);
 
     //   const handleListItemClick = (event, id) => {
     //     setSelectedId(id);
@@ -91,6 +60,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
 
     return (
         <div>
+            
             {render &&
                 <TextField
                     id="outlined-basic"
