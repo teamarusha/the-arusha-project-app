@@ -73,12 +73,12 @@ function App() {
             <ReduxCookie />
           </Route>
 
-          <Route exact path="/incident">
+          {/* <Route exact path="/incident">
             <IncidentHome />
           </Route>
           <Route path="/incident/:id">
             <IncidentHome />
-          </Route>
+          </Route> */}
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -144,21 +144,21 @@ function App() {
             <LandingPage />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/incidentHome" authRedirect="/user">
+          <ProtectedRoute path="/incident">
             <IncidentHome />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/incidentResponse" authRedirect="/user">
+          {/* <ProtectedRoute path="/incidentResponse">
             <IncidentFormResponse />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/incidentScene" authRedirect="/user">
+          <ProtectedRoute path="/incidentScene">
             <IncidentFormScene />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/incidentDisposition" authRedirect="/user">
+          <ProtectedRoute path="/incidentDisposition">
             <IncidentFormDisposition />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           <ProtectedRoute exact path="/patientHome">
             <PatientHome />
@@ -184,17 +184,17 @@ function App() {
             <PatientCardiac />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/treatmentHome" authRedirect="/user">
+          <ProtectedRoute path="/treatment">
             <TreatmentHome />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/treatmentMeds" authRedirect="/user">
+          {/* <ProtectedRoute path="/treatmentMeds" authRedirect="/user">
             <TreatmentMedsForm />
           </ProtectedRoute>
 
           <ProtectedRoute path="/treatmentProcedure" authRedirect="/user">
             <TreatmentProcedureForm />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

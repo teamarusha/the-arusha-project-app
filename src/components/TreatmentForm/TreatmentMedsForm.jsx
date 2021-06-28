@@ -141,7 +141,6 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
               </Select>
             </div>
           )}
-          ;
         </div>
       )}
     </div>
