@@ -27,17 +27,18 @@ import PatientSymptoms from "../PatientSymptoms/PatientSymptoms";
 import PatientMedical from "../PatientMedical/PatientMedical";
 import PatientInjury from "../PatientInjury/PatientInjury";
 import PatientCardiac from "../PatientCardiac/PatientCardiac";
-import TreatmentHome from "../TreatmentForm/TreatmentHome";
 
 import { ThemeProvider } from "@material-ui/styles";
 import createMuiTheme from "../GLOBALUI/Theme";
 
 import "./App.css";
-import TreatmentMedsForm from "../TreatmentForm/TreatmentMedsForm";
 import IncidentHome from "../IncidentForm/IncidentHome";
 import IncidentFormResponse from "../IncidentForm/IncidentFormResponse";
-import IncidentFormDisposition from "../IncidentForm/IncidentFormDisposition";
 import IncidentFormScene from "../IncidentForm/IncidentFormScene";
+import IncidentFormDisposition from "../IncidentForm/IncidentFormDisposition";
+import TreatmentHome from "../TreatmentForm/TreatmentHome";
+import TreatmentMedsForm from "../TreatmentForm/TreatmentMedsForm";
+import TreatmentProcedureForm from "../TreatmentForm/TreatmentProcedureForm";
 import ReduxCookie from "../ReduxCookie/ReduxCookie";
 
 function App() {
@@ -183,8 +184,16 @@ function App() {
             <PatientCardiac />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/treatment/home">
+          <ProtectedRoute path="/treatmentHome" authRedirect="/user">
             <TreatmentHome />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/treatmentMeds" authRedirect="/user">
+            <TreatmentMedsForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/treatmentProcedure" authRedirect="/user">
+            <TreatmentProcedureForm />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
