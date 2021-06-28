@@ -28,7 +28,7 @@ import PatientMedical from '../PatientMedical/PatientMedical';
 import PatientInjury from '../PatientInjury/PatientInjury';
 import PatientCardiac from '../PatientCardiac/PatientCardiac';
 
-import {ThemeProvider} from '@material-ui/styles';
+import { ThemeProvider } from '@material-ui/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
 import './App.css';
 import TreatmentMedsForm from '../TreatmentForm/TreatmentMedsForm';
@@ -68,6 +68,18 @@ function App() {
             path="/dropdown"
           >
             <ReduxCookie />
+          </Route>
+
+          <Route
+            exact
+            path="/incident"
+          >
+            <IncidentHome />
+          </Route>
+          <Route
+            path="/incident/:id"
+          >
+            <IncidentHome />
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
@@ -133,10 +145,10 @@ function App() {
           >
             <LandingPage />
           </ProtectedRoute>
-          
-          <ProtectedRoute>
+
+          {/* <ProtectedRoute>
             <IncidentFormResponse />
-          </ProtectedRoute> 
+          </ProtectedRoute>
 
           <ProtectedRoute>
             <IncidentFormScene />
@@ -146,54 +158,57 @@ function App() {
             <IncidentFormDisposition />
           </ProtectedRoute>
 
-          <ProtectedRoute>
+          <ProtectedRoute
+            path="/incident"
+            authRedirect="/user"
+          >
             <IncidentHome />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           <ProtectedRoute
 
-          exact
-          path="/patientHome"
+            exact
+            path="/patientHome"
           >
             <PatientHome />
           </ProtectedRoute>
 
           <ProtectedRoute
 
-          exact
-          path="/patientDemographics"
+            exact
+            path="/patientDemographics"
           >
             <PatientDemographics />
           </ProtectedRoute>
 
           <ProtectedRoute
 
-          exact
-          path="/patientInjury"
+            exact
+            path="/patientInjury"
           >
             <PatientInjury />
           </ProtectedRoute>
 
           <ProtectedRoute
 
-          exact
-          path="/patientMedical"
+            exact
+            path="/patientMedical"
           >
             <PatientMedical />
           </ProtectedRoute>
 
           <ProtectedRoute
 
-          exact
-          path="/patientSymptoms"
+            exact
+            path="/patientSymptoms"
           >
             <PatientSymptoms />
           </ProtectedRoute>
 
           <ProtectedRoute
 
-          exact
-          path="/patientCardiacArrest"
+            exact
+            path="/patientCardiacArrest"
           >
             <PatientCardiac />
           </ProtectedRoute>

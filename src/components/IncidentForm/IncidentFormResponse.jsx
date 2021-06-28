@@ -18,9 +18,7 @@ import { ExpandMoreIcon } from "@material-ui/icons/ExpandMore";
 
 import useStyles from "./Styles";
 
-const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
-    // let [localIncident, setLocalIncident] = useState(JSON.parse(localStorage.getItem('incident')));
-    let [render, setRender] = useState(false);
+const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
     const { id } = useParams();
     // const history = useHistory();
     const dispatch = useDispatch();
@@ -29,18 +27,9 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
     const [expanded, setExpanded] = useState(false);
     const [selectedId, setSelectedId] = useState(false);
 
-    // // To render on page load
-    // useEffect(() => {
-    //     // console.log( 'Params id:', id );
-    //     console.log( 'Cookie Mirror', localIncident );
-    //     console.log( 'Incident Storage', JSON.parse(localStorage.getItem('incident')));
 
-    //     if ( JSON.parse(localStorage.getItem('incident')) === null) {
-    //         setLocalIncident({ "crew": '', "triageCat": '', 'serviceType': '' });
-    //         setRender(true);
-    //     }
-    // }, []);
-
+    // This useEffect will watch localIncident and update localStorage
+    // whenever localIncident changes 
     useEffect(() => {
         console.log("UPDATING browser storage", localIncident);
         localStorage.setItem("incident", JSON.stringify(localIncident));
@@ -59,38 +48,13 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
             ...localIncident,
             [newParameter.key]: newParameter.thing,
         });
-
-        // localStorage.setItem(`${newParameter.key}`, JSON.stringify(newParameter.thing));
     }
 
-    let [localDropdownMirror, setLocalDropdownMirror] = useState(
-        JSON.parse(localStorage.getItem("dropdowns"))
-    );
-
-    useEffect(() => {
-        if (JSON.parse(localStorage.getItem("dropdowns")) === null) {
-            dispatch({ type: "GET_DROPDOWNS" });
-        } else {
-            dispatch({ type: "SET_DROPDOWNS", payload: localDropdownMirror });
-        }
-    }, []);
-
-    useEffect(() => {
-        if (dropdowns.go === true) {
-            localStorage.setItem("dropdowns", JSON.stringify(dropdowns));
-        }
-    }, [dropdowns.go]);
-
-    //   const handleListItemClick = (event, id) => {
-    //     setSelectedId(id);
-    //   };
-
-    //   const handleChange = (panel) => (event, isExpanded) => {
-    //     setExpanded(isExpanded ? panel : false);
-    //   };
+    
 
     return (
         <div>
+
             {render &&
                 <TextField
                     id="outlined-basic"
@@ -117,7 +81,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
                     >
                         {dropdowns["triage_cat"].map((item) => (
                             <MenuItem key={"triage_cat" + item.id} value={item.id}>
-                                {item.type}
+                                {item["triage_cat_type"]}
                             </MenuItem>
                         ))}
                     </TextField>
@@ -127,14 +91,14 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
                         select
                         label="Type of Service Requested"
                         variant="outlined"
-                        value={localIncident[`serviceType`]}
+                        value={localIncident[`incidentService`]}
                         onChange={(event) =>
-                            submitValue({ key: `serviceType`, thing: event.target.value })
+                            submitValue({ key: `incidentService`, thing: event.target.value })
                         }
                     >
-                        {dropdowns["incident_type"].map((item) => (
-                            <MenuItem key={"incident_type" + item.id} value={item.id}>
-                                {item.type}
+                        {dropdowns["incident_service"].map((item) => (
+                            <MenuItem key={"incident_service" + item.id} value={item.id}>
+                                {item["incident_service_type"]}
                             </MenuItem>
                         ))}
                     </TextField>

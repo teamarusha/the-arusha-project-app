@@ -978,12 +978,3 @@ CREATE TABLE vitals (
 	stroke_scale_id integer REFERENCES "stroke_scale",
 	vitals_timestamp timestamp
 );
-
-
-
-
-
-
-
-
-
