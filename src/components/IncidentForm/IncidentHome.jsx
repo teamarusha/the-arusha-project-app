@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { useHistory } from "react-router-dom";
 
 import IncidentFormResponse from "./IncidentFormResponse";
 import IncidentFormDisposition from "./IncidentFormDisposition";
@@ -22,14 +23,15 @@ import { ExpandMoreIcon } from "@material-ui/icons/ExpandMore";
 
 import useStyles from "./Styles";
 
-
-
 function IncidentHome() {
   const classes = useStyles();
   const { id } = useParams();
+  const history = useHistory();
   const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);
-  const [localIncident, setLocalIncident] = useState(JSON.parse(localStorage.getItem("incident")));
+  const [localIncident, setLocalIncident] = useState(
+    JSON.parse(localStorage.getItem("incident"))
+  );
   const [render, setRender] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [selectedId, setSelectedId] = useState(false);
@@ -42,10 +44,6 @@ function IncidentHome() {
     // setExpanded(isExpanded ? panel : false);
     setExpanded(expanded === id ? -1 : id);
   };
-
-
-
-
 
   // ____________________DROPDOWNS____________________
   let [localDropdownMirror, setLocalDropdownMirror] = useState(
@@ -66,36 +64,34 @@ function IncidentHome() {
     }
   }, [dropdowns.go]);
 
-
-
-
   // ____________________LOCAL STORAGE____________________
   useEffect(() => {
-    console.log('Storage Mirror:', localIncident);
-    console.log('Incident Storage:', JSON.parse(localStorage.getItem('incident')));
+    console.log("Storage Mirror:", localIncident);
+    console.log(
+      "Incident Storage:",
+      JSON.parse(localStorage.getItem("incident"))
+    );
 
-
-    if (JSON.parse(localStorage.getItem('incident')) === null) {
-      setLocalIncident(
-        {
-          initialized: true,
-          crew: "",
-          triageCat: "",
-          incidentService: "",
-          destinationState: "",
-          destinationCounty: "",
-          destinationZipCode: "",
-          transportDisposition: "",
-          transportMethod: "",
-          transportMode: "",
-          destinationFacility: "",
-          patientNumbers: "",
-          incidentState: "",
-          incidentCounty: "",
-          incidentZipCode: "",
-          possibleInjury: "",
-          alcoholDrugIndicators: ""
-        });
+    if (JSON.parse(localStorage.getItem("incident")) === null) {
+      setLocalIncident({
+        initialized: true,
+        crew: "",
+        triageCat: "",
+        incidentService: "",
+        destinationState: "",
+        destinationCounty: "",
+        destinationZipCode: "",
+        transportDisposition: "",
+        transportMethod: "",
+        transportMode: "",
+        destinationFacility: "",
+        patientNumbers: "",
+        incidentState: "",
+        incidentCounty: "",
+        incidentZipCode: "",
+        possibleInjury: "",
+        alcoholDrugIndicators: "",
+      });
       setRender(true);
     }
 
@@ -105,19 +101,10 @@ function IncidentHome() {
     }
   }, []);
 
-
-
-
-
-
   return (
     <div>
-      <p>
-        {JSON.stringify(localIncident)}
-      </p>
-      <p>
-        {localStorage.getItem("incident")}
-      </p>
+      <p>{JSON.stringify(localIncident)}</p>
+      <p>{localStorage.getItem("incident")}</p>
 
       <IncidentFormResponse
         localIncident={localIncident}
@@ -188,7 +175,7 @@ function IncidentHome() {
     //     </Accordion>
     //   </Grid>
     // </Grid>
-  )
+  );
 }
 
 export default IncidentHome;
