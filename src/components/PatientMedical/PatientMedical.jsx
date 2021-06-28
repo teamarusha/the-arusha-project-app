@@ -8,7 +8,7 @@ function PatientMedical() {
     return (
         <div className="container">
             <h2>Patient Medical History Form:</h2>
-            <button>Tell Me About Your Past</button> <br /><br />
+             <br /><br />
 
             <TextField id="outlined-basic" label="Allergies" variant="outlined">
             </TextField> &nbsp; <br /><br />
