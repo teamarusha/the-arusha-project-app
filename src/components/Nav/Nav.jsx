@@ -204,7 +204,8 @@ function Drawer(props) {
             classes={{ root: classes.item }}
           >
             <ListItemText classes={{ primary: classes.text }}>
-              Treament Home
+              {" "}
+              Treament Home{" "}
             </ListItemText>
             <ListItemSecondaryAction edge="end">
               <ChevronRightIcon fontSize="large" />
