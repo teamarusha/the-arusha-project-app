@@ -7,10 +7,10 @@ import TreatmentMedsForm from "./TreatmentMedsForm";
 import TreatmentProcedureForm from "./TreatmentProcedureForm";
 
 //____________________Material UI Imports____________________
-import useStyles from "./Styles";
+// import useStyles from "./Styles";
 
 function TreatmentHome() {
-  const classes = useStyles();
+  // const classes = useStyles();
   const { id } = useParams();
   const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);

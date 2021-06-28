@@ -56,7 +56,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
             id="outlined-basic"
             label="Medication Administered"
             variant="outlined"
-            value={localIncident[`medication`]}
+            value={localTreatment[`medication`]}
             onChange={(event) =>
               submitValue({ key: `medication`, thing: event.target.value })
             }
@@ -68,7 +68,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
                 select
                 label="Administered Route"
                 variant="outlined"
-                value={localIncident[`routeAdministered`]}
+                value={localTreatment[`routeAdministered`]}
                 onChange={(event) =>
                   submitValue({
                     key: `routeAdministered`,
@@ -88,7 +88,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
             id="outlined-basic"
             label="Dosage"
             variant="outlined"
-            value={localIncident[`dosage`]}
+            value={localTreatment[`dosage`]}
             onChange={(event) =>
               submitValue({ key: `dosage`, thing: event.target.value })
             }
@@ -100,7 +100,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
                 select
                 label="Dosage Units"
                 variant="outlined"
-                value={localIncident[`units`]}
+                value={localTreatment[`units`]}
                 onChange={(event) =>
                   submitValue({
                     key: `units`,
@@ -148,7 +148,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
               >
                 {dropdowns["med_admin_by"].map((item) => (
                   <MenuItem key={"med_admin_by" + item.id} value={item.id}>
-                    {item[med_admin_by_type]}
+                    {item["med_admin_by_type"]}
                   </MenuItem>
                 ))}
               </TextField>
