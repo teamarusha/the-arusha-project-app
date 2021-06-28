@@ -9,7 +9,7 @@ function* getDropdowns() {
         "cardiac_arrest_etiology",
         "cardiac_arrest_witness",
         "aed_use_prior",
-        "cpr_type",
+        "cpr_provided",
         "spontaneous_circulation",
         "cpr_stopped",
         "resuscitation_attempt",
@@ -38,14 +38,14 @@ function* getDropdowns() {
         "procedure_response",
         "procedure_successful",
         "med_admin_by",
-        "incident_type",
+        "incident_service",
         "transport_disposition",
         "transport_mode",
         "transport_method",
         "triage_cat",
-        "destination_type",
+        "destination_facility",
         "primary_impression",
-        "injury_type",
+        "injury_location",
         "injury_cause"
     ];
     let count = 0;
