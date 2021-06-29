@@ -202,6 +202,21 @@ function Drawer(props) {
           <ListItem
             divider
             component={Link}
+            to="/vitals"
+            classes={{ root: classes.item }}
+          >
+            <ListItemText classes={{ primary: classes.text }}>
+              {" "}
+              Vitals{" "}
+            </ListItemText>
+            <ListItemSecondaryAction edge="end">
+              <ChevronRightIcon fontSize="large" />
+            </ListItemSecondaryAction>
+          </ListItem>
+
+          <ListItem
+            divider
+            component={Link}
             to="/dropdown"
             classes={{ root: classes.item }}
           >
