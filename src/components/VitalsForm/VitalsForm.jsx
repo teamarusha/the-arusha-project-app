@@ -297,6 +297,8 @@ const VitalsForm = () => {
                   </MenuItem>
                 ))}
               </Select>
+              <br />
+              <br />
               <InputLabel id="demo-simple-select-autowidth-label">
                 Stroke Scale Score
               </InputLabel>
@@ -314,6 +316,8 @@ const VitalsForm = () => {
                   </MenuItem>
                 ))}
               </Select>
+              <br />
+              <br />
               <InputLabel id="demo-simple-select-autowidth-label">
                 Stroke Scale Type
               </InputLabel>
