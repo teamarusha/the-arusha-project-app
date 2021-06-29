@@ -2,6 +2,8 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
+import AddProcedure from "./AddProcedureButton";
+
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 
@@ -34,7 +36,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
 
   return (
     <div className="container">
-      <h2>Procedure Form</h2>
+      <AddProcedure />
       <br />
       <br />
 
