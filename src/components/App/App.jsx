@@ -33,7 +33,6 @@ import createMuiTheme from "../GLOBALUI/Theme";
 
 import "./App.css";
 import IncidentHome from "../IncidentForm/IncidentHome";
-
 import TreatmentHome from "../TreatmentForm/TreatmentHome";
 import ReduxCookie from "../ReduxCookie/ReduxCookie";
 import VitalsForm from "../VitalsForm/VitalsForm";
@@ -134,7 +133,7 @@ function App() {
             <LandingPage />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/incident">
+          <ProtectedRoute exact path="/incident">
             <IncidentHome />
           </ProtectedRoute>
 

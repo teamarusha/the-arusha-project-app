@@ -153,7 +153,7 @@ function Drawer(props) {
           >
             <ListItemText classes={{ primary: classes.text }}>
               {" "}
-              Incident Form{" "}
+              Incident{" "}
             </ListItemText>
             <ListItemSecondaryAction edge="end">
               <ChevronRightIcon fontSize="large" />

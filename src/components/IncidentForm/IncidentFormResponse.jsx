@@ -4,9 +4,6 @@ import { useSelector } from "react-redux";
 
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
-import { ExpandMoreIcon } from "@material-ui/icons/ExpandMore";
-
-import useStyles from "./Styles";
 
 const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
   const dropdowns = useSelector((store) => store.dropdowns);

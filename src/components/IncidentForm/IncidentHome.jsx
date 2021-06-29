@@ -13,7 +13,7 @@ import {
   Button,
   Typography,
 } from "@material-ui/core";
-import { ExpandMoreIcon } from "@material-ui/icons/ExpandMore";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import useStyles from "./Styles";
 
