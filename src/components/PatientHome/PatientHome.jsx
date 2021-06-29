@@ -15,6 +15,7 @@ import { AccordionSummary } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import TimestampButton from '../TimestampButton/TimestampButton';
 
 // ----- More Material UI -----
 // import globalUseStyle from "./globalUseStyles";
@@ -110,6 +111,8 @@ function PatientHome() {
               // onClick={() => handleClick()}
               >{buttonText}</Button>
             </div>
+
+            <TimestampButton />
 
             <p>List of Links for Patient Form:</p>
             {/* <ul>
