@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
 
 import IncidentFormResponse from "./IncidentFormResponse";
 import IncidentFormDisposition from "./IncidentFormDisposition";
@@ -11,20 +10,15 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
+  Button,
   Typography,
 } from "@material-ui/core";
-import { ExpandMoreIcon } from "@material-ui/icons/ExpandMore";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import useStyles from "./Styles";
 
 function IncidentHome() {
   const classes = useStyles();
-  const { id } = useParams();
   const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);
   const [localIncident, setLocalIncident] = useState(
@@ -32,15 +26,9 @@ function IncidentHome() {
   );
   const [render, setRender] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const [selectedId, setSelectedId] = useState(false);
 
-  const handleListItemClick = (event, id) => {
-    setSelectedId(id);
-  };
-
-  const handleChange = (id) => {
-    // setExpanded(isExpanded ? panel : false);
-    setExpanded(expanded === id ? -1 : id);
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
   };
 
   // ____________________DROPDOWNS____________________
@@ -99,80 +87,134 @@ function IncidentHome() {
     }
   }, []);
 
+  // Main Button
+  const [buttonText, setButtonText] = useState("Dispatched");
+  function clickMe() {
+    console.log("Button clicked...");
+
+    switch (buttonText) {
+      case "Dispatched":
+        setButtonText("Unit En Route");
+        break;
+      case "Unit En Route":
+        setButtonText("Arrived at Scene");
+        break;
+      case "Arrived at Scene":
+        setButtonText("Arrived at Patient");
+        break;
+      case "Arrived at Patient":
+        setButtonText("En Route to Hospital");
+        break;
+      case "En Route to Hospital":
+        setButtonText("Arrived at Hospital");
+        break;
+      default:
+        setButtonText("Dispatched");
+        break;
+    }
+
+    const timestamp = Date.now(); // This would be the timestamp you want to format
+    console.log(
+      new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }).format(timestamp)
+    );
+  }
+
   return (
-    <div>
-      <p>{JSON.stringify(localIncident)}</p>
-      <p>{localStorage.getItem("incident")}</p>
+    <div className="container">
+      <h2>Incident Form Home</h2>
 
-      <IncidentFormResponse
-        localIncident={localIncident}
-        setLocalIncident={setLocalIncident}
-        render={render}
-      />
+      <div>
+        <Button onClick={clickMe} color="primary" variant="contained">
+          {buttonText}
+        </Button>
+      </div>
+      <div className={classes.root}>
+        <Accordion
+          expanded={expanded === "panel1"}
+          onChange={handleChange("panel1")}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1bh-content"
+            id="panel1bh-header"
+            style={{ textAlign: "center" }}
+          >
+            <Typography
+              classes={{ root: classes.text }}
+              className={classes.heading}
+            >
+              Incident Response Form
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <IncidentFormResponse
+              localIncident={localIncident}
+              setLocalIncident={setLocalIncident}
+              render={render}
+            />
+          </AccordionDetails>
+        </Accordion>
+        <br />
 
-      <IncidentFormDisposition
-        localIncident={localIncident}
-        setLocalIncident={setLocalIncident}
-        render={render}
-      />
-
-      <IncidentFormScene
-        localIncident={localIncident}
-        setLocalIncident={setLocalIncident}
-        render={render}
-      />
+        <Accordion
+          expanded={expanded === "panel2"}
+          onChange={handleChange("panel2")}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2bh-content"
+            id="panel2bh-header"
+            style={{ textAlign: "center" }}
+          >
+            <Typography
+              classes={{ root: classes.text }}
+              className={classes.heading}
+            >
+              Incident Disposition Form
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <IncidentFormDisposition
+              localIncident={localIncident}
+              setLocalIncident={setLocalIncident}
+              render={render}
+            />
+          </AccordionDetails>
+        </Accordion>
+        <Accordion
+          expanded={expanded === "panel3"}
+          onChange={handleChange("panel3")}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2bh-content"
+            id="panel2bh-header"
+            style={{ textAlign: "center" }}
+          >
+            <Typography
+              classes={{ root: classes.text }}
+              className={classes.heading}
+            >
+              Incident Scene Form
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <IncidentFormScene
+              localIncident={localIncident}
+              setLocalIncident={setLocalIncident}
+              render={render}
+            />
+          </AccordionDetails>
+        </Accordion>
+      </div>
     </div>
-
-    // <Grid Container justify="center" className={classes.root}>
-    //   <Grid item xs={12} s={6} m={4}>
-    //     <Accordion
-    //       expanded={expanded === id}
-    //       key={id}
-    //       onChange={handleChange(id)}
-    //     >
-    //       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-    //         <Typography className={classes.header}>"Incident Form"</Typography>
-    //       </AccordionSummary>
-    //       <Paper className={classes.paper}>
-    //         <AccordionDetails className={classes.rootExpanded}>
-    //           <List component="nav" aria-label="main mailbox folders">
-
-    //             <ListItem
-    //               button
-    //               selected={selectedId === id}
-    //               onClick={(event) => handleListItemClick(event, id)}
-    //             >
-    //               <ListItemText
-    //                 primary={IncidentFormResponse(
-    //                   localIncident,
-    //                   setLocalIncident,
-    //                   render
-    //                 )}
-    //               />
-    //             </ListItem>
-
-    //             <ListItem
-    //               button
-    //               selected={selectedId === id}
-    //               onClick={(event) => handleListItemClick(event, id)}
-    //             >
-    //               <ListItemText primary={IncidentFormScene} />
-    //             </ListItem>
-
-    //             <ListItem
-    //               button
-    //               selected={selectedId === id}
-    //               onClick={(event) => handleListItemClick(event, id)}
-    //             >
-    //               <ListItemText primary={IncidentFormDisposition} />
-    //             </ListItem>
-
-    //           </List>
-    //         </AccordionDetails>
-    //       </Paper>
-    //     </Accordion>
-    //   </Grid>
-    // </Grid>
   );
 }
 

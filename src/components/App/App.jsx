@@ -33,12 +33,7 @@ import createMuiTheme from "../GLOBALUI/Theme";
 
 import "./App.css";
 import IncidentHome from "../IncidentForm/IncidentHome";
-import IncidentFormResponse from "../IncidentForm/IncidentFormResponse";
-import IncidentFormScene from "../IncidentForm/IncidentFormScene";
-import IncidentFormDisposition from "../IncidentForm/IncidentFormDisposition";
 import TreatmentHome from "../TreatmentForm/TreatmentHome";
-import TreatmentMedsForm from "../TreatmentForm/TreatmentMedsForm";
-import TreatmentProcedureForm from "../TreatmentForm/TreatmentProcedureForm";
 import ReduxCookie from "../ReduxCookie/ReduxCookie";
 import VitalsForm from "../VitalsForm/VitalsForm";
 
@@ -73,13 +68,6 @@ function App() {
           >
             <ReduxCookie />
           </Route>
-
-          {/* <Route exact path="/incident">
-            <IncidentHome />
-          </Route>
-          <Route path="/incident/:id">
-            <IncidentHome />
-          </Route> */}
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -145,21 +133,9 @@ function App() {
             <LandingPage />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/incident">
+          <ProtectedRoute exact path="/incident">
             <IncidentHome />
           </ProtectedRoute>
-
-          {/* <ProtectedRoute path="/incidentResponse">
-            <IncidentFormResponse />
-          </ProtectedRoute>
-
-          <ProtectedRoute path="/incidentScene">
-            <IncidentFormScene />
-          </ProtectedRoute>
-
-          <ProtectedRoute path="/incidentDisposition">
-            <IncidentFormDisposition />
-          </ProtectedRoute> */}
 
           <ProtectedRoute exact path="/patientHome">
             <PatientHome />

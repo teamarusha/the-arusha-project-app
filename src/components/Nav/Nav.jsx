@@ -153,7 +153,7 @@ function Drawer(props) {
           >
             <ListItemText classes={{ primary: classes.text }}>
               {" "}
-              Incident Form{" "}
+              Incident{" "}
             </ListItemText>
             <ListItemSecondaryAction edge="end">
               <ChevronRightIcon fontSize="large" />
@@ -163,19 +163,6 @@ function Drawer(props) {
           {/* <Link className="navLink" to="/about">
           About
         </Link>
-
-        <Link className="navLink" to="/incident/scene">
-          Incident Scene
-        </Link>
-
-        <Link className="navLink" to="/incident/disposition">
-          Incident Disposition
-        </Link>
-
-        <Link className="navLink" to="/treatment/meds/:id">
-          Treatment Medication
-        </Link>
-        
         <Link className="navLink" to ="/patientHome">
           Patient Home
         </Link>
