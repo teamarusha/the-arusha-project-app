@@ -1,94 +1,150 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { useCookies } from "react-cookie";
+import React from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 //Material UI imports
-import { TextField, Button } from "@material-ui/core";
+import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 
-const TreatmentMedsForm = () => {
-    const { id } = useParams();
+const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
+  const dropdowns = useSelector((store) => store.dropdowns);
 
-    function cookieForm(props) {
-        const [ cookie, setCookie ] = useCookies([ 'medication' ]);
-        let [ localCookie, setLocalCookie ] = useState( cookie );
-        let [ render, setRender ] = useState('');
-    }
-    // To render on page load
-    useEffect(() => {
-        console.log( 'Params id:', id );
-        console.log( 'Cookie Mirror', localCookie );
-        console.log( 'THE cookie', cookie );
-        if( cookie[`${id}medication`] >= 0 ) {
-            setRender( true );
-        }
-    }, []);
-    
-    function submitCookie(newCookie) {
-        console.log('setting THE cookie', newCookie.key, newCookie.item );
-        setLocalCookie({ ...localCookie, [ newCookie.key ] : newCookie.item });
-        setCookie( newCookie.key, newCookie.item, { path: '/' });
-    }
+  // Runs whenever localPatientMirror is changed, updated, manipulated at all
+  // This way they will always be the same as long as it is the mirror that is being changed
+  useEffect(() => {
+    console.log("UPDATING browser storage", localTreatment);
+    localStorage.setItem("treatment", JSON.stringify(localTreatment));
+  }, [localTreatment]);
 
-    function addMedication() {
-        if ( cookie[`${id}medication`] === undefined) {
-            submitCookie({ key: `${id}medication1`, item: '' });
-            submitCookie({ key: `${id}routeAdministered`, item: '' });
-            submitCookie({ key: `${id}dosage`, item: '' });
-            submitCookie({ key: `${id}units`, item: '' });
-            submitCookie({ key: `${id}medicationResponse`, item: ''});
-            submitCookie({ key: `${id}medsAdminBy`, item: '' });
-
-            submitCookie({ key: `${id}medication`, item: [1] });
-            setRender(true);
-            // history.push(`/medication/${id}`);
-        } else {
-            let newMedicationID = cookie.medication.length + 1;
-            submitCookie({ key: `${id}medication${newMedicationID}`, item: '' });
-            submitCookie({ key: `${id}routeAdministered${newMedicationID}`, item: '' });
-            submitCookie({ key: `${id}dosage${newMedicationID}`, item: '' });
-            submitCookie({ key: `${id}units${newMedicationID}`, item: '' });
-            submitCookie({ key: `${id}medicationResponse${newMedicationID}`})
-            submitCookie({ key: `${id}medsAdminBy${newMedicationID}`, item: '' });
-            submitCookie({ key: `medication`, item: [...cookie.medication, newMedicationID] });
-        }
-    }
-
-    return(
-        <div>
-            <Button size="small" color="primary" variant="contained" onClick={addMedication}>
-                Add Medication
-            </Button>
-            <TextField id="outlined-basic" label="Medication Administered" 
-                variant="outlined" value={ localCookie[`${id}medication`]}
-                onChange={( event ) => submitCookie({ key: `${id}medication`,
-                item: event.target.value })}>
-            </TextField>
-            <TextField id="outlined-basic" label="Administered Route" 
-                variant="outlined" value={ localCookie[`${id}routeAdministered`]}
-                onChange={( event ) => submitCookie({ key: `${id}routeAdministered`,
-                item: event.target.value })}>
-            </TextField>
-            <TextField id="outlined-basic" label="Dosage" variant="outlined" 
-                value={ localCookie[`${id}dosage`]}
-                onChange={( event ) => submitCookie({ key: `{id}dosage`, 
-                item: event.target.value })}>
-            </TextField>
-            <TextField id="outlined-basic" label="Units" variant="outlined"
-                value={ localCookie[`${id}units`]} onChange={( event ) => 
-                submitCookie({ key: `${id}units`, item: event.target.value })}>
-            </TextField>
-            <TextField id="outlined-basic" label="Response to Medication" 
-                variant="outlined" value={ localCookie[`${id}medicationResponse`]}
-                onChange={( event ) => submitCookie({ key: `${id}medicationResponse`,
-                item: event.target.value })}>
-            </TextField>
-            <TextField id="outlined-basic" label="Role/Type of Person Administering 
-                Medication" variant="outlined" value={ localCookie[`${id}medsAdminBy`]}
-                onChange={( event ) => submitCookie({ key: `${id}medsAdminBy`, 
-                item: event.target.value })}>
-            </TextField>
-        </div>
+  // Only handles when a value is changed by keystroke/inputfield clicks.
+  // Does NOT handle initialization of new data.
+  function submitValue(newParameter) {
+    console.log(
+      "Updating parameter in submitValue",
+      newParameter.key,
+      newParameter.thing
     );
+
+    setLocalTreatment({
+      ...localTreatment,
+      [newParameter.key]: newParameter.thing,
+    });
+
+    // localStorage.setItem(`${newParameter.key}`, JSON.stringify(newParameter.thing));
+  }
+
+  return (
+    <div className="container">
+      <h2>Medication Form</h2>
+      <br />
+      <br />
+
+      {render && (
+        <div>
+          <TextField
+            id="outlined-basic"
+            label="Medication Administered"
+            variant="outlined"
+            value={localTreatment[`medication`]}
+            onChange={(event) =>
+              submitValue({ key: `medication`, thing: event.target.value })
+            }
+          ></TextField>
+          &nbsp;
+          <br />
+          <br />
+          {dropdowns.go && render && (
+            <div>
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Administered Route
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {dropdowns["med_admin_route"].map((item) => (
+                  <MenuItem key={"med_admin_route" + item.id} value={item.id}>
+                    {item["med_admin_route_type"]}
+                  </MenuItem>
+                ))}
+              </Select>
+              <br />
+              <br />
+              <TextField
+                id="outlined-basic"
+                label="Dosage"
+                variant="outlined"
+                value={localTreatment[`dosage`]}
+                onChange={(event) =>
+                  submitValue({ key: `dosage`, thing: event.target.value })
+                }
+              ></TextField>
+              <br />
+              <br />
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Dosage Units
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {dropdowns["med_dosage_units"].map((item) => (
+                  <MenuItem key={"med_dosage_units" + item.id} value={item.id}>
+                    {item["med_dosage_units_type"]}
+                  </MenuItem>
+                ))}
+              </Select>
+              <br />
+              <br />
+              <InputLabel id="demo-simple-autowidth-label">
+                Response to Medication
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {dropdowns["med_response"].map((item) => (
+                  <MenuItem key={"med_response" + item.id} value={item.id}>
+                    {item["med_response_type"]}
+                  </MenuItem>
+                ))}
+              </Select>
+              <br />
+              <br />
+              <InputLabel id="demo-simple-autowidth-label">
+                Role/Type of Person Administering Medication
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {dropdowns["med_admin_by"].map((item) => (
+                  <MenuItem key={"med_admin_by" + item.id} value={item.id}>
+                    {item["med_admin_by_type"]}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default TreatmentMedsForm;

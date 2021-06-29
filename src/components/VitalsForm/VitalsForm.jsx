@@ -32,7 +32,7 @@ const VitalsForm = () => {
             [id + "heartRate1"]: '', [id + "pulseOximetry1"]: '', [id + "respiratoryRate1"]: '', 
             [id + "bloodGlucoseLevel1"]: '', [id + "glasgowComaScoreEye1"]: '', 
             [id + "glasgowComaScoreVerbal1"]: '', [id + "glasgowComaScoreMotor1"]: '',
-            [id + "glasgowComaScoreQualifier"]: '', [id + "responsivenessLevel1"]: '',
+            [id + "glasgowComaScoreQualifier1"]: '', [id + "responsivenessLevel1"]: '',
             [id + "painScaleScore1"]: '', [id + "strokeScaleScore1"]: '', 
             [id + "strokeScaleType1"]: '' });
             setRender(true);

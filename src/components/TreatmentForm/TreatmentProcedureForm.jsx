@@ -1,88 +1,150 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { useCookies } from "react-cookie";
+import React from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 //Material UI imports
-import { TextField, Button } from "@material-ui/core";
+import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 
-const TreatmentProcedureForm = () => {
-    const { id } = useParams();
+const TreatmentProcedureForm = ({
+  localTreatment,
+  setLocalTreatment,
+  render,
+}) => {
+  const dropdowns = useSelector((store) => store.dropdowns);
 
-    function cookieForm(props) {
-        const [ cookie, setCookie ] = useCookies([ 'procedureArray' ]);
-        let [ localCookie, setLocalCookie ] = useState( cookie );
-        let [ render, setRender ] = useState('');
-    }
-    // To render on page load
-    useEffect(() => {
-        console.log( 'Params id:', id );
-        console.log( 'Cookie Mirror', localCookie );
-        console.log( 'THE cookie', cookie );
-        if( cookie[`${id}procedureArray`] >= 0 ) {
-            setRender( true );
-        }
-    }, []);
-    
-    function submitCookie(newCookie) {
-        console.log('setting THE cookie', newCookie.key, newCookie.item );
-        setLocalCookie({ ...localCookie, [ newCookie.key ] : newCookie.item });
-        setCookie( newCookie.key, newCookie.item, { path: '/' });
-    }
+  // Runs whenever localPatientMirror is changed, updated, manipulated at all
+  // This way they will always be the same as long as it is the mirror that is being changed
+  useEffect(() => {
+    console.log("UPDATING browser storage", localTreatment);
+    localStorage.setItem("treatment", JSON.stringify(localTreatment));
+  }, [localTreatment]);
 
-    function addProcedure() {
-        if ( cookie[`${id}procedureArray`] === undefined) {
-            submitCookie({ key: `${id}procedure1`, item: '' });
-            submitCookie({ key: `${id}procedureAttempts`, item: '' });
-            submitCookie({ key: `${id}successfulProcedure`, item: '' });
-            submitCookie({ key: `${id}responseToProcedure`, item: '' });
-            submitCookie({ key: `${id}procedurePerformedBy`, item: '' });
-
-            submitCookie({ key: `${id}procedureArray`, item: [1] });
-            setRender(true);
-            // history.push(`/treatment/${id}`);
-        } else {
-            let newProcedureID = cookie.procedure.length + 1;
-            submitCookie({ key: `${id}procedure${newProcedureID}`, item: '' });
-            submitCookie({ key: `${id}procedureAttempts${newProcedureID}`, item: '' });
-            submitCookie({ key: `${id}successfulProcedure${newProcedureID}`, item: '' });
-            submitCookie({ key: `${id}responseToProcedure${newProcedureID}`, item: '' });
-            submitCookie({ key: `${id}procedurePerformedBy${newProcedureID}`, item: '' });
-            submitCookie({ key: `procedureArray`, item: [...cookie.procedure, newProcedureID] });
-        }
-    }
-
-    return(
-        <div>
-            <Button size="small" color="primary" variant="contained" onClick={addProcedure}>
-                Add Procedure
-            </Button>
-            <TextField id="outlined-basic" label="Procedure Attempted" 
-                variant="outlined" value={ localCookie[`${id}procedure`]}
-                onChange={( event ) => submitCookie({ key: `${id}procedure`,
-                item: event.target.value })}>
-            </TextField>
-            <TextField id="outlined-basic" label="Number of Procedure Attempts" 
-                variant="outlined" value={ localCookie[`${id}procedureAttempts`]}
-                onChange={( event ) => submitCookie({ key: `${id}procedureAttempts`,
-                item: event.target.value })}>
-            </TextField>
-            <TextField id="outlined-basic" label="Procedure Successful" 
-                variant="outlined" value={ localCookie[`${id}successfulProcedure`]}
-                onChange={( event ) => submitCookie({ key: `${id}successfulProcedure`,
-                item: event.target.value })}>
-            </TextField>
-            <TextField id="outlined-basic" label="Response to Procedure" 
-                variant="outlined" value={ localCookie[`${id}responseToProcedure`]}
-                onChange={( event ) => submitCookie({ key: `${id}responseToProcedure`,
-                item: event.target.value })}>
-            </TextField>
-            <TextField id="outlined-basic" label="Role/Type of Person Performing
-                Procedure" variant="outlined" value={ localCookie[`${id}procedurePerformedBy`]}
-                onChange={( event ) => submitCookie({ key: `$id}procedurePerformedBy`, 
-                item: event.target.value })}>
-            </TextField>
-        </div>
+  // Only handles when a value is changed by keystroke/inputfield clicks.
+  // Does NOT handle initialization of new data.
+  function submitValue(newParameter) {
+    console.log(
+      "Updating parameter in submitValue",
+      newParameter.key,
+      newParameter.thing
     );
+
+    setLocalTreatment({
+      ...localTreatment,
+      [newParameter.key]: newParameter.thing,
+    });
+
+    // localStorage.setItem(`${newParameter.key}`, JSON.stringify(newParameter.thing));
+  }
+
+  return (
+    <div className="container">
+      <h2>Procedure Form</h2>
+      <br />
+      <br />
+
+      {render && (
+        <div>
+          {dropdowns.go && (
+            <div>
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Procedure Type
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {dropdowns["procedure_list"].map((item) => (
+                  <MenuItem key={"procedure_list" + item.id} value={item.id}>
+                    {item["procedure_list_type"]}
+                  </MenuItem>
+                ))}
+              </Select>
+              <br />
+              <br />
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Number of Procedure Attempts
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
+              >
+                {dropdowns["procedures_attempted"].map((item) => (
+                  <MenuItem
+                    key={"procedures_attempted" + item.id}
+                    value={item.id}
+                  >
+                    {item["procedures_attempted_type"]}
+                  </MenuItem>
+                ))}
+              </Select>
+              <br />
+              <br />
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Procedure Successful
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
+              >
+                {dropdowns["procedure_successful"].map((item) => (
+                  <MenuItem
+                    key={"procedure_successful" + item.id}
+                    value={item.id}
+                  >
+                    {item["procedure_successful_type"]}
+                  </MenuItem>
+                ))}
+              </Select>
+              <br />
+              <br />
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Response to Procedure
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
+              >
+                {dropdowns["procedure_response"].map((item) => (
+                  <MenuItem
+                    key={"procedure_response" + item.id}
+                    value={item.id}
+                  >
+                    {item["procedure_response_type"]}
+                  </MenuItem>
+                ))}
+              </Select>
+              <br />
+              <br />
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Role/Type of Person Performing Procedure
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
+              >
+                {dropdowns["procedure_performer"].map((item) => (
+                  <MenuItem
+                    key={"procedure_performer" + item.id}
+                    value={item.id}
+                  >
+                    {item["procedure_performer_type"]}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default TreatmentProcedureForm;

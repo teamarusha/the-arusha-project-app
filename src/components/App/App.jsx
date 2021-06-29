@@ -1,46 +1,56 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   HashRouter as Router,
   Route,
   Redirect,
   Switch,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
+import Nav from "../Nav/Nav";
+import Footer from "../Footer/Footer";
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
-import Admin from '../Admin/Admin';
+import AboutPage from "../AboutPage/AboutPage";
+import UserPage from "../UserPage/UserPage";
+import InfoPage from "../InfoPage/InfoPage";
+import LandingPage from "../LandingPage/LandingPage";
+import LoginPage from "../LoginPage/LoginPage";
+import RegisterPage from "../RegisterPage/RegisterPage";
+import Admin from "../Admin/Admin";
 
-import PatientHome from '../PatientHome/PatientHome';
-import PatientDemographics from '../PatientDemographics/PatientDemographics';
-import PatientSymptoms from '../PatientSymptoms/PatientSymptoms';
-import PatientMedical from '../PatientMedical/PatientMedical';
-import PatientInjury from '../PatientInjury/PatientInjury';
-import PatientCardiac from '../PatientCardiac/PatientCardiac';
+import PatientHome from "../PatientHome/PatientHome";
+import PatientDemographics from "../PatientDemographics/PatientDemographics";
+import PatientSymptoms from "../PatientSymptoms/PatientSymptoms";
+import PatientMedical from "../PatientMedical/PatientMedical";
+import PatientInjury from "../PatientInjury/PatientInjury";
+import PatientCardiac from "../PatientCardiac/PatientCardiac";
 
-import './App.css';
-import ReduxCookie from '../ReduxCookie/ReduxCookie';
+import { ThemeProvider } from "@material-ui/styles";
+import createMuiTheme from "../GLOBALUI/Theme";
+
+import "./App.css";
+import IncidentHome from "../IncidentForm/IncidentHome";
+import IncidentFormResponse from "../IncidentForm/IncidentFormResponse";
+import IncidentFormScene from "../IncidentForm/IncidentFormScene";
+import IncidentFormDisposition from "../IncidentForm/IncidentFormDisposition";
+import TreatmentHome from "../TreatmentForm/TreatmentHome";
+import TreatmentMedsForm from "../TreatmentForm/TreatmentMedsForm";
+import TreatmentProcedureForm from "../TreatmentForm/TreatmentProcedureForm";
+import ReduxCookie from "../ReduxCookie/ReduxCookie";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
 
   return (
     <Router>
-      <div>
+      <ThemeProvider theme={createMuiTheme}>
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -62,6 +72,13 @@ function App() {
           >
             <ReduxCookie />
           </Route>
+
+          {/* <Route exact path="/incident">
+            <IncidentHome />
+          </Route>
+          <Route path="/incident/:id">
+            <IncidentHome />
+          </Route> */}
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -127,53 +144,57 @@ function App() {
             <LandingPage />
           </ProtectedRoute>
 
-          <ProtectedRoute
+          <ProtectedRoute path="/incident">
+            <IncidentHome />
+          </ProtectedRoute>
 
-          exact
-          path="/patientHome"
-          >
+          {/* <ProtectedRoute path="/incidentResponse">
+            <IncidentFormResponse />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/incidentScene">
+            <IncidentFormScene />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/incidentDisposition">
+            <IncidentFormDisposition />
+          </ProtectedRoute> */}
+
+          <ProtectedRoute exact path="/patientHome">
             <PatientHome />
           </ProtectedRoute>
 
-          <ProtectedRoute
-
-          exact
-          path="/patientDemographics"
-          >
+          <ProtectedRoute exact path="/patientDemographics">
             <PatientDemographics />
           </ProtectedRoute>
 
-          <ProtectedRoute
-
-          exact
-          path="/patientInjury"
-          >
+          <ProtectedRoute exact path="/patientInjury">
             <PatientInjury />
           </ProtectedRoute>
 
-          <ProtectedRoute
-
-          exact
-          path="/patientMedical"
-          >
+          <ProtectedRoute exact path="/patientMedical">
             <PatientMedical />
           </ProtectedRoute>
 
-          <ProtectedRoute
-
-          exact
-          path="/patientSymptoms"
-          >
+          <ProtectedRoute exact path="/patientSymptoms">
             <PatientSymptoms />
           </ProtectedRoute>
 
-          <ProtectedRoute
-
-          exact
-          path="/patientCardiacArrest"
-          >
+          <ProtectedRoute exact path="/patientCardiacArrest">
             <PatientCardiac />
           </ProtectedRoute>
+
+          <ProtectedRoute path="/treatment">
+            <TreatmentHome />
+          </ProtectedRoute>
+
+          {/* <ProtectedRoute path="/treatmentMeds" authRedirect="/user">
+            <TreatmentMedsForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/treatmentProcedure" authRedirect="/user">
+            <TreatmentProcedureForm />
+          </ProtectedRoute> */}
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
@@ -181,7 +202,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-      </div>
+      </ThemeProvider>
     </Router>
   );
 }
