@@ -21,21 +21,24 @@ import AddEditPatient from "../AddEditPatient/AddEditPatient";
 function IncidentHome() {
   const classes = useStyles();
   const dispatch = useDispatch();
+
   const dropdowns = useSelector((store) => store.dropdowns);
   const patients = useSelector((store) => store.patients);
   const incident = useSelector((store) => store.incident);
+  const treatment = useSelector((store) => store.treatment);
+  const vitals = useSelector((store) => store.vitals);
 
-  const [localIncident, setLocalIncident] = useState(incident);
+  // const [localIncident, setLocalIncident] = useState(incident);
 
-  const [incidentMirror, setIncidentMirror] = useState({});
-  const [patientsMirror, setPatientsMirror] = useState({});
-  const [treatmentMirror, setTreatmentMirror] = useState({});
-  const [vitalsMirror, setVitalsMirror] = useState({});
+  const [incidentMirror, setIncidentMirror] = useState(JSON.parse(localStorage.getItem("incident")));
+  const [patientsMirror, setPatientsMirror] = useState(JSON.parse(localStorage.getItem("patients")));
+  const [treatmentMirror, setTreatmentMirror] = useState(JSON.parse(localStorage.getItem("treatment")));
+  const [vitalsMirror, setVitalsMirror] = useState(JSON.parse(localStorage.getItem("vitals")));
 
-  const [localIncident, setLocalIncident] = useState(
-    JSON.parse(localStorage.getItem("incident"))
-  );
-  const [render, setRender] = useState(false);
+  // const [localIncident, setLocalIncident] = useState(
+  //   JSON.parse(localStorage.getItem("incident"))
+  // );
+
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -44,14 +47,15 @@ function IncidentHome() {
 
 
 
-  // Initialize local storage if it is empty
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem("incident")) === null) {
-      localStorage.setItem("incident", JSON.stringify(incident));
-    } else {
-      dispatch({ type: "SET_INCIDENT", payload: JSON.parse(localStorage.getItem("incident")) });
-    }
-  }, []);
+  // // Initialize local storage if it is empty
+  // useEffect(() => {
+  //   if (JSON.parse(localStorage.getItem("incident")) === null) {
+  //     localStorage.setItem("incident", JSON.stringify(incident));
+  //   } else {
+  //     dispatch({ type: "SET_INCIDENT", payload: JSON.parse(localStorage.getItem("incident")) });
+  //   }
+  // }, []);
+
 
   // ____________________DROPDOWNS____________________
   let [localDropdownMirror, setLocalDropdownMirror] = useState(
@@ -71,43 +75,6 @@ function IncidentHome() {
       localStorage.setItem("dropdowns", JSON.stringify(dropdowns));
     }
   }, [dropdowns.go]);
-
-  // ____________________LOCAL STORAGE____________________
-  useEffect(() => {
-    console.log("Storage Mirror:", localIncident);
-    console.log(
-      "Incident Storage:",
-      JSON.parse(localStorage.getItem("incident"))
-    );
-
-    if (JSON.parse(localStorage.getItem("incident")) === null) {
-      setLocalIncident({
-        initialized: true,
-        crew: "",
-        triageCat: "",
-        incidentService: "",
-        destinationState: "",
-        destinationCounty: "",
-        destinationZipCode: "",
-        transportDisposition: "",
-        transportMethod: "",
-        transportMode: "",
-        destinationFacility: "",
-        patientNumbers: "",
-        incidentState: "",
-        incidentCounty: "",
-        incidentZipCode: "",
-        possibleInjury: "",
-        alcoholDrugIndicators: "",
-      });
-      setRender(true);
-    }
-
-    // Otherwise, we allow the render as there should be data in storage
-    else {
-      setRender(true);
-    }
-  }, []);
 
   // Main Button
   const [buttonText, setButtonText] = useState("Dispatched");
@@ -150,7 +117,29 @@ function IncidentHome() {
 
   return (
     <div className="container">
-      <h2>Incident Form Home</h2>
+      <h2>Incident</h2>
+
+      <AddEditPatient
+        formName={'incident'}
+
+        incidentMirror={incidentMirror}
+        setIncidentMirror={setIncidentMirror}
+        patientsMirror={patientsMirror}
+        setPatientsMirror={setPatientsMirror}
+        treatmentMirror={treatmentMirror}
+        setTreatmentMirror={setTreatmentMirror}
+        vitalsMirror={vitalsMirror}
+        setVitalsMirror={setVitalsMirror}
+      />
+
+      <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
+      <p>Incident Storage: {localStorage.getItem("incident")}</p>
+      <p>Vitals Mirror: {JSON.stringify(vitalsMirror)}</p>
+      <p>Vitals Storage: {localStorage.getItem("vitals")}</p>
+      <p>Treatment Mirror: {JSON.stringify(treatmentMirror)}</p>
+      <p>Treatment Storage: {localStorage.getItem("treatment")}</p>
+      <p>Patients Mirror: {JSON.stringify(patientsMirror)}</p>
+      <p>Patients Storage: {localStorage.getItem("patients")}</p>
 
       <div>
         <Button onClick={clickMe} color="primary" variant="contained">
@@ -176,14 +165,14 @@ function IncidentHome() {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
+
             <IncidentFormResponse
-              localIncident={localIncident}
-              setLocalIncident={setLocalIncident}
-              render={render}
+              localIncident={incidentMirror}
+              setLocalIncident={setIncidentMirror}
             />
+
           </AccordionDetails>
         </Accordion>
-        <br />
 
         <Accordion
           expanded={expanded === "panel2"}
@@ -203,13 +192,15 @@ function IncidentHome() {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
+
             <IncidentFormDisposition
-              localIncident={localIncident}
-              setLocalIncident={setLocalIncident}
-              render={render}
+              localIncident={incidentMirror}
+              setLocalIncident={setIncidentMirror}
             />
+
           </AccordionDetails>
         </Accordion>
+
         <Accordion
           expanded={expanded === "panel3"}
           onChange={handleChange("panel3")}
@@ -228,11 +219,12 @@ function IncidentHome() {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
+
             <IncidentFormScene
-              localIncident={localIncident}
-              setLocalIncident={setLocalIncident}
-              render={render}
+              localIncident={incidentMirror}
+              setLocalIncident={setIncidentMirror}
             />
+
           </AccordionDetails>
         </Accordion>
       </div>

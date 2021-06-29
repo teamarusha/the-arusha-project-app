@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 
-const IncidentFormScene = ({ localIncident, setLocalIncident, render }) => {
+const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident, render }) => {
   return (
     <div className="container">
       <h2>Incident Scene</h2>
-      {render && (
+      {localIncident && (
         <div>
           <TextField
             id="outlined-basic"
@@ -85,7 +85,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident, render }) => {
           <br />
         </div>
       )}
-      {dropdowns.go && render && (
+      {dropdowns.go && localIncident && (
         <div>
           <InputLabel id="demo-simple-select-autowidth-label">
             Possible Injury
@@ -94,6 +94,10 @@ const IncidentFormScene = ({ localIncident, setLocalIncident, render }) => {
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             autoWidth
+            value={localIncident[`patientNumbers`]}
+            onChange={(event) =>
+              submitValue({ key: `patientNumbers`, thing: event.target.value })
+            }
           >
             <MenuItem value="">
               <em>None</em>
@@ -113,6 +117,10 @@ const IncidentFormScene = ({ localIncident, setLocalIncident, render }) => {
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             autoWidth
+            value={localIncident[`alcoholDrugIndicators`]}
+            onChange={(event) =>
+              submitValue({ key: `alcoholDrugIndicators`, thing: event.target.value })
+            }
           >
             <MenuItem value="">
               <em>None</em>

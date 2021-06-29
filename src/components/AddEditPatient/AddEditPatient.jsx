@@ -6,8 +6,6 @@ import { useHistory, useParams } from "react-router-dom";
 function AddEditPatient(
     {
         formName,
-        render,
-        setRender,
         incidentMirror,
         setIncidentMirror,
         patientsMirror,
@@ -37,9 +35,11 @@ function AddEditPatient(
     const history = useHistory();
     const { id } = useParams();
 
-    // Initialize Redux/localStorage on first load
+
+    // Initializing all variables if this is the first form clicked on
+    // Initialize INDICENT
     useEffect(() => {
-        if (JSON.parse(localStorage.getItem("incident")) === null) {
+        if (incidentMirror === null) {
             localStorage.setItem("incident", JSON.stringify(incident));
             setIncidentMirror(incident);
         } else {
@@ -48,9 +48,9 @@ function AddEditPatient(
         }
     }, []);
 
-
+    // Initialize TREATMENT
     useEffect(() => {
-        if (JSON.parse(localStorage.getItem("treatment")) === null) {
+        if (treatmentMirror === null) {
             localStorage.setItem("treatment", JSON.stringify(treatment));
             setTreatmentMirror(treatment);
 
@@ -60,8 +60,9 @@ function AddEditPatient(
         }
     }, []);
 
+    // Initialize VITALS
     useEffect(() => {
-        if (JSON.parse(localStorage.getItem("vitals")) === null) {
+        if (vitalsMirror === null) {
             localStorage.setItem("vitals", JSON.stringify(vitals));
             setVitalsMirror(vitals);
         } else {
@@ -70,8 +71,9 @@ function AddEditPatient(
         }
     }, []);
 
+    // Initialize PATIENTS
     useEffect(() => {
-        if (JSON.parse(localStorage.getItem("patients")) === null) {
+        if (patientsMirror === null) {
             localStorage.setItem("patients", JSON.stringify(patients));
             setPatientsMirror(patients);
         } else {
@@ -80,14 +82,16 @@ function AddEditPatient(
         }
     }, []);
 
-    useEffect(() => {
-        if (dropdowns.go === true) {
-            // dispatch({ type: "ADD_PATIENTS_OBJECT", payload: { key: 'go', value: true } });
-            setRender(true);
-        }
-    }, [dropdowns.go])
+    // Allow Render if dropdowns are ready
+    // useEffect(() => {
+    //     if (dropdowns.go === true) {
+    //         // dispatch({ type: "ADD_PATIENTS_OBJECT", payload: { key: 'go', value: true } });
+    //         setRender(true);
+    //     }
+    // }, [dropdowns.go])
 
-    // Watchers to update Storage on patient addition
+
+    // ----------Watchers to update Storage on patient addition----------
 
     useEffect(() => {
         console.log("UPDATING incident browser storage", incidentMirror);
@@ -232,10 +236,10 @@ function AddEditPatient(
     return (
         <div>
             {
-                render &&
+                patientsMirror &&
                 <div>
 
-                    {
+                    {patientsMirror &&
                         patientsMirror.patientArray.map(value =>
                             <button key={`${value}changePatient`} disabled={id == value} onClick={() => changePatient(value)}>
                                 Edit Patient {value}
