@@ -5,11 +5,7 @@ import { useSelector } from "react-redux";
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 
-const TreatmentProcedureForm = ({
-  localTreatment,
-  setLocalTreatment,
-  render,
-}) => {
+const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
 
   // Runs whenever localPatientMirror is changed, updated, manipulated at all
@@ -42,7 +38,7 @@ const TreatmentProcedureForm = ({
       <br />
       <br />
 
-      {render && (
+      {localTreatment && (
         <div>
           {dropdowns.go && (
             <div>
