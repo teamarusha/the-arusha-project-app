@@ -46,10 +46,10 @@ function AddEditPatient(
             dispatch({ type: "SET_INCIDENT", payload: JSON.parse(localStorage.getItem("incident")) });
             setIncidentMirror(JSON.parse(localStorage.getItem("incident")));
         }
-    }, []);
+    // }, []);
 
-    // Initialize TREATMENT
-    useEffect(() => {
+    // // Initialize TREATMENT
+    // useEffect(() => {
         if (treatmentMirror === null) {
             localStorage.setItem("treatment", JSON.stringify(treatment));
             setTreatmentMirror(treatment);
@@ -58,10 +58,10 @@ function AddEditPatient(
             dispatch({ type: "SET_TREATMENT", payload: JSON.parse(localStorage.getItem("treatment")) });
             setTreatmentMirror(JSON.parse(localStorage.getItem("treatment")));
         }
-    }, []);
+    // }, []);
 
-    // Initialize VITALS
-    useEffect(() => {
+    // // Initialize VITALS
+    // useEffect(() => {
         if (vitalsMirror === null) {
             localStorage.setItem("vitals", JSON.stringify(vitals));
             setVitalsMirror(vitals);
@@ -69,10 +69,10 @@ function AddEditPatient(
             dispatch({ type: "SET_VITALS", payload: JSON.parse(localStorage.getItem("vitals")) });
             setVitalsMirror(JSON.parse(localStorage.getItem("vitals")));
         }
-    }, []);
+    // }, []);
 
-    // Initialize PATIENTS
-    useEffect(() => {
+    // // Initialize PATIENTS
+    // useEffect(() => {
         if (patientsMirror === null) {
             localStorage.setItem("patients", JSON.stringify(patients));
             setPatientsMirror(patients);
