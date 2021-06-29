@@ -194,8 +194,8 @@ function IncidentHome() {
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel3bh-content"
-            id="panel3bh-header"
+            aria-controls="panel2bh-content"
+            id="panel2bh-header"
             style={{ textAlign: "center" }}
           >
             <Typography

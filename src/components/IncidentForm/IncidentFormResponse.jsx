@@ -31,24 +31,6 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
     });
   }
 
-  let [localDropdownMirror, setLocalDropdownMirror] = useState(
-    JSON.parse(localStorage.getItem("dropdowns"))
-  );
-
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem("dropdowns")) === null) {
-      dispatch({ type: "GET_DROPDOWNS" });
-    } else {
-      dispatch({ type: "SET_DROPDOWNS", payload: localDropdownMirror });
-    }
-  }, []);
-
-  useEffect(() => {
-    if (dropdowns.go === true) {
-      localStorage.setItem("dropdowns", JSON.stringify(dropdowns));
-    }
-  }, [dropdowns.go]);
-
   return (
     <div className="container">
       <h2>Incident Response Form</h2>
