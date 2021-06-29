@@ -51,6 +51,13 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}procedure1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}procedure1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -70,6 +77,13 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}procedureAttempts1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}procedureAttempts1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 {dropdowns["procedures_attempted"].map((item) => (
                   <MenuItem
@@ -89,6 +103,13 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}successfulProcedure1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}successfulProcedure1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 {dropdowns["procedure_successful"].map((item) => (
                   <MenuItem
@@ -108,6 +129,13 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}responseToProcedure1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}responseToProcedure1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 {dropdowns["procedure_response"].map((item) => (
                   <MenuItem
@@ -127,6 +155,13 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}procedurePerformedBy1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}procedurePerformedBy1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 {dropdowns["procedure_performer"].map((item) => (
                   <MenuItem
