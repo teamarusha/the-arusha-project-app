@@ -1,8 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
-import { useHistory } from "react-router-dom";
 
 import IncidentFormResponse from "./IncidentFormResponse";
 import IncidentFormDisposition from "./IncidentFormDisposition";
@@ -12,11 +10,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
+  Button,
   Typography,
 } from "@material-ui/core";
 import { ExpandMoreIcon } from "@material-ui/icons/ExpandMore";
@@ -135,8 +129,6 @@ function IncidentHome() {
   return (
     <div className="container">
       <h2>Incident Form Home</h2>
-      {/* <p>{JSON.stringify(localIncident)}</p>
-      <p>{localStorage.getItem("incident")}</p> */}
 
       <div>
         <Button onClick={clickMe} color="primary" variant="contained">

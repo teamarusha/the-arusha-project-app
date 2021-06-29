@@ -1,30 +1,15 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 //Material UI imports
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Grid,
-  MenuItem,
-  Paper,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 import { ExpandMoreIcon } from "@material-ui/icons/ExpandMore";
 
 import useStyles from "./Styles";
 
 const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
-  const { id } = useParams();
-  const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);
-  const classes = useStyles();
-  const [expanded, setExpanded] = useState(false);
-  const [selectedId, setSelectedId] = useState(false);
 
   useEffect(() => {
     console.log("UPDATING browser storage", localIncident);
@@ -65,7 +50,10 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
   }, [dropdowns.go]);
 
   return (
-    <div>
+    <div className="container">
+      <h2>Incident Response Form</h2>
+      <br />
+      <br />
       {render && (
         <TextField
           id="outlined-basic"
@@ -80,39 +68,42 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
 
       {dropdowns.go && render && (
         <div>
-          <TextField
-            id="outlined-basic"
-            select
-            label="Triage Category"
-            variant="outlined"
-            value={localIncident[`triageCat`]}
-            onChange={(event) =>
-              submitValue({ key: `triageCat`, thing: event.target.value })
-            }
+          <InputLabel id="demo-simple-select-autowidth-label">
+            Triage Category
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            autoWidth
           >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
             {dropdowns["triage_cat"].map((item) => (
               <MenuItem key={"triage_cat" + item.id} value={item.id}>
                 {item["triage_cat_type"]}
               </MenuItem>
             ))}
-          </TextField>
-
-          <TextField
-            id="outlined-basic"
-            select
-            label="Type of Service Requested"
-            variant="outlined"
-            value={localIncident[`serviceType`]}
-            onChange={(event) =>
-              submitValue({ key: `serviceType`, thing: event.target.value })
-            }
+          </Select>
+          <br />
+          <br />
+          <InputLabel id="demo-simple-select-autowidth-label">
+            Type of Service Requested
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            autoWidth
           >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
             {dropdowns["incident_service"].map((item) => (
               <MenuItem key={"incident_service" + item.id} value={item.id}>
                 {item["incident_service_type"]}
               </MenuItem>
             ))}
-          </TextField>
+          </Select>
         </div>
       )}
     </div>
