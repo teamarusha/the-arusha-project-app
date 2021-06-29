@@ -188,6 +188,7 @@ function IncidentHome() {
             />
           </AccordionDetails>
         </Accordion>
+        <br />
         <Accordion
           expanded={expanded === "panel3"}
           onChange={handleChange("panel3")}
