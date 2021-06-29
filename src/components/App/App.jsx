@@ -40,6 +40,7 @@ import TreatmentHome from "../TreatmentForm/TreatmentHome";
 import TreatmentMedsForm from "../TreatmentForm/TreatmentMedsForm";
 import TreatmentProcedureForm from "../TreatmentForm/TreatmentProcedureForm";
 import ReduxCookie from "../ReduxCookie/ReduxCookie";
+import VitalsForm from "../VitalsForm/VitalsForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -188,13 +189,9 @@ function App() {
             <TreatmentHome />
           </ProtectedRoute>
 
-          {/* <ProtectedRoute path="/treatmentMeds" authRedirect="/user">
-            <TreatmentMedsForm />
+          <ProtectedRoute path="/vitals">
+            <VitalsForm />
           </ProtectedRoute>
-
-          <ProtectedRoute path="/treatmentProcedure" authRedirect="/user">
-            <TreatmentProcedureForm />
-          </ProtectedRoute> */}
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
