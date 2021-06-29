@@ -21,6 +21,7 @@ import {
 import { ExpandMoreIcon } from "@material-ui/icons/ExpandMore";
 
 import useStyles from "./Styles";
+import AddEditPatient from "../AddEditPatient/AddEditPatient";
 
 
 
@@ -29,7 +30,9 @@ function IncidentHome() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);
-  const [localIncident, setLocalIncident] = useState(JSON.parse(localStorage.getItem("incident")));
+  const patients = useSelector((store) => store.patients);
+  const incident = useSelector((store) => store.incident);
+  const [localIncident, setLocalIncident] = useState(incident);
   const [render, setRender] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [selectedId, setSelectedId] = useState(false);
@@ -45,7 +48,14 @@ function IncidentHome() {
 
 
 
-
+  // Initialize local storage if it is empty
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("incident")) === null) {
+      localStorage.setItem("incident", JSON.stringify(incident));
+    } else {
+      dispatch({ type: "SET_INCIDENT", payload: JSON.parse(localStorage.getItem("incident")) });
+    }
+  }, []);
 
   // ____________________DROPDOWNS____________________
   let [localDropdownMirror, setLocalDropdownMirror] = useState(
@@ -70,40 +80,40 @@ function IncidentHome() {
 
 
   // ____________________LOCAL STORAGE____________________
-  useEffect(() => {
-    console.log('Storage Mirror:', localIncident);
-    console.log('Incident Storage:', JSON.parse(localStorage.getItem('incident')));
+  // useEffect(() => {
+  //   console.log('Storage Mirror:', localIncident);
+  //   console.log('Incident Storage:', JSON.parse(localStorage.getItem('incident')));
 
 
-    if (JSON.parse(localStorage.getItem('incident')) === null) {
-      setLocalIncident(
-        {
-          initialized: true,
-          crew: "",
-          triageCat: "",
-          incidentService: "",
-          destinationState: "",
-          destinationCounty: "",
-          destinationZipCode: "",
-          transportDisposition: "",
-          transportMethod: "",
-          transportMode: "",
-          destinationFacility: "",
-          patientNumbers: "",
-          incidentState: "",
-          incidentCounty: "",
-          incidentZipCode: "",
-          possibleInjury: "",
-          alcoholDrugIndicators: ""
-        });
-      setRender(true);
-    }
+  //   if (JSON.parse(localStorage.getItem('incident')) === null) {
+  //     setLocalIncident(
+  //       {
+  //         initialized: true,
+  //         crew: "",
+  //         triageCat: "",
+  //         incidentService: "",
+  //         destinationState: "",
+  //         destinationCounty: "",
+  //         destinationZipCode: "",
+  //         transportDisposition: "",
+  //         transportMethod: "",
+  //         transportMode: "",
+  //         destinationFacility: "",
+  //         patientNumbers: "",
+  //         incidentState: "",
+  //         incidentCounty: "",
+  //         incidentZipCode: "",
+  //         possibleInjury: "",
+  //         alcoholDrugIndicators: ""
+  //       });
+  //     setRender(true);
+  //   }
 
-    // Otherwise, we allow the render as there should be data in storage
-    else {
-      setRender(true);
-    }
-  }, []);
+  //   // Otherwise, we allow the render as there should be data in storage
+  //   else {
+  //     setRender(true);
+  //   }
+  // }, []);
 
 
 
@@ -119,23 +129,29 @@ function IncidentHome() {
         {localStorage.getItem("incident")}
       </p>
 
-      <IncidentFormResponse
-        localIncident={localIncident}
-        setLocalIncident={setLocalIncident}
-        render={render}
-      />
+      <AddEditPatient formName={'incident'} render={render} setRender={setRender} />
 
-      <IncidentFormDisposition
-        localIncident={localIncident}
-        setLocalIncident={setLocalIncident}
-        render={render}
-      />
+      {patients.go &&
+        <div>
+          <IncidentFormResponse
+            localIncident={localIncident}
+            setLocalIncident={setLocalIncident}
+            render={render}
+          />
 
-      <IncidentFormScene
-        localIncident={localIncident}
-        setLocalIncident={setLocalIncident}
-        render={render}
-      />
+          <IncidentFormDisposition
+            localIncident={localIncident}
+            setLocalIncident={setLocalIncident}
+            render={render}
+          />
+
+          <IncidentFormScene
+            localIncident={localIncident}
+            setLocalIncident={setLocalIncident}
+            render={render}
+          />
+        </div>
+      }
     </div>
 
     // <Grid Container justify="center" className={classes.root}>

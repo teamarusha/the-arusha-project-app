@@ -1,59 +1,101 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
 function AddEditPatient({ formName, render, setRender }) {
 
+    // Redux stores for all important variables
+    const dropdowns = useSelector(store => store.dropdowns);
+    const incident = useSelector(store => store.incident);
+    const patients = useSelector(store => store.patients);
+    const treatment = useSelector(store => store.treatment);
+    const vitals = useSelector(store => store.vitals);
+
+    // Set up useStates to mirror the values in the localStorage
+    const [incidentMirror, setIncidentMirror] = useState(incident);
+    const [patientsMirror, setPatientsMirror] = useState(patients);
+    const [treatmentMirror, setTreatmentMirror] = useState(treatment);
+    const [vitalsMirror, setVitalsMirror] = useState(vitals);
+
+    // router/redux
+    const dispatch = useDispatch();
     const history = useHistory();
     const { id } = useParams();
 
 
-    useEffect(() => {
-        // console.log('Params id:', id);
-        console.log('Cookie Mirror:', localPatientMirror);
-        console.log('Patient Storage:', JSON.parse(localStorage.getItem('patients')));
 
+    // Initialize Redux/localStorage on first loadvariables 
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem("incident")) === null) {
+            localStorage.setItem("incident", JSON.stringify(incident));
+        } else {
+            dispatch({ type: "SET_INCIDENT", payload: JSON.parse(localStorage.getItem("incident")) });
+        }
+    }, []);
+
+
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem("treatment")) === null) {
+            localStorage.setItem("treatment", JSON.stringify(treatment));
+        } else {
+            dispatch({ type: "SET_TREATMENT", payload: JSON.parse(localStorage.getItem("treatment")) });
+        }
+    }, []);
+
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem("vitals")) === null) {
+            localStorage.setItem("vitals", JSON.stringify(JSON.parse(localStorage.getItem("vitals"))));
+        } else {
+            dispatch({ type: "SET_VITALS", payload: vitals });
+        }
+    }, []);
+
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem("patients")) === null) {
+            localStorage.setItem("patients", JSON.stringify(patients));
+        } else {
+            dispatch({ type: "SET_PATIENTS", payload: JSON.parse(localStorage.getItem("patients")) });
+        }
+    }, []);
+
+    useEffect(() => {
+        if (dropdowns.go === true) {
+            // dispatch({ type: "ADD_PATIENTS_OBJECT", payload: { key: 'go', value: true } });
+            setRender(true);
+        }
+    }, [dropdowns.go])
+
+    // Watchers to update Storage on patient addition
+
+    // useEffect(() => {
+    //     console.log("UPDATING incident browser storage", incidentMirror);
+    //     localStorage.setItem("incident", JSON.stringify(incidentMirror));
+    // }, [incidentMirror]);
+
+    // useEffect(() => {
+    //     console.log("UPDATING patients browser storage", patientsMirror);
+    //     localStorage.setItem("patients", JSON.stringify(patientsMirror));
+    // }, [patientsMirror]);
+
+    // useEffect(() => {
+    //     console.log("UPDATING treatment browser storage", treatmentMirror);
+    //     localStorage.setItem("treatment", JSON.stringify(treatmentMirror));
+    // }, [treatmentMirror]);
+
+    // useEffect(() => {
+    //     console.log("UPDATING vitals browser storage", vitalsMirror);
+    //     localStorage.setItem("vitals", JSON.stringify(vitalsMirror));
+    // }, [vitalsMirror]);
+
+
+
+
+    useEffect(() => {
         // If the user comes to this page without a patient ID, get redirected to patient 1
         if (!id) {
             history.push(`/${formName}/1`);
         }
-
-        else if (id == 1 && JSON.parse(localStorage.getItem(`${formName}`)) === null) {
-
-            switch (formName) {
-                case "patients":
-                    setLocalPatientMirror(
-                        {
-                            'patientArray': [1],
-                            '1patientFirstName': '',
-                            '1patientLastName': '',
-                            '1patientAddress': '',
-                            '1patientHomeCounty': '',
-                            '1patientHomeState': '',
-                            '1patientHomeZip': '',
-                            '1patientGender': '',
-                            '1patientRace': '',
-                            '1patientDateOfBirth': '',
-                            '1patientAge': '',
-                            '1patientAgeUnits': '',
-                            '1bloodType': ''
-                        });
-                    setRender(true);
-                    break;
-                case "incident":
-                    // code block
-                    break;
-                default:
-                // code block
-            }
-
-        }
-
-        else {
-            setRender(true);
-        }
-
-
     }, []);
 
     // This function handles initialization of new patients
@@ -62,36 +104,118 @@ function AddEditPatient({ formName, render, setRender }) {
         // Instead it looks at the patientArray and adds the next patient based on that
         // THIS ID IS NOT THE PATIENT'S ID FROM THE DATABASE,
         // THIS VALUE MEANS NOTHING AFTER SUBMISSION
-        let newPatientID = localPatientMirror.patientArray.length + 1;
+        let newPatientID = patientsMirror.patientArray.length + 1;
         console.log('new patient ID', newPatientID);
 
-        // This is where all parameters associated with a new patient get initialized
-        // We do this in order to not have inputs stagnate as you chose a new patient to edit
-        setLocalPatientMirror({
-            ...localPatientMirror,
-            'patientArray': [...localPatientMirror.patientArray, newPatientID],
-            [newPatientID + 'bloodType']: '',
-            [newPatientID + 'birthDate']: '',
-            [newPatientID + 'patientLastName']: '',
-            [newPatientID + 'patientFirstName']: ''
+
+        setIncidentMirror({
+            ...incidentMirror,
+            'dispositionArray': [...incidentMirror.dispositionArray, newPatientID],
+            [newPatientID + 'destinationState']: '',
+            [newPatientID + 'destinationCounty']: '',
+            [newPatientID + 'destinationZipCode']: '',
+            [newPatientID + 'transportDisposition']: '',
+            [newPatientID + 'transportMethod']: '',
+            [newPatientID + 'transportMode']: '',
+            [newPatientID + 'destinationFacility']: ''
+
         })
+
+        setPatientsMirror({
+            ...patientsMirror,
+            'patientArray': [...patientsMirror.patientArray, newPatientID],
+            [newPatientID + 'patientFirstName']: '',
+            [newPatientID + 'patientLastName']: '',
+            [newPatientID + 'patientAddress']: '',
+            [newPatientID + 'patientHomeCounty']: '',
+            [newPatientID + 'patientHomeState']: '',
+            [newPatientID + 'patientHomeZip']: '',
+            [newPatientID + 'patientGender']: '',
+            [newPatientID + 'patientRace']: '',
+            [newPatientID + 'patientDateOfBirth']: '',
+            [newPatientID + 'patientAge']: '',
+            [newPatientID + 'patientAgeUnits']: '',
+            [newPatientID + 'patientMedConditions']: '',
+            [newPatientID + 'patientAllergies']: '',
+            [newPatientID + 'patientCurrMedications']: '',
+            [newPatientID + 'anatomicLocation']: '',
+            [newPatientID + 'organSystem']: '',
+            [newPatientID + 'symptomOnset']: '',
+            [newPatientID + 'lastKnownWell']: '',
+            [newPatientID + 'primarySymptom']: '',
+            [newPatientID + 'otherSymptoms']: '',
+            [newPatientID + 'initialAcuity']: '',
+            [newPatientID + 'finalAcuity']: '',
+            [newPatientID + 'primaryImpression']: '',
+            [newPatientID + 'injuryLocation']: '',
+            [newPatientID + 'injuryCause']: '',
+            [newPatientID + 'cardiacArrest']: '',
+            [newPatientID + 'cardiacArrestEtiology']: '',
+            [newPatientID + 'resuscitationAttempt']: '',
+            [newPatientID + 'cardiacArrestWitness']: '',
+            [newPatientID + 'aedUsePrior']: '',
+            [newPatientID + 'cprProvided']: '',
+            [newPatientID + 'spontaneousCirculation']: '',
+            [newPatientID + 'timeCardiacArrest']: '',
+            [newPatientID + 'cprStopped']: '',
+            [newPatientID + 'aedInitiator']: '',
+            [newPatientID + 'aedApplicator']: '',
+            [newPatientID + 'aedDefibrillator']: ''
+
+        })
+
+
+        setTreatmentMirror({
+            ...treatmentMirror,
+            [newPatientID + 'medicationArray']: [1],
+            [newPatientID + 'medication1']: '',
+            [newPatientID + 'routeAdministered1']: '',
+            [newPatientID + 'dosage1']: '',
+            [newPatientID + 'units1']: '',
+            [newPatientID + 'medicationResponse1']: '',
+            [newPatientID + 'medsAdminBy1']: '',
+            [newPatientID + 'procedure1']: '',
+            [newPatientID + 'procedureAttempts1']: '',
+            [newPatientID + 'successfulProcedure1']: '',
+            [newPatientID + 'responseToProcedure1']: '',
+            [newPatientID + 'procedurePerformedBy1']: ''
+        })
+
+        setVitalsMirror({
+            ...vitalsMirror,
+            [newPatientID + 'vitalsArray']: [1],
+            [newPatientID + 'systolicBloodPressure1']: '',
+            [newPatientID + 'heartRate1']: '',
+            [newPatientID + 'pulseOximetry1']: '',
+            [newPatientID + 'respiratoryRate1']: '',
+            [newPatientID + 'bloodGlucoseLevel1']: '',
+            [newPatientID + 'glasgowComaScoreEye1']: '',
+            [newPatientID + 'glasgowComaScoreVerbal1']: '',
+            [newPatientID + 'glasgowComaScoreMotor1']: '',
+            [newPatientID + 'glasgowComaScoreQualifier1']: '',
+            [newPatientID + 'painScaleScore1']: '',
+            [newPatientID + 'strokeScaleScore1']: '',
+            [newPatientID + 'strokeScaleType1']: ''
+        })
+
+
     }
 
     // Simply redirects to the patient page of a new patient 
     // based on their position in the patientArray
     function changePatient(patientNumber) {
-        history.push(`/patient/${patientNumber}`);
+        history.push(`/${formName}/${patientNumber}`);
     }
 
 
     return (
-        <>
+        <div>
             {
                 render &&
-                <>
+                <div>
 
                     {
-                        localPatientMirror.patientArray.map(value =>
+                        patientsMirror.patientArray.map(value =>
                             <button key={`${value}changePatient`} disabled={id == value} onClick={() => changePatient(value)}>
                                 Edit Patient {value}
                             </button>
@@ -102,10 +226,10 @@ function AddEditPatient({ formName, render, setRender }) {
                     <button onClick={addPatient}>
                         Add Patient!
                     </button>
-                </>
+                </div>
             }
 
-        </>
+        </div>
     )
 }
 
