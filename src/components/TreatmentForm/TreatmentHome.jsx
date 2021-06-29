@@ -2,10 +2,11 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import IncidentFormResponse from "./IncidentFormResponse";
-import IncidentFormDisposition from "./IncidentFormDisposition";
-import IncidentFormScene from "./IncidentFormScene";
+import TreatmentMedsForm from "./TreatmentMedsForm";
+import TreatmentProcedureForm from "./TreatmentProcedureForm";
 
+//____________________Material UI Imports____________________
+import useStyles from "./Styles";
 import {
   Accordion,
   AccordionDetails,
@@ -15,25 +16,12 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import useStyles from "./Styles";
-import AddEditPatient from "../AddEditPatient/AddEditPatient";
-
-function IncidentHome() {
+function TreatmentHome() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);
-  const patients = useSelector((store) => store.patients);
-  const incident = useSelector((store) => store.incident);
-
-  const [localIncident, setLocalIncident] = useState(incident);
-
-  const [incidentMirror, setIncidentMirror] = useState({});
-  const [patientsMirror, setPatientsMirror] = useState({});
-  const [treatmentMirror, setTreatmentMirror] = useState({});
-  const [vitalsMirror, setVitalsMirror] = useState({});
-
-  const [localIncident, setLocalIncident] = useState(
-    JSON.parse(localStorage.getItem("incident"))
+  const [localTreatment, setLocalTreatment] = useState(
+    JSON.parse(localStorage.getItem("treatment"))
   );
   const [render, setRender] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -41,17 +29,6 @@ function IncidentHome() {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-
-
-
-  // Initialize local storage if it is empty
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem("incident")) === null) {
-      localStorage.setItem("incident", JSON.stringify(incident));
-    } else {
-      dispatch({ type: "SET_INCIDENT", payload: JSON.parse(localStorage.getItem("incident")) });
-    }
-  }, []);
 
   // ____________________DROPDOWNS____________________
   let [localDropdownMirror, setLocalDropdownMirror] = useState(
@@ -74,31 +51,26 @@ function IncidentHome() {
 
   // ____________________LOCAL STORAGE____________________
   useEffect(() => {
-    console.log("Storage Mirror:", localIncident);
+    console.log("Storage Mirror:", localTreatment);
     console.log(
-      "Incident Storage:",
-      JSON.parse(localStorage.getItem("incident"))
+      "Treatment Storage:",
+      JSON.parse(localStorage.getItem("treatment"))
     );
 
-    if (JSON.parse(localStorage.getItem("incident")) === null) {
-      setLocalIncident({
+    if (JSON.parse(localStorage.getItem("treatment")) === null) {
+      setLocalTreatment({
         initialized: true,
-        crew: "",
-        triageCat: "",
-        incidentService: "",
-        destinationState: "",
-        destinationCounty: "",
-        destinationZipCode: "",
-        transportDisposition: "",
-        transportMethod: "",
-        transportMode: "",
-        destinationFacility: "",
-        patientNumbers: "",
-        incidentState: "",
-        incidentCounty: "",
-        incidentZipCode: "",
-        possibleInjury: "",
-        alcoholDrugIndicators: "",
+        medication: "",
+        routeAdministered: "",
+        dosage: "",
+        units: "",
+        medicationResponse: "",
+        medsAdminBy: "",
+        procedure: "",
+        procedureAttempts: "",
+        successfulProcedure: "",
+        responseToProcedure: "",
+        procedurePerformedBy: "",
       });
       setRender(true);
     }
@@ -150,7 +122,7 @@ function IncidentHome() {
 
   return (
     <div className="container">
-      <h2>Incident Form Home</h2>
+      <h2>Treament Form Home</h2>
 
       <div>
         <Button onClick={clickMe} color="primary" variant="contained">
@@ -172,17 +144,18 @@ function IncidentHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Incident Response Form
+              Medication Administered
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <IncidentFormResponse
-              localIncident={localIncident}
-              setLocalIncident={setLocalIncident}
+            <TreatmentMedsForm
+              localTreatment={localTreatment}
+              setLocalTreatment={setLocalTreatment}
               render={render}
             />
           </AccordionDetails>
         </Accordion>
+
         <br />
 
         <Accordion
@@ -199,38 +172,13 @@ function IncidentHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Incident Disposition Form
+              Procedure Administered
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <IncidentFormDisposition
-              localIncident={localIncident}
-              setLocalIncident={setLocalIncident}
-              render={render}
-            />
-          </AccordionDetails>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel3"}
-          onChange={handleChange("panel3")}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2bh-content"
-            id="panel2bh-header"
-            style={{ textAlign: "center" }}
-          >
-            <Typography
-              classes={{ root: classes.text }}
-              className={classes.heading}
-            >
-              Incident Scene Form
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <IncidentFormScene
-              localIncident={localIncident}
-              setLocalIncident={setLocalIncident}
+            <TreatmentProcedureForm
+              localTreatment={localTreatment}
+              setLocalTreatment={setLocalTreatment}
               render={render}
             />
           </AccordionDetails>
@@ -240,4 +188,4 @@ function IncidentHome() {
   );
 }
 
-export default IncidentHome;
+export default TreatmentHome;
