@@ -3,7 +3,21 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
-function AddEditPatient({ formName, render, setRender }) {
+function AddEditPatient(
+    {
+        formName,
+        render,
+        setRender,
+        incidentMirror,
+        setIncidentMirror,
+        patientsMirror,
+        setPatientsMirror,
+        treatmentMirror,
+        setTreatmentMirror,
+        vitalsMirror,
+        setVitalsMirror
+    }
+) {
 
     // Redux stores for all important variables
     const dropdowns = useSelector(store => store.dropdowns);
@@ -13,24 +27,24 @@ function AddEditPatient({ formName, render, setRender }) {
     const vitals = useSelector(store => store.vitals);
 
     // Set up useStates to mirror the values in the localStorage
-    const [incidentMirror, setIncidentMirror] = useState(incident);
-    const [patientsMirror, setPatientsMirror] = useState(patients);
-    const [treatmentMirror, setTreatmentMirror] = useState(treatment);
-    const [vitalsMirror, setVitalsMirror] = useState(vitals);
+    // const [incidentMirror, setIncidentMirror] = useState({});
+    // const [patientsMirror, setPatientsMirror] = useState({});
+    // const [treatmentMirror, setTreatmentMirror] = useState({});
+    // const [vitalsMirror, setVitalsMirror] = useState({});
 
     // router/redux
     const dispatch = useDispatch();
     const history = useHistory();
     const { id } = useParams();
 
-
-
-    // Initialize Redux/localStorage on first loadvariables 
+    // Initialize Redux/localStorage on first load
     useEffect(() => {
         if (JSON.parse(localStorage.getItem("incident")) === null) {
             localStorage.setItem("incident", JSON.stringify(incident));
+            setIncidentMirror(incident);
         } else {
             dispatch({ type: "SET_INCIDENT", payload: JSON.parse(localStorage.getItem("incident")) });
+            setIncidentMirror(JSON.parse(localStorage.getItem("incident")));
         }
     }, []);
 
@@ -38,24 +52,31 @@ function AddEditPatient({ formName, render, setRender }) {
     useEffect(() => {
         if (JSON.parse(localStorage.getItem("treatment")) === null) {
             localStorage.setItem("treatment", JSON.stringify(treatment));
+            setTreatmentMirror(treatment);
+
         } else {
             dispatch({ type: "SET_TREATMENT", payload: JSON.parse(localStorage.getItem("treatment")) });
+            setTreatmentMirror(JSON.parse(localStorage.getItem("treatment")));
         }
     }, []);
 
     useEffect(() => {
         if (JSON.parse(localStorage.getItem("vitals")) === null) {
-            localStorage.setItem("vitals", JSON.stringify(JSON.parse(localStorage.getItem("vitals"))));
+            localStorage.setItem("vitals", JSON.stringify(vitals));
+            setVitalsMirror(vitals);
         } else {
-            dispatch({ type: "SET_VITALS", payload: vitals });
+            dispatch({ type: "SET_VITALS", payload: JSON.parse(localStorage.getItem("vitals")) });
+            setVitalsMirror(JSON.parse(localStorage.getItem("vitals")));
         }
     }, []);
 
     useEffect(() => {
         if (JSON.parse(localStorage.getItem("patients")) === null) {
             localStorage.setItem("patients", JSON.stringify(patients));
+            setPatientsMirror(patients);
         } else {
             dispatch({ type: "SET_PATIENTS", payload: JSON.parse(localStorage.getItem("patients")) });
+            setPatientsMirror(JSON.parse(localStorage.getItem("patients")));
         }
     }, []);
 
@@ -68,25 +89,25 @@ function AddEditPatient({ formName, render, setRender }) {
 
     // Watchers to update Storage on patient addition
 
-    // useEffect(() => {
-    //     console.log("UPDATING incident browser storage", incidentMirror);
-    //     localStorage.setItem("incident", JSON.stringify(incidentMirror));
-    // }, [incidentMirror]);
+    useEffect(() => {
+        console.log("UPDATING incident browser storage", incidentMirror);
+        localStorage.setItem("incident", JSON.stringify(incidentMirror));
+    }, [incidentMirror]);
 
-    // useEffect(() => {
-    //     console.log("UPDATING patients browser storage", patientsMirror);
-    //     localStorage.setItem("patients", JSON.stringify(patientsMirror));
-    // }, [patientsMirror]);
+    useEffect(() => {
+        console.log("UPDATING patients browser storage", patientsMirror);
+        localStorage.setItem("patients", JSON.stringify(patientsMirror));
+    }, [patientsMirror]);
 
-    // useEffect(() => {
-    //     console.log("UPDATING treatment browser storage", treatmentMirror);
-    //     localStorage.setItem("treatment", JSON.stringify(treatmentMirror));
-    // }, [treatmentMirror]);
+    useEffect(() => {
+        console.log("UPDATING treatment browser storage", treatmentMirror);
+        localStorage.setItem("treatment", JSON.stringify(treatmentMirror));
+    }, [treatmentMirror]);
 
-    // useEffect(() => {
-    //     console.log("UPDATING vitals browser storage", vitalsMirror);
-    //     localStorage.setItem("vitals", JSON.stringify(vitalsMirror));
-    // }, [vitalsMirror]);
+    useEffect(() => {
+        console.log("UPDATING vitals browser storage", vitalsMirror);
+        localStorage.setItem("vitals", JSON.stringify(vitalsMirror));
+    }, [vitalsMirror]);
 
 
 

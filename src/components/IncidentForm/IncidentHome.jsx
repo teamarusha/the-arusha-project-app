@@ -32,7 +32,14 @@ function IncidentHome() {
   const dropdowns = useSelector((store) => store.dropdowns);
   const patients = useSelector((store) => store.patients);
   const incident = useSelector((store) => store.incident);
+
   const [localIncident, setLocalIncident] = useState(incident);
+
+  const [incidentMirror, setIncidentMirror] = useState({});
+  const [patientsMirror, setPatientsMirror] = useState({});
+  const [treatmentMirror, setTreatmentMirror] = useState({});
+  const [vitalsMirror, setVitalsMirror] = useState({});
+
   const [render, setRender] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [selectedId, setSelectedId] = useState(false);
@@ -129,7 +136,18 @@ function IncidentHome() {
         {localStorage.getItem("incident")}
       </p>
 
-      <AddEditPatient formName={'incident'} render={render} setRender={setRender} />
+      <AddEditPatient
+        formName={'incident'}
+        render={render}
+        setRender={setRender}
+        incidentMirror={incidentMirror}
+        setIncidentMirror={setIncidentMirror}
+        patientsMirror={patientsMirror}
+        setPatientsMirror={setPatientsMirror}
+        treatmentMirror={treatmentMirror}
+        setTreatmentMirror={setTreatmentMirror}
+        vitalsMirror={vitalsMirror}
+        setVitalsMirror={setVitalsMirror} />
 
       {patients.go &&
         <div>
