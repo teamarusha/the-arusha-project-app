@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
+import { useParams } from "react-router-dom";
 
 const IncidentFormDisposition = ({
   localIncident,
-  setLocalIncident,
-  render,
+  setLocalIncident
 }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
 
@@ -34,22 +34,24 @@ const IncidentFormDisposition = ({
     // localStorage.setItem(`${newParameter.key}`, JSON.stringify(newParameter.thing));
   }
 
+  const { id } = useParams();
+
   return (
     <div className="container">
       <h2>Disposition Form</h2>
       <br />
       <br />
 
-      {render && (
+      {localIncident && (
         <div>
           <TextField
             id="outlined-basic"
             label="Destination State"
             variant="outlined"
-            value={localIncident[`destinationState`]}
+            value={localIncident[`${id}destinationState`]}
             onChange={(event) =>
               submitValue({
-                key: `destinationState`,
+                key: `${id}destinationState`,
                 thing: event.target.value,
               })
             }
@@ -60,10 +62,10 @@ const IncidentFormDisposition = ({
             id="outlined-basic"
             label="Destination County"
             variant="outlined"
-            value={localIncident[`destinationCounty`]}
+            value={localIncident[`${id}destinationCounty`]}
             onChange={(event) =>
               submitValue({
-                key: `destinationCounty`,
+                key: `${id}destinationCounty`,
                 thing: event.target.value,
               })
             }
@@ -74,10 +76,10 @@ const IncidentFormDisposition = ({
             id="outlined-basic"
             label="Destination Zip Code"
             variant="outlined"
-            value={localIncident[`destinationZipCode`]}
+            value={localIncident[`${id}destinationZipCode`]}
             onChange={(event) =>
               submitValue({
-                key: `destinationZipCode`,
+                key: `${id}destinationZipCode`,
                 thing: event.target.value,
               })
             }
@@ -87,7 +89,7 @@ const IncidentFormDisposition = ({
         </div>
       )}
 
-      {dropdowns.go && render && (
+      {dropdowns.go && localIncident && (
         <div>
           <InputLabel id="demo-simple-select-autowidth-label">
             Transportation Disposition
@@ -96,6 +98,10 @@ const IncidentFormDisposition = ({
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             autoWidth
+            value={localIncident[`${id}transportDisposition`]}
+            onChange={(event) =>
+              submitValue({ key: `${id}transportDisposition`, thing: event.target.value })
+            }
           >
             <MenuItem value="">
               <em>None</em>
@@ -115,6 +121,10 @@ const IncidentFormDisposition = ({
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             autoWidth
+            value={localIncident[`${id}transportMethod`]}
+            onChange={(event) =>
+              submitValue({ key: `${id}transportMethod`, thing: event.target.value })
+            }
           >
             <MenuItem value="">
               <em>None</em>
@@ -134,6 +144,10 @@ const IncidentFormDisposition = ({
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             autoWidth
+            value={localIncident[`${id}transportMode`]}
+            onChange={(event) =>
+              submitValue({ key: `${id}transportMode`, thing: event.target.value })
+            }
           >
             <MenuItem value="">
               <em>None</em>
@@ -153,6 +167,10 @@ const IncidentFormDisposition = ({
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             autoWidth
+            value={localIncident[`${id}destinationFacility`]}
+            onChange={(event) =>
+              submitValue({ key: `${id}destinationFacility`, thing: event.target.value })
+            }
           >
             <MenuItem value="">
               <em>None</em>

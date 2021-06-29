@@ -137,6 +137,10 @@ function App() {
             <IncidentHome />
           </ProtectedRoute>
 
+          <ProtectedRoute path="/incident/:id">
+            <IncidentHome />
+          </ProtectedRoute>
+
           <ProtectedRoute exact path="/patientHome">
             <PatientHome />
           </ProtectedRoute>

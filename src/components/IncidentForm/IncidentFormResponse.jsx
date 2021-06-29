@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 
-const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
+const IncidentFormResponse = ({ localIncident, setLocalIncident}) => {
   const dropdowns = useSelector((store) => store.dropdowns);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
       <h2>Incident Response Form</h2>
       <br />
       <br />
-      {render && (
+      {localIncident && (
         <TextField
           id="outlined-basic"
           label="Crew Id"
@@ -45,7 +45,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
         ></TextField>
       )}
 
-      {dropdowns.go && render && (
+      {dropdowns.go && localIncident && (
         <div>
           <InputLabel id="demo-simple-select-autowidth-label">
             Triage Category
@@ -54,6 +54,10 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             autoWidth
+            value={localIncident[`triageCat`]}
+            onChange={(event) =>
+              submitValue({ key: `triageCat`, thing: event.target.value })
+            }
           >
             <MenuItem value="">
               <em>None</em>
@@ -73,6 +77,10 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident, render }) => {
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             autoWidth
+            value={localIncident[`incidentService`]}
+            onChange={(event) =>
+              submitValue({ key: `incidentService`, thing: event.target.value })
+            }
           >
             <MenuItem value="">
               <em>None</em>
