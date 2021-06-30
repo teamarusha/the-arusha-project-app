@@ -148,10 +148,10 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Systolic Blood Pressure (SBP"
             variant="outlined"
-            value={localVitals[`systolicBloodPressure`]}
+            value={localVitals[`${id}systolicBloodPressure`]}
             onChange={(event) =>
               submitValue({
-                key: `systolicBloodPressure`,
+                key: `${id}systolicBloodPressure`,
                 thing: event.target.value,
               })
             }
@@ -163,9 +163,9 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Heart Rate"
             variant="outlined"
-            value={localVitals[`heartRate`]}
+            value={localVitals[`${id}heartRate`]}
             onChange={(event) =>
-              submitValue({ key: `heartRate`, thing: event.target.value })
+              submitValue({ key: `${id}heartRate`, thing: event.target.value })
             }
           ></TextField>
           <br />
@@ -174,9 +174,12 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Pulse Oximetry"
             variant="outlined"
-            value={localVitals[`pulseOximetry`]}
+            value={localVitals[`${id}pulseOximetry`]}
             onChange={(event) =>
-              submitValue({ key: `pulseOximetry`, thing: event.target.value })
+              submitValue({
+                key: `${id}pulseOximetry`,
+                thing: event.target.value,
+              })
             }
           ></TextField>
           <br />
@@ -185,9 +188,12 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Respiratory Rate"
             variant="outlined"
-            value={localVitals[`respiratoryRate`]}
+            value={localVitals[`${id}respiratoryRate`]}
             onChange={(event) =>
-              submitValue({ key: `respiratoryRate`, thing: event.target.value })
+              submitValue({
+                key: `${id}respiratoryRate`,
+                thing: event.target.value,
+              })
             }
           ></TextField>
           <br />
@@ -196,10 +202,10 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Blood Glucose Level"
             variant="outlined"
-            value={localVitals[`bloodGlucoseLevel`]}
+            value={localVitals[`${id}bloodGlucoseLevel`]}
             onChange={(event) =>
               submitValue({
-                key: `bloodGlucoseLevel`,
+                key: `${id}bloodGlucoseLevel`,
                 thing: event.target.value,
               })
             }
@@ -210,10 +216,10 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Glasgow Coma Score-Eye"
             variant="outlined"
-            value={localVitals[`glasgowComaScoreEye`]}
+            value={localVitals[`${id}glasgowComaScoreEye`]}
             onChange={(event) =>
               submitValue({
-                key: `glasgowComaScoreEye`,
+                key: `${id}glasgowComaScoreEye`,
                 thing: event.target.value,
               })
             }
@@ -224,10 +230,10 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Glasgow Coma Score-Verbal"
             variant="outlined"
-            value={localVitals[`glasgowComaScoreVerbal`]}
+            value={localVitals[`${id}glasgowComaScoreVerbal`]}
             onChange={(event) =>
               submitValue({
-                key: `glasgowComaScoreVerbal`,
+                key: `${id}glasgowComaScoreVerbal`,
                 thing: event.target.value,
               })
             }
@@ -238,10 +244,10 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Glasgow Coma Score-Motor"
             variant="outlined"
-            value={localVitals[`glasgowComaScoreMotor`]}
+            value={localVitals[`${id}glasgowComaScoreMotor`]}
             onChange={(event) =>
               submitValue({
-                key: `glasgowComaScoreMotor`,
+                key: `${id}glasgowComaScoreMotor`,
                 thing: event.target.value,
               })
             }
@@ -252,10 +258,10 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Glasgow Coma Score-Qualifier"
             variant="outlined"
-            value={localVitals[`glasgowComaScoreQualifier`]}
+            value={localVitals[`${id}glasgowComaScoreQualifier`]}
             onChange={(event) =>
               submitValue({
-                key: `glasgowComaScoreQualifier`,
+                key: `${id}glasgowComaScoreQualifier`,
                 thing: event.target.value,
               })
             }
@@ -271,6 +277,13 @@ const VitalsForm = () => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}responsivenessLevel1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}responsivenessLevel1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -293,12 +306,19 @@ const VitalsForm = () => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}painScaleScore1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}painScaleScore1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
                 {dropdowns["pain_scale"].map((item) => (
-                  <MenuItem key={"pain_scale" + item.id} value={item.id}>
+                  <MenuItem key={"${id}pain_scale" + item.id} value={item.id}>
                     {item["pain_scale_type"]}
                   </MenuItem>
                 ))}
@@ -312,6 +332,13 @@ const VitalsForm = () => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}strokeScaleScore1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}strokeScaleScore1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -331,6 +358,13 @@ const VitalsForm = () => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}strokeScaleType1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}strokeScaleType1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 <MenuItem value="">
                   <em>None</em>
