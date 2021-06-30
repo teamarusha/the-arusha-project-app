@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 // This is one of our simplest components
 // It doesn't have local state,
 // It doesn't dispatch any redux actions or display any part of redux state
@@ -7,12 +8,14 @@ import React from 'react';
 
 function AboutPage() {
   return (
+  <React.Fragment>
     <div className="container">
       <div>
         <p>This about page is for anyone to read!</p>
       </div>
     </div>
-  );
+    </React.Fragment>
+  )
 }
 
 export default AboutPage;

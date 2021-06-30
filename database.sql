@@ -802,7 +802,8 @@ CREATE TABLE "user" (
     "password" VARCHAR (1000) NOT NULL,
     "user_first_name" VARCHAR (80) NOT NULL,
     "user_last_name" VARCHAR (80) NOT NULL,
-    "region_id" NUMERIC NOT NULL
+    "region_id" NUMERIC NOT NULL,
+    "is_admin" BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE incident (

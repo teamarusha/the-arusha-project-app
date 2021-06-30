@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-
+import LogOutButton from '../LogOutButton/LogOutButton';
 
 
 const useStyles = makeStyles({
@@ -32,12 +32,12 @@ function Admin() {
     const history = useHistory();
     const classes = useStyles();
 
-    useEffect(() => {
-        dispatch({ type: 'FETCH_REPORTS' })
-    }, []);
+    // useEffect(() => {
+    //     dispatch({ type: 'FETCH_REPORTS' })
+    // }, []);
 
-    const reports = useSelector((store) => store.reports);
-    console.log('reports:', reports)
+    // const reports = useSelector((store) => store.reports);
+    // console.log('reports:', reports)
     // const classes = useStyles();
 
     // rows = useSelector(store => store.table);
