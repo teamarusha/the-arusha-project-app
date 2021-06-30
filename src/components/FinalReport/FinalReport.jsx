@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { Card, Container } from '@material-ui/core';
 import moment from 'moment';
+import React from 'react';
 
 function FinalReport() {
     const { id } = useParams();
@@ -91,7 +92,7 @@ function FinalReport() {
                         <p>
                             {vit.map((item, index) => {
                                 return (
-                                    <>
+                                    <div>
                                         <h5>Vitals {index + 1}</h5>
                                         <ul>
                                             <li>Date: {moment(item.vitals_timestamp).format('DD/MM/YYYY')}</li>
@@ -114,7 +115,7 @@ function FinalReport() {
                                             <li>Stroke Scale Score: {item.stroke_score}</li>
                                             <li>Stroke Scale Type: {item.stroke_scale}</li>
                                         </ul>
-                                    </>
+                                    </div>
                                 )
                             })}
                         </p>
@@ -127,11 +128,11 @@ function FinalReport() {
                         <p>
                             {inj.map((item, index) => {
                                 return (
-                                    <>
+                                    <div>
                                         <h5>Injury {index + 1}</h5>
                                         <p>Type: {item.injury_location}</p>
                                         <p>Cause: {item.injury_cause}</p>
-                                    </>
+                                    </div>
 
                                 )
                             })}
@@ -167,7 +168,7 @@ function FinalReport() {
                         <p>
                             {med.map((item, index) => {
                                 return (
-                                    <>
+                                    <div>
                                         <h5>Medication {index + 1}</h5>
                                         <ul>
                                             <li>Date: {moment(item.med_timestamp).format('DD/MM/YYYY')}</li>
@@ -178,7 +179,7 @@ function FinalReport() {
                                             <li>Response to Medication: {item.med_response}</li>
                                             <li>Role/Type of Person Administering Medication: {item.med_admin_by_type}</li>
                                         </ul>
-                                    </>
+                                    </div>
                                 )
                             })}
                         </p>
@@ -189,7 +190,7 @@ function FinalReport() {
                         <p>
                             {pro.map((item, index) => {
                                 return (
-                                    <>
+                                    <div>
                                         <h5>Procedure {index + 1}</h5>
                                         <ul>
                                             <li>Date: {moment(item.procedure_timestamp).format('DD/MM/YYYY')}</li>
@@ -200,7 +201,7 @@ function FinalReport() {
                                             <li>Response to Procedure: {item.procedure_response}</li>
                                             <li>Role/Type of Person Performing Procedure: {item.procedure_performer}</li>
                                         </ul>
-                                    </>
+                                    </div>
                                 )
                             })}
                         </p>

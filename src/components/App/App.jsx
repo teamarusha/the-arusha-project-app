@@ -23,20 +23,12 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import Admin from '../Admin/Admin';
 import FinalReport from '../FinalReport/FinalReport';
 
-import PatientHome from '../PatientHome/PatientHome';
-import PatientDemographics from '../PatientDemographics/PatientDemographics';
-import PatientSymptoms from '../PatientSymptoms/PatientSymptoms';
-import PatientMedical from '../PatientMedical/PatientMedical';
-import PatientInjury from '../PatientInjury/PatientInjury';
-import PatientCardiac from '../PatientCardiac/PatientCardiac';
 
 import {ThemeProvider} from '@material-ui/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
 import './App.css';
-import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
-import IncidentFormDisposition from '../IncidentForm/IncidentFormDisposition';
-import IncidentFormScene from '../IncidentForm/IncidentFormScene';
 import IncidentHome from "../IncidentForm/IncidentHome";
+import PatientHome from '../PatientHome/PatientHome';
 import TreatmentHome from "../TreatmentForm/TreatmentHome";
 import VitalsForm from "../VitalsForm/VitalsForm";
 
