@@ -172,7 +172,7 @@ function Drawer(props) {
           <ListItem
             divider
             component={Link}
-            to="/patientHome"
+            to="/patient"
             classes={{ root: classes.item }}
           >
             <ListItemText classes={{ primary: classes.text }}>
