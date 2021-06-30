@@ -58,13 +58,13 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                 autoWidth
                 value={
                   localTreatment[
-                    `${id}procedure${localTreatment[`${id}lastMedication`]}`
+                    `${id}procedure${localTreatment[`${id}lastProcedure`]}`
                   ]
                 }
                 onChange={(event) =>
                   submitValue({
                     key: `${id}procedure${
-                      localTreatment[`${id}lastMedication`]
+                      localTreatment[`${id}lastProcedure`]
                     }`,
                     thing: event.target.value,
                   })
@@ -91,14 +91,14 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                 value={
                   localTreatment[
                     `${id}procedureAttempts${
-                      localTreatment[`${id}lastMedication`]
+                      localTreatment[`${id}lastProcedure`]
                     }`
                   ]
                 }
                 onChange={(event) =>
                   submitValue({
                     key: `${id}procedureAttempts${
-                      localTreatment[`${id}lastMedication`]
+                      localTreatment[`${id}lastProcedure`]
                     }`,
                     thing: event.target.value,
                   })
@@ -125,14 +125,14 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                 value={
                   localTreatment[
                     `${id}successfulProcedure${
-                      localTreatment[`${id}lastMedication`]
+                      localTreatment[`${id}lastProcedure`]
                     }`
                   ]
                 }
                 onChange={(event) =>
                   submitValue({
                     key: `${id}successfulProcedure${
-                      localTreatment[`${id}lastMedication`]
+                      localTreatment[`${id}lastProcedure`]
                     }`,
                     thing: event.target.value,
                   })
@@ -159,14 +159,14 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                 value={
                   localTreatment[
                     `${id}responseToProcedure${
-                      localTreatment[`${id}lastMedication`]
+                      localTreatment[`${id}lastProcedure`]
                     }`
                   ]
                 }
                 onChange={(event) =>
                   submitValue({
                     key: `${id}responseToProcedure${
-                      localTreatment[`${id}lastMedication`]
+                      localTreatment[`${id}lastProcedure`]
                     }`,
                     thing: event.target.value,
                   })
@@ -193,14 +193,14 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                 value={
                   localTreatment[
                     `${id}procedurePerformedBy${
-                      localTreatment[`${id}lastMedication`]
+                      localTreatment[`${id}lastProcedure`]
                     }`
                   ]
                 }
                 onChange={(event) =>
                   submitValue({
                     key: `${id}procedurePerformedBy${
-                      localTreatment[`${id}lastMedication`]
+                      localTreatment[`${id}lastProcedure`]
                     }`,
                     thing: event.target.value,
                   })
