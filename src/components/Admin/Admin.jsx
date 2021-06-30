@@ -1,3 +1,4 @@
+import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -11,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-
+import LogOutButton from '../LogOutButton/LogOutButton';
 
 
 const useStyles = makeStyles({
@@ -29,7 +30,7 @@ const useStyles = makeStyles({
 function Admin() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const classes = useStyles();
+
 
     useEffect(() => {
         dispatch({ type: 'FETCH_REPORTS' })
@@ -37,12 +38,12 @@ function Admin() {
 
     const reports = useSelector((store) => store.reportsTable);
     console.log('reports:', reports)
-    // const classes = useStyles();
+    const classes = useStyles();
 
-    // rows = useSelector(store => store.table);
+   const rows = useSelector(store => store.table);
 
 
-    // const classes = useStyles();
+
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 

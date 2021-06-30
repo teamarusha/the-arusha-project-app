@@ -5,6 +5,10 @@ import reportsTable from './reportsTable.reducer';
 import dropdowns from './dropdowns.reducer';
 import incident from './incident.reducer';
 import report from './report.reducer';
+import patients from './patients.reducer';
+import vitals from './vitals.reducer';
+import treatment from './treatment.reducer';
+
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,6 +23,9 @@ const rootReducer = combineReducers({
   dropdowns,
   incident,
   report,
+  patients,
+  vitals,
+  treatment
 });
 
 export default rootReducer;

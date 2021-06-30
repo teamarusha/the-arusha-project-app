@@ -2,11 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import IncidentFormResponse from "./IncidentFormResponse";
-import IncidentFormDisposition from "./IncidentFormDisposition";
-import IncidentFormScene from "./IncidentFormScene";
-import SummaryFieldSubmit from "../SummaryFieldSubmit/SummaryFieldSubmit"
+import TreatmentMedsForm from "./TreatmentMedsForm";
+import TreatmentProcedureForm from "./TreatmentProcedureForm";
+import AddEditPatient from "../AddEditPatient/AddEditPatient";
 
+//____________________Material UI Imports____________________
+import useStyles from "./Styles";
 import {
   Accordion,
   AccordionDetails,
@@ -16,15 +17,14 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import useStyles from "./Styles";
-import AddEditPatient from "../AddEditPatient/AddEditPatient";
-
-function IncidentHome() {
+function TreatmentHome() {
   const classes = useStyles();
   const dispatch = useDispatch();
-
   const dropdowns = useSelector((store) => store.dropdowns);
-
+  const [localTreatment, setLocalTreatment] = useState(
+    JSON.parse(localStorage.getItem("treatment"))
+  );
+  const [expanded, setExpanded] = useState(false);
   const [incidentMirror, setIncidentMirror] = useState(
     JSON.parse(localStorage.getItem("incident"))
   );
@@ -37,8 +37,6 @@ function IncidentHome() {
   const [vitalsMirror, setVitalsMirror] = useState(
     JSON.parse(localStorage.getItem("vitals"))
   );
-
-  const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -62,7 +60,6 @@ function IncidentHome() {
       localStorage.setItem("dropdowns", JSON.stringify(dropdowns));
     }
   }, [dropdowns.go]);
-  // _________________________________________________
 
   // Main Button
   const [buttonText, setButtonText] = useState("Dispatched");
@@ -105,10 +102,19 @@ function IncidentHome() {
 
   return (
     <div className="container">
-      <h2>Incident</h2>
+      <h2>Treament</h2>
+
+      {/* <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
+      <p>Incident Storage: {localStorage.getItem("incident")}</p>
+      <p>Vitals Mirror: {JSON.stringify(vitalsMirror)}</p>
+      <p>Vitals Storage: {localStorage.getItem("vitals")}</p>
+      <p>Treatment Mirror: {JSON.stringify(treatmentMirror)}</p>
+      <p>Treatment Storage: {localStorage.getItem("treatment")}</p>
+      <p>Patients Mirror: {JSON.stringify(patientsMirror)}</p>
+      <p>Patients Storage: {localStorage.getItem("patients")}</p> */}
 
       <AddEditPatient
-        formName={"incident"}
+        formName={"treatment"}
         incidentMirror={incidentMirror}
         setIncidentMirror={setIncidentMirror}
         patientsMirror={patientsMirror}
@@ -118,15 +124,8 @@ function IncidentHome() {
         vitalsMirror={vitalsMirror}
         setVitalsMirror={setVitalsMirror}
       />
-
-      <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
-      <p>Incident Storage: {localStorage.getItem("incident")}</p>
-      <p>Vitals Mirror: {JSON.stringify(vitalsMirror)}</p>
-      <p>Vitals Storage: {localStorage.getItem("vitals")}</p>
-      <p>Treatment Mirror: {JSON.stringify(treatmentMirror)}</p>
-      <p>Treatment Storage: {localStorage.getItem("treatment")}</p>
-      <p>Patients Mirror: {JSON.stringify(patientsMirror)}</p>
-      <p>Patients Storage: {localStorage.getItem("patients")}</p>
+      <br />
+      <br />
 
       <div>
         <Button onClick={clickMe} color="primary" variant="contained">
@@ -148,16 +147,18 @@ function IncidentHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Incident Response Form
+              Medication Administered
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <IncidentFormResponse
-              localIncident={incidentMirror}
-              setLocalIncident={setIncidentMirror}
+            <TreatmentMedsForm
+              localTreatment={treatmentMirror}
+              setLocalTreatment={setTreatmentMirror}
             />
           </AccordionDetails>
         </Accordion>
+
+        <br />
 
         <Accordion
           expanded={expanded === "panel2"}
@@ -173,45 +174,19 @@ function IncidentHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Incident Disposition Form
+              Procedure Administered
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <IncidentFormDisposition
-              localIncident={incidentMirror}
-              setLocalIncident={setIncidentMirror}
-            />
-          </AccordionDetails>
-        </Accordion>
-        <br />
-        <Accordion
-          expanded={expanded === "panel3"}
-          onChange={handleChange("panel3")}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2bh-content"
-            id="panel2bh-header"
-            style={{ textAlign: "center" }}
-          >
-            <Typography
-              classes={{ root: classes.text }}
-              className={classes.heading}
-            >
-              Incident Scene Form
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <IncidentFormScene
-              localIncident={incidentMirror}
-              setLocalIncident={setIncidentMirror}
+            <TreatmentProcedureForm
+              localTreatment={treatmentMirror}
+              setLocalTreatment={setTreatmentMirror}
             />
           </AccordionDetails>
         </Accordion>
       </div>
-      <SummaryFieldSubmit />
     </div>
   );
 }
 
-export default IncidentHome;
+export default TreatmentHome;

@@ -129,12 +129,12 @@ VALUES
 ('First Responder (non-EMS Fire)'),
 ('EMS Responder (transport EMS)');
 
-CREATE TABLE "aed_initiator" (
+CREATE TABLE "cpr_initiator" (
     "id" SERIAL PRIMARY KEY,
-    "aed_initiator_type" VARCHAR (40)
+    "cpr_initiator_type" VARCHAR (40)
 );
 
-INSERT INTO "aed_initiator" ("aed_initiator_type")
+INSERT INTO "cpr_initiator" ("cpr_initiator_type")
 VALUES
 ('Bystander'),
 ('Family Member'),
@@ -802,7 +802,7 @@ CREATE TABLE "user" (
     "password" VARCHAR (1000) NOT NULL,
     "user_first_name" VARCHAR (80) NOT NULL,
     "user_last_name" VARCHAR (80) NOT NULL,
-    "region_id" NUMERIC NOT NULL
+    "region_id" NUMERIC NOT NULL,
     "is_admin" BOOLEAN DEFAULT FALSE
 );
 
@@ -929,7 +929,7 @@ CREATE TABLE cardiacarrest (
     spontaneous_circulation_id integer REFERENCES "spontaneous_circulation",
     time_cardiac_arrest timestamp,
     cpr_stopped_id integer REFERENCES "cpr_stopped",
-    cpr_initiator_id integer REFERENCES "aed_initiator",
+    cpr_initiator_id integer REFERENCES "cpr_initiator",
     aed_applicator_id integer REFERENCES "aed_applicator",
     aed_defibrillator_id integer REFERENCES "aed_defibrillator"
 );
@@ -982,10 +982,3 @@ CREATE TABLE vitals (
 	stroke_scale_id integer REFERENCES "stroke_scale",
 	vitals_timestamp timestamp
 );
-
-
-
-
-
-
-

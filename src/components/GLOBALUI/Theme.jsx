@@ -8,7 +8,7 @@ export default createMuiTheme({
 
     palette:{
         common: {
-            main: `${KOPIOrange}`,
+            main: `${KOPIWhite}`,
         },
         primary: {
             main: `${KOPITeal}`,
@@ -18,15 +18,8 @@ export default createMuiTheme({
         }
     },
     typography: {
-        h5: {
-            color:'white'
-        },
-        h4: {
-            fontSize: 30,
-            fontFamily: 'Red Hat Display',
-            fontWeight: 600
-        },
-        h3: {
+        h1: {
+            fontSize: '3rem',
             fontFamily: 'Red Hat Display',
             fontWeight: 600
         },
@@ -34,8 +27,24 @@ export default createMuiTheme({
             fontFamily: 'Red Hat Display',
             fontWeight: 600,
         },
+        h3: {
+            fontFamily: 'Red Hat Display',
+            fontWeight: 600
+        },
+        h4: {
+            fontSize: 30,
+            fontFamily: 'Red Hat Display',
+            fontWeight: 600
+        },
+        h5: {
+            color:'white'
+        },
         body1: {
+            fontFamily: 'Red Hat Display',
             color:'black'
+        },
+        caption: {
+            fontFamily: 'Red Hat Display'
         }
     }
     

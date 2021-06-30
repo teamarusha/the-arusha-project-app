@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
-
-//req . user AND 
-//reject unauthenticated -non admin 
+const {
+  adminAuth,
+} = require('../modules/authentication-middleware');
 // get report info for admin table display
-router.get('/', (req, res) => {
+router.get('/', adminAuth(), (req, res) => {
   
     let queryText = `SELECT incident.unit_notified, patient.patient_first_name, patient.patient_last_name, "user".user_first_name, "user".user_last_name, patient.id FROM incident
     JOIN patient ON patient.patient_incident_id = incident.id
