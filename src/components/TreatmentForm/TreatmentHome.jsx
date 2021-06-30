@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import TreatmentMedsForm from "./TreatmentMedsForm";
 import TreatmentProcedureForm from "./TreatmentProcedureForm";
+import AddEditPatient from "../AddEditPatient/AddEditPatient";
 
 //____________________Material UI Imports____________________
 import useStyles from "./Styles";
@@ -23,8 +24,19 @@ function TreatmentHome() {
   const [localTreatment, setLocalTreatment] = useState(
     JSON.parse(localStorage.getItem("treatment"))
   );
-  const [render, setRender] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [incidentMirror, setIncidentMirror] = useState(
+    JSON.parse(localStorage.getItem("incident"))
+  );
+  const [patientsMirror, setPatientsMirror] = useState(
+    JSON.parse(localStorage.getItem("patients"))
+  );
+  const [treatmentMirror, setTreatmentMirror] = useState(
+    JSON.parse(localStorage.getItem("treatment"))
+  );
+  const [vitalsMirror, setVitalsMirror] = useState(
+    JSON.parse(localStorage.getItem("vitals"))
+  );
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -48,38 +60,6 @@ function TreatmentHome() {
       localStorage.setItem("dropdowns", JSON.stringify(dropdowns));
     }
   }, [dropdowns.go]);
-
-  // ____________________LOCAL STORAGE____________________
-  useEffect(() => {
-    console.log("Storage Mirror:", localTreatment);
-    console.log(
-      "Treatment Storage:",
-      JSON.parse(localStorage.getItem("treatment"))
-    );
-
-    if (JSON.parse(localStorage.getItem("treatment")) === null) {
-      setLocalTreatment({
-        initialized: true,
-        medication: "",
-        routeAdministered: "",
-        dosage: "",
-        units: "",
-        medicationResponse: "",
-        medsAdminBy: "",
-        procedure: "",
-        procedureAttempts: "",
-        successfulProcedure: "",
-        responseToProcedure: "",
-        procedurePerformedBy: "",
-      });
-      setRender(true);
-    }
-
-    // Otherwise, we allow the render as there should be data in storage
-    else {
-      setRender(true);
-    }
-  }, []);
 
   // Main Button
   const [buttonText, setButtonText] = useState("Dispatched");
@@ -122,7 +102,30 @@ function TreatmentHome() {
 
   return (
     <div className="container">
-      <h2>Treament Form Home</h2>
+      <h2>Treament</h2>
+
+      <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
+      <p>Incident Storage: {localStorage.getItem("incident")}</p>
+      <p>Vitals Mirror: {JSON.stringify(vitalsMirror)}</p>
+      <p>Vitals Storage: {localStorage.getItem("vitals")}</p>
+      <p>Treatment Mirror: {JSON.stringify(treatmentMirror)}</p>
+      <p>Treatment Storage: {localStorage.getItem("treatment")}</p>
+      <p>Patients Mirror: {JSON.stringify(patientsMirror)}</p>
+      <p>Patients Storage: {localStorage.getItem("patients")}</p>
+
+      <AddEditPatient
+        formName={"treatment"}
+        incidentMirror={incidentMirror}
+        setIncidentMirror={setIncidentMirror}
+        patientsMirror={patientsMirror}
+        setPatientsMirror={setPatientsMirror}
+        treatmentMirror={treatmentMirror}
+        setTreatmentMirror={setTreatmentMirror}
+        vitalsMirror={vitalsMirror}
+        setVitalsMirror={setVitalsMirror}
+      />
+      <br />
+      <br />
 
       <div>
         <Button onClick={clickMe} color="primary" variant="contained">
@@ -149,9 +152,8 @@ function TreatmentHome() {
           </AccordionSummary>
           <AccordionDetails>
             <TreatmentMedsForm
-              localTreatment={localTreatment}
-              setLocalTreatment={setLocalTreatment}
-              render={render}
+              localTreatment={treatmentMirror}
+              setLocalTreatment={setTreatmentMirror}
             />
           </AccordionDetails>
         </Accordion>
@@ -177,9 +179,8 @@ function TreatmentHome() {
           </AccordionSummary>
           <AccordionDetails>
             <TreatmentProcedureForm
-              localTreatment={localTreatment}
-              setLocalTreatment={setLocalTreatment}
-              render={render}
+              localTreatment={treatmentMirror}
+              setLocalTreatment={setTreatmentMirror}
             />
           </AccordionDetails>
         </Accordion>

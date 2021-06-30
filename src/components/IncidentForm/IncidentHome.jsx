@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
 
 import IncidentFormResponse from "./IncidentFormResponse";
 import IncidentFormDisposition from "./IncidentFormDisposition";
@@ -11,37 +10,57 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
+  Button,
   Typography,
 } from "@material-ui/core";
-import { ExpandMoreIcon } from "@material-ui/icons/ExpandMore";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import useStyles from "./Styles";
+import AddEditPatient from "../AddEditPatient/AddEditPatient";
 
 function IncidentHome() {
   const classes = useStyles();
-  const { id } = useParams();
   const dispatch = useDispatch();
+
   const dropdowns = useSelector((store) => store.dropdowns);
-  const [localIncident, setLocalIncident] = useState(
+  const patients = useSelector((store) => store.patients);
+  const incident = useSelector((store) => store.incident);
+  const treatment = useSelector((store) => store.treatment);
+  const vitals = useSelector((store) => store.vitals);
+
+  // const [localIncident, setLocalIncident] = useState(incident);
+
+  const [incidentMirror, setIncidentMirror] = useState(
     JSON.parse(localStorage.getItem("incident"))
   );
-  const [render, setRender] = useState(false);
+  const [patientsMirror, setPatientsMirror] = useState(
+    JSON.parse(localStorage.getItem("patients"))
+  );
+  const [treatmentMirror, setTreatmentMirror] = useState(
+    JSON.parse(localStorage.getItem("treatment"))
+  );
+  const [vitalsMirror, setVitalsMirror] = useState(
+    JSON.parse(localStorage.getItem("vitals"))
+  );
+
+  // const [localIncident, setLocalIncident] = useState(
+  //   JSON.parse(localStorage.getItem("incident"))
+  // );
+
   const [expanded, setExpanded] = useState(false);
-  const [selectedId, setSelectedId] = useState(false);
 
-  const handleListItemClick = (event, id) => {
-    setSelectedId(id);
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
   };
 
-  const handleChange = (id) => {
-    // setExpanded(isExpanded ? panel : false);
-    setExpanded(expanded === id ? -1 : id);
-  };
+  // // Initialize local storage if it is empty
+  // useEffect(() => {
+  //   if (JSON.parse(localStorage.getItem("incident")) === null) {
+  //     localStorage.setItem("incident", JSON.stringify(incident));
+  //   } else {
+  //     dispatch({ type: "SET_INCIDENT", payload: JSON.parse(localStorage.getItem("incident")) });
+  //   }
+  // }, []);
 
   // ____________________DROPDOWNS____________________
   let [localDropdownMirror, setLocalDropdownMirror] = useState(
@@ -62,117 +81,152 @@ function IncidentHome() {
     }
   }, [dropdowns.go]);
 
-  // ____________________LOCAL STORAGE____________________
-  useEffect(() => {
-    console.log("Storage Mirror:", localIncident);
+  // Main Button
+  const [buttonText, setButtonText] = useState("Dispatched");
+  function clickMe() {
+    console.log("Button clicked...");
+
+    switch (buttonText) {
+      case "Dispatched":
+        setButtonText("Unit En Route");
+        break;
+      case "Unit En Route":
+        setButtonText("Arrived at Scene");
+        break;
+      case "Arrived at Scene":
+        setButtonText("Arrived at Patient");
+        break;
+      case "Arrived at Patient":
+        setButtonText("En Route to Hospital");
+        break;
+      case "En Route to Hospital":
+        setButtonText("Arrived at Hospital");
+        break;
+      default:
+        setButtonText("Dispatched");
+        break;
+    }
+
+    const timestamp = Date.now(); // This would be the timestamp you want to format
     console.log(
-      "Incident Storage:",
-      JSON.parse(localStorage.getItem("incident"))
+      new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }).format(timestamp)
     );
-
-    if (JSON.parse(localStorage.getItem("incident")) === null) {
-      setLocalIncident({
-        initialized: true,
-        crew: "",
-        triageCat: "",
-        incidentService: "",
-        destinationState: "",
-        destinationCounty: "",
-        destinationZipCode: "",
-        transportDisposition: "",
-        transportMethod: "",
-        transportMode: "",
-        destinationFacility: "",
-        patientNumbers: "",
-        incidentState: "",
-        incidentCounty: "",
-        incidentZipCode: "",
-        possibleInjury: "",
-        alcoholDrugIndicators: "",
-      });
-      setRender(true);
-    }
-
-    // Otherwise, we allow the render as there should be data in storage
-    else {
-      setRender(true);
-    }
-  }, []);
+  }
 
   return (
-    <div>
-      <p>{JSON.stringify(localIncident)}</p>
-      <p>{localStorage.getItem("incident")}</p>
+    <div className="container">
+      <h2>Incident</h2>
 
-      <IncidentFormResponse
-        localIncident={localIncident}
-        setLocalIncident={setLocalIncident}
-        render={render}
+      <AddEditPatient
+        formName={"incident"}
+        incidentMirror={incidentMirror}
+        setIncidentMirror={setIncidentMirror}
+        patientsMirror={patientsMirror}
+        setPatientsMirror={setPatientsMirror}
+        treatmentMirror={treatmentMirror}
+        setTreatmentMirror={setTreatmentMirror}
+        vitalsMirror={vitalsMirror}
+        setVitalsMirror={setVitalsMirror}
       />
 
-      <IncidentFormDisposition
-        localIncident={localIncident}
-        setLocalIncident={setLocalIncident}
-        render={render}
-      />
+      {/* <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
+      <p>Incident Storage: {localStorage.getItem("incident")}</p>
+      <p>Vitals Mirror: {JSON.stringify(vitalsMirror)}</p>
+      <p>Vitals Storage: {localStorage.getItem("vitals")}</p>
+      <p>Treatment Mirror: {JSON.stringify(treatmentMirror)}</p>
+      <p>Treatment Storage: {localStorage.getItem("treatment")}</p>
+      <p>Patients Mirror: {JSON.stringify(patientsMirror)}</p>
+      <p>Patients Storage: {localStorage.getItem("patients")}</p> */}
 
-      <IncidentFormScene
-        localIncident={localIncident}
-        setLocalIncident={setLocalIncident}
-        render={render}
-      />
+      <div>
+        <Button onClick={clickMe} color="primary" variant="contained">
+          {buttonText}
+        </Button>
+      </div>
+      <div className={classes.root}>
+        <Accordion
+          expanded={expanded === "panel1"}
+          onChange={handleChange("panel1")}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1bh-content"
+            id="panel1bh-header"
+            style={{ textAlign: "center" }}
+          >
+            <Typography
+              classes={{ root: classes.text }}
+              className={classes.heading}
+            >
+              Incident Response Form
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <IncidentFormResponse
+              localIncident={incidentMirror}
+              setLocalIncident={setIncidentMirror}
+            />
+          </AccordionDetails>
+        </Accordion>
+
+        <Accordion
+          expanded={expanded === "panel2"}
+          onChange={handleChange("panel2")}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2bh-content"
+            id="panel2bh-header"
+            style={{ textAlign: "center" }}
+          >
+            <Typography
+              classes={{ root: classes.text }}
+              className={classes.heading}
+            >
+              Incident Disposition Form
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <IncidentFormDisposition
+              localIncident={incidentMirror}
+              setLocalIncident={setIncidentMirror}
+            />
+          </AccordionDetails>
+        </Accordion>
+        <br />
+        <Accordion
+          expanded={expanded === "panel3"}
+          onChange={handleChange("panel3")}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2bh-content"
+            id="panel2bh-header"
+            style={{ textAlign: "center" }}
+          >
+            <Typography
+              classes={{ root: classes.text }}
+              className={classes.heading}
+            >
+              Incident Scene Form
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <IncidentFormScene
+              localIncident={incidentMirror}
+              setLocalIncident={setIncidentMirror}
+            />
+          </AccordionDetails>
+        </Accordion>
+      </div>
     </div>
-
-    // <Grid Container justify="center" className={classes.root}>
-    //   <Grid item xs={12} s={6} m={4}>
-    //     <Accordion
-    //       expanded={expanded === id}
-    //       key={id}
-    //       onChange={handleChange(id)}
-    //     >
-    //       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-    //         <Typography className={classes.header}>"Incident Form"</Typography>
-    //       </AccordionSummary>
-    //       <Paper className={classes.paper}>
-    //         <AccordionDetails className={classes.rootExpanded}>
-    //           <List component="nav" aria-label="main mailbox folders">
-
-    //             <ListItem
-    //               button
-    //               selected={selectedId === id}
-    //               onClick={(event) => handleListItemClick(event, id)}
-    //             >
-    //               <ListItemText
-    //                 primary={IncidentFormResponse(
-    //                   localIncident,
-    //                   setLocalIncident,
-    //                   render
-    //                 )}
-    //               />
-    //             </ListItem>
-
-    //             <ListItem
-    //               button
-    //               selected={selectedId === id}
-    //               onClick={(event) => handleListItemClick(event, id)}
-    //             >
-    //               <ListItemText primary={IncidentFormScene} />
-    //             </ListItem>
-
-    //             <ListItem
-    //               button
-    //               selected={selectedId === id}
-    //               onClick={(event) => handleListItemClick(event, id)}
-    //             >
-    //               <ListItemText primary={IncidentFormDisposition} />
-    //             </ListItem>
-
-    //           </List>
-    //         </AccordionDetails>
-    //       </Paper>
-    //     </Accordion>
-    //   </Grid>
-    // </Grid>
   );
 }
 

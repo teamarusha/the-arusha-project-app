@@ -1,16 +1,16 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import AddProcedureButton from "./AddProcedureButton";
 
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 
-const TreatmentProcedureForm = ({
-  localTreatment,
-  setLocalTreatment,
-  render,
-}) => {
+const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
+  const { id } = useParams();
 
   // Runs whenever localPatientMirror is changed, updated, manipulated at all
   // This way they will always be the same as long as it is the mirror that is being changed
@@ -38,11 +38,14 @@ const TreatmentProcedureForm = ({
 
   return (
     <div className="container">
-      <h2>Procedure Form</h2>
+      <AddProcedureButton
+        treatmentMirror={localTreatment}
+        setTreatmentMirror={setLocalTreatment}
+      />
       <br />
       <br />
 
-      {render && (
+      {localTreatment && (
         <div>
           {dropdowns.go && (
             <div>
@@ -53,6 +56,13 @@ const TreatmentProcedureForm = ({
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}procedure1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}procedure1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -72,6 +82,13 @@ const TreatmentProcedureForm = ({
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}procedureAttempts1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}procedureAttempts1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 {dropdowns["procedures_attempted"].map((item) => (
                   <MenuItem
@@ -91,6 +108,13 @@ const TreatmentProcedureForm = ({
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}successfulProcedure1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}successfulProcedure1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 {dropdowns["procedure_successful"].map((item) => (
                   <MenuItem
@@ -110,6 +134,13 @@ const TreatmentProcedureForm = ({
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}responseToProcedure1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}responseToProcedure1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 {dropdowns["procedure_response"].map((item) => (
                   <MenuItem
@@ -129,6 +160,13 @@ const TreatmentProcedureForm = ({
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}procedurePerformedBy1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}procedurePerformedBy1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 {dropdowns["procedure_performer"].map((item) => (
                   <MenuItem
