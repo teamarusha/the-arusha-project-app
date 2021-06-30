@@ -1,44 +1,41 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import './LandingPage.css';
-import { Typography, Grid, Link } from '@material-ui/core';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import "./LandingPage.css";
+import { Typography, Grid, Link } from "@material-ui/core";
 // CUSTOM COMPONENTS
-import RegisterForm from '../RegisterForm/RegisterForm';
+import LoginForm from "../LoginForm/LoginForm";
+
 
 function LandingPage() {
-  const [heading, setHeading] = useState('Welcome');
+  const [heading, setHeading] = useState("Welcome");
   const history = useHistory();
 
   const onLogin = (event) => {
-    history.push('/login');
+    history.push("/registration");
   };
 
   return (
-    <div className="container">
+    <React.Fragment>
       
-
-      
-          <RegisterForm />
-
-         
-           
-          <Grid container justify='center'>
-            <Typography variant='body1' component='h4'>Already a Member?</Typography>
-            </Grid>
-     
-      <Grid container justify='center'>
-        <Link
-          variant='body1'
-          component="button"
-          onClick={onLogin}
-          color='secondary'
-        >
-          Register
-        </Link>
-     
+      <div className="container">
+        <LoginForm />
+        <Grid container justify="center">
+          <Typography variant="body1" component="h4">
+            New User?
+          </Typography>
         </Grid>
-      
-    </div>
+        <Grid container justify="center">
+          <Link
+            variant="body1"
+            component="button"
+            onClick={onLogin}
+            color="secondary"
+          >
+            Register
+          </Link>
+        </Grid>
+      </div>
+    </React.Fragment>
   );
 }
 

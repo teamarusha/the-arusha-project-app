@@ -2,10 +2,11 @@ import React from "react";
 import { Component } from "react";
 import './KOPILogo.css';
 
-export default class KOPIDesktopLogo extends Component {
+
+export default class KOPIAdminLogo extends Component {
   render() {
     return (
-      <svg className='desktopLogo'
+      <svg className='adminLogo'
         width="100"
         height="100"
         viewBox="0 0 259 259"

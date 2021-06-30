@@ -1,20 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
 import {useSelector} from 'react-redux';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import KOPIMobileLogo from "../KOPILOGO/KOPIMobileLogo";
+import KOPIMobileLogo from "../GLOBALUI/KOPILOGO/KOPIMobileLogo";
 import { makeStyles } from "@material-ui/styles";
-import { SwipeableDrawer, List, ListItem, ListItemText, ListItemSecondaryAction } from "@material-ui/core";
+import { SwipeableDrawer, List, ListItem, ListItemText, ListItemSecondaryAction, Divider } from "@material-ui/core";
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useState } from "react";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import LogOutButton from '../LogOutButton/LogOutButton';
 
 
+
+// OVERHEAD COMPONENT STYLING
 const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   nav: {
     width: '78%',
-    backgroundColor: '#8DD8DE',
+    backgroundColor: '#E8E7E7',
     boxShadow: '8px 8px 10px 3px rgba(0,0,0,0.56)',
   },
   item: {
@@ -36,11 +37,14 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     color: 'common'
+  },
+  root : {
+    backgroundColor: '#5BC6CC'
   }
 }));
 
 
-
+// NAV DRAWER PROP.
 function Drawer(props) {
 
   const classes = useStyles();
@@ -50,15 +54,26 @@ function Drawer(props) {
 
   const user = useSelector((store) => store.user);
 
-  let loginLinkData = {
+
+  let nonAdminLoginLinkData = {
     path: '/login',
     text: 'Login / Register',
   };
 
-  if (user.id != null) {
-    loginLinkData.path = '/user';
-    loginLinkData.text = 'Home';
+  let adminLoginLinkData = {
+    path: '/login',
+    text: 'Login / Register',
+  };
+
+  if (user.id != null && user.is_admin == false) {
+    nonAdminLoginLinkData.path = '/user';
+    nonAdminLoginLinkData.text = 'Home';
+  } 
+  else if (user.id !=null && user.is_admin == true){
+    adminLoginLinkData.path = '/admin'
+    adminLoginLinkData.text = 'Home'
   }
+
 
   return (
     <React.Fragment>
@@ -68,69 +83,49 @@ function Drawer(props) {
      disableDiscovery={iOS} 
      open={openDrawer} 
      onClose={()=> setOpenDrawer(false)} 
-    onOpen={()=> setOpenDrawer(true)} >
+     onOpen={()=> setOpenDrawer(true)} >
  <List>
-      <ListItem divider  component={Link} to="/home" classes={{root: classes.item}}>
-         <ListItemText classes={{primary: classes.text}}> Home </ListItemText>
-           <ListItemSecondaryAction edge="end">
-             <ChevronRightIcon fontSize='large'/>
-          </ListItemSecondaryAction>
-       </ListItem>
-    {/* <div className="nav">
-      <Link to="/home">
-        <h2 className="nav-title">The Arusha Project</h2>
-      </Link>
-      <div> */}
-         <ListItem divider component={Link} to={loginLinkData.path} classes={{root: classes.item}}>
-           <ListItemText classes={{primary: classes.text}}> {loginLinkData.text} </ListItemText>
-            <ListItemSecondaryAction edge="end">
-              <ChevronRightIcon fontSize='large'/>
-            </ListItemSecondaryAction>
-         </ListItem>
-        {/* <Link className="navLink" to={loginLinkData.path}>
-          {loginLinkData.text}
-        </Link> */}
-
         {user.id && (
           <React.Fragment>
-          <ListItem divider component={Link} to="/info" classes={{root: classes.item}}>
+          <ListItem  component={Link} to="/info" classes={{root: classes.item}}>
             <ListItemText classes={{primary: classes.text}}> Info Page </ListItemText>
              <ListItemSecondaryAction edge="end">
-              <ChevronRightIcon fontSize='large'/>
+              <ChevronRightIcon fontSize='large' style={{color: '#5BC6CC'}}/>
             </ListItemSecondaryAction>
          </ListItem>
-            {/* <Link className="navLink" to="/info">
-              Info Page
-            </Link> */}
-            <LogOutButton className="navLink" />
-          </React.Fragment>
-        )}
-        <ListItem divider component={Link} to="/about" classes={{root: classes.item}}>
+         <Divider classes={{root: classes.root}}/>
+         </React.Fragment>
+          )}
+
+        <ListItem  component={Link} to="/about" classes={{root: classes.item}}>
            <ListItemText classes={{primary: classes.text}}> About </ListItemText>
             <ListItemSecondaryAction edge="end">
-             <ChevronRightIcon fontSize='large'/>
+             <ChevronRightIcon fontSize='large' style={{color: '#5BC6CC'}}/>
             </ListItemSecondaryAction>
          </ListItem>
-        {/* <Link className="navLink" to="/about">
-          About
-
-        </Link> */}
-        <ListItem divider component={Link} to="/patientHome" classes={{root: classes.item}}>
+         <Divider classes={{root: classes.root}}/>
+    
+        <ListItem  component={Link} to="/patientHome" classes={{root: classes.item}}>
            <ListItemText classes={{primary: classes.text}}> Patient Home </ListItemText>
             <ListItemSecondaryAction edge="end">
-             <ChevronRightIcon fontSize='large'/>
+             <ChevronRightIcon fontSize='large' style={{color: '#5BC6CC'}}/>
             </ListItemSecondaryAction>
          </ListItem>
+         <Divider classes={{root: classes.root}}/>
 
-            <ListItem divider component={Link} to="/dropdown" classes={{root: classes.item}}>
+         <ListItem  component={Link} to="/dropdown" classes={{root: classes.item}}>
            <ListItemText classes={{primary: classes.text}}> ReduxCookie </ListItemText>
             <ListItemSecondaryAction edge="end">
-             <ChevronRightIcon fontSize='large'/>
+             <ChevronRightIcon fontSize='large' style={{color: '#5BC6CC'}}/>
             </ListItemSecondaryAction>
          </ListItem>
-        {/* <Link className="navLink" to="/dropdown">
-          ReduxCookie
-        </Link> */}
+         <Divider classes={{root: classes.root}}/>
+       
+
+        <ListItem  component={Link} to={nonAdminLoginLinkData.path} classes={{root: classes.item}}>
+           <ListItemText classes={{primary: classes.text}}> <LogOutButton/> </ListItemText>
+         </ListItem>
+         
     </List>
     </SwipeableDrawer>
      <IconButton
@@ -143,7 +138,7 @@ function Drawer(props) {
   );
 }
 
-
+// NAV HEADER SCROLL PROP.
 function ElevationScroll(props) {
   
   const { children } = props;
@@ -158,7 +153,7 @@ function ElevationScroll(props) {
   });
 }
 
-
+// NAV HEADER COMPONENT
 export default function Nav(props) {
   const classes = useStyles();
  

@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     height: "10rem",
+    marginBottom: theme.spacing(4)
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -37,8 +38,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const themeSpace = makeStyles((theme) => ( {
+  paper: {
+    marginBottom: theme.spacing(2)
+  }
+}))
+
 export default function ControlledAccordions() {
   const classes = useStyles();
+  const bottom = themeSpace();
   const [expanded, setExpanded] = React.useState(false);
   const [selectedID, setSelectedID] = React.useState(false);
 
@@ -76,6 +84,7 @@ export default function ControlledAccordions() {
             expanded={expanded === id}
             key={id}
             onChange={handleChange(id)}
+            classes={{root: bottom.paper}}
           >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography className={classes.heading}>{heading}</Typography>

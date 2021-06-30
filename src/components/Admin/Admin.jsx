@@ -1,3 +1,4 @@
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -11,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
-
+import LogOutButton from '../LogOutButton/LogOutButton';
 
 
 // const useStyles = makeStyles({
@@ -27,15 +28,15 @@ import { useHistory } from 'react-router';
 
 
 function Admin() {
-    const dispatch = useDispatch();
-    const history = useHistory();
+    // const dispatch = useDispatch();
+    // const history = useHistory();
 
-    useEffect(() => {
-        dispatch({ type: 'FETCH_REPORTS' })
-    }, []);
+    // useEffect(() => {
+    //     dispatch({ type: 'FETCH_REPORTS' })
+    // }, []);
 
-    const reports = useSelector((store) => store.reports);
-    console.log('reports:', reports)
+    // const reports = useSelector((store) => store.reports);
+    // console.log('reports:', reports)
     // const classes = useStyles();
 
     // rows = useSelector(store => store.table);
@@ -54,12 +55,16 @@ function Admin() {
     //     setPage(0);
     // };
 
-    function handleClick(row) {
-        history.push('/savedlist/${row.id}')
-    }
+    // function handleClick(row) {
+    //     history.push('/savedlist/${row.id}')
+    // }
 
     return (
-            JSON.stringify(reports)
+
+        <div>
+        <h1>HELLO THIS IS ADMIN</h1>
+        </div>
+            // JSON.stringify(reports)
             // <table>
             //     <thead>
             //         <tr>

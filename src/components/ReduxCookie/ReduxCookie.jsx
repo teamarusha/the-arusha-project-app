@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import Nav from '../Nav/Nav';
 
 function ReduxCookie() {
 
@@ -27,6 +27,8 @@ function ReduxCookie() {
     }, [dropdowns.go]);
 
     return (
+        <React.Fragment>
+        <Nav />
         <div>
             {dropdowns.go &&
                 <div>
@@ -39,6 +41,7 @@ function ReduxCookie() {
 
 
         </div>
+        </React.Fragment>  
     )
 }
 

@@ -8,10 +8,11 @@ import {
 
 import { useDispatch } from 'react-redux';
 
-import Nav from '../Nav/Nav';
+
 import Footer from '../Footer/Footer';
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import NonAdminProtectedRoute from '../ProtectedRoute/NonAdminProtectedRoute';
+import AdminProtectedRoute from '../ProtectedRoute/AdminProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
@@ -36,17 +37,33 @@ import IncidentFormDisposition from '../IncidentForm/IncidentFormDisposition';
 import IncidentFormScene from '../IncidentForm/IncidentFormScene';
 import ReduxCookie from '../ReduxCookie/ReduxCookie';
 
+import Nav from '../Nav/Nav';
+import AdminHeader from '../Admin/AdminHeader';
+import {useSelector} from 'react-redux';
+
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
+  
+  // KEEPING TRACK OF USER REDUX STATE
+  const user = useSelector((store) => store.user);
+  let isAdmin = (user.is_admin == true)
+  let nonAdmin = (user.is_admin == false)
+  let def = null
 
   return (
     <Router>
       <ThemeProvider theme={createMuiTheme}>
-        <Nav />
+
+  {/* CONDITIONAL RENDERING OF APP BAR w/ NAV */}
+      {isAdmin ? <AdminHeader/>
+      : nonAdmin ? <Nav/> 
+      : def
+      }
+
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -93,34 +110,28 @@ function App() {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          <ProtectedRoute
+            
+          <NonAdminProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/user"
           >
             <UserPage />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/admin"
-          >
-            <Admin />
-          </ProtectedRoute>
 
-          <ProtectedRoute
+          <NonAdminProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
             path="/info"
           >
             <InfoPage />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
           {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
-          <ProtectedRoute
+          <NonAdminProtectedRoute
             // with authRedirect:
             // - if logged in, redirects to "/user"
             // - else shows LoginPage at /login
@@ -129,9 +140,9 @@ function App() {
             authRedirect="/user"
           >
             <LoginPage />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute
+          <NonAdminProtectedRoute
             // with authRedirect:
             // - if logged in, redirects to "/user"
             // - else shows RegisterPage at "/registration"
@@ -140,9 +151,9 @@ function App() {
             authRedirect="/user"
           >
             <RegisterPage />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute
+          <NonAdminProtectedRoute
             // with authRedirect:
             // - if logged in, redirects to "/user"
             // - else shows LandingPage at "/home"
@@ -151,67 +162,58 @@ function App() {
             authRedirect="/user"
           >
             <LandingPage />
-          </ProtectedRoute>
-          
-          {/* <ProtectedRoute>
-            <IncidentFormResponse />
-          </ProtectedRoute> */}
+          </NonAdminProtectedRoute>
+    
 
-          {/* <ProtectedRoute>
-            <IncidentFormScene />
-          </ProtectedRoute> */}
-
-           {/* <ProtectedRoute>
-            <IncidentFormDisposition />
-          </ProtectedRoute> */}
-
-          <ProtectedRoute
-
+          <NonAdminProtectedRoute
           exact
           path="/patientHome"
           >
             <PatientHome />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute
-
+          <NonAdminProtectedRoute
           exact
           path="/patientDemographics"
           >
             <PatientDemographics />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute
-
+          <NonAdminProtectedRoute
           exact
           path="/patientInjury"
           >
             <PatientInjury />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute
-
+          <NonAdminProtectedRoute
           exact
           path="/patientMedical"
           >
             <PatientMedical />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute
-
+          <NonAdminProtectedRoute
           exact
           path="/patientSymptoms"
           >
             <PatientSymptoms />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute
-
+          <NonAdminProtectedRoute
           exact
           path="/patientCardiacArrest"
           >
             <PatientCardiac />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
+
+          <AdminProtectedRoute
+          exact
+          path="/admin"
+          >
+            <Admin />
+          </AdminProtectedRoute>
+
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
