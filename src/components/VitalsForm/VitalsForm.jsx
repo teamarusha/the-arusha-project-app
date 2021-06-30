@@ -2,6 +2,9 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import AddVitalsButton from "./AddVitalsButton";
+import AddEditPatient from "../AddEditPatient/AddEditPatient";
+
 //Material UI imports
 import {
   Button,
@@ -17,7 +20,19 @@ const VitalsForm = () => {
   const [localVitals, setLocalVitals] = useState(
     JSON.parse(localStorage.getItem("vitals"))
   );
-  const [render, setRender] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [incidentMirror, setIncidentMirror] = useState(
+    JSON.parse(localStorage.getItem("incident"))
+  );
+  const [patientsMirror, setPatientsMirror] = useState(
+    JSON.parse(localStorage.getItem("patients"))
+  );
+  const [treatmentMirror, setTreatmentMirror] = useState(
+    JSON.parse(localStorage.getItem("treatment"))
+  );
+  const [vitalsMirror, setVitalsMirror] = useState(
+    JSON.parse(localStorage.getItem("vitals"))
+  );
 
   // ____________________DROPDOWNS____________________
   let [localDropdownMirror, setLocalDropdownMirror] = useState(
@@ -37,36 +52,6 @@ const VitalsForm = () => {
       localStorage.setItem("dropdowns", JSON.stringify(dropdowns));
     }
   }, [dropdowns.go]);
-
-  // ____________________LOCAL STORAGE____________________
-  useEffect(() => {
-    console.log("Storage Mirror:", localVitals);
-    console.log("Vitals Storage:", JSON.parse(localStorage.getItem("vitals")));
-
-    if (JSON.parse(localStorage.getItem("vitals")) === null) {
-      setLocalVitals({
-        initialized: true,
-        systolicBloodPressure: "",
-        heartRate: "",
-        pulseOximetry: "",
-        respiratoryRate: "",
-        bloodGlucoseLevel: "",
-        glasgowComaScoreEye: "",
-        glasgowComaScoreVerbal: "",
-        glasgowComaScoreMotor: "",
-        glasgowComaScoreQualifier: "",
-        responsivenessLevel: "",
-        painScaleScore: "",
-        strokeScaleScore: "",
-        strokeScaleType: "",
-      });
-      setRender(true);
-    }
-    // Otherwise, we allow the render as there should be data in storage
-    else {
-      setRender(true);
-    }
-  }, []);
 
   // Main Button
   const [buttonText, setButtonText] = useState("Dispatched");
@@ -129,15 +114,36 @@ const VitalsForm = () => {
 
   return (
     <div className="container">
-      <h2>Vitals Form</h2>
+      <h2>Vitals</h2>
+
+      <AddEditPatient
+        formName={"vitals"}
+        incidentMirror={incidentMirror}
+        setIncidentMirror={setIncidentMirror}
+        patientsMirror={patientsMirror}
+        setPatientsMirror={setPatientsMirror}
+        treatmentMirror={treatmentMirror}
+        setTreatmentMirror={setTreatmentMirror}
+        vitalsMirror={vitalsMirror}
+        setVitalsMirror={setVitalsMirror}
+      />
+      <br />
+      <br />
+
       <div>
         <Button onClick={clickMe} color="primary" variant="contained">
           {buttonText}
         </Button>
       </div>
 
-      {render && (
+      {localVitals && (
         <div>
+          <AddVitalsButton
+            vitalsMirror={localVitals}
+            setVitalsMirror={setLocalVitals}
+          />
+          <br />
+          <br />
           <TextField
             id="outlined-basic"
             label="Systolic Blood Pressure (SBP"
