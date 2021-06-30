@@ -22,6 +22,7 @@ function AddMedicationButton({ treatmentMirror, setTreatmentMirror }) {
 
     setTreatmentMirror({
       ...treatmentMirror,
+      [id + "lastMedication"]: newMedicationID,
       [id + "medicationArray"]: [
         ...treatmentMirror[`${id}medicationArray`],
         newMedicationID,

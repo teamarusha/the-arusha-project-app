@@ -50,10 +50,14 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
             id="outlined-basic"
             label="Medication Administered"
             variant="outlined"
-            value={localTreatment[`${id}medication1`]}
+            value={
+              localTreatment[
+                `${id}medication${localTreatment[`${id}lastMedication`]}`
+              ]
+            }
             onChange={(event) =>
               submitValue({
-                key: `${id}medication1`,
+                key: `${id}medication${localTreatment[`${id}lastMedication`]}`,
                 thing: event.target.value,
               })
             }
@@ -70,10 +74,16 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
-                value={localTreatment[`${id}medsAdminBy1`]}
+                value={
+                  localTreatment[
+                    `${id}medsAdminBy${localTreatment[`${id}lastMedication`]}`
+                  ]
+                }
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}medsAdminBy1`,
+                    key: `${id}medsAdminBy${
+                      localTreatment[`${id}lastMedication`]
+                    }`,
                     thing: event.target.value,
                   })
                 }
@@ -93,10 +103,14 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 id="outlined-basic"
                 label="Dosage"
                 variant="outlined"
-                value={localTreatment[`${id}dosage1`]}
+                value={
+                  localTreatment[
+                    `${id}dosage${localTreatment[`${id}lastMedication`]}`
+                  ]
+                }
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}dosage1`,
+                    key: `${id}dosage${localTreatment[`${id}lastMedication`]}`,
                     thing: event.target.value,
                   })
                 }
@@ -110,9 +124,16 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
-                value={localTreatment[`${id}units1`]}
+                value={
+                  localTreatment[
+                    `${id}units${localTreatment[`${id}lastMedication`]}`
+                  ]
+                }
                 onChange={(event) =>
-                  submitValue({ key: `${id}units1`, thing: event.target.value })
+                  submitValue({
+                    key: `${id}units${localTreatment[`${id}lastMedication`]}`,
+                    thing: event.target.value,
+                  })
                 }
               >
                 <MenuItem value="">
@@ -133,10 +154,18 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
-                value={localTreatment[`${id}responseToProcedure1`]}
+                value={
+                  localTreatment[
+                    `${id}responseToProcedure${
+                      localTreatment[`${id}lastMedication`]
+                    }`
+                  ]
+                }
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}responseToProcedure1`,
+                    key: `${id}responseToProcedure${
+                      localTreatment[`${id}lastMedication`]
+                    }`,
                     thing: event.target.value,
                   })
                 }
@@ -159,10 +188,18 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
-                value={localTreatment[`${id}procedurePerformedBy1`]}
+                value={
+                  localTreatment[
+                    `${id}procedurePerformedBy${
+                      localTreatment[`${id}lastMedication`]
+                    }`
+                  ]
+                }
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}procedurePerformedBy1`,
+                    key: `${id}procedurePerformedBy${
+                      localTreatment[`${id}lastMedication`]
+                    }`,
                     thing: event.target.value,
                   })
                 }
