@@ -14,7 +14,7 @@ function* getDropdowns() {
         "cpr_stopped",
         "resuscitation_attempt",
         "aed_applicator",
-        "aed_initiator",
+        "cpr_initiator",
         "aed_defibrillator",
         "gender",
         "race",
