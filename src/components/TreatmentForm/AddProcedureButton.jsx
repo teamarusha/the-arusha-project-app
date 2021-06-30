@@ -23,6 +23,7 @@ function AddProcedureButton({ treatmentMirror, setTreatmentMirror }) {
 
     setTreatmentMirror({
       ...treatmentMirror,
+      [id + "lastProcedure"]: newProcedureID,
       [id + "procedureArray"]: [
         ...treatmentMirror[`${id}procedureArray`],
         newProcedureID,
