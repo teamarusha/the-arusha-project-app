@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import IncidentFormResponse from "./IncidentFormResponse";
 import IncidentFormDisposition from "./IncidentFormDisposition";
 import IncidentFormScene from "./IncidentFormScene";
+import SummaryFieldSubmit from "../SummaryFieldSubmit/SummaryFieldSubmit"
 
 import {
   Accordion,
@@ -226,6 +227,7 @@ function IncidentHome() {
           </AccordionDetails>
         </Accordion>
       </div>
+      <SummaryFieldSubmit />
     </div>
   );
 }
