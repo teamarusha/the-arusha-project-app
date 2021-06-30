@@ -123,7 +123,7 @@ function Drawer(props) {
           <Divider classes={{root: classes.root}}/>
 
      {/* PATIENT HOME */}
-        <ListItem  component={Link} to="/patientHome" classes={{root: classes.item}}>
+        <ListItem  component={Link} to="/patient" classes={{root: classes.item}}>
            <ListItemText classes={{primary: classes.text}}> Patient Home </ListItemText>
             <ListItemSecondaryAction edge="end">
              <ChevronRightIcon fontSize='large' style={{color: '#5BC6CC'}}/>
@@ -140,6 +140,7 @@ function Drawer(props) {
           </ListItem>
           <Divider classes={{root: classes.root}}/>
 
+    {/* VITALS HOME */}
           <ListItem component={Link} to="/vitals" classes={{ root: classes.item }}>
             <ListItemText classes={{ primary: classes.text }}> Vitals </ListItemText>
             <ListItemSecondaryAction edge="end">
@@ -148,14 +149,6 @@ function Drawer(props) {
             </ListItem>
             <Divider classes={{root: classes.root}}/>
 
-    {/* REDUX COOKIE */}
-         <ListItem  component={Link} to="/dropdown" classes={{root: classes.item}}>
-           <ListItemText classes={{primary: classes.text}}> ReduxCookie </ListItemText>
-            <ListItemSecondaryAction edge="end">
-             <ChevronRightIcon fontSize='large' style={{color: '#5BC6CC'}}/>
-            </ListItemSecondaryAction>
-         </ListItem>
-         <Divider classes={{root: classes.root}}/>
        
     {/* LOGOUT BUTTON */}
         <ListItem  component={Link} to={nonAdminLoginLinkData.path} classes={{root: classes.item}}>

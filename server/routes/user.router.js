@@ -1,4 +1,3 @@
-import {useSelector} from 'react-redux';
 const express = require('express');
 const {
   rejectUnauthenticated,
