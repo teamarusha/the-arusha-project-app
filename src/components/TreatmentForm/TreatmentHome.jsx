@@ -104,14 +104,14 @@ function TreatmentHome() {
     <div className="container">
       <h2>Treament</h2>
 
-      <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
+      {/* <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
       <p>Incident Storage: {localStorage.getItem("incident")}</p>
       <p>Vitals Mirror: {JSON.stringify(vitalsMirror)}</p>
       <p>Vitals Storage: {localStorage.getItem("vitals")}</p>
       <p>Treatment Mirror: {JSON.stringify(treatmentMirror)}</p>
       <p>Treatment Storage: {localStorage.getItem("treatment")}</p>
       <p>Patients Mirror: {JSON.stringify(patientsMirror)}</p>
-      <p>Patients Storage: {localStorage.getItem("patients")}</p>
+      <p>Patients Storage: {localStorage.getItem("patients")}</p> */}
 
       <AddEditPatient
         formName={"treatment"}

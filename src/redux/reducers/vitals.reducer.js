@@ -2,6 +2,7 @@ const vitals = (
   state =
     {
       '1vitalsArray': [1],
+      '1lastVital': 1,
       '1systolicBloodPressure1': '',
       '1heartRate1': '',
       '1pulseOximetry1': '',

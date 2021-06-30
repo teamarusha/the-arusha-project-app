@@ -25,8 +25,6 @@ const incident = (
       return action.payload;
     case 'ADD_INCIDENT_OBJECT':
       return { ...state, [action.payload.key]: action.payload.value }
-    case 'UNSET_INCIDENT':
-      return {};
     default:
       return state;
   }
