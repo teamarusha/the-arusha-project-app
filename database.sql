@@ -925,7 +925,7 @@ CREATE TABLE cardiacarrest (
     spontaneous_circulation_id integer REFERENCES "spontaneous_circulation",
     time_cardiac_arrest timestamp,
     cpr_stopped_id integer REFERENCES "cpr_stopped",
-    aed_initiator_id integer REFERENCES "aed_initiator",
+    cpr_initiator_id integer REFERENCES "cpr_initiator",
     aed_applicator_id integer REFERENCES "aed_applicator",
     aed_defibrillator_id integer REFERENCES "aed_defibrillator"
 );

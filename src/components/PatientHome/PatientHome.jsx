@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 function PatientHome() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
+  const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);
 
   const [incidentMirror, setIncidentMirror] = useState(
@@ -69,8 +69,8 @@ function PatientHome() {
     JSON.parse(localStorage.getItem("vitals"))
   );
 
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+ 
+  
 
   // const [buttonText, setButtonText] = useState('Dispatched');
 
@@ -138,14 +138,6 @@ function PatientHome() {
   }, [dropdowns.go]);
 
 
-<<<<<<< HEAD
-    return (
-      <React.Fragment>
-        <div className="container">
-            <h2>Patient Form Home</h2>
-
-            
-=======
 
 
   return (
@@ -158,29 +150,9 @@ function PatientHome() {
               // onClick={() => handleClick()}
               >{buttonText}</Button>
             </div> */}
->>>>>>> 4c72a12b5c4d566bb5ea94495bcdbed6c8e90556
 
       <TimestampButton />
 
-<<<<<<< HEAD
-            <p>List of Links for Patient Form:</p>
-     
-            
-            <div className={classes.root}>
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-          style={{textAlign: 'center'}}
-        >
-          <Typography classes={{root: classes.text}} className={classes.heading}>Demographics</Typography>
-          {/* <Typography className={classes.secondaryHeading}>I am an accordion</Typography> */}
-        </AccordionSummary>
-        <AccordionDetails>
-            <PatientDemographics />
-          {/* <Typography>
-=======
       <AddEditPatient
         formName={"patient"}
         incidentMirror={incidentMirror}
@@ -219,7 +191,6 @@ function PatientHome() {
               setPatientsMirror={setPatientsMirror}
             />
             {/* <Typography>
->>>>>>> 4c72a12b5c4d566bb5ea94495bcdbed6c8e90556
             Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
             maximus est, id dignissim quam.
           </Typography> */}
@@ -322,15 +293,8 @@ function PatientHome() {
           </AccordionDetails>
         </Accordion>
 
-<<<<<<< HEAD
-        </div>
-        </div>
-      
-        </React.Fragment>
-=======
       </div>
     </div>
->>>>>>> 4c72a12b5c4d566bb5ea94495bcdbed6c8e90556
   );
 }
 
