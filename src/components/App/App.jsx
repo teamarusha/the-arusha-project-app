@@ -141,28 +141,12 @@ function App() {
             <IncidentHome />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/patientHome">
+          <ProtectedRoute exact path="/patient">
             <PatientHome />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/patientDemographics">
-            <PatientDemographics />
-          </ProtectedRoute>
-
-          <ProtectedRoute exact path="/patientInjury">
-            <PatientInjury />
-          </ProtectedRoute>
-
-          <ProtectedRoute exact path="/patientMedical">
-            <PatientMedical />
-          </ProtectedRoute>
-
-          <ProtectedRoute exact path="/patientSymptoms">
-            <PatientSymptoms />
-          </ProtectedRoute>
-
-          <ProtectedRoute exact path="/patientCardiacArrest">
-            <PatientCardiac />
+          <ProtectedRoute exact path="/patient/:id">
+            <PatientHome />
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/treatment">
@@ -185,6 +169,7 @@ function App() {
           <Route>
             <h1>404</h1>
           </Route>
+          
         </Switch>
         <Footer />
       </ThemeProvider>

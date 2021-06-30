@@ -158,7 +158,7 @@ function AddEditPatient({
             [newPatientID + "spontaneousCirculation"]: "",
             [newPatientID + "timeCardiacArrest"]: "",
             [newPatientID + "cprStopped"]: "",
-            [newPatientID + "aedInitiator"]: "",
+            [newPatientID + "cprInitiator"]: "",
             [newPatientID + "aedApplicator"]: "",
             [newPatientID + "aedDefibrillator"]: "",
         });
