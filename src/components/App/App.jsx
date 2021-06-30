@@ -150,13 +150,22 @@ function App() {
           </NonAdminProtectedRoute>
     
 
+<<<<<<< HEAD
           <NonAdminProtectedRoute
           exact
           path="/patientHome"
           >
+=======
+          <ProtectedRoute path="/incident/:id">
+            <IncidentHome />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/patient">
+>>>>>>> 4c72a12b5c4d566bb5ea94495bcdbed6c8e90556
             <PatientHome />
           </NonAdminProtectedRoute>
 
+<<<<<<< HEAD
           <NonAdminProtectedRoute
           exact
           path="/patientDemographics"
@@ -193,6 +202,11 @@ function App() {
           <NonAdminProtectedRoute exact path="/incident">
             <IncidentHome />
           </NonAdminProtectedRoute>
+=======
+          <ProtectedRoute exact path="/patient/:id">
+            <PatientHome />
+          </ProtectedRoute>
+>>>>>>> 4c72a12b5c4d566bb5ea94495bcdbed6c8e90556
 
           <NonAdminProtectedRoute path="/incident/:id">
             <IncidentHome />
@@ -228,7 +242,12 @@ function App() {
           <Route>
             <h1>404</h1>
           </Route>
+<<<<<<< HEAD
        
+=======
+          
+        </Switch>
+>>>>>>> 4c72a12b5c4d566bb5ea94495bcdbed6c8e90556
         <Footer />
         </ThemeProvider>
         </Router>
