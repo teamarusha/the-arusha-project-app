@@ -166,6 +166,7 @@ function AddEditPatient({
         setTreatmentMirror({
             ...treatmentMirror,
             [newPatientID + "medicationArray"]: [1],
+            [newPatientID + "lastMedication"]: 1,
             [newPatientID + "medication1"]: "",
             [newPatientID + "routeAdministered1"]: "",
             [newPatientID + "dosage1"]: "",
@@ -173,6 +174,7 @@ function AddEditPatient({
             [newPatientID + "medicationResponse1"]: "",
             [newPatientID + "medsAdminBy1"]: "",
             [newPatientID + "procedureArray"]: [1],
+            [newPatientID + "lastProcedure"]: 1,
             [newPatientID + "procedure1"]: "",
             [newPatientID + "procedureAttempts1"]: "",
             [newPatientID + "successfulProcedure1"]: "",
@@ -183,6 +185,7 @@ function AddEditPatient({
         setVitalsMirror({
             ...vitalsMirror,
             [newPatientID + "vitalsArray"]: [1],
+            [newPatientID + "lastVital"]: 1,
             [newPatientID + "systolicBloodPressure1"]: "",
             [newPatientID + "heartRate1"]: "",
             [newPatientID + "pulseOximetry1"]: "",

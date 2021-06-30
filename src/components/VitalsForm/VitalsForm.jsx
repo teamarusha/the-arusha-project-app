@@ -158,10 +158,10 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Systolic Blood Pressure (SBP"
             variant="outlined"
-            value={localVitals[`${id}systolicBloodPressure1`]}
+            value={localVitals[`${id}systolicBloodPressure${localVitals[`${id}lastVital`]}`]}
             onChange={(event) =>
               submitValue({
-                key: `${id}systolicBloodPressure1`,
+                key: `${id}systolicBloodPressure${localVitals[`${id}lastVital`]}`,
                 thing: event.target.value,
               })
             }
@@ -173,9 +173,9 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Heart Rate"
             variant="outlined"
-            value={localVitals[`${id}heartRate1`]}
+            value={localVitals[`${id}heartRate${localVitals[`${id}lastVital`]}`]}
             onChange={(event) =>
-              submitValue({ key: `${id}heartRate1`, thing: event.target.value })
+              submitValue({ key: `${id}heartRate${localVitals[`${id}lastVital`]}`, thing: event.target.value })
             }
           ></TextField>
           <br />
@@ -184,10 +184,10 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Pulse Oximetry"
             variant="outlined"
-            value={localVitals[`${id}pulseOximetry1`]}
+            value={localVitals[`${id}pulseOximetry${localVitals[`${id}lastVital`]}`]}
             onChange={(event) =>
               submitValue({
-                key: `${id}pulseOximetry1`,
+                key: `${id}pulseOximetry${localVitals[`${id}lastVital`]}`,
                 thing: event.target.value,
               })
             }
@@ -198,10 +198,10 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Respiratory Rate"
             variant="outlined"
-            value={localVitals[`${id}respiratoryRate1`]}
+            value={localVitals[`${id}respiratoryRate${localVitals[`${id}lastVital`]}`]}
             onChange={(event) =>
               submitValue({
-                key: `${id}respiratoryRate1`,
+                key: `${id}respiratoryRate${localVitals[`${id}lastVital`]}`,
                 thing: event.target.value,
               })
             }
@@ -212,10 +212,10 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Blood Glucose Level"
             variant="outlined"
-            value={localVitals[`${id}bloodGlucoseLevel1`]}
+            value={localVitals[`${id}bloodGlucoseLevel${localVitals[`${id}lastVital`]}`]}
             onChange={(event) =>
               submitValue({
-                key: `${id}bloodGlucoseLevel1`,
+                key: `${id}bloodGlucoseLevel${localVitals[`${id}lastVital`]}`,
                 thing: event.target.value,
               })
             }
@@ -226,10 +226,10 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Glasgow Coma Score-Eye"
             variant="outlined"
-            value={localVitals[`${id}glasgowComaScoreEye1`]}
+            value={localVitals[`${id}glasgowComaScoreEye${localVitals[`${id}lastVital`]}`]}
             onChange={(event) =>
               submitValue({
-                key: `${id}glasgowComaScoreEye1`,
+                key: `${id}glasgowComaScoreEye${localVitals[`${id}lastVital`]}`,
                 thing: event.target.value,
               })
             }
@@ -240,10 +240,10 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Glasgow Coma Score-Verbal"
             variant="outlined"
-            value={localVitals[`${id}glasgowComaScoreVerbal1`]}
+            value={localVitals[`${id}glasgowComaScoreVerbal${localVitals[`${id}lastVital`]}`]}
             onChange={(event) =>
               submitValue({
-                key: `${id}glasgowComaScoreVerbal1`,
+                key: `${id}glasgowComaScoreVerbal${localVitals[`${id}lastVital`]}`,
                 thing: event.target.value,
               })
             }
@@ -254,10 +254,10 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Glasgow Coma Score-Motor"
             variant="outlined"
-            value={localVitals[`${id}glasgowComaScoreMotor1`]}
+            value={localVitals[`${id}glasgowComaScoreMotor${localVitals[`${id}lastVital`]}`]}
             onChange={(event) =>
               submitValue({
-                key: `${id}glasgowComaScoreMotor1`,
+                key: `${id}glasgowComaScoreMotor${localVitals[`${id}lastVital`]}`,
                 thing: event.target.value,
               })
             }
@@ -268,10 +268,10 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Glasgow Coma Score-Qualifier"
             variant="outlined"
-            value={localVitals[`${id}glasgowComaScoreQualifier1`]}
+            value={localVitals[`${id}glasgowComaScoreQualifier${localVitals[`${id}lastVital`]}`]}
             onChange={(event) =>
               submitValue({
-                key: `${id}glasgowComaScoreQualifier1`,
+                key: `${id}glasgowComaScoreQualifier${localVitals[`${id}lastVital`]}`,
                 thing: event.target.value,
               })
             }
@@ -287,10 +287,10 @@ const VitalsForm = () => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
-                value={localVitals[`${id}responsivenessLevel1`]}
+                value={localVitals[`${id}responsivenessLevel${localVitals[`${id}lastVital`]}`]}
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}responsivenessLevel1`,
+                    key: `${id}responsivenessLevel${localVitals[`${id}lastVital`]}`,
                     thing: event.target.value,
                   })
                 }
@@ -316,10 +316,10 @@ const VitalsForm = () => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
-                value={localVitals[`${id}painScaleScore1`]}
+                value={localVitals[`${id}painScaleScore${localVitals[`${id}lastVital`]}`]}
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}painScaleScore1`,
+                    key: `${id}painScaleScore${localVitals[`${id}lastVital`]}`,
                     thing: event.target.value,
                   })
                 }
@@ -342,10 +342,10 @@ const VitalsForm = () => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
-                value={localVitals[`${id}strokeScaleScore1`]}
+                value={localVitals[`${id}strokeScaleScore${localVitals[`${id}lastVital`]}`]}
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}strokeScaleScore1`,
+                    key: `${id}strokeScaleScore${localVitals[`${id}lastVital`]}`,
                     thing: event.target.value,
                   })
                 }
@@ -368,10 +368,10 @@ const VitalsForm = () => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
-                value={localVitals[`${id}strokeScaleType1`]}
+                value={localVitals[`${id}strokeScaleType${localVitals[`${id}lastVital`]}`]}
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}strokeScaleType1`,
+                    key: `${id}strokeScaleType${localVitals[`${id}lastVital`]}`,
                     thing: event.target.value,
                   })
                 }

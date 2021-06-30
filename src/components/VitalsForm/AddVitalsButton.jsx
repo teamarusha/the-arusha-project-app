@@ -19,8 +19,12 @@ function AddVitalsButton({ vitalsMirror, setVitalsMirror }) {
     let newVitalsID = vitalsMirror[`${id}vitalsArray`].length + 1;
     console.log("new vitals ID", newVitalsID);
 
+
+
+
     setVitalsMirror({
       ...vitalsMirror,
+      [id + "lastVital"]: newVitalsID,
       [id + "vitalsArray"]: [...vitalsMirror[`${id}vitalsArray`], newVitalsID],
       [id + "systolicBloodPressure" + newVitalsID]: "",
       [id + "heartRate" + newVitalsID]: "",
