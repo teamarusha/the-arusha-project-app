@@ -129,12 +129,12 @@ VALUES
 ('First Responder (non-EMS Fire)'),
 ('EMS Responder (transport EMS)');
 
-CREATE TABLE "aed_initiator" (
+CREATE TABLE "cpr_initiator" (
     "id" SERIAL PRIMARY KEY,
-    "aed_initiator_type" VARCHAR (40)
+    "cpr_initiator_type" VARCHAR (40)
 );
 
-INSERT INTO "aed_initiator" ("aed_initiator_type")
+INSERT INTO "cpr_initiator" ("cpr_initiator_type")
 VALUES
 ('Bystander'),
 ('Family Member'),
