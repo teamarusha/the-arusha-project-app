@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   HashRouter as Router,
   Route,
@@ -36,6 +36,11 @@ import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
 import IncidentFormDisposition from '../IncidentForm/IncidentFormDisposition';
 import IncidentFormScene from '../IncidentForm/IncidentFormScene';
 import ReduxCookie from '../ReduxCookie/ReduxCookie';
+import IncidentHome from "../IncidentForm/IncidentHome";
+import TreatmentHome from "../TreatmentForm/TreatmentHome";
+import ReduxCookie from "../ReduxCookie/ReduxCookie";
+import VitalsForm from "../VitalsForm/VitalsForm";
+
 
 import Nav from '../Nav/Nav';
 import AdminHeader from '../Admin/AdminHeader';
@@ -45,7 +50,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
   
   // KEEPING TRACK OF USER REDUX STATE
@@ -78,34 +83,13 @@ function App() {
           </Route>
 
           <Route
-            exact
-            path="/incident/response"
-          >
-            <IncidentFormResponse />
-          </Route>
-
-           <Route
-            exact
-            path="/incident/scene"
-          >
-            <IncidentFormScene />
-          </Route>
-
-          <Route
-            exact
-            path="/incident/disposition"
-          >
-            <IncidentFormDisposition />
-          </Route>
-
-          <Route
             // shows AboutPage at all times (logged in or not)
             exact
             path="/dropdown"
           >
             <ReduxCookie />
           </Route>
-
+          </Switch>
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -162,6 +146,7 @@ function App() {
             authRedirect="/user"
           >
             <LandingPage />
+
           </NonAdminProtectedRoute>
     
 
@@ -204,8 +189,31 @@ function App() {
           exact
           path="/patientCardiacArrest"
           >
-            <PatientCardiac />
+
+          <NonAdminProtectedRoute exact path="/incident">
+            <IncidentHome />
           </NonAdminProtectedRoute>
+
+          <NonAdminProtectedRoute path="/incident/:id">
+            <IncidentHome />
+          </NonAdminProtectedRoute>
+
+          <NonAdminProtectedRoute exact path="/treatment">
+            <TreatmentHome />
+          </NonAdminProtectedRoute>
+
+          <NonAdminProtectedRoute path="/treatment/:id">
+            <TreatmentHome />
+          </NonAdminProtectedRoute>
+
+          <NonAdminProtectedRoute exact path="/vitals">
+            <VitalsForm />
+          </NonAdminProtectedRoute>
+
+          <NonAdminProtectedRoute path="/vitals/:id">
+            <VitalsForm />
+          </NonAdminProtectedRoute>
+
 
           <AdminProtectedRoute
           exact
@@ -215,14 +223,15 @@ function App() {
           </AdminProtectedRoute>
 
 
+
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
           </Route>
-        </Switch>
+       
         <Footer />
-      </ThemeProvider>
-    </Router>
+        </ThemeProvider>
+        </Router>
   );
 }
 

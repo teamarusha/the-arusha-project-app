@@ -2,8 +2,7 @@ import {useSelector} from 'react-redux';
 const express = require('express');
 const {
   rejectUnauthenticated,
-  adminAuth,
-  nonAdminAuth
+
 } = require('../modules/authentication-middleware');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
