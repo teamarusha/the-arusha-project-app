@@ -165,7 +165,11 @@ function App() {
             <PatientCardiac />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/treatment">
+          <ProtectedRoute exact path="/treatment">
+            <TreatmentHome />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/treatment/:id">
             <TreatmentHome />
           </ProtectedRoute>
 
