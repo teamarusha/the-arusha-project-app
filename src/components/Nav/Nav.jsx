@@ -122,31 +122,9 @@ function Drawer(props) {
           </ListItem>
           <Divider classes={{root: classes.root}}/>
 
-<<<<<<< HEAD
      {/* PATIENT HOME */}
         <ListItem  component={Link} to="/patientHome" classes={{root: classes.item}}>
            <ListItemText classes={{primary: classes.text}}> Patient Home </ListItemText>
-=======
-          {/* <Link className="navLink" to="/about">
-          About
-        </Link>
-        <Link className="navLink" to ="/patientHome">
-          Patient Home
-        </Link>
-        <Link className="navLink" to="/dropdown">
-
-        </Link> */}
-          <ListItem
-            divider
-            component={Link}
-            to="/patient"
-            classes={{ root: classes.item }}
-          >
-            <ListItemText classes={{ primary: classes.text }}>
-              {" "}
-              Patient Home{" "}
-            </ListItemText>
->>>>>>> 4c72a12b5c4d566bb5ea94495bcdbed6c8e90556
             <ListItemSecondaryAction edge="end">
              <ChevronRightIcon fontSize='large' style={{color: '#5BC6CC'}}/>
             </ListItemSecondaryAction>
