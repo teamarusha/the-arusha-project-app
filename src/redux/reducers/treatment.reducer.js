@@ -8,6 +8,7 @@ const treatments = (
       '1units1': "",
       '1medicationResponse1': "",
       '1medsAdminBy1': "",
+      '1procedureArray': [1],
       '1procedure1': "",
       '1procedureAttempts1': "",
       '1successfulProcedure1': "",

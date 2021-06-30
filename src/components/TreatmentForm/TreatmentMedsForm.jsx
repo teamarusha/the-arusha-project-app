@@ -1,12 +1,16 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import AddMedicationButton from "./AddMedicationButton";
 
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 
-const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
+const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
+  const { id } = useParams;
 
   // Runs whenever localPatientMirror is changed, updated, manipulated at all
   // This way they will always be the same as long as it is the mirror that is being changed
@@ -34,25 +38,30 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
 
   return (
     <div className="container">
-      <h2>Medication Form</h2>
-      <br />
-      <br />
-
-      {render && (
+      {localTreatment && (
         <div>
+          <AddMedicationButton
+            treatmentMirror={localTreatment}
+            setTreatmentMirror={setLocalTreatment}
+          />
+          <br />
+          <br />
           <TextField
             id="outlined-basic"
             label="Medication Administered"
             variant="outlined"
-            value={localTreatment[`medication`]}
+            value={localTreatment[`${id}medication1`]}
             onChange={(event) =>
-              submitValue({ key: `medication`, thing: event.target.value })
+              submitValue({
+                key: `${id}medication1`,
+                thing: event.target.value,
+              })
             }
           ></TextField>
           &nbsp;
           <br />
           <br />
-          {dropdowns.go && render && (
+          {dropdowns.go && localTreatment && (
             <div>
               <InputLabel id="demo-simple-select-autowidth-label">
                 Administered Route
@@ -61,6 +70,13 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}medsAdminBy1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}medsAdminBy1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -77,9 +93,12 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
                 id="outlined-basic"
                 label="Dosage"
                 variant="outlined"
-                value={localTreatment[`dosage`]}
+                value={localTreatment[`${id}dosage1`]}
                 onChange={(event) =>
-                  submitValue({ key: `dosage`, thing: event.target.value })
+                  submitValue({
+                    key: `${id}dosage1`,
+                    thing: event.target.value,
+                  })
                 }
               ></TextField>
               <br />
@@ -91,6 +110,10 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}units1`]}
+                onChange={(event) =>
+                  submitValue({ key: `${id}units1`, thing: event.target.value })
+                }
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -110,6 +133,13 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}responseToProcedure1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}responseToProcedure1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -129,6 +159,13 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment, render }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
+                value={localTreatment[`${id}procedurePerformedBy1`]}
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}procedurePerformedBy1`,
+                    thing: event.target.value,
+                  })
+                }
               >
                 <MenuItem value="">
                   <em>None</em>

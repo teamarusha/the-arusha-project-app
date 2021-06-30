@@ -30,10 +30,18 @@ function IncidentHome() {
 
   // const [localIncident, setLocalIncident] = useState(incident);
 
-  const [incidentMirror, setIncidentMirror] = useState(JSON.parse(localStorage.getItem("incident")));
-  const [patientsMirror, setPatientsMirror] = useState(JSON.parse(localStorage.getItem("patients")));
-  const [treatmentMirror, setTreatmentMirror] = useState(JSON.parse(localStorage.getItem("treatment")));
-  const [vitalsMirror, setVitalsMirror] = useState(JSON.parse(localStorage.getItem("vitals")));
+  const [incidentMirror, setIncidentMirror] = useState(
+    JSON.parse(localStorage.getItem("incident"))
+  );
+  const [patientsMirror, setPatientsMirror] = useState(
+    JSON.parse(localStorage.getItem("patients"))
+  );
+  const [treatmentMirror, setTreatmentMirror] = useState(
+    JSON.parse(localStorage.getItem("treatment"))
+  );
+  const [vitalsMirror, setVitalsMirror] = useState(
+    JSON.parse(localStorage.getItem("vitals"))
+  );
 
   // const [localIncident, setLocalIncident] = useState(
   //   JSON.parse(localStorage.getItem("incident"))
@@ -45,8 +53,6 @@ function IncidentHome() {
     setExpanded(isExpanded ? panel : false);
   };
 
-
-
   // // Initialize local storage if it is empty
   // useEffect(() => {
   //   if (JSON.parse(localStorage.getItem("incident")) === null) {
@@ -55,7 +61,6 @@ function IncidentHome() {
   //     dispatch({ type: "SET_INCIDENT", payload: JSON.parse(localStorage.getItem("incident")) });
   //   }
   // }, []);
-
 
   // ____________________DROPDOWNS____________________
   let [localDropdownMirror, setLocalDropdownMirror] = useState(
@@ -120,8 +125,7 @@ function IncidentHome() {
       <h2>Incident</h2>
 
       <AddEditPatient
-        formName={'incident'}
-
+        formName={"incident"}
         incidentMirror={incidentMirror}
         setIncidentMirror={setIncidentMirror}
         patientsMirror={patientsMirror}
@@ -132,14 +136,14 @@ function IncidentHome() {
         setVitalsMirror={setVitalsMirror}
       />
 
-      <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
+      {/* <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
       <p>Incident Storage: {localStorage.getItem("incident")}</p>
       <p>Vitals Mirror: {JSON.stringify(vitalsMirror)}</p>
       <p>Vitals Storage: {localStorage.getItem("vitals")}</p>
       <p>Treatment Mirror: {JSON.stringify(treatmentMirror)}</p>
       <p>Treatment Storage: {localStorage.getItem("treatment")}</p>
       <p>Patients Mirror: {JSON.stringify(patientsMirror)}</p>
-      <p>Patients Storage: {localStorage.getItem("patients")}</p>
+      <p>Patients Storage: {localStorage.getItem("patients")}</p> */}
 
       <div>
         <Button onClick={clickMe} color="primary" variant="contained">
@@ -165,12 +169,10 @@ function IncidentHome() {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-
             <IncidentFormResponse
               localIncident={incidentMirror}
               setLocalIncident={setIncidentMirror}
             />
-
           </AccordionDetails>
         </Accordion>
 
@@ -192,12 +194,10 @@ function IncidentHome() {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-
             <IncidentFormDisposition
               localIncident={incidentMirror}
               setLocalIncident={setIncidentMirror}
             />
-
           </AccordionDetails>
         </Accordion>
         <br />
@@ -219,12 +219,10 @@ function IncidentHome() {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-
             <IncidentFormScene
               localIncident={incidentMirror}
               setLocalIncident={setIncidentMirror}
             />
-
           </AccordionDetails>
         </Accordion>
       </div>
