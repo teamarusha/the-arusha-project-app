@@ -243,7 +243,7 @@ CREATE TABLE "initial_acuity" (
 
 INSERT INTO "initial_acuity" ("initial_acuity_type")
 VALUES
-('Critical (red)'),
+('Critical (Red)'),
 ('Emergent (Yellow)'),
 ('Lower Acuity (Green)'),
 ('Dead without Resuscitation Efforts (Black)'),
@@ -803,6 +803,7 @@ CREATE TABLE "user" (
     "user_first_name" VARCHAR (80) NOT NULL,
     "user_last_name" VARCHAR (80) NOT NULL,
     "region_id" NUMERIC NOT NULL
+    "is_admin" BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE incident (
@@ -811,6 +812,7 @@ CREATE TABLE incident (
 	incident_service_id integer REFERENCES "incident_service",
 	crew_id numeric,
 	triage_cat_id integer REFERENCES "triage_cat",
+	number_patients numeric,
 	unit_notified timestamp,
 	unit_enroute timestamp,
 	unit_arrived_scene timestamp,
@@ -821,6 +823,9 @@ CREATE TABLE incident (
 	unit_in_service timestamp,
 	incident_summary varchar(20000)
 );
+
+
+
 
 
 CREATE TABLE scene (
@@ -924,7 +929,7 @@ CREATE TABLE cardiacarrest (
     spontaneous_circulation_id integer REFERENCES "spontaneous_circulation",
     time_cardiac_arrest timestamp,
     cpr_stopped_id integer REFERENCES "cpr_stopped",
-    aed_initiator_id integer REFERENCES "aed_initiator",
+    cpr_initiator_id integer REFERENCES "aed_initiator",
     aed_applicator_id integer REFERENCES "aed_applicator",
     aed_defibrillator_id integer REFERENCES "aed_defibrillator"
 );
@@ -944,7 +949,6 @@ CREATE TABLE medication (
 	med_response_id integer REFERENCES "med_response",
 	med_timestamp timestamp
 );
-
 
 
 
@@ -978,8 +982,6 @@ CREATE TABLE vitals (
 	stroke_scale_id integer REFERENCES "stroke_scale",
 	vitals_timestamp timestamp
 );
-
-
 
 
 

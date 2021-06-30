@@ -1,4 +1,4 @@
-const reports = (state = [], action) => {
+const reportsTable = (state = [], action) => {
     console.log('hello from the reports reducer');
   
     // set all reports with data from server
@@ -11,4 +11,4 @@ const reports = (state = [], action) => {
     return state;
   }
   
-  export default reports;
+  export default reportsTable;

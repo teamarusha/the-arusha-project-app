@@ -35,7 +35,7 @@ function Admin() {
         dispatch({ type: 'FETCH_REPORTS' })
     }, []);
 
-    const reports = useSelector((store) => store.reports);
+    const reports = useSelector((store) => store.reportsTable);
     console.log('reports:', reports)
     // const classes = useStyles();
 
@@ -56,7 +56,8 @@ function Admin() {
     };
 
     function handleClick(row) {
-        // history.push('/reports/${}')
+        console.log('in handle click')
+        history.push(`/report/${row.id}`)
     }
 
     return (
@@ -107,7 +108,7 @@ function Admin() {
                                     <TableCell>{moment(row.unit_notified).format('HH:MM:SS')}</TableCell>
                                     <TableCell>{row.patient_first_name} {row.patient_last_name}</TableCell>
                                     <TableCell>{row.user_first_name} {row.user_last_name}</TableCell>
-                                    <TableCell><button onClick={handleClick(row)}>Report</button></TableCell>
+                                    <TableCell><button onClick={() => handleClick(row)}>Report</button></TableCell>
                                        
                                  
                                 </TableRow>
