@@ -199,6 +199,7 @@ function AddEditPatient(
             [newPatientID + 'units1']: '',
             [newPatientID + 'medicationResponse1']: '',
             [newPatientID + 'medsAdminBy1']: '',
+            [newPatientID + 'procedureArray']: [1],
             [newPatientID + 'procedure1']: '',
             [newPatientID + 'procedureAttempts1']: '',
             [newPatientID + 'successfulProcedure1']: '',
