@@ -69,7 +69,6 @@ function PatientHome() {
     JSON.parse(localStorage.getItem("vitals"))
   );
 
- 
   
 
   // const [buttonText, setButtonText] = useState('Dispatched');

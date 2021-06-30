@@ -82,7 +82,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
                             <em>None</em>
                         </MenuItem>
                         {dropdowns['gender'].map(item => <MenuItem key={'gender' + item.id}
-                            value={item.id}>{item.type}</MenuItem>)}
+                            value={item.id}>{item[`gender_type`]}</MenuItem>)}
                         {/* <MenuItem value={10}>Male</MenuItem>
                     <MenuItem value={20}>Female</MenuItem>
                     <MenuItem value={30}>Other</MenuItem> */}
@@ -104,7 +104,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
                             <em>None</em>
                         </MenuItem>
                         {dropdowns['race'].map(item => <MenuItem key={'race' + item.id}
-                            value={item.id}>{item.type}</MenuItem>)}
+                            value={item.id}>{item[`race_type`]}</MenuItem>)}
                         {/* <MenuItem value={10}>African</MenuItem>
                     <MenuItem value={20}>African-American</MenuItem>
                     <MenuItem value={30}>American Indian</MenuItem> */}
