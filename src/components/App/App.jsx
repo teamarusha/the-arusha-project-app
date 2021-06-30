@@ -35,10 +35,8 @@ import './App.css';
 import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
 import IncidentFormDisposition from '../IncidentForm/IncidentFormDisposition';
 import IncidentFormScene from '../IncidentForm/IncidentFormScene';
-import ReduxCookie from '../ReduxCookie/ReduxCookie';
 import IncidentHome from "../IncidentForm/IncidentHome";
 import TreatmentHome from "../TreatmentForm/TreatmentHome";
-import ReduxCookie from "../ReduxCookie/ReduxCookie";
 import VitalsForm from "../VitalsForm/VitalsForm";
 
 
@@ -82,13 +80,7 @@ function App() {
             <AboutPage />
           </Route>
 
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/dropdown"
-          >
-            <ReduxCookie />
-          </Route>
+
           </Switch>
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -150,45 +142,6 @@ function App() {
           </NonAdminProtectedRoute>
     
 
-          <NonAdminProtectedRoute
-          exact
-          path="/patientHome"
-          >
-            <PatientHome />
-          </NonAdminProtectedRoute>
-
-          <NonAdminProtectedRoute
-          exact
-          path="/patientDemographics"
-          >
-            <PatientDemographics />
-          </NonAdminProtectedRoute>
-
-          <NonAdminProtectedRoute
-          exact
-          path="/patientInjury"
-          >
-            <PatientInjury />
-          </NonAdminProtectedRoute>
-
-          <NonAdminProtectedRoute
-          exact
-          path="/patientMedical"
-          >
-            <PatientMedical />
-          </NonAdminProtectedRoute>
-
-          <NonAdminProtectedRoute
-          exact
-          path="/patientSymptoms"
-          >
-            <PatientSymptoms />
-          </NonAdminProtectedRoute>
-
-          <NonAdminProtectedRoute
-          exact
-          path="/patientCardiacArrest"
-          >
 
           <NonAdminProtectedRoute exact path="/incident">
             <IncidentHome />
@@ -196,6 +149,14 @@ function App() {
 
           <NonAdminProtectedRoute path="/incident/:id">
             <IncidentHome />
+          </NonAdminProtectedRoute>
+
+          <NonAdminProtectedRoute exact path="/patient">
+            <PatientHome />
+          </NonAdminProtectedRoute>
+
+          <NonAdminProtectedRoute path="/patient/:id">
+            <PatientHome />
           </NonAdminProtectedRoute>
 
           <NonAdminProtectedRoute exact path="/treatment">

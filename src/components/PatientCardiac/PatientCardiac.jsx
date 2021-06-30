@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { useParams} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 // ----- Material UI -----
@@ -25,7 +26,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
         );
 
         setPatientsMirror({
-            ...localIncident,
+            ...patientsMirror,
             [newParameter.key]: newParameter.thing,
         });
     }

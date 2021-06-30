@@ -22,7 +22,7 @@ function SummaryFieldSubmit(params) {
 
     return (
         <div>
-            <button onClick={submitIncident}></button>
+            {/* <button onClick={submitIncident}></button> */}
         </div>
     )
 }

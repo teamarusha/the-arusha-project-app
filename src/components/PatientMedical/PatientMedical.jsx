@@ -25,7 +25,7 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
         );
 
         setPatientsMirror({
-            ...localIncident,
+            ...patientsMirror,
             [newParameter.key]: newParameter.thing,
         });
     }
