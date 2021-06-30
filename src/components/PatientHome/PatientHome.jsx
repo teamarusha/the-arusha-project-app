@@ -51,7 +51,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 function PatientHome() {
-
+  const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
+  const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);
 
   const [incidentMirror, setIncidentMirror] = useState(
@@ -67,9 +69,7 @@ function PatientHome() {
     JSON.parse(localStorage.getItem("vitals"))
   );
 
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const [expanded, setExpanded] = React.useState(false);
+  
 
   // const [buttonText, setButtonText] = useState('Dispatched');
 

@@ -1,33 +1,35 @@
-import React from 'react';
-import LoginForm from '../LoginForm/LoginForm';
-import { useHistory } from 'react-router-dom';
-import { Grid, ThemeProvider, Link } from '@material-ui/core';
-import createMuiTheme from '../GLOBALUI/Theme'
-
+import React from "react";
+import LoginForm from "../LoginForm/LoginForm";
+import { useHistory } from "react-router-dom";
+import { Grid, ThemeProvider, Link, Typography, Container } from "@material-ui/core";
+import createMuiTheme from "../GLOBALUI/Theme";
 
 function LoginPage() {
   const history = useHistory();
 
   return (
     <ThemeProvider theme={createMuiTheme}>
+      <Container style={{ marginBottom: '25%'}}>
       <LoginForm />
-    <Grid container justify='center'>
-     <Grid item>
-      
+      <Grid container justify="center">
+        <Typography variant="body1" component="h4">
+          New User?
+        </Typography>
+      </Grid>
+      <Grid container justify="center">
         <Link
-          variant='body1'
+          variant="body1"
           component="button"
           onClick={() => {
-            history.push('/registration');
+            history.push("/registration");
           }}
-          color='secondary'
+          color="secondary"
         >
           Register
         </Link>
-     
       </Grid>
-    </Grid>
-  </ThemeProvider>
+      </Container>
+    </ThemeProvider>
   );
 }
 

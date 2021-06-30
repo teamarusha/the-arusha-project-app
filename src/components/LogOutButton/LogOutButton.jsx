@@ -1,18 +1,30 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import {Button, Box}from '@material-ui/core';
+import globalUseStyle from '../GLOBALUI/globalUseStyles';
+import { ThemeProvider } from '@material-ui/core/styles';
+import createMuiTheme from '../GLOBALUI/Theme';
 
 function LogOutButton(props) {
+  const globalStyle = globalUseStyle();
   const dispatch = useDispatch();
   return (
-    <button
-      // This button shows up in multiple locations and is styled differently
-      // because it's styled differently depending on where it is used, the className
-      // is passed to it from it's parents through React props
-      className={props.className}
+    <ThemeProvider theme={createMuiTheme}>
+      <Box className={globalStyle.btnArea}>
+    <Button
       onClick={() => dispatch({ type: 'LOGOUT' })}
+      type="submit"
+      name="submit"
+      value="Register"
+      size="large"
+      variant="contained"
+      color="secondary"
+      className={globalStyle.submit}
     >
       Log Out
-    </button>
+    </Button>
+    </Box>
+    </ThemeProvider>
   );
 }
 

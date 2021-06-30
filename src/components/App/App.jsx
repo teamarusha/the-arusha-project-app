@@ -4,38 +4,38 @@ import {
   Route,
   Redirect,
   Switch,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
 
-import Nav from "../Nav/Nav";
-import Footer from "../Footer/Footer";
 
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import Footer from '../Footer/Footer';
 
-import AboutPage from "../AboutPage/AboutPage";
-import UserPage from "../UserPage/UserPage";
-import InfoPage from "../InfoPage/InfoPage";
-import LandingPage from "../LandingPage/LandingPage";
-import LoginPage from "../LoginPage/LoginPage";
-import RegisterPage from "../RegisterPage/RegisterPage";
-import Admin from "../Admin/Admin";
+import NonAdminProtectedRoute from '../ProtectedRoute/NonAdminProtectedRoute';
+import AdminProtectedRoute from '../ProtectedRoute/AdminProtectedRoute';
 
-import PatientHome from "../PatientHome/PatientHome";
-import PatientDemographics from "../PatientDemographics/PatientDemographics";
-import PatientSymptoms from "../PatientSymptoms/PatientSymptoms";
-import PatientMedical from "../PatientMedical/PatientMedical";
-import PatientInjury from "../PatientInjury/PatientInjury";
-import PatientCardiac from "../PatientCardiac/PatientCardiac";
+import AboutPage from '../AboutPage/AboutPage';
+import UserPage from '../UserPage/UserPage';
+import InfoPage from '../InfoPage/InfoPage';
+import LandingPage from '../LandingPage/LandingPage';
+import LoginPage from '../LoginPage/LoginPage';
+import RegisterPage from '../RegisterPage/RegisterPage';
+import Admin from '../Admin/Admin';
+import FinalReport from '../FinalReport/FinalReport';
 
-import { ThemeProvider } from "@material-ui/styles";
-import createMuiTheme from "../GLOBALUI/Theme";
 
-import "./App.css";
+import {ThemeProvider} from '@material-ui/styles';
+import createMuiTheme from '../GLOBALUI/Theme';
+import './App.css';
 import IncidentHome from "../IncidentForm/IncidentHome";
+import PatientHome from '../PatientHome/PatientHome';
 import TreatmentHome from "../TreatmentForm/TreatmentHome";
-import ReduxCookie from "../ReduxCookie/ReduxCookie";
 import VitalsForm from "../VitalsForm/VitalsForm";
+
+
+import Nav from '../Nav/Nav';
+import AdminHeader from '../Admin/AdminHeader';
+import {useSelector} from 'react-redux';
 
 function App() {
   const dispatch = useDispatch();
@@ -43,11 +43,23 @@ function App() {
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
+  
+  // KEEPING TRACK OF USER REDUX STATE
+  const user = useSelector((store) => store.user);
+  let isAdmin = (user.is_admin == true)
+  let nonAdmin = (user.is_admin == false)
+  let def = null
 
   return (
     <Router>
       <ThemeProvider theme={createMuiTheme}>
-        <Nav />
+
+  {/* CONDITIONAL RENDERING OF APP BAR w/ NAV */}
+      {isAdmin ? <AdminHeader/>
+      : nonAdmin ? <Nav/> 
+      : def
+      }
+
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -61,46 +73,48 @@ function App() {
             <AboutPage />
           </Route>
 
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/dropdown"
-          >
-            <ReduxCookie />
-          </Route>
 
+          </Switch>
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          <ProtectedRoute
+            
+          <NonAdminProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/user"
           >
             <UserPage />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+          <AdminProtectedRoute
+            // logged in shows admin home page of all reports, else shows LoginPage
             exact
             path="/admin"
           >
             <Admin />
-          </ProtectedRoute>
+          </AdminProtectedRoute>
+          <AdminProtectedRoute
+            // logged in shows individual report, else shows LoginPage
+            exact
+            path="/report/:id"
+          >
+            <FinalReport />
+          </AdminProtectedRoute>
 
-          <ProtectedRoute
+          <NonAdminProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
             path="/info"
           >
             <InfoPage />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
           {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
-          <ProtectedRoute
+          <NonAdminProtectedRoute
             // with authRedirect:
             // - if logged in, redirects to "/user"
             // - else shows LoginPage at /login
@@ -109,9 +123,9 @@ function App() {
             authRedirect="/user"
           >
             <LoginPage />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute
+          <NonAdminProtectedRoute
             // with authRedirect:
             // - if logged in, redirects to "/user"
             // - else shows RegisterPage at "/registration"
@@ -120,9 +134,9 @@ function App() {
             authRedirect="/user"
           >
             <RegisterPage />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute
+          <NonAdminProtectedRoute
             // with authRedirect:
             // - if logged in, redirects to "/user"
             // - else shows LandingPage at "/home"
@@ -131,49 +145,55 @@ function App() {
             authRedirect="/user"
           >
             <LandingPage />
-          </ProtectedRoute>
 
-          <ProtectedRoute exact path="/incident">
+          </NonAdminProtectedRoute>
+    
+
+
+          <NonAdminProtectedRoute exact path="/incident">
             <IncidentHome />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute path="/incident/:id">
+          <NonAdminProtectedRoute path="/incident/:id">
             <IncidentHome />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute exact path="/patient">
+          <NonAdminProtectedRoute exact path="/patient">
             <PatientHome />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute exact path="/patient/:id">
+          <NonAdminProtectedRoute path="/patient/:id">
             <PatientHome />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute exact path="/treatment">
+          <NonAdminProtectedRoute exact path="/treatment">
             <TreatmentHome />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute path="/treatment/:id">
+          <NonAdminProtectedRoute path="/treatment/:id">
             <TreatmentHome />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute exact path="/vitals">
+          <NonAdminProtectedRoute exact path="/vitals">
             <VitalsForm />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
 
-          <ProtectedRoute path="/vitals/:id">
+          <NonAdminProtectedRoute path="/vitals/:id">
             <VitalsForm />
-          </ProtectedRoute>
+          </NonAdminProtectedRoute>
+
+
+
+
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
           </Route>
-          
-        </Switch>
+       
         <Footer />
-      </ThemeProvider>
-    </Router>
+        </ThemeProvider>
+        </Router>
   );
 }
 
