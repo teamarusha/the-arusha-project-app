@@ -7,6 +7,7 @@ import IncidentFormDisposition from "./IncidentFormDisposition";
 import IncidentFormScene from "./IncidentFormScene";
 import AddEditPatient from "../AddEditPatient/AddEditPatient";
 import TimestampButton from "../TimestampButton/TimestampButton";
+import SummaryFieldSubmit from "../SummaryFieldSubmit/SummaryFieldSubmit";
 
 import {
   Accordion,
@@ -24,12 +25,6 @@ function IncidentHome() {
   const dispatch = useDispatch();
 
   const dropdowns = useSelector((store) => store.dropdowns);
-  const patients = useSelector((store) => store.patients);
-  const incident = useSelector((store) => store.incident);
-  const treatment = useSelector((store) => store.treatment);
-  const vitals = useSelector((store) => store.vitals);
-
-  // const [localIncident, setLocalIncident] = useState(incident);
 
   const [incidentMirror, setIncidentMirror] = useState(
     JSON.parse(localStorage.getItem("incident"))
@@ -44,24 +39,11 @@ function IncidentHome() {
     JSON.parse(localStorage.getItem("vitals"))
   );
 
-  // const [localIncident, setLocalIncident] = useState(
-  //   JSON.parse(localStorage.getItem("incident"))
-  // );
-
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-
-  // // Initialize local storage if it is empty
-  // useEffect(() => {
-  //   if (JSON.parse(localStorage.getItem("incident")) === null) {
-  //     localStorage.setItem("incident", JSON.stringify(incident));
-  //   } else {
-  //     dispatch({ type: "SET_INCIDENT", payload: JSON.parse(localStorage.getItem("incident")) });
-  //   }
-  // }, []);
 
   // ____________________DROPDOWNS____________________
   let [localDropdownMirror, setLocalDropdownMirror] = useState(
@@ -81,6 +63,7 @@ function IncidentHome() {
       localStorage.setItem("dropdowns", JSON.stringify(dropdowns));
     }
   }, [dropdowns.go]);
+  // _________________________________________________
 
   return (
     <div className="container">
@@ -186,6 +169,7 @@ function IncidentHome() {
           </AccordionDetails>
         </Accordion>
       </div>
+      <SummaryFieldSubmit />
     </div>
   );
 }

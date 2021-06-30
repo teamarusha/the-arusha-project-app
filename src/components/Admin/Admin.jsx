@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-
+import LogOutButton from '../LogOutButton/LogOutButton';
 
 
 const useStyles = makeStyles({
@@ -30,20 +30,20 @@ const useStyles = makeStyles({
 function Admin() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const classes = useStyles();
+
 
     useEffect(() => {
         dispatch({ type: 'FETCH_REPORTS' })
     }, []);
 
-    const reports = useSelector((store) => store.reports);
+    const reports = useSelector((store) => store.reportsTable);
     console.log('reports:', reports)
-    // const classes = useStyles();
+    const classes = useStyles();
 
-    // rows = useSelector(store => store.table);
+   const rows = useSelector(store => store.table);
 
 
-    // const classes = useStyles();
+
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -57,7 +57,8 @@ function Admin() {
     };
 
     function handleClick(row) {
-        // history.push('/reports/${}')
+        console.log('in handle click')
+        history.push(`/report/${row.id}`)
     }
 
     return (
@@ -108,7 +109,7 @@ function Admin() {
                                     <TableCell>{moment(row.unit_notified).format('HH:MM:SS')}</TableCell>
                                     <TableCell>{row.patient_first_name} {row.patient_last_name}</TableCell>
                                     <TableCell>{row.user_first_name} {row.user_last_name}</TableCell>
-                                    <TableCell><button onClick={handleClick(row)}>Report</button></TableCell>
+                                    <TableCell><button onClick={() => handleClick(row)}>Report</button></TableCell>
                                        
                                  
                                 </TableRow>

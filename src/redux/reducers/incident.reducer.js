@@ -17,7 +17,8 @@ const incident = (
       incidentCounty: "",
       incidentZipCode: "",
       possibleInjury: "",
-      alcoholDrugIndicators: ""
+      alcoholDrugIndicators: "",
+      incidentSummary: ""
     }
   , action) => {
   switch (action.type) {

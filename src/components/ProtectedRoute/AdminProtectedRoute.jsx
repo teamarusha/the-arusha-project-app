@@ -13,7 +13,20 @@ import {useSelector} from 'react-redux';
 // by checking req.isAuthenticated for authentication
 // and by checking req.user for authorization
 
-function ProtectedRoute(props) {
+
+// let nonAdminLoginLinkData = {
+//   path: '/login',
+//   text: 'Login / Register',
+// };
+
+// let adminLoginLinkData = {
+//   path: '/login',
+//   text: 'Login / Register',
+// };
+
+
+
+function AdminProtectedRoute(props) {
   const user = useSelector((store) => store.user);
 
   // Using destructuring, this takes ComponentToProtect from component
@@ -29,7 +42,7 @@ function ProtectedRoute(props) {
 
   let ComponentToShow;
 
-  if (user.id) {
+  if (user.id && user.is_admin == true) {
     // if the user is logged in (only logged in users have ids)
     // show the component that is protected
     ComponentToShow = ComponentToProtect;
@@ -59,5 +72,4 @@ function ProtectedRoute(props) {
 
   );
 }
-
-export default ProtectedRoute;
+export default AdminProtectedRoute;

@@ -37,7 +37,7 @@ const patients = (
       '1spontaneousCirculation': '',
       '1timeCardiacArrest': '',
       '1cprStopped': '',
-      '1aedInitiator': '',
+      '1cprInitiator': '',
       '1aedApplicator': '',
       '1aedDefibrillator': ''
     }

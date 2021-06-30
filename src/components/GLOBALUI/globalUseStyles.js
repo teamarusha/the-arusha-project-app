@@ -1,13 +1,15 @@
 import { makeStyles } from '@material-ui/core';
+import createMuiTheme from '../GLOBALUI/Theme';
+
+
 const globalUseStyle = makeStyles((theme) => ({
+
   btnArea: {
     display: 'flex',
     justifyContent: 'space-around',
     margin: theme.spacing(2),
   },
-  button: {
-    backgroundColor: !'orange',
-  },
+
   input: {
     marginBottom: theme.spacing(1),
     marginTop: theme.spacing(1),
@@ -24,6 +26,7 @@ const globalUseStyle = makeStyles((theme) => ({
       ...theme.mixins.toolbar,
       marginBottom: '2em',
     },
+
     // DROPDOWN MENU STYLING DEPENDENCIES
     dropdown: {
           root: {
@@ -35,9 +38,9 @@ const globalUseStyle = makeStyles((theme) => ({
             fontSize: theme.typography.pxToRem(15),
             flexBasis: "33.33%",
             flexShrink: 0,
-          },
-          
+          }, 
     },
+
     // REGISTRATION STYLING DEPENDENCIES
     register : {
       submit: {
@@ -56,10 +59,39 @@ const globalUseStyle = makeStyles((theme) => ({
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(3),
       },
-    
 
+      // NAVIGATION DEPENDENCIES
+      toolbarMargin: {
+        ...theme.mixins.toolbar,
+        marginBottom: '2em',
+      },
+      slidingDrawerNav: {
+        width: '78%',
+        backgroundColor: '#E8E7E7',
+        boxShadow: '8px 8px 10px 3px rgba(0,0,0,0.56)',
+      },
+      item: {
+        textAlign: 'center',
+        maxHeight: 'inherit'
+      },
+      text: {
+        fontFamily: 'Red Hat Display',
+        fontWeight: 400,
+        fontSize: '1.5rem',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        color: 'common'
+      },
+      root : {
+        backgroundColor: '#5BC6CC',
+    },
+    adminButton : {
+      marginLeft: 'auto',
+      position: 'static'
     }
 
+    }
+  
   }
 }));
 

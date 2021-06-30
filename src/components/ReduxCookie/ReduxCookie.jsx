@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import Nav from '../Nav/Nav';
 
 function ReduxCookie() {
 
@@ -56,6 +56,8 @@ function ReduxCookie() {
 
 
     return (
+        <React.Fragment>
+        <Nav />
         <div>
             {/* <button onClick={triggerMastodon}>
                 Mastodon
@@ -77,6 +79,7 @@ function ReduxCookie() {
 
 
         </div>
+        </React.Fragment>  
     )
 }
 

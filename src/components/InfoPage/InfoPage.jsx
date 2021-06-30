@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React from "react";
+import Nav from "../Nav/Nav";
 // This is one of our simplest components
 // It doesn't have local state
 // It doesn't dispatch any redux actions or display any part of redux state
@@ -7,9 +7,12 @@ import React from 'react';
 
 function InfoPage() {
   return (
-    <div className="container">
-      <p>Info Page</p>
-    </div>
+    <React.Fragment>
+      <Nav />
+      <div className="container">
+        <p>Info Page</p>
+      </div>
+    </React.Fragment>
   );
 }
 
