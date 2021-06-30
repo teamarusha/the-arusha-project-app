@@ -173,7 +173,11 @@ function App() {
             <TreatmentHome />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/vitals">
+          <ProtectedRoute exact path="/vitals">
+            <VitalsForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/vitals/:id">
             <VitalsForm />
           </ProtectedRoute>
 
