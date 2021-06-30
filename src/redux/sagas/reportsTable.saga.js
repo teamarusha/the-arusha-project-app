@@ -18,8 +18,8 @@ function* fetchReports() {
   }
 
   // if dispatch called - triggers function that follows
-function* reportsSaga() {
+function* reportsTableSaga() {
     yield takeLatest('FETCH_REPORTS', fetchReports);
 }
 
-export default reportsSaga;
+export default reportsTableSaga;

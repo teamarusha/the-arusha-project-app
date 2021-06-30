@@ -21,6 +21,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Admin from '../Admin/Admin';
+import FinalReport from '../FinalReport/FinalReport';
 
 import PatientHome from '../PatientHome/PatientHome';
 import PatientDemographics from '../PatientDemographics/PatientDemographics';
@@ -95,6 +96,20 @@ function App() {
             <UserPage />
           </NonAdminProtectedRoute>
 
+          <AdminProtectedRoute
+            // logged in shows admin home page of all reports, else shows LoginPage
+            exact
+            path="/admin"
+          >
+            <Admin />
+          </AdminProtectedRoute>
+          <AdminProtectedRoute
+            // logged in shows individual report, else shows LoginPage
+            exact
+            path="/report/:id"
+          >
+            <FinalReport />
+          </AdminProtectedRoute>
 
           <NonAdminProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -176,12 +191,6 @@ function App() {
           </NonAdminProtectedRoute>
 
 
-          <AdminProtectedRoute
-          exact
-          path="/admin"
-          >
-            <Admin />
-          </AdminProtectedRoute>
 
 
 
