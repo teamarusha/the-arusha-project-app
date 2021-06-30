@@ -4,6 +4,10 @@ import user from './user.reducer';
 import reports from './reports.reducer';
 import dropdowns from './dropdowns.reducer';
 import incident from './incident.reducer';
+import patients from './patients.reducer';
+import vitals from './vitals.reducer';
+import treatment from './treatment.reducer';
+
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -16,7 +20,10 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   reports, //gets all reports from database
   dropdowns,
-  incident
+  incident,
+  patients,
+  vitals,
+  treatment
 });
 
 export default rootReducer;
