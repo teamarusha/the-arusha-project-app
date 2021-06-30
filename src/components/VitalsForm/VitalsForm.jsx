@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import AddVitalsButton from "./AddVitalsButton";
 import AddEditPatient from "../AddEditPatient/AddEditPatient";
@@ -16,6 +17,7 @@ import {
 
 const VitalsForm = () => {
   const dispatch = useDispatch();
+  const { id } = useParams();
   const dropdowns = useSelector((store) => store.dropdowns);
   const [localVitals, setLocalVitals] = useState(
     JSON.parse(localStorage.getItem("vitals"))
@@ -285,7 +287,7 @@ const VitalsForm = () => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
-                value={localTreatment[`${id}responsivenessLevel1`]}
+                value={localVitals[`${id}responsivenessLevel1`]}
                 onChange={(event) =>
                   submitValue({
                     key: `${id}responsivenessLevel1`,
@@ -314,7 +316,7 @@ const VitalsForm = () => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
-                value={localTreatment[`${id}painScaleScore1`]}
+                value={localVitals[`${id}painScaleScore1`]}
                 onChange={(event) =>
                   submitValue({
                     key: `${id}painScaleScore1`,
@@ -340,7 +342,7 @@ const VitalsForm = () => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
-                value={localTreatment[`${id}strokeScaleScore1`]}
+                value={localVitals[`${id}strokeScaleScore1`]}
                 onChange={(event) =>
                   submitValue({
                     key: `${id}strokeScaleScore1`,
@@ -366,7 +368,7 @@ const VitalsForm = () => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
-                value={localTreatment[`${id}strokeScaleType1`]}
+                value={localVitals[`${id}strokeScaleType1`]}
                 onChange={(event) =>
                   submitValue({
                     key: `${id}strokeScaleType1`,
