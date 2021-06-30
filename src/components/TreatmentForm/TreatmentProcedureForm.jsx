@@ -1,14 +1,16 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-import AddProcedure from "./AddProcedureButton";
+import AddProcedureButton from "./AddProcedureButton";
 
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 
 const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
+  const { id } = useParams();
 
   // Runs whenever localPatientMirror is changed, updated, manipulated at all
   // This way they will always be the same as long as it is the mirror that is being changed
@@ -36,7 +38,10 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
 
   return (
     <div className="container">
-      <AddProcedure />
+      <AddProcedureButton
+        treatmentMirror={localTreatment}
+        setTreatmentMirror={setLocalTreatment}
+      />
       <br />
       <br />
 

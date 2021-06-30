@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import AddMedication from "./AddMedicationButton";
+import AddMedicationButton from "./AddMedicationButton";
 
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
@@ -38,12 +38,14 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
 
   return (
     <div className="container">
-      <AddMedication />
-      <br />
-      <br />
-
       {localTreatment && (
         <div>
+          <AddMedicationButton
+            treatmentMirror={localTreatment}
+            setTreatmentMirror={setLocalTreatment}
+          />
+          <br />
+          <br />
           <TextField
             id="outlined-basic"
             label="Medication Administered"
