@@ -73,7 +73,14 @@ function IncidentHome() {
   return (
     <div className="container">
       <h2>Incident</h2>
-
+      <br />
+      <br />
+      <TimestampButton
+        incidentMirror={incidentMirror}
+        setIncidentMirror={setIncidentMirror}
+      />
+      <br />
+      <br />
       <AddEditPatient
         formName={"incident"}
         incidentMirror={incidentMirror}
@@ -85,21 +92,8 @@ function IncidentHome() {
         vitalsMirror={vitalsMirror}
         setVitalsMirror={setVitalsMirror}
       />
-
-      {/* <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
-      <p>Incident Storage: {localStorage.getItem("incident")}</p>
-      <p>Vitals Mirror: {JSON.stringify(vitalsMirror)}</p>
-      <p>Vitals Storage: {localStorage.getItem("vitals")}</p>
-      <p>Treatment Mirror: {JSON.stringify(treatmentMirror)}</p>
-      <p>Treatment Storage: {localStorage.getItem("treatment")}</p>
-      <p>Patients Mirror: {JSON.stringify(patientsMirror)}</p>
-      <p>Patients Storage: {localStorage.getItem("patients")}</p> */}
-
-      <TimestampButton
-        incidentMirror={incidentMirror}
-        setIncidentMirror={setIncidentMirror}
-      />
-
+      <br />
+      <br />
       <div className={classes.root}>
         <Accordion
           expanded={expanded === "panel1"}
@@ -125,7 +119,7 @@ function IncidentHome() {
             />
           </AccordionDetails>
         </Accordion>
-
+        <br />
         <Accordion
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}

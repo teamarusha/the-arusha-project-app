@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 
-const IncidentFormResponse = ({ localIncident, setLocalIncident}) => {
+const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
 
   // useEffect(() => {
@@ -30,9 +30,6 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident}) => {
 
   return (
     <div className="container">
-      <h2>Incident Response Form</h2>
-      <br />
-      <br />
       {localIncident && (
         <TextField
           id="outlined-basic"

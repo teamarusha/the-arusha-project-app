@@ -30,7 +30,6 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
 
   return (
     <div className="container">
-      <h2>Incident Scene</h2>
       {localIncident && (
         <div>
           <TextField
@@ -119,7 +118,10 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
             autoWidth
             value={localIncident[`alcoholDrugIndicators`]}
             onChange={(event) =>
-              submitValue({ key: `alcoholDrugIndicators`, thing: event.target.value })
+              submitValue({
+                key: `alcoholDrugIndicators`,
+                thing: event.target.value,
+              })
             }
           >
             <MenuItem value="">
