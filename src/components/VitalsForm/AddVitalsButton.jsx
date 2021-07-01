@@ -21,8 +21,6 @@ function AddVitalsButton({ vitalsMirror, setVitalsMirror }) {
 
     const timestamp = Date.now();
 
-
-
     setVitalsMirror({
       ...vitalsMirror,
 
@@ -58,8 +56,9 @@ function AddVitalsButton({ vitalsMirror, setVitalsMirror }) {
     <div>
       {vitalsMirror && (
         <div>
-          <p>Submit Vitals</p>
-          <Button onClick={AddVitals}>Add Vitals</Button>
+          <Button color="primary" variant="contained" onClick={AddVitals}>
+            Add Vitals
+          </Button>
         </div>
       )}
     </div>

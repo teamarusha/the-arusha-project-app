@@ -70,8 +70,9 @@ function AddMedicationButton({ treatmentMirror, setTreatmentMirror }) {
     <div>
       {treatmentMirror && (
         <div>
-          <p>Submit Medication</p>
-          <Button onClick={AddMedication}>Add Medication</Button>
+          <Button color="primary" variant="contained" onClick={AddMedication}>
+            Add Medication
+          </Button>
         </div>
       )}
     </div>

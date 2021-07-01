@@ -1,23 +1,23 @@
-import React from 'react';
-import PatientDemographics from '../PatientDemographics/PatientDemographics';
-import PatientMedical from '../PatientMedical/PatientMedical';
-import PatientSymptoms from '../PatientSymptoms/PatientSymptoms';
-import PatientInjury from '../PatientInjury/PatientInjury';
-import PatientCardiac from '../PatientCardiac/PatientCardiac';
-import AddEditPatient from '../AddEditPatient/AddEditPatient';
-import TimestampButton from '../TimestampButton/TimestampButton';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import React from "react";
+import PatientDemographics from "../PatientDemographics/PatientDemographics";
+import PatientMedical from "../PatientMedical/PatientMedical";
+import PatientSymptoms from "../PatientSymptoms/PatientSymptoms";
+import PatientInjury from "../PatientInjury/PatientInjury";
+import PatientCardiac from "../PatientCardiac/PatientCardiac";
+import AddEditPatient from "../AddEditPatient/AddEditPatient";
+import TimestampButton from "../TimestampButton/TimestampButton";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 
 // ----- Material UI -----
-import { makeStyles } from '@material-ui/core/styles';
-import { Accordion } from '@material-ui/core';
-import { AccordionDetails } from '@material-ui/core';
-import { AccordionSummary } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import { makeStyles } from "@material-ui/core/styles";
+import { Accordion } from "@material-ui/core";
+import { AccordionDetails } from "@material-ui/core";
+import { AccordionSummary } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 // ----- More Material UI -----
 // import globalUseStyle from "./globalUseStyles";
@@ -26,14 +26,13 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { TextField, Paper, Grid } from "@material-ui/core";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    flexBasis: '33.33%',
+    flexBasis: "33.33%",
     flexShrink: 0,
     // textAlign: 'center',
   },
@@ -43,11 +42,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   text: {
-    marginLeft: 'auto',
-    marginRight: 'auto'
+    marginLeft: "auto",
+    marginRight: "auto",
   },
 }));
-
 
 function PatientHome() {
   const classes = useStyles();
@@ -96,20 +94,17 @@ function PatientHome() {
     }
   }, [dropdowns.go]);
 
-
-
-
   return (
     <div className="container">
       <h2>Patients</h2>
-
-      {/* <div>
-              <Button onClick={clickMe} color="primary"
-              variant="contained"
-              // onClick={() => handleClick()}
-              >{buttonText}</Button>
-            </div> */}
-
+      <br />
+      <br />
+      <TimestampButton
+        incidentMirror={incidentMirror}
+        setIncidentMirror={setIncidentMirror}
+      />
+      <br />
+      <br />
       <AddEditPatient
         formName={"patient"}
         incidentMirror={incidentMirror}
@@ -121,108 +116,137 @@ function PatientHome() {
         vitalsMirror={vitalsMirror}
         setVitalsMirror={setVitalsMirror}
       />
-
-      <TimestampButton
-        incidentMirror={incidentMirror}
-        setIncidentMirror={setIncidentMirror}
-      />
-
+      <br />
+      <br />
       <div className={classes.root}>
-        <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+        <Accordion
+          expanded={expanded === "panel1"}
+          onChange={handleChange("panel1")}
+        >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1bh-content"
             id="panel1bh-header"
-            style={{ textAlign: 'center' }}
+            style={{ textAlign: "center" }}
           >
-            <Typography classes={{ root: classes.text }} className={classes.heading}>Demographics</Typography>
-
+            <Typography
+              classes={{ root: classes.text }}
+              className={classes.heading}
+            >
+              Demographics
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <PatientDemographics
               patientsMirror={patientsMirror}
               setPatientsMirror={setPatientsMirror}
             />
-
           </AccordionDetails>
-        </Accordion><br />
+        </Accordion>
+        <br />
 
-        <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+        <Accordion
+          expanded={expanded === "panel2"}
+          onChange={handleChange("panel2")}
+        >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2bh-content"
             id="panel2bh-header"
-            style={{ textAlign: 'center' }}
+            style={{ textAlign: "center" }}
           >
-            <Typography classes={{ root: classes.text }} className={classes.heading}>Medical History</Typography>
-
+            <Typography
+              classes={{ root: classes.text }}
+              className={classes.heading}
+            >
+              Medical History
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <PatientMedical
               patientsMirror={patientsMirror}
               setPatientsMirror={setPatientsMirror}
             />
-
           </AccordionDetails>
-        </Accordion><br />
+        </Accordion>
+        <br />
 
-        <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+        <Accordion
+          expanded={expanded === "panel3"}
+          onChange={handleChange("panel3")}
+        >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2bh-content"
             id="panel2bh-header"
-            style={{ textAlign: 'center' }}
+            style={{ textAlign: "center" }}
           >
-            <Typography classes={{ root: classes.text }} className={classes.heading}>Symptoms</Typography>
-
+            <Typography
+              classes={{ root: classes.text }}
+              className={classes.heading}
+            >
+              Symptoms
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <PatientSymptoms
               patientsMirror={patientsMirror}
               setPatientsMirror={setPatientsMirror}
             />
-
           </AccordionDetails>
-        </Accordion><br />
+        </Accordion>
+        <br />
 
-        <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+        <Accordion
+          expanded={expanded === "panel4"}
+          onChange={handleChange("panel4")}
+        >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2bh-content"
             id="panel2bh-header"
-            style={{ textAlign: 'center' }}
+            style={{ textAlign: "center" }}
           >
-            <Typography classes={{ root: classes.text }} className={classes.heading}>Injury</Typography>
-
+            <Typography
+              classes={{ root: classes.text }}
+              className={classes.heading}
+            >
+              Injury
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <PatientInjury
               patientsMirror={patientsMirror}
               setPatientsMirror={setPatientsMirror}
             />
-
           </AccordionDetails>
-        </Accordion><br />
+        </Accordion>
+        <br />
 
-        <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
+        <Accordion
+          expanded={expanded === "panel5"}
+          onChange={handleChange("panel5")}
+        >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2bh-content"
             id="panel2bh-header"
-            style={{ textAlign: 'center' }}
+            style={{ textAlign: "center" }}
           >
-            <Typography classes={{ root: classes.text }} className={classes.heading}>Cardiac Arrest</Typography>
-
+            <Typography
+              classes={{ root: classes.text }}
+              className={classes.heading}
+            >
+              Cardiac Arrest
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <PatientCardiac
               patientsMirror={patientsMirror}
               setPatientsMirror={setPatientsMirror}
             />
-
           </AccordionDetails>
         </Accordion>
-
       </div>
     </div>
   );

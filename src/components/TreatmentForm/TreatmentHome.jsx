@@ -42,7 +42,7 @@ function TreatmentHome() {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-// ____________________WATCHER FUNCTION____________________
+  // ____________________WATCHER FUNCTION____________________
   useEffect(() => {
     console.log("UPDATING browser storage", localTreatment);
     localStorage.setItem("treatment", JSON.stringify(localTreatment));
@@ -70,16 +70,14 @@ function TreatmentHome() {
   return (
     <div className="container">
       <h2>Treament</h2>
-
-      {/* <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
-      <p>Incident Storage: {localStorage.getItem("incident")}</p>
-      <p>Vitals Mirror: {JSON.stringify(vitalsMirror)}</p>
-      <p>Vitals Storage: {localStorage.getItem("vitals")}</p>
-      <p>Treatment Mirror: {JSON.stringify(treatmentMirror)}</p>
-      <p>Treatment Storage: {localStorage.getItem("treatment")}</p>
-      <p>Patients Mirror: {JSON.stringify(patientsMirror)}</p>
-      <p>Patients Storage: {localStorage.getItem("patients")}</p> */}
-
+      <br />
+      <br />
+      <TimestampButton
+        incidentMirror={incidentMirror}
+        setIncidentMirror={setIncidentMirror}
+      />
+      <br />
+      <br />
       <AddEditPatient
         formName={"treatment"}
         incidentMirror={incidentMirror}
@@ -91,14 +89,8 @@ function TreatmentHome() {
         vitalsMirror={vitalsMirror}
         setVitalsMirror={setVitalsMirror}
       />
-
-      <TimestampButton
-        incidentMirror={incidentMirror}
-        setIncidentMirror={setIncidentMirror}
-      />
       <br />
       <br />
-
       <div className={classes.root}>
         <Accordion
           expanded={expanded === "panel1"}
