@@ -180,6 +180,26 @@ function App() {
           <h1>404</h1>
         </Route>
 
+        <NonAdminProtectedRoute path="/patient/:id">
+          <PatientHome />
+        </NonAdminProtectedRoute>
+
+        <NonAdminProtectedRoute exact path="/treatment">
+          <TreatmentHome />
+        </NonAdminProtectedRoute>
+
+        <NonAdminProtectedRoute path="/treatment/:id">
+          <TreatmentHome />
+        </NonAdminProtectedRoute>
+
+        <NonAdminProtectedRoute exact path="/vitals">
+          <VitalsForm />
+        </NonAdminProtectedRoute>
+
+        <NonAdminProtectedRoute path="/vitals/:id">
+          <VitalsForm />
+        </NonAdminProtectedRoute>
+
         <Footer />
       </ThemeProvider>
     </Router>

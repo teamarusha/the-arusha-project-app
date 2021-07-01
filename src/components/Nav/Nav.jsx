@@ -199,6 +199,19 @@ function Drawer(props) {
             <ListItemText classes={{ primary: classes.text }}>
               Summary
             </ListItemText>
+          </ListItem>
+          <Divider classes={{ root: classes.root }} />
+
+          {/* VITALS HOME */}
+          <ListItem
+            component={Link}
+            to="/vitals"
+            classes={{ root: classes.item }}
+          >
+            <ListItemText classes={{ primary: classes.text }}>
+              {" "}
+              Vitals{" "}
+            </ListItemText>
             <ListItemSecondaryAction edge="end">
               <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
             </ListItemSecondaryAction>

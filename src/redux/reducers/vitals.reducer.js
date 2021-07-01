@@ -15,7 +15,8 @@ const vitals = (
       '1responsivenessLevel1': '',
       '1painScaleScore1': '',
       '1strokeScaleScore1': '',
-      '1strokeScaleType1': ''
+      '1strokeScaleType1': '',
+      '1vitalTimestamp1': ''
     }
   , action) => {
   switch (action.type) {

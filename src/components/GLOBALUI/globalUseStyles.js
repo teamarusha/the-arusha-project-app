@@ -7,7 +7,7 @@ const globalUseStyle = makeStyles((theme) => ({
   btnArea: {
     display: 'flex',
     justifyContent: 'space-around',
-    margin: theme.spacing(2),
+    margin: theme.spacing(1),
   },
 
   input: {

@@ -175,6 +175,7 @@ function AddEditPatient({
       ...treatmentMirror,
       [newPatientID + "medicationArray"]: [1],
       [newPatientID + "lastMedication"]: 1,
+      [newPatientID + 'medicationTimestamp1']:"",
       [newPatientID + "medication1"]: "",
       [newPatientID + "routeAdministered1"]: "",
       [newPatientID + "dosage1"]: "",
@@ -183,6 +184,7 @@ function AddEditPatient({
       [newPatientID + "medsAdminBy1"]: "",
       [newPatientID + "procedureArray"]: [1],
       [newPatientID + "lastProcedure"]: 1,
+      [newPatientID + 'procedureTimestamp1']:"",
       [newPatientID + "procedure1"]: "",
       [newPatientID + "procedureAttempts1"]: "",
       [newPatientID + "successfulProcedure1"]: "",
@@ -206,6 +208,7 @@ function AddEditPatient({
       [newPatientID + "painScaleScore1"]: "",
       [newPatientID + "strokeScaleScore1"]: "",
       [newPatientID + "strokeScaleType1"]: "",
+      [newPatientID + 'vitalTimestamp1']:""
     });
   }
 
