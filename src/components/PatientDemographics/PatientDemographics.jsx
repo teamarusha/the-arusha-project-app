@@ -15,11 +15,6 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
     const dropdowns = useSelector((store) => store.dropdowns);
     const { id } = useParams();
 
-    useEffect(() => {
-        console.log("UPDATING patients browser storage", patientsMirror);
-        localStorage.setItem("patients", JSON.stringify(patientsMirror));
-    }, [patientsMirror]);
-
     function submitValue(newParameter) {
         console.log(
             "Updating parameter in submitValue",

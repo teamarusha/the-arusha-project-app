@@ -44,6 +44,11 @@ function IncidentHome() {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+  // ____________________WATCHER FUNCTION____________________
+  useEffect(() => {
+    console.log("UPDATING browser storage", incidentMirror);
+    localStorage.setItem("incident", JSON.stringify(incidentMirror));
+  }, [incidentMirror]);
 
   // ____________________DROPDOWNS____________________
   let [localDropdownMirror, setLocalDropdownMirror] = useState(
@@ -90,9 +95,11 @@ function IncidentHome() {
       <p>Patients Mirror: {JSON.stringify(patientsMirror)}</p>
       <p>Patients Storage: {localStorage.getItem("patients")}</p> */}
 
-      <div>
-        <TimestampButton />
-      </div>
+      <TimestampButton
+        incidentMirror={incidentMirror}
+        setIncidentMirror={setIncidentMirror}
+      />
+
       <div className={classes.root}>
         <Accordion
           expanded={expanded === "panel1"}

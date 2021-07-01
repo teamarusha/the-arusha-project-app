@@ -8,7 +8,7 @@ const incident = (
       '1destinationState': "",
       '1destinationCounty': "",
       '1destinationZipCode': "",
-      '1transportDisposition': "",
+      '1transportDisposition': 0,
       '1transportMethod': "",
       '1transportMode': "",
       '1destinationFacility': "",
@@ -18,8 +18,21 @@ const incident = (
       incidentZipCode: "",
       possibleInjury: "",
       alcoholDrugIndicators: "",
+      dispatchButton: "Unit Notified",
+      unitNotified: "",
+      unitEnRoute: "",
+      unitArrivedScene: "",
+      unitArrivedPatient: "",
+      unitLeftScene: "",
+      unitArrivedDestination: "",
+      unitTransferCare: "",
+      unitInService: "",
       incidentSummary: ""
     }
+
+
+
+
   , action) => {
   switch (action.type) {
     case 'SET_INCIDENT':

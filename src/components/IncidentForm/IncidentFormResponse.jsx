@@ -8,10 +8,10 @@ import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 const IncidentFormResponse = ({ localIncident, setLocalIncident}) => {
   const dropdowns = useSelector((store) => store.dropdowns);
 
-  useEffect(() => {
-    console.log("UPDATING browser storage", localIncident);
-    localStorage.setItem("incident", JSON.stringify(localIncident));
-  }, [localIncident]);
+  // useEffect(() => {
+  //   console.log("UPDATING browser storage", localIncident);
+  //   localStorage.setItem("incident", JSON.stringify(localIncident));
+  // }, [localIncident]);
 
   // Only handles when a value is changed by keystroke/inputfield clicks.
   // Does NOT handle initialization of new data.

@@ -12,10 +12,10 @@ const IncidentFormDisposition = ({
 }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
 
-  useEffect(() => {
-    console.log("UPDATING browser storage", localIncident);
-    localStorage.setItem("incident", JSON.stringify(localIncident));
-  }, [localIncident]);
+  // useEffect(() => {
+  //   console.log("UPDATING browser storage", localIncident);
+  //   localStorage.setItem("incident", JSON.stringify(localIncident));
+  // }, [localIncident]);
 
   // Only handles when a value is changed by keystroke/inputfield clicks.
   // Does NOT handle initialization of new data.
@@ -42,7 +42,36 @@ const IncidentFormDisposition = ({
       <br />
       <br />
 
-      {localIncident && (
+      {dropdowns.go && localIncident &&
+        <div>
+          <InputLabel id="demo-simple-select-autowidth-label">
+            Transportation Disposition
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            autoWidth
+            value={localIncident[`${id}transportDisposition`]}
+            onChange={(event) =>
+              submitValue({ key: `${id}transportDisposition`, thing: event.target.value })
+            }
+          >
+            <MenuItem value={0}>
+              <em>None</em>
+            </MenuItem>
+            {dropdowns["transport_disposition"].map((item) => (
+              <MenuItem key={"transport_disposition" + item.id} value={item.id}>
+                {item["transport_disposition_type"]}
+              </MenuItem>
+            ))}
+          </Select>
+        </div>
+      }
+
+      <br />
+      <br />
+
+      {localIncident && localIncident[`${id}transportDisposition`] <= 4 && localIncident[`${id}transportDisposition`] !== 0 && (
         <div>
           <TextField
             id="outlined-basic"
@@ -89,29 +118,9 @@ const IncidentFormDisposition = ({
         </div>
       )}
 
-      {dropdowns.go && localIncident && (
+      {dropdowns.go && localIncident && localIncident[`${id}transportDisposition`] <= 4 && localIncident[`${id}transportDisposition`] !== 0 && (
         <div>
-          <InputLabel id="demo-simple-select-autowidth-label">
-            Transportation Disposition
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-autowidth-label"
-            id="demo-simple-select-autowidth"
-            autoWidth
-            value={localIncident[`${id}transportDisposition`]}
-            onChange={(event) =>
-              submitValue({ key: `${id}transportDisposition`, thing: event.target.value })
-            }
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {dropdowns["transport_disposition"].map((item) => (
-              <MenuItem key={"transport_disposition" + item.id} value={item.id}>
-                {item["transport_disposition_type"]}
-              </MenuItem>
-            ))}
-          </Select>
+
           <br />
           <br />
           <InputLabel id="demo-simple-select-autowidth-label">
