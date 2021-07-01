@@ -82,7 +82,20 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                             value={item.id}>{item[`organ_system_type`]}</MenuItem>)}
                     </Select> <br /><br />
 
-                    <p>Symptom Onset calendar goes here</p> <br />
+                    {/* <p>Symptom Onset calendar goes here</p> <br /> */}
+                    <TextField
+                        id="date"
+                        label="Symptom Onset"
+                        type="date"
+                        // defaultValue="0000-00-00"
+                        // className={classes.textField}
+                        InputLabelProps={{
+                        shrink: true,
+                        }}
+                    />&nbsp; &nbsp; <br /><br />
+                    <label for="appt">Time:</label>
+                    <input type="time" id="appt" name="appt"
+                        min="09:00" max="18:00" required></input> <br /><br />
 
                     <TextField
                         id="outlined-basic"
@@ -152,7 +165,17 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                             value={item.id}>{item[`primary_impression_type`]}</MenuItem>)}
                     </Select> <br /><br />
 
-                    <p>Last Known Well calendar goes here</p>
+                    {/* <p>Last Known Well calendar goes here</p> */}
+                    <TextField
+                        id="date"
+                        label="Last Known Well:"
+                        type="date"
+                        // defaultValue="0000-00-00"
+                        // className={classes.textField}
+                        InputLabelProps={{
+                        shrink: true,
+                        }}
+                    />
 
                 </div>
             }

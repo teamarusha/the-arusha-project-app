@@ -34,21 +34,21 @@ function PatientInjury({ patientsMirror, setPatientsMirror }) {
         });
     }
 
-    function handleTimeStamp() {
-        const timestamp = Date.now(); // This would be the timestamp you want to format
-        console.log(new Intl.DateTimeFormat('en-US', {
-            year: 'numeric', month: '2-digit',
-            day: '2-digit', hour: '2-digit',
-            minute: '2-digit', second: '2-digit'
-        }).format(timestamp));
-    }
+    // function handleTimeStamp() {
+    //     const timestamp = Date.now(); // This would be the timestamp you want to format
+    //     console.log(new Intl.DateTimeFormat('en-US', {
+    //         year: 'numeric', month: '2-digit',
+    //         day: '2-digit', hour: '2-digit',
+    //         minute: '2-digit', second: '2-digit'
+    //     }).format(timestamp));
+    // }
 
     return (
         <div className="container">
             <h2>Patient Injury Form:</h2>
-            <button onClick={handleTimeStamp}>What's Gucci</button><br /><br />
+            {/* <button onClick={handleTimeStamp}>What's Gucci</button><br /><br /> */}
 
-            <p>Time: {time}</p>
+            {/* <p>Time: {time}</p> */}
 
             {dropdowns.go && patientsMirror &&
                 <div>

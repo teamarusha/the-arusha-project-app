@@ -8,12 +8,28 @@ import { InputLabel } from '@material-ui/core';
 import { Select } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+
 
 function PatientDemographics({ patientsMirror, setPatientsMirror }) {
 
     const dispatch = useDispatch();
     const dropdowns = useSelector((store) => store.dropdowns);
     const { id } = useParams();
+
+    // const classes = useStyles();
+    // const useStyles = makeStyles((theme) => ({
+    //     container: {
+    //       display: 'flex',
+    //       flexWrap: 'wrap',
+    //     },
+    //     textField: {
+    //       marginLeft: theme.spacing(1),
+    //       marginRight: theme.spacing(1),
+    //       width: 200,
+    //     },
+    //   }));
+    
 
     useEffect(() => {
         console.log("UPDATING patients browser storage", patientsMirror);
@@ -83,9 +99,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
                         </MenuItem>
                         {dropdowns['gender'].map(item => <MenuItem key={'gender' + item.id}
                             value={item.id}>{item[`gender_type`]}</MenuItem>)}
-                        {/* <MenuItem value={10}>Male</MenuItem>
-                    <MenuItem value={20}>Female</MenuItem>
-                    <MenuItem value={30}>Other</MenuItem> */}
+                        
                     </Select> <br /><br />
                     <InputLabel id="demo-simple-select-autowidth-label">Race</InputLabel>
                     <Select
@@ -109,7 +123,20 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
                     <MenuItem value={20}>African-American</MenuItem>
                     <MenuItem value={30}>American Indian</MenuItem> */}
                     </Select> <br /><br />
-                    <p>Date of Birth calendar goes here</p>
+                    {/* <p>Date of Birth calendar goes here</p> */}
+
+                    <TextField
+                        id="date"
+                        label="DOB:"
+                        type="date"
+                        // defaultValue="0000-00-00"
+                        // className={classes.textField}
+                        InputLabelProps={{
+                        shrink: true,
+                        }}
+                    />
+
+
                     <TextField
                         id="outlined-basic"
                         label="Patient Address"
