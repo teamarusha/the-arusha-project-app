@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 // ----- Material UI -----
@@ -12,11 +12,6 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
 
     const dropdowns = useSelector((store) => store.dropdowns);
     const { id } = useParams();
-
-    useEffect(() => {
-        console.log("UPDATING patients browser storage", patientsMirror);
-        localStorage.setItem("patients", JSON.stringify(patientsMirror));
-    }, [patientsMirror]);
 
     function submitValue(newParameter) {
         console.log(
@@ -30,11 +25,6 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             [newParameter.key]: newParameter.thing,
         });
     }
-
-
-
-
-
 
     return (
         <div className="container">

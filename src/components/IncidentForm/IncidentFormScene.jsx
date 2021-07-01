@@ -8,10 +8,10 @@ import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
 
-  useEffect(() => {
-    console.log("UPDATING browser storage", localIncident);
-    localStorage.setItem("incident", JSON.stringify(localIncident));
-  }, [localIncident]);
+  // useEffect(() => {
+  //   console.log("UPDATING browser storage", localIncident);
+  //   localStorage.setItem("incident", JSON.stringify(localIncident));
+  // }, [localIncident]);
 
   function submitValue(newParameter) {
     console.log(
