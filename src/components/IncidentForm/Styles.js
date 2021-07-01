@@ -23,7 +23,11 @@ const useStyles = makeStyles((theme) => ({
     },
     textfield: {
       margin: theme.spacing(1)
-    }
+    },
+    text: {
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    },
   }));
 
   export default useStyles;

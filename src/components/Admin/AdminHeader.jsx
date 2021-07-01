@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { Typography, Container } from "@material-ui/core";
@@ -10,6 +10,7 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import { ThemeProvider } from '@material-ui/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
 import globalUseStyle from "../GLOBALUI/globalUseStyles";
+import { useHistory } from "react-router";
 
 
 // ADMIN HEADER COMPONENT STYLING
@@ -23,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
   adminButton: {
     marginLeft: 'auto',
     position: 'static'
+  },
+  text: {
+    color: 'white'
   }
 }));
 
@@ -44,7 +48,9 @@ function ElevationScroll(props) {
 
 // ADMIN HEADER COMPONENT
 export default function AdminHeader(props) {
+  const history = useHistory();
   const classes = useStyles();
+  const [toggleArrow, setToggleArrow] = useState(false)
 
   return (
     <ThemeProvider theme={createMuiTheme}>
@@ -52,12 +58,13 @@ export default function AdminHeader(props) {
         <ElevationScroll>
           <AppBar position="fixed" color="primary">
             <Toolbar disableGutters={false}>
-              <SubdirectoryArrowLeftIcon fontSize='large' />
+              {toggleArrow ? <SubdirectoryArrowLeftIcon />
+                : !toggleArrow}
               <KOPIAdminLogo />
               <LogOutButton className={classes.button} />
             </Toolbar>
             <Container style={{ textAlign: "center" }}>
-              <Typography variant="h3">Reports</Typography>
+              <Typography variant="h3" className={classes.text}>Reports</Typography>
             </Container>
           </AppBar>
         </ElevationScroll>

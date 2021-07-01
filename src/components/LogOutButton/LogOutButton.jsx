@@ -19,7 +19,6 @@ function LogOutButton(props) {
       size="large"
       variant="contained"
       color="secondary"
-      className={globalStyle.submit}
     >
       Log Out
     </Button>
