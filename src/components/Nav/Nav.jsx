@@ -157,7 +157,7 @@ function Drawer(props) {
          
     </List>
     </SwipeableDrawer>
-     <IconButton
+     <IconButton 
       onClick={() => setOpenDrawer(!openDrawer)}
        disableRipple
       >

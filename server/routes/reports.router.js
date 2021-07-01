@@ -27,14 +27,14 @@ router.get('/', adminAuth, (req, res) => {
     alcohol_drug_use.alcohol_drug_use_type, disposition.*, transport_disposition.transport_disposition_type, 
     transport_method.transport_method_type, transport_mode.transport_mode_type, destination_facility.destination_facility_type, 
     medicalconditions.*, currentmedication.*, allergies.*, 
-    symptoms.*, organ_system.organ_system_type, 
+    symptoms.*, organ_system.organ_system_type, injury.*,
     anatomic_location.anatomic_location_type, initial_acuity.initial_acuity_type, final_acuity.final_acuity_type, 
-    primary_impression.primary_impression_type, 
+    primary_impression.primary_impression_type, injury_cause.injury_cause_type, injury_location.injury_location_type,
     
     cardiacarrest.time_cardiac_arrest, cardiac_arrest.cardiac_arrest_type, 
     cardiac_arrest_etiology.cardiac_arrest_etiology_type, resuscitation_attempt.resuscitation_attempt_type, 
     cardiac_arrest_witness.cardiac_arrest_witness_type, aed_use_prior.aed_use_prior_type, cpr_provided.cpr_provided_type, 
-    spontaneous_circulation.spontaneous_circulation_type, cpr_stopped.cpr_stopped_type, aed_initiator.aed_initiator_type, 
+    spontaneous_circulation.spontaneous_circulation_type, cpr_stopped.cpr_stopped_type, cpr_initiator.cpr_initiator_type, 
     aed_applicator.aed_applicator_type, aed_defibrillator.aed_defibrillator_type, 
     
   CASE WHEN count(med) = 0 THEN ARRAY[]::jsonb[] ELSE array_agg(DISTINCT to_jsonb(med.medication)) END AS med, 
@@ -67,7 +67,7 @@ router.get('/', adminAuth, (req, res) => {
   LEFT JOIN cpr_provided ON cpr_provided.id = cardiacarrest.cpr_provided_id
   LEFT JOIN spontaneous_circulation ON spontaneous_circulation.id = cardiacarrest.spontaneous_circulation_id
   LEFT JOIN cpr_stopped ON cpr_stopped.id = cardiacarrest.cpr_stopped_id
-  LEFT JOIN aed_initiator ON aed_initiator.id = cardiacarrest.aed_initiator_id
+  LEFT JOIN cpr_initiator ON cpr_initiator.id = cardiacarrest.cpr_initiator_id
   LEFT JOIN aed_applicator ON aed_applicator.id = cardiacarrest.aed_applicator_id
   LEFT JOIN aed_defibrillator ON aed_defibrillator.id = cardiacarrest.aed_defibrillator_id
   JOIN "user" ON "user".id = incident.user_id
@@ -81,7 +81,10 @@ router.get('/', adminAuth, (req, res) => {
   LEFT JOIN transport_method ON transport_method.id = disposition.transport_method_id
   LEFT JOIN transport_mode ON transport_mode.id = disposition.transport_mode_id
   LEFT JOIN destination_facility ON destination_facility.id = disposition.destination_facility_id
- 
+   LEFT JOIN injury ON injury.patient_injury_id = patient.id
+   LEFT JOIN injury_cause ON injury_cause.id = injury.injury_cause_id
+   LEFT JOIN injury_location ON injury_location.id = injury_location_id
+   
 
   
 
@@ -114,16 +117,16 @@ router.get('/', adminAuth, (req, res) => {
     JOIN pain_scale ON pain_scale.id = vitals.pain_scale_id
     JOIN stroke_score ON stroke_score.id = vitals.stroke_score_id
     JOIN stroke_scale ON stroke_scale.id = vitals.stroke_scale_id) vit ON vit.patient_vitals_id = patient.id
-  WHERE patient.id=1
+  WHERE patient.id=$1
   GROUP BY patient.id, incident.id, incident_service.id, triage_cat.id, gender.id, race.id, age_units.id, 
     medicalconditions.id, currentmedication.id, allergies.id, 
     symptoms.id, anatomic_location.id, organ_system.id, 
     initial_acuity.id, final_acuity.id, primary_impression.id, 
     cardiacarrest.id, cardiac_arrest.id, cardiac_arrest_etiology.id, 
     resuscitation_attempt.id, cardiac_arrest_witness.id, aed_use_prior.id, cpr_provided.id, spontaneous_circulation.id, 
-    cpr_stopped.id, aed_initiator.id, aed_applicator.id, aed_defibrillator.id, 
+    cpr_stopped.id, cpr_initiator.id, aed_applicator.id, aed_defibrillator.id, 
     "user".id, scene.id, possible_injury.id, 
-    alcohol_drug_use.id, disposition.id, transport_disposition.id, transport_method.id, transport_mode.id, destination_facility.id;
+    alcohol_drug_use.id, disposition.id, transport_disposition.id, transport_method.id, transport_mode.id, destination_facility.id, injury.id, injury_cause.id, injury_location.id;
 `;
     pool.query(queryText, [req.params.id]).then(result => {
       // Sends back the results in an object

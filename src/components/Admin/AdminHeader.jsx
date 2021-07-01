@@ -1,4 +1,4 @@
-import {React, useState }from "react";
+import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { Typography, Container } from "@material-ui/core";
@@ -23,11 +23,20 @@ const useStyles = makeStyles((theme) => ({
   },
   adminButton : {
     marginLeft: 'auto',
-    position: 'static'
+    position: 'static',
   },
   text: {
-    color: 'white'
-  }
+    color: 'white', 
+    paddingBottom: 40,
+    marginTop: -60,
+    
+  },
+  adlogo: {
+    marginTop: 50,
+},
+button: {
+  marginBottom: -10,
+}
 }));
 
 
@@ -50,7 +59,7 @@ function ElevationScroll(props) {
 export default function AdminHeader(props) {
   const history = useHistory();
   const classes = useStyles();
-  const [toggleArrow, setToggleArrow] = useState(false)
+  // const [toggleArrow, setToggleArrow] = useState(false)
 
   return (
     <ThemeProvider theme={createMuiTheme}>
@@ -58,9 +67,9 @@ export default function AdminHeader(props) {
       <ElevationScroll>
         <AppBar position="fixed" color="primary">
           <Toolbar disableGutters={false}>
-          {toggleArrow ? <SubdirectoryArrowLeftIcon/>
-         : !toggleArrow }
-            <KOPIAdminLogo />
+          {/* {toggleArrow ? <SubdirectoryArrowLeftIcon/>
+         : !toggleArrow } */}
+            <KOPIAdminLogo className={classes.adlogo}/>
             <LogOutButton className={classes.button}/>
           </Toolbar>
           <Container style={{ textAlign: "center" }}>

@@ -58,8 +58,8 @@ function App() {
       { isAdmin ? <AdminHeader/>
       : nonAdmin ? <Nav/> 
       : def
-      }
-
+      } 
+        {/* <Nav/>  */}
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -74,7 +74,7 @@ function App() {
           </Route>
 
 
-          </Switch>
+          
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -183,6 +183,7 @@ function App() {
           </NonAdminProtectedRoute>
 
         <Footer />
+        </Switch>
         </ThemeProvider>
         </Router>
   );
