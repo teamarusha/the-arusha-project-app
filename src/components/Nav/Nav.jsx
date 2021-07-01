@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
@@ -15,7 +15,7 @@ import { useState } from "react";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import LogOutButton from '../LogOutButton/LogOutButton';
 
-
+import SummaryFieldSubmit from '../SummaryFieldSubmit/SummaryFieldSubmit';
 
 // OVERHEAD COMPONENT STYLING
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 'auto',
     color: 'common'
   },
-  root : {
+  root: {
     backgroundColor: '#5BC6CC'
   }
 }));
@@ -72,8 +72,8 @@ function Drawer(props) {
   if (user.id != null && user.is_admin == false) {
     nonAdminLoginLinkData.path = '/user';
     nonAdminLoginLinkData.text = 'Home';
-  } 
-  else if (user.id !=null && user.is_admin == true){
+  }
+  else if (user.id != null && user.is_admin == true) {
     adminLoginLinkData.path = '/admin'
     adminLoginLinkData.text = 'Home'
 
@@ -83,87 +83,78 @@ function Drawer(props) {
   return (
     <React.Fragment>
 
-    <SwipeableDrawer 
-     classes={{paper: classes.nav}}
-     disableBackdropTransition={!iOS} 
-     disableDiscovery={iOS} 
-     open={openDrawer} 
-     onClose={()=> setOpenDrawer(false)} 
-     onOpen={()=> setOpenDrawer(true)} >
- <List>
-        {user.id && (
-          <React.Fragment>
-    {/* INFO PAGE */}
-          <ListItem  component={Link} to="/info" classes={{root: classes.item}}>
-            <ListItemText classes={{primary: classes.text}}> Info Page </ListItemText>
-             <ListItemSecondaryAction edge="end">
-              <ChevronRightIcon fontSize='large' style={{color: '#5BC6CC'}}/>
-            </ListItemSecondaryAction>
-         </ListItem>
-         <Divider classes={{root: classes.root}}/>
-         </React.Fragment>
-          )}
+      <SwipeableDrawer
+        classes={{ paper: classes.nav }}
+        disableBackdropTransition={!iOS}
+        disableDiscovery={iOS}
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        onOpen={() => setOpenDrawer(true)} >
+        <List>
+          
 
-    {/* ABOUT PAGE */}
-        <ListItem  component={Link} to="/about" classes={{root: classes.item}}>
-           <ListItemText classes={{primary: classes.text}}> About </ListItemText>
-            <ListItemSecondaryAction edge="end">
-             <ChevronRightIcon fontSize='large' style={{color: '#5BC6CC'}}/>
-            </ListItemSecondaryAction>
-         </ListItem>
-         <Divider classes={{root: classes.root}}/>
+          
 
-    {/* INCIDENT */}
-         <ListItem  component={Link} to="/incident" classes={{ root: classes.item }}>
+          {/* INCIDENT */}
+          <ListItem component={Link} to="/incident" classes={{ root: classes.item }}>
             <ListItemText classes={{ primary: classes.text }}> Incident </ListItemText>
             <ListItemSecondaryAction edge="end">
-              <ChevronRightIcon fontSize="large" style={{color: '#5BC6CC'}}/>
+              <ChevronRightIcon fontSize="large" style={{ color: '#5BC6CC' }} />
             </ListItemSecondaryAction>
           </ListItem>
-          <Divider classes={{root: classes.root}}/>
+          <Divider classes={{ root: classes.root }} />
 
-     {/* PATIENT HOME */}
-        <ListItem  component={Link} to="/patient" classes={{root: classes.item}}>
-           <ListItemText classes={{primary: classes.text}}> Patient Home </ListItemText>
+          {/* PATIENT */}
+          <ListItem component={Link} to="/patient" classes={{ root: classes.item }}>
+            <ListItemText classes={{ primary: classes.text }}> Patient </ListItemText>
             <ListItemSecondaryAction edge="end">
-             <ChevronRightIcon fontSize='large' style={{color: '#5BC6CC'}}/>
-            </ListItemSecondaryAction>
-         </ListItem>
-         <Divider classes={{root: classes.root}}/>
-
-    {/* TREATMENT HOME */}
-         <ListItem component={Link} to="/treatment" classes={{ root: classes.item }}>
-            <ListItemText classes={{ primary: classes.text }}> Treament Home </ListItemText>
-            <ListItemSecondaryAction edge="end">
-              <ChevronRightIcon fontSize="large" style={{color: '#5BC6CC'}}/>
+              <ChevronRightIcon fontSize='large' style={{ color: '#5BC6CC' }} />
             </ListItemSecondaryAction>
           </ListItem>
-          <Divider classes={{root: classes.root}}/>
+          <Divider classes={{ root: classes.root }} />
 
-    {/* VITALS HOME */}
+          {/* TREATMENT */}
+          <ListItem component={Link} to="/treatment" classes={{ root: classes.item }}>
+            <ListItemText classes={{ primary: classes.text }}> Treament </ListItemText>
+            <ListItemSecondaryAction edge="end">
+              <ChevronRightIcon fontSize="large" style={{ color: '#5BC6CC' }} />
+            </ListItemSecondaryAction>
+          </ListItem>
+          <Divider classes={{ root: classes.root }} />
+
+          {/* VITALS */}
           <ListItem component={Link} to="/vitals" classes={{ root: classes.item }}>
             <ListItemText classes={{ primary: classes.text }}> Vitals </ListItemText>
             <ListItemSecondaryAction edge="end">
-              <ChevronRightIcon fontSize="large" style={{color: '#5BC6CC'}}/>
+              <ChevronRightIcon fontSize="large" style={{ color: '#5BC6CC' }} />
             </ListItemSecondaryAction>
-            </ListItem>
-            <Divider classes={{root: classes.root}}/>
+          </ListItem>
+          <Divider classes={{ root: classes.root }} />
 
-       
-    {/* LOGOUT BUTTON */}
-        <ListItem  component={Link} to={nonAdminLoginLinkData.path} classes={{root: classes.item}}>
-           <ListItemText classes={{primary: classes.text}}> <LogOutButton/> </ListItemText>
-         </ListItem>
-         
-    </List>
-    </SwipeableDrawer>
-     <IconButton
-      onClick={() => setOpenDrawer(!openDrawer)}
-       disableRipple
+          {/* SUMMARY */}
+          <ListItem component={Link} to="/summary" classes={{ root: classes.item }}>
+            <ListItemText classes={{ primary: classes.text }}> Summary </ListItemText>
+            <ListItemSecondaryAction edge="end">
+              <ChevronRightIcon fontSize="large" style={{ color: '#5BC6CC' }} />
+            </ListItemSecondaryAction>
+          </ListItem>
+          <Divider classes={{ root: classes.root }} />
+
+
+          {/* LOGOUT BUTTON */}
+          <ListItem component={Link} to={nonAdminLoginLinkData.path} classes={{ root: classes.item }}>
+            <ListItemText classes={{ primary: classes.text }}> <LogOutButton /> </ListItemText>
+          </ListItem>
+
+        </List>
+      </SwipeableDrawer>
+      <IconButton
+        onClick={() => setOpenDrawer(!openDrawer)}
+        disableRipple
       >
-       <MenuIcon style={{fontSize: 50, color: 'white'}}/>
-    </IconButton>
-   </React.Fragment>
+        <MenuIcon style={{ fontSize: 50, color: 'white' }} />
+      </IconButton>
+    </React.Fragment>
   );
 }
 
@@ -204,3 +195,29 @@ export default function Nav(props) {
     </React.Fragment>
   );
 }
+
+
+
+// {user.id && (
+//   <React.Fragment>
+//   {/* INFO PAGE */}
+//   <ListItem component={Link} to="/info" classes={{ root: classes.item }}>
+//     <ListItemText classes={{ primary: classes.text }}> Info Page </ListItemText>
+//     <ListItemSecondaryAction edge="end">
+//       <ChevronRightIcon fontSize='large' style={{ color: '#5BC6CC' }} />
+//     </ListItemSecondaryAction>
+//   </ListItem>
+//   <Divider classes={{ root: classes.root }} />
+// </React.Fragment>
+// )
+// }
+
+
+// {/* ABOUT PAGE */}
+// <ListItem component={Link} to="/about" classes={{ root: classes.item }}>
+// <ListItemText classes={{ primary: classes.text }}> About </ListItemText>
+// <ListItemSecondaryAction edge="end">
+//   <ChevronRightIcon fontSize='large' style={{ color: '#5BC6CC' }} />
+// </ListItemSecondaryAction>
+// </ListItem>
+// <Divider classes={{ root: classes.root }} />

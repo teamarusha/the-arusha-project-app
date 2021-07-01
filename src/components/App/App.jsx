@@ -13,6 +13,7 @@ import Footer from '../Footer/Footer';
 
 import NonAdminProtectedRoute from '../ProtectedRoute/NonAdminProtectedRoute';
 import AdminProtectedRoute from '../ProtectedRoute/AdminProtectedRoute';
+import SummaryFieldSubmit from "../SummaryFieldSubmit/SummaryFieldSubmit";
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
@@ -24,7 +25,7 @@ import Admin from '../Admin/Admin';
 import FinalReport from '../FinalReport/FinalReport';
 
 
-import {ThemeProvider} from '@material-ui/styles';
+import { ThemeProvider } from '@material-ui/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
 import './App.css';
 import IncidentHome from "../IncidentForm/IncidentHome";
@@ -35,7 +36,7 @@ import VitalsForm from "../VitalsForm/VitalsForm";
 
 import Nav from '../Nav/Nav';
 import AdminHeader from '../Admin/AdminHeader';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function App() {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ function App() {
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
-  
+
   // KEEPING TRACK OF USER REDUX STATE
   const user = useSelector((store) => store.user);
   let isAdmin = (user.is_admin == true)
@@ -54,11 +55,11 @@ function App() {
     <Router>
       <ThemeProvider theme={createMuiTheme}>
 
-  {/* CONDITIONAL RENDERING OF APP BAR w/ NAV */}
-      { isAdmin ? <AdminHeader/>
-      : nonAdmin ? <Nav/> 
-      : def
-      }
+        {/* CONDITIONAL RENDERING OF APP BAR w/ NAV */}
+        {isAdmin ? <AdminHeader />
+          : nonAdmin ? <Nav />
+            : def
+        }
 
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -74,12 +75,12 @@ function App() {
           </Route>
 
 
-          </Switch>
+
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-            
+
           <NonAdminProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
@@ -147,7 +148,7 @@ function App() {
             <LandingPage />
 
           </NonAdminProtectedRoute>
-    
+
 
 
           <NonAdminProtectedRoute exact path="/incident">
@@ -182,9 +183,14 @@ function App() {
             <VitalsForm />
           </NonAdminProtectedRoute>
 
-        <Footer />
-        </ThemeProvider>
-        </Router>
+          <NonAdminProtectedRoute exact path="/summary">
+            <SummaryFieldSubmit />
+          </NonAdminProtectedRoute>
+
+          <Footer />
+        </Switch>
+      </ThemeProvider>
+    </Router>
   );
 }
 

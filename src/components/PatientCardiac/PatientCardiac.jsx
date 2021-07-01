@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // ----- Material UI -----
-import { InputLabel } from "@material-ui/core";
+import { InputLabel, TextField } from "@material-ui/core";
 import { Select } from "@material-ui/core";
 import { MenuItem } from "@material-ui/core";
 
@@ -187,7 +187,19 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
               value={item.id}>{item[`spontaneous_circulation_type`]}</MenuItem>)}
           </Select> <br /><br />
 
-          <p>Cardiac Arrest calendar goes here</p> <br /><br />
+          <TextField
+            id="date"
+            label="Cardiac Arrest"
+            type="date"
+            // defaultValue="0000-00-00"
+            // className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />&nbsp; &nbsp; <br /><br />
+          <label for="appt">Time:</label>
+          <input type="time" id="appt" name="appt"
+            min="09:00" max="18:00" required></input> <br /><br />
 
           <InputLabel
             id="demo-simple-select-autowidth-label">Reason for Stopping CPR/Resuscitation</InputLabel>

@@ -116,7 +116,18 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           </Select>{" "}
           <br />
           <br />
-          <p>Date of Birth calendar goes here</p>
+          <TextField
+            id="date"
+            label="DOB:"
+            type="date"
+            // defaultValue="0000-00-00"
+            // className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <br />
+          <br />
           <TextField
             id="outlined-basic"
             label="Patient Address"
