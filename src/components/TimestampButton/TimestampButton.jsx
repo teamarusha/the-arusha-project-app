@@ -3,7 +3,7 @@ import { useState } from "react";
 
 // ----- Material UI -----
 import Button from '@material-ui/core/Button';
-import { useEffect } from 'react';
+
 
 function TimestampButton({ incidentMirror, setIncidentMirror }) {
 
@@ -183,7 +183,7 @@ function TimestampButton({ incidentMirror, setIncidentMirror }) {
   return (
     <div>
       {incidentMirror &&
-        <Button onClick={advanceDispatch} color="primary"
+        <Button onClick={advanceDispatch} color="secondary"
           variant="contained"
           disabled={incidentMirror.dispatchButton === "Service Complete"}
         >

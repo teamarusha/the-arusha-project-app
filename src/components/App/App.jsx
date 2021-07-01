@@ -55,7 +55,7 @@ function App() {
       <ThemeProvider theme={createMuiTheme}>
 
   {/* CONDITIONAL RENDERING OF APP BAR w/ NAV */}
-      {isAdmin ? <AdminHeader/>
+      { isAdmin ? <AdminHeader/>
       : nonAdmin ? <Nav/> 
       : def
       }
@@ -182,15 +182,6 @@ function App() {
             <VitalsForm />
           </NonAdminProtectedRoute>
 
-
-
-
-
-          {/* If none of the other routes matched, we will show a 404. */}
-          <Route>
-            <h1>404</h1>
-          </Route>
-       
         <Footer />
         </ThemeProvider>
         </Router>
