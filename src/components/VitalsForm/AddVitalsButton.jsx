@@ -19,11 +19,21 @@ function AddVitalsButton({ vitalsMirror, setVitalsMirror }) {
     let newVitalsID = vitalsMirror[`${id}vitalsArray`].length + 1;
     console.log("new vitals ID", newVitalsID);
 
-
-
+    const timestamp = Date.now();
 
     setVitalsMirror({
       ...vitalsMirror,
+
+      [id + "vitalTimestamp" + vitalsMirror[`${id}vitalsArray`].length]:
+        new Intl.DateTimeFormat("en-GB", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        }).format(timestamp),
+
       [id + "lastVital"]: newVitalsID,
       [id + "vitalsArray"]: [...vitalsMirror[`${id}vitalsArray`], newVitalsID],
       [id + "systolicBloodPressure" + newVitalsID]: "",
@@ -38,6 +48,7 @@ function AddVitalsButton({ vitalsMirror, setVitalsMirror }) {
       [id + "painScaleScore" + newVitalsID]: "",
       [id + "strokeScaleScore" + newVitalsID]: "",
       [id + "strokeScaleType" + newVitalsID]: "",
+      [id + "vitalTimestamp" + newVitalsID]: "",
     });
   }
 
@@ -45,8 +56,9 @@ function AddVitalsButton({ vitalsMirror, setVitalsMirror }) {
     <div>
       {vitalsMirror && (
         <div>
-          <p>Submit Vitals</p>
-          <Button onClick={AddVitals}>Add Vitals</Button>
+          <Button color="primary" variant="contained" onClick={AddVitals}>
+            Add Vitals
+          </Button>
         </div>
       )}
     </div>

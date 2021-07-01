@@ -14,34 +14,65 @@ function AddProcedureButton({ treatmentMirror, setTreatmentMirror }) {
   const { id } = useParams();
 
   function AddProcedure() {
-    // newProcedureID will be the next procedure added. Does not use params from the url
-    // Instead it looks at the ProcedureArray and adds the next procedure based on that
-    // THIS ID IS NOT THE Procedure ID FROM THE DATABASE,
-    // THIS VALUE MEANS NOTHING AFTER SUBMISSION
-    let newProcedureID = treatmentMirror[`${id}procedureArray`].length + 1;
-    console.log("new procedure ID", newProcedureID);
 
-    setTreatmentMirror({
-      ...treatmentMirror,
-      [id + "lastProcedure"]: newProcedureID,
-      [id + "procedureArray"]: [
-        ...treatmentMirror[`${id}procedureArray`],
-        newProcedureID,
-      ],
-      [id + "procedure" + newProcedureID]: "",
-      [id + "procedureAttempts" + newProcedureID]: "",
-      [id + "successfulProcedure" + newProcedureID]: "",
-      [id + "responseToProcedure" + newProcedureID]: "",
-      [id + "procedurePerformedBy" + newProcedureID]: "",
-    });
+    if (
+      treatmentMirror[`${id}procedure${treatmentMirror[`${id}lastProcedure`]}`] === "" ||
+      treatmentMirror[`${id}procedureAttempts${treatmentMirror[`${id}lastProcedure`]}`] === "" ||
+      treatmentMirror[`${id}successfulProcedure${treatmentMirror[`${id}lastProcedure`]}`] === "" ||
+      treatmentMirror[`${id}responseToProcedure${treatmentMirror[`${id}lastProcedure`]}`] === "" ||
+      treatmentMirror[`${id}procedurePerformedBy${treatmentMirror[`${id}lastProcedure`]}`] === ""
+    ) {
+      alert('Please fill all Procedure Form inputs before submitting')
+
+    } else {
+
+
+      // newProcedureID will be the next procedure added. Does not use params from the url
+      // Instead it looks at the ProcedureArray and adds the next procedure based on that
+      // THIS ID IS NOT THE Procedure ID FROM THE DATABASE,
+      // THIS VALUE MEANS NOTHING AFTER SUBMISSION
+      let newProcedureID = treatmentMirror[`${id}procedureArray`].length + 1;
+      console.log("new procedure ID", newProcedureID);
+
+      const timestamp = Date.now();
+
+      
+
+
+      setTreatmentMirror({
+        ...treatmentMirror,
+
+        [id + "procedureTimestamp" + treatmentMirror[`${id}procedureArray`].length]:
+          new Intl.DateTimeFormat("en-GB", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+          }).format(timestamp),
+
+        [id + "lastProcedure"]: newProcedureID,
+        [id + "procedureArray"]: [
+          ...treatmentMirror[`${id}procedureArray`],
+          newProcedureID,
+        ],
+        [id + "procedure" + newProcedureID]: "",
+        [id + "procedureAttempts" + newProcedureID]: "",
+        [id + "successfulProcedure" + newProcedureID]: "",
+        [id + "responseToProcedure" + newProcedureID]: "",
+        [id + "procedurePerformedBy" + newProcedureID]: "",
+      });
+    }
   }
 
   return (
     <div>
       {treatmentMirror && (
         <div>
-          <p>Submit Procedure</p>
-          <Button onClick={AddProcedure}>Add Procedure</Button>
+          <Button color="primary" variant="contained" onClick={AddProcedure}>
+            Add Procedure
+          </Button>
         </div>
       )}
     </div>

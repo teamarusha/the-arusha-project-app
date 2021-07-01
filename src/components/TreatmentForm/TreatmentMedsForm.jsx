@@ -10,14 +10,7 @@ import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 
 const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
-  const { id } = useParams;
-
-  // Runs whenever localPatientMirror is changed, updated, manipulated at all
-  // This way they will always be the same as long as it is the mirror that is being changed
-  useEffect(() => {
-    console.log("UPDATING browser storage", localTreatment);
-    localStorage.setItem("treatment", JSON.stringify(localTreatment));
-  }, [localTreatment]);
+  const { id } = useParams();
 
   // Only handles when a value is changed by keystroke/inputfield clicks.
   // Does NOT handle initialization of new data.
@@ -32,8 +25,6 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
       ...localTreatment,
       [newParameter.key]: newParameter.thing,
     });
-
-    // localStorage.setItem(`${newParameter.key}`, JSON.stringify(newParameter.thing));
   }
 
   return (
@@ -76,12 +67,12 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 autoWidth
                 value={
                   localTreatment[
-                    `${id}medsAdminBy${localTreatment[`${id}lastMedication`]}`
+                    `${id}routeAdministered${localTreatment[`${id}lastMedication`]}`
                   ]
                 }
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}medsAdminBy${
+                    key: `${id}routeAdministered${
                       localTreatment[`${id}lastMedication`]
                     }`,
                     thing: event.target.value,
@@ -156,14 +147,14 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 autoWidth
                 value={
                   localTreatment[
-                    `${id}responseToProcedure${
+                    `${id}medicationResponse${
                       localTreatment[`${id}lastMedication`]
                     }`
                   ]
                 }
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}responseToProcedure${
+                    key: `${id}medicationResponse${
                       localTreatment[`${id}lastMedication`]
                     }`,
                     thing: event.target.value,
@@ -190,14 +181,14 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 autoWidth
                 value={
                   localTreatment[
-                    `${id}procedurePerformedBy${
+                    `${id}medsAdminBy${
                       localTreatment[`${id}lastMedication`]
                     }`
                   ]
                 }
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}procedurePerformedBy${
+                    key: `${id}medsAdminBy${
                       localTreatment[`${id}lastMedication`]
                     }`,
                     thing: event.target.value,

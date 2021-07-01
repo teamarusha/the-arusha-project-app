@@ -1,13 +1,13 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import React from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 // ----- Material UI -----
-import { TextField } from '@material-ui/core';
-import { InputLabel } from '@material-ui/core';
-import { Select } from '@material-ui/core';
-import { MenuItem } from '@material-ui/core';
+import { TextField } from "@material-ui/core";
+import { InputLabel } from "@material-ui/core";
+import { Select } from "@material-ui/core";
+import { MenuItem } from "@material-ui/core";
 
 function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
 
@@ -34,6 +34,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
     }
 
     return (
+        <div>
         <div className="container">
             <h2>Patient Symptoms Form:</h2>
             <br /><br />
@@ -179,9 +180,131 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
 
                 </div>
             }
-
+          {/* > */}
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {dropdowns["anatomic_location"].map((item) => (
+              <MenuItem key={"anatomic_location" + item.id} value={item.id}>
+                {item[`anatomic_location_type`]}
+              </MenuItem>
+            ))}
+          {/* </Select>{" "} */}
+          <br />
+          <br />
+          <InputLabel id="demo-simple-select-autowidth-label">
+            Chief Complaint Organ System
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            autoWidth
+            value={patientsMirror[`${id}organSystem`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}organSystem`,
+                thing: event.target.value,
+              })
+            }
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {dropdowns["organ_system"].map((item) => (
+              <MenuItem key={"organ_system" + item.id} value={item.id}>
+                {item[`organ_system_type`]}
+              </MenuItem>
+            ))}
+          </Select>{" "}
+          <br />
+          <br />
+          <p>Symptom Onset calendar goes here</p> <br />
+          <TextField
+            id="outlined-basic"
+            label="Primary Symptom"
+            variant="outlined"
+            value={patientsMirror[`${id}primarySymptom`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}primarySymptom`,
+                thing: event.target.value,
+              })
+            }
+          ></TextField>{" "}
+          &nbsp;
+          <br />
+          <br />
+          <TextField
+            id="outlined-basic"
+            label="Other Associated Symptoms"
+            variant="outlined"
+            value={patientsMirror[`${id}otherSymptoms`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}otherSymptoms`,
+                thing: event.target.value,
+              })
+            }
+          ></TextField>{" "}
+          <br />
+          <br />
+          <InputLabel id="demo-simple-select-autowidth-label">
+            Initial Patient Aquity
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            autoWidth
+            value={patientsMirror[`${id}initialAcuity`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}initialAcuity`,
+                thing: event.target.value,
+              })
+            }
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {dropdowns["initial_acuity"].map((item) => (
+              <MenuItem key={"initial_acuity" + item.id} value={item.id}>
+                {item[`initial_acuity_type`]}
+              </MenuItem>
+            ))}
+          </Select>{" "}
+          <br />
+          <br />
+          <InputLabel id="demo-simple-select-autowidth-label">
+            Provider's Primary Impression
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            autoWidth
+            value={patientsMirror[`${id}primaryImpression`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}primaryImpression`,
+                thing: event.target.value,
+              })
+            }
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {dropdowns["primary_impression"].map((item) => (
+              <MenuItem key={"primary_impression" + item.id} value={item.id}>
+                {item[`primary_impression_type`]}
+              </MenuItem>
+            ))}
+          </Select>{" "}
+          <br />
+          <br />
+          <p>Last Known Well calendar goes here</p>
         </div>
-    )
+      {/* )} */}
+    </div>
+  );
 }
 
 export default PatientSymptoms;

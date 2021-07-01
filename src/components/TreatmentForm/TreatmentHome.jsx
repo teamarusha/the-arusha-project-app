@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TreatmentMedsForm from "./TreatmentMedsForm";
 import TreatmentProcedureForm from "./TreatmentProcedureForm";
 import AddEditPatient from "../AddEditPatient/AddEditPatient";
+import TimestampButton from "../TimestampButton/TimestampButton";
 
 //____________________Material UI Imports____________________
 import useStyles from "./Styles";
@@ -41,6 +42,11 @@ function TreatmentHome() {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+  // ____________________WATCHER FUNCTION____________________
+  useEffect(() => {
+    console.log("UPDATING browser storage", localTreatment);
+    localStorage.setItem("treatment", JSON.stringify(localTreatment));
+  }, [localTreatment]);
 
   // ____________________DROPDOWNS____________________
   let [localDropdownMirror, setLocalDropdownMirror] = useState(
@@ -61,58 +67,17 @@ function TreatmentHome() {
     }
   }, [dropdowns.go]);
 
-  // Main Button
-  const [buttonText, setButtonText] = useState("Dispatched");
-  function clickMe() {
-    console.log("Button clicked...");
-
-    switch (buttonText) {
-      case "Dispatched":
-        setButtonText("Unit En Route");
-        break;
-      case "Unit En Route":
-        setButtonText("Arrived at Scene");
-        break;
-      case "Arrived at Scene":
-        setButtonText("Arrived at Patient");
-        break;
-      case "Arrived at Patient":
-        setButtonText("En Route to Hospital");
-        break;
-      case "En Route to Hospital":
-        setButtonText("Arrived at Hospital");
-        break;
-      default:
-        setButtonText("Dispatched");
-        break;
-    }
-
-    const timestamp = Date.now(); // This would be the timestamp you want to format
-    console.log(
-      new Intl.DateTimeFormat("en-US", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      }).format(timestamp)
-    );
-  }
-
   return (
     <div className="container">
       <h2>Treament</h2>
-
-      {/* <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
-      <p>Incident Storage: {localStorage.getItem("incident")}</p>
-      <p>Vitals Mirror: {JSON.stringify(vitalsMirror)}</p>
-      <p>Vitals Storage: {localStorage.getItem("vitals")}</p>
-      <p>Treatment Mirror: {JSON.stringify(treatmentMirror)}</p>
-      <p>Treatment Storage: {localStorage.getItem("treatment")}</p>
-      <p>Patients Mirror: {JSON.stringify(patientsMirror)}</p>
-      <p>Patients Storage: {localStorage.getItem("patients")}</p> */}
-
+      <br />
+      <br />
+      <TimestampButton
+        incidentMirror={incidentMirror}
+        setIncidentMirror={setIncidentMirror}
+      />
+      <br />
+      <br />
       <AddEditPatient
         formName={"treatment"}
         incidentMirror={incidentMirror}
@@ -126,12 +91,6 @@ function TreatmentHome() {
       />
       <br />
       <br />
-
-      <div>
-        <Button onClick={clickMe} color="primary" variant="contained">
-          {buttonText}
-        </Button>
-      </div>
       <div className={classes.root}>
         <Accordion
           expanded={expanded === "panel1"}

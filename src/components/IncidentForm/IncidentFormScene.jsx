@@ -8,10 +8,10 @@ import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
 
-  useEffect(() => {
-    console.log("UPDATING browser storage", localIncident);
-    localStorage.setItem("incident", JSON.stringify(localIncident));
-  }, [localIncident]);
+  // useEffect(() => {
+  //   console.log("UPDATING browser storage", localIncident);
+  //   localStorage.setItem("incident", JSON.stringify(localIncident));
+  // }, [localIncident]);
 
   function submitValue(newParameter) {
     console.log(
@@ -30,7 +30,6 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
 
   return (
     <div className="container">
-      <h2>Incident Scene</h2>
       {localIncident && (
         <div>
           <TextField
@@ -119,7 +118,10 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
             autoWidth
             value={localIncident[`alcoholDrugIndicators`]}
             onChange={(event) =>
-              submitValue({ key: `alcoholDrugIndicators`, thing: event.target.value })
+              submitValue({
+                key: `alcoholDrugIndicators`,
+                thing: event.target.value,
+              })
             }
           >
             <MenuItem value="">
