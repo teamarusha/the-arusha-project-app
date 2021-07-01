@@ -7,7 +7,7 @@ import KOPIAdminLogo from "../GLOBALUI/KOPILOGO/KOPIAdminLogo";
 import { makeStyles } from "@material-ui/styles";
 import SubdirectoryArrowLeftIcon from '@material-ui/icons/SubdirectoryArrowLeft';
 import LogOutButton from "../LogOutButton/LogOutButton";
-import {ThemeProvider} from '@material-ui/styles';
+import { ThemeProvider } from '@material-ui/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
 import globalUseStyle from "../GLOBALUI/globalUseStyles";
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
     marginBottom: "6em",
   },
-  adminButton : {
+  adminButton: {
     marginLeft: 'auto',
     position: 'static'
   }
@@ -48,21 +48,21 @@ export default function AdminHeader(props) {
 
   return (
     <ThemeProvider theme={createMuiTheme}>
-    <React.Fragment>
-      <ElevationScroll>
-        <AppBar position="fixed" color="primary">
-          <Toolbar disableGutters={false}>
-            <SubdirectoryArrowLeftIcon fontSize='large' />
-            <KOPIAdminLogo />
-            <LogOutButton className={classes.button}/>
-          </Toolbar>
-          <Container style={{ textAlign: "center" }}>
-            <Typography variant="h3">Reports</Typography>
-          </Container>
-        </AppBar>
-      </ElevationScroll>
-      <div className={classes.toolbarMargin} />
-    </React.Fragment>
+      <React.Fragment>
+        <ElevationScroll>
+          <AppBar position="fixed" color="primary">
+            <Toolbar disableGutters={false}>
+              <SubdirectoryArrowLeftIcon fontSize='large' />
+              <KOPIAdminLogo />
+              <LogOutButton className={classes.button} />
+            </Toolbar>
+            <Container style={{ textAlign: "center" }}>
+              <Typography variant="h3">Reports</Typography>
+            </Container>
+          </AppBar>
+        </ElevationScroll>
+        <div className={classes.toolbarMargin} />
+      </React.Fragment>
     </ThemeProvider>
   );
 }
