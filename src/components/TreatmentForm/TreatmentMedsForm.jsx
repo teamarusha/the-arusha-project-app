@@ -12,13 +12,6 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
   const { id } = useParams;
 
-  // Runs whenever localPatientMirror is changed, updated, manipulated at all
-  // This way they will always be the same as long as it is the mirror that is being changed
-  useEffect(() => {
-    console.log("UPDATING browser storage", localTreatment);
-    localStorage.setItem("treatment", JSON.stringify(localTreatment));
-  }, [localTreatment]);
-
   // Only handles when a value is changed by keystroke/inputfield clicks.
   // Does NOT handle initialization of new data.
   function submitValue(newParameter) {
@@ -32,8 +25,6 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
       ...localTreatment,
       [newParameter.key]: newParameter.thing,
     });
-
-    // localStorage.setItem(`${newParameter.key}`, JSON.stringify(newParameter.thing));
   }
 
   return (

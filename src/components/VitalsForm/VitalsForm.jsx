@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 
 import AddVitalsButton from "./AddVitalsButton";
 import AddEditPatient from "../AddEditPatient/AddEditPatient";
+import TimestampButton from "../TimestampButton/TimestampButton";
 
 //Material UI imports
 import {
@@ -55,43 +56,7 @@ const VitalsForm = () => {
     }
   }, [dropdowns.go]);
 
-  // Main Button
-  const [buttonText, setButtonText] = useState("Dispatched");
-  function clickMe() {
-    console.log("Button clicked...");
 
-    switch (buttonText) {
-      case "Dispatched":
-        setButtonText("Unit En Route");
-        break;
-      case "Unit En Route":
-        setButtonText("Arrived at Scene");
-        break;
-      case "Arrived at Scene":
-        setButtonText("Arrived at Patient");
-        break;
-      case "Arrived at Patient":
-        setButtonText("En Route to Hospital");
-        break;
-      case "En Route to Hospital":
-        setButtonText("Arrived at Hospital");
-        break;
-      default:
-        setButtonText("Dispatched");
-        break;
-    }
-    const timestamp = Date.now(); // This would be the timestamp you want to format
-    console.log(
-      new Intl.DateTimeFormat("en-US", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      }).format(timestamp)
-    );
-  }
 
   // Runs whenever localPatientMirror is changed, updated, manipulated at all
   // This way they will always be the same as long as it is the mirror that is being changed
@@ -110,8 +75,6 @@ const VitalsForm = () => {
     );
 
     setLocalVitals({ ...localVitals, [newParameter.key]: newParameter.thing });
-
-    // localStorage.setItem(`${newParameter.key}`, JSON.stringify(newParameter.thing));
   }
 
   return (
@@ -129,6 +92,11 @@ const VitalsForm = () => {
         vitalsMirror={vitalsMirror}
         setVitalsMirror={setVitalsMirror}
       />
+
+      <TimestampButton
+        incidentMirror={incidentMirror}
+        setIncidentMirror={setIncidentMirror}
+      />
       <br />
       <br />
       <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
@@ -139,12 +107,6 @@ const VitalsForm = () => {
       <p>Treatment Storage: {localStorage.getItem("treatment")}</p>
       <p>Patients Mirror: {JSON.stringify(patientsMirror)}</p>
       <p>Patients Storage: {localStorage.getItem("patients")}</p>
-
-      <div>
-        <Button onClick={clickMe} color="primary" variant="contained">
-          {buttonText}
-        </Button>
-      </div>
 
       {localVitals && (
         <div>

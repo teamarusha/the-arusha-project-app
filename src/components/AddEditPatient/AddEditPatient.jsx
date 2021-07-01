@@ -115,7 +115,7 @@ function AddEditPatient({
             [newPatientID + "destinationState"]: "",
             [newPatientID + "destinationCounty"]: "",
             [newPatientID + "destinationZipCode"]: "",
-            [newPatientID + "transportDisposition"]: "",
+            [newPatientID + "transportDisposition"]: 0,
             [newPatientID + "transportMethod"]: "",
             [newPatientID + "transportMode"]: "",
             [newPatientID + "destinationFacility"]: "",
