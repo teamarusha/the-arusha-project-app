@@ -44,23 +44,27 @@ function SummaryFieldSubmit(params) {
 
   return (
     <div>
-      <TimestampButton
-        incidentMirror={incidentMirror}
-        setIncidentMirror={setIncidentMirror}
-      />
-      <br />
-      <br />
-      <TextField
-        id="outlined-basic"
-        label="Incident Summary"
-        variant="outlined"
-        value={incidentSummary}
-      ></TextField>
-      <Button
-        color="primary"
-        variant="contained"
-        onClick={submitSummary}
-      ></Button>
+      {incidentMirror && (
+        <div>
+          <TimestampButton
+            incidentMirror={incidentMirror}
+            setIncidentMirror={setIncidentMirror}
+          />
+          <br />
+          <br />
+          <TextField
+            id="outlined-basic"
+            label="Incident Summary"
+            variant="outlined"
+            value={incidentMirror.incidentSummary}
+          ></TextField>
+          <br />
+          <br />
+          <Button color="primary" variant="contained" onClick={submitSummary}>
+            Submit Summary
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
