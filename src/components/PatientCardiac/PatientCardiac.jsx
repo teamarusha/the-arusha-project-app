@@ -56,6 +56,12 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
 
                     </Select> <br /><br />
 
+                </div>
+            }
+            
+            {dropdowns.go && patientsMirror && patientsMirror[`${id}cardiacArrest`] > 1 &&
+                <div>
+
                     <InputLabel
                         id="demo-simple-select-autowidth-label">Cardiac Arrest Etiology</InputLabel>
                     <Select

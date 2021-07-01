@@ -3,6 +3,7 @@ const treatments = (
     {
       '1medicationArray': [1],
       '1lastMedication': 1,
+      '1medicationTimestamp1':"",
       '1medication1': "",
       '1routeAdministered1': "",
       '1dosage1': "",
@@ -11,6 +12,7 @@ const treatments = (
       '1medsAdminBy1': "",
       '1procedureArray': [1],
       '1lastProcedure': 1,
+      '1procedureTimestamp1':"",
       '1procedure1': "",
       '1procedureAttempts1': "",
       '1successfulProcedure1': "",
