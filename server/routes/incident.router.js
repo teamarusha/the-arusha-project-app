@@ -9,7 +9,7 @@ const {
 // ____________________POST THE INCIDENT FORM____________________
 router.post('/', rejectUnauthenticated, async (req, res) => {
     // IMPORTANT VARIABLES FOR A QUERY - user id
-    const user = req.user.id
+    const userID = req.user.id
     const sampleStamp = '2021-03-23 12:23:33';
 
     const connection = await pool.connect();
@@ -28,20 +28,36 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         // THE ORDER FOR BIG INSERT STATEMENT
         // incident
+        // const incidentValues = {
+        //     user_id: user,
+        //     incident_type_id: 5,
+        //     crew_id: 1,
+        //     triage_cat_id: 2,
+        //     unit_notified: sampleStamp,
+        //     unit_enroute: sampleStamp,
+        //     unit_arrived_scene: sampleStamp,
+        //     arrived_patient: sampleStamp,
+        //     unit_left_scene: sampleStamp,
+        //     arrived_destination: sampleStamp,
+        //     transfer_of_care: sampleStamp,
+        //     unit_in_service: sampleStamp,
+        //     incident_summary: "It went well"
+
+        // };
         const incidentValues = {
-            user_id: user,
-            incident_type_id: 5,
-            crew_id: 1,
-            triage_cat_id: 2,
-            unit_notified: sampleStamp,
-            unit_enroute: sampleStamp,
-            unit_arrived_scene: sampleStamp,
-            arrived_patient: sampleStamp,
-            unit_left_scene: sampleStamp,
-            arrived_destination: sampleStamp,
-            transfer_of_care: sampleStamp,
-            unit_in_service: sampleStamp,
-            incident_summary: "It went well"
+            user_id: userID,
+            incident_service_id: incident.incidentService,
+            crew_id: incident.crew,
+            triage_cat_id: incident.triageCat,
+            unit_notified: incident.unitNotified,
+            unit_enroute: incident.unitEnRoute,
+            unit_arrived_scene: incident.unitArrivedScene,
+            arrived_patient: incident.unitArrivedPatient,
+            unit_left_scene: incident.unitLeftScene,
+            arrived_destination: incident.unitArrivedDestination,
+            transfer_of_care: incident.unitTransferCare,
+            unit_in_service: incident.unitInService,
+            incident_summary: incident.incidentSummary
 
         };
 
@@ -73,38 +89,42 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         const incidentID = incidentInsertResults[0].id;
 
         // scene
-        const sceneQuery = {
-            incident_scene_id: incidentID,
-            incident_state: "Minnesota",
-            incident_zip: 55409,
-            incident_county: "Hennepin",
-            possible_injury_id: 3,
-            alcohol_drug_use_id: 5
-        };
+        // const sceneQuery = {
+        //     incident_scene_id: incidentID,
+        //     incident_state: "Minnesota",
+        //     incident_zip: 55409,
+        //     incident_county: "Hennepin",
+        //     possible_injury_id: 3,
+        //     alcohol_drug_use_id: 5
+        // };
 
         await connection.query(`
             INSERT INTO scene ("incident_scene_id","incident_state","incident_zip","incident_county",
             "possible_injury_id","alcohol_drug_use_id")
             VALUES ($1, $2, $3, $4, $5, $6);`,
             [
-                sceneQuery.incident_scene_id,
-                sceneQuery.incident_state,
-                sceneQuery.incident_zip,
-                sceneQuery.incident_county,
-                sceneQuery.possible_injury_id,
-                sceneQuery.alcohol_drug_use_id
-            ]);
+                incidentID,
+                incident.incidentState,
+                incident.incidentZipCode,
+                incident.incidentCounty,
+                incident.possibleInjury,
+                incident.alcoholDrugIndicators
+            ]
+        );
         // disposition
-        const dispositionValues = {
-            incident_disposition_id: incidentID,
-            destination_state: "Minnesota",
-            destination_zip: 55044,
-            destination_county: "Dakota",
-            transport_disposition_id: 2,
-            transport_method_id: 2,
-            transport_mode_id: 3,
-            destination_type_id: 2
-        };
+        // const dispositionValues = {
+        //     incident_disposition_id: incidentID,
+        //     destination_state: "Minnesota",
+        //     destination_zip: 55044,
+        //     destination_county: "Dakota",
+        //     transport_disposition_id: 2,
+        //     transport_method_id: 2,
+        //     transport_mode_id: 3,
+        //     destination_type_id: 2
+        // };
+
+        // TO DO - MAKE THIS A MAP BECAUSE PATIENTS 
+        // CAN HAVE THEIR OWN SEPERATE DISPOSITION
 
         await connection.query(`
             INSERT INTO disposition ("incident_disposition_id","destination_state",
@@ -129,70 +149,84 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
                 RETURNING id;`;
 
-        const samplePatients = [
-            {
-                patient_incident_id: 1,
-                patient_first_name: 'Charlie',
-                patient_last_name: 'Stokes',
-                address: '1234 Nicollet Ave',
-                home_county: 'Hennepin',
-                home_state: 'MN',
-                home_zip: '55409',
-                gender_id: 2,
-                race_id: 3,
-                date_of_birth: sampleStamp,
-                age: 29,
-                age_units_id: 1
-            }, {
-                patient_incident_id: 1,
-                patient_first_name: 'Chloe',
-                patient_last_name: 'Everson',
-                address: '4321 Nicollet Ave',
-                home_county: 'Hennepin',
-                home_state: 'MN',
-                home_zip: '55409',
-                gender_id: 1,
-                race_id: 2,
-                date_of_birth: sampleStamp,
-                age: 28,
-                age_units_id: 1
-            }, {
-                patient_incident_id: 1,
-                patient_first_name: 'Eyram',
-                patient_last_name: 'Tay',
-                address: '3142 Nicollet Ave',
-                home_county: 'Hennepin',
-                home_state: 'MN',
-                home_zip: '55409',
-                gender_id: 2,
-                race_id: 1,
-                date_of_birth: sampleStamp,
-                age: 27,
-                age_units_id: 1
-            }
-        ]
+        // const samplePatients = [
+        //     {
+        //         patient_incident_id: 1,
+        //         patient_first_name: 'Charlie',
+        //         patient_last_name: 'Stokes',
+        //         address: '1234 Nicollet Ave',
+        //         home_county: 'Hennepin',
+        //         home_state: 'MN',
+        //         home_zip: '55409',
+        //         gender_id: 2,
+        //         race_id: 3,
+        //         date_of_birth: sampleStamp,
+        //         age: 29,
+        //         age_units_id: 1
+        //     }, {
+        //         patient_incident_id: 1,
+        //         patient_first_name: 'Chloe',
+        //         patient_last_name: 'Everson',
+        //         address: '4321 Nicollet Ave',
+        //         home_county: 'Hennepin',
+        //         home_state: 'MN',
+        //         home_zip: '55409',
+        //         gender_id: 1,
+        //         race_id: 2,
+        //         date_of_birth: sampleStamp,
+        //         age: 28,
+        //         age_units_id: 1
+        //     }, {
+        //         patient_incident_id: 1,
+        //         patient_first_name: 'Eyram',
+        //         patient_last_name: 'Tay',
+        //         address: '3142 Nicollet Ave',
+        //         home_county: 'Hennepin',
+        //         home_state: 'MN',
+        //         home_zip: '55409',
+        //         gender_id: 2,
+        //         race_id: 1,
+        //         date_of_birth: sampleStamp,
+        //         age: 27,
+        //         age_units_id: 1
+        //     }
+        // ]
 
         // ANOTHER SUPER IMPORTANT THING - Patient ID array 
-        // holds patient's actual id from the database
+        // holds patient's ACTUAL id from the database 
         const returnPatientIDs = [];
 
         const patientReturn = await Promise.all(
 
-            samplePatients.map((patient, i) => {
+            patients.patientArray.map((patient, i) => {
 
+                // let patientValues = [
+                //     patient.patient_incident_id,
+                //     patient.patient_first_name,
+                //     patient.patient_last_name,
+                //     patient.address,
+                //     patient.home_county,
+                //     patient.home_state,
+                //     patient.home_zip,
+                //     patient.gender_id,
+                //     patient.race_id,
+                //     patient.date_of_birth,
+                //     patient.age,
+                //     patient.age_units_id
+                // ];
                 let patientValues = [
-                    patient.patient_incident_id,
-                    patient.patient_first_name,
-                    patient.patient_last_name,
-                    patient.address,
-                    patient.home_county,
-                    patient.home_state,
-                    patient.home_zip,
-                    patient.gender_id,
-                    patient.race_id,
-                    patient.date_of_birth,
-                    patient.age,
-                    patient.age_units_id
+                    incidentID,
+                    patients[String(patient) + 'patientFirstName'],
+                    patients[String(patient) + 'patientLastName'],
+                    patients[String(patient) + 'patientAddress'],
+                    patients[String(patient) + 'patientHomeCounty'],
+                    patients[String(patient) + 'patientHomeState'],
+                    patients[String(patient) + 'patientHomeZip'],
+                    patients[String(patient) + 'patientGender'],
+                    patients[String(patient) + 'patientRace'],
+                    patients[String(patient) + 'patientDateOfBirth'],
+                    patients[String(patient) + 'patientAge'],
+                    patients[String(patient) + 'patientAgeUnits']
                 ];
 
                 return connection.query(patientQuery, patientValues);
@@ -205,12 +239,12 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             console.log('newReturn.rows[0].id', newReturn.rows[0].id);
             returnPatientIDs.push(newReturn.rows[0].id);
         }
-        console.log('1');
-        console.log('2');
-        console.log('3');
-        console.log('4');
-        console.log('5');
-        console.log('returnPatientIDs', returnPatientIDs);
+        // console.log('1');
+        // console.log('2');
+        // console.log('3');
+        // console.log('4');
+        // console.log('5');
+        // console.log('returnPatientIDs', returnPatientIDs);
 
 
         // medicalConditions
@@ -222,7 +256,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
                 let medCondValues = [
                     patientID,
-                    patients[String(i+1)+'conditions']
+                    patients[String(i + 1) + 'patientMedConditions']
                 ];
 
                 return connection.query(medCondQuery, medCondValues);
@@ -239,7 +273,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
                 let currMedValues = [
                     patientID,
-                    patients[String(i+1)+'medication']
+                    patients[String(i + 1) + 'patientCurrMedications']
                 ];
 
                 return connection.query(currMedQuery, currMedValues);
@@ -256,7 +290,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
                 let allergyValues = [
                     patientID,
-                    patients[String(i+1)+'allergies']
+                    patients[String(i + 1) + 'patientAllergies']
                 ];
 
                 return connection.query(allergyQuery, allergyValues);
@@ -273,18 +307,18 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         await Promise.all(
             returnPatientIDs.map((patientID, i) => {
-                
+
                 let symptomValues = [
                     patientID,
-                    patients[String(i + 1) + 'anatomic_location_id'],
-                    patients[String(i + 1) + 'organ_system_id'],
-                    patients[String(i + 1) + 'time_symptom_onset'],
-                    patients[String(i + 1) + 'time_last_known_well'],
-                    patients[String(i + 1) + 'primary_symptom'],
-                    patients[String(i + 1) + 'other_symptoms'],
-                    patients[String(i + 1) + 'initial_acuity_id'],
-                    patients[String(i + 1) + 'final_acuity_id'],
-                    patients[String(i + 1) + 'primary_impression_id']
+                    patients[String(i + 1) + 'anatomicLocation'],
+                    patients[String(i + 1) + 'organSystem'],
+                    patients[String(i + 1) + 'symptomOnset'],
+                    patients[String(i + 1) + 'lastKnownWell'],
+                    patients[String(i + 1) + 'primarySymptom'],
+                    patients[String(i + 1) + 'otherSymptoms'],
+                    patients[String(i + 1) + 'initialAcuity'],
+                    patients[String(i + 1) + 'finalAcuity'],
+                    patients[String(i + 1) + 'primaryImpression']
                 ];
 
                 return connection.query(symptomQuery, symptomValues);
@@ -301,8 +335,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
                 let injuryValues = [
                     patientID,
-                    patients[String(i + 1) + 'injury_type_id'],
-                    patients[String(i + 1) + 'injury_cause_id']
+                    patients[String(i + 1) + 'injuryLocation'],
+                    patients[String(i + 1) + 'injuryCause']
                 ];
 
                 return connection.query(injuryQuery, injuryValues);
@@ -310,10 +344,10 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         );
         // cardiacArrest
-        const cardiacQuery = `INSERT INTO symptoms ("cardiac_patient_id",
+        const cardiacQuery = `INSERT INTO cardiacarrest ("cardiac_patient_id",
         "cardiac_arrest_id","cardiac_arrest_etiology_id","resuscitation_attempt_id",
         "cardiac_arrest_witness_id","aed_use_prior_id","cpr_type_id","spontaneous_circulation_id",
-        "time_cardiac_arrest","cpr_stopped_id", "aed_initiator_id", "aed_applicator_id", "aed_defibrillator_id")
+        "time_cardiac_arrest","cpr_stopped_id", "cpr_initiator_id", "aed_applicator_id", "aed_defibrillator_id")
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);`;
 
         await Promise.all(
@@ -321,18 +355,18 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
                 let cardiacValues = [
                     patientID,
-                    patients[String(i + 1) + 'cardiac_arrest_id'],
-                    patients[String(i + 1) + 'cardiac_arrest_etiology_id'],
-                    patients[String(i + 1) + 'resuscitation_attempt_id'],
-                    patients[String(i + 1) + 'cardiac_arrest_witness_id'],
-                    patients[String(i + 1) + 'aed_use_prior_id'],
-                    patients[String(i + 1) + 'cpr_type_id'],
-                    patients[String(i + 1) + 'spontaneous_circulation_id'],
-                    patients[String(i + 1) + 'time_cardiac_arrest'],
-                    patients[String(i + 1) + 'cpr_stopped_id'],
-                    patients[String(i + 1) + 'aed_initiator_id'],
-                    patients[String(i + 1) + 'aed_applicator_id'],
-                    patients[String(i + 1) + 'aed_defibrillator_id']
+                    patients[String(i + 1) + 'cardiacArrest'],
+                    patients[String(i + 1) + 'cardiacArrestEtiology'],
+                    patients[String(i + 1) + 'resuscitationAttempt'],
+                    patients[String(i + 1) + 'cardiacArrestWitness'],
+                    patients[String(i + 1) + 'aedUsePrior'],
+                    patients[String(i + 1) + 'cprProvided'],
+                    patients[String(i + 1) + 'spontaneousCirculation'],
+                    patients[String(i + 1) + 'timeCardiacArrest'],
+                    patients[String(i + 1) + 'cprStopped'],
+                    patients[String(i + 1) + 'cprInitiator'],
+                    patients[String(i + 1) + 'aedApplicator'],
+                    patients[String(i + 1) + 'aedDefibrillator']
                 ];
 
                 return connection.query(cardiacQuery, cardiacValues);
@@ -358,19 +392,19 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             // 2medication3
             returnPatientIDs.map((patientID, i) => {
 
-                treatments[String(i+1)+"medicationArray"].map(med => {
+                treatments[String(i + 1) + "medicationArray"].map(med => {
 
                     let medTreatmentValues = [
                         patientID,
-                        patients[String(i + 1) + 'medication'+ med],
-                        patients[String(i + 1) + 'med_admin_route_id'+ med],
-                        patients[String(i + 1) + 'med_admin_by_id'+ med],
-                        patients[String(i + 1) + 'med_dosage'+ med],
-                        patients[String(i + 1) + 'med_dosage_units_id'+ med],
-                        patients[String(i + 1) + 'med_response_id'+ med],
-                        patients[String(i + 1) + 'med_timestamp'+ med]
+                        patients[String(i + 1) + 'medication' + med],
+                        patients[String(i + 1) + 'routeAdministered' + med],
+                        patients[String(i + 1) + 'medsAdminBy' + med],
+                        patients[String(i + 1) + 'dosage' + med],
+                        patients[String(i + 1) + 'units' + med],
+                        patients[String(i + 1) + 'medicationResponse' + med],
+                        patients[String(i + 1) + 'medicationTimestamp' + med]
                     ];
-                    
+
                     return connection.query(medTreatmentQuery, medTreatmentValues);
                 });
             })
@@ -385,56 +419,56 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             // this query is much the same as the 
             returnPatientIDs.map((patientID, i) => {
 
-                treatments[String(i+1)+"procedureArray"].map(proc => {
+                treatments[String(i + 1) + "procedureArray"].map(proc => {
 
                     let procedureValues = [
                         patientID,
-                        patients[String(i + 1) + 'procedure_name_id'+ proc],
-                        patients[String(i + 1) + 'procedure_attempts_id'+ proc],
-                        patients[String(i + 1) + 'procedure_successful'+ proc],
-                        patients[String(i + 1) + 'procedure_response'+ proc],
-                        patients[String(i + 1) + 'procedure_performer_id'+ proc],
-                        patients[String(i + 1) + 'procedure_timestamp'+ proc]
+                        patients[String(i + 1) + 'procedure' + proc],
+                        patients[String(i + 1) + 'procedureAttempts' + proc],
+                        patients[String(i + 1) + 'successfulProcedure' + proc],
+                        patients[String(i + 1) + 'responseToProcedure' + proc],
+                        patients[String(i + 1) + 'procedurePerformedBy' + proc],
+                        patients[String(i + 1) + 'procedureTimestamp' + proc]
                     ];
-                    
+
                     return connection.query(procedureQuery, procedureValues);
                 });
             })
         );
         // vitals
-        const vitalQuery = `INSERT INTO procedure ("patient_vitals_id",
+        const vitalQuery = `INSERT INTO vitals ("patient_vitals_id",
         "systolic_BP","heart_rate","pulse_oximetry","respiratory_rate",
         "blood_glucose","glasgow_eye", "glasgow_verbal", "glasgow_motor",
         "glasgow_qualifier", "responsiveness_level_id", "pain_scale_id",
         "stroke_score_id", "stroke_scale_id", "vitals_timestamp")
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15);`;
 
-        
-        
+
+
         await Promise.all(
             // this query is much the same as the 
             returnPatientIDs.map((patientID, i) => {
 
-                vitals[String(i+1)+"vitalsArray"].map(proc => {
+                vitals[String(i + 1) + "vitalsArray"].map(vital => {
 
                     let vitalValues = [
                         patientID,
-                        patients[String(i + 1) + 'systolic_BP'+ proc],
-                        patients[String(i + 1) + 'heart_rate'+ proc],
-                        patients[String(i + 1) + 'pulse_oximetry'+ proc],
-                        patients[String(i + 1) + 'respiratory_rate'+ proc],
-                        patients[String(i + 1) + 'blood_glucose'+ proc],
-                        patients[String(i + 1) + 'glasgow_eye'+ proc],
-                        patients[String(i + 1) + 'glasgow_verbal'+ proc],
-                        patients[String(i + 1) + 'glasgow_motor'+ proc],
-                        patients[String(i + 1) + 'glasgow_qualifier'+ proc],
-                        patients[String(i + 1) + 'responsiveness_level_id'+ proc],
-                        patients[String(i + 1) + 'pain_scale_id'+ proc],
-                        patients[String(i + 1) + 'stroke_score_id'+ proc],
-                        patients[String(i + 1) + 'stroke_scale_id'+ proc],
-                        patients[String(i + 1) + 'vitals_timestamp'+ proc]
+                        patients[String(i + 1) + 'systolicBloodPressure' + vital],
+                        patients[String(i + 1) + 'heartRate' + vital],
+                        patients[String(i + 1) + 'pulseOximetry' + vital],
+                        patients[String(i + 1) + 'respiratoryRate' + vital],
+                        patients[String(i + 1) + 'bloodGlucoseLevel' + vital],
+                        patients[String(i + 1) + 'glasgowComaScoreEye' + vital],
+                        patients[String(i + 1) + 'glasgowComaScoreVerbal' + vital],
+                        patients[String(i + 1) + 'glasgowComaScoreMotor' + vital],
+                        patients[String(i + 1) + 'glasgowComaScoreQualifier' + vital],
+                        patients[String(i + 1) + 'responsivenessLevel' + vital],
+                        patients[String(i + 1) + 'painScaleScore' + vital],
+                        patients[String(i + 1) + 'strokeScaleScore' + vital],
+                        patients[String(i + 1) + 'strokeScaleType' + vital],
+                        patients[String(i + 1) + 'vitalTimestamp' + vital]
                     ];
-                    
+
                     return connection.query(vitalQuery, vitalValues);
                 });
             })
