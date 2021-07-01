@@ -243,7 +243,7 @@ CREATE TABLE "initial_acuity" (
 
 INSERT INTO "initial_acuity" ("initial_acuity_type")
 VALUES
-('Critical (red)'),
+('Critical (Red)'),
 ('Emergent (Yellow)'),
 ('Lower Acuity (Green)'),
 ('Dead without Resuscitation Efforts (Black)'),
@@ -812,6 +812,7 @@ CREATE TABLE incident (
 	incident_service_id integer REFERENCES "incident_service",
 	crew_id numeric,
 	triage_cat_id integer REFERENCES "triage_cat",
+	number_patients numeric,
 	unit_notified timestamp,
 	unit_enroute timestamp,
 	unit_arrived_scene timestamp,
@@ -822,6 +823,9 @@ CREATE TABLE incident (
 	unit_in_service timestamp,
 	incident_summary varchar(20000)
 );
+
+
+
 
 
 CREATE TABLE scene (
@@ -945,7 +949,6 @@ CREATE TABLE medication (
 	med_response_id integer REFERENCES "med_response",
 	med_timestamp timestamp
 );
-
 
 
 

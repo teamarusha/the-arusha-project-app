@@ -21,21 +21,14 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Admin from '../Admin/Admin';
+import FinalReport from '../FinalReport/FinalReport';
 
-import PatientHome from '../PatientHome/PatientHome';
-import PatientDemographics from '../PatientDemographics/PatientDemographics';
-import PatientSymptoms from '../PatientSymptoms/PatientSymptoms';
-import PatientMedical from '../PatientMedical/PatientMedical';
-import PatientInjury from '../PatientInjury/PatientInjury';
-import PatientCardiac from '../PatientCardiac/PatientCardiac';
 
 import {ThemeProvider} from '@material-ui/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
 import './App.css';
-import IncidentFormResponse from '../IncidentForm/IncidentFormResponse';
-import IncidentFormDisposition from '../IncidentForm/IncidentFormDisposition';
-import IncidentFormScene from '../IncidentForm/IncidentFormScene';
 import IncidentHome from "../IncidentForm/IncidentHome";
+import PatientHome from '../PatientHome/PatientHome';
 import TreatmentHome from "../TreatmentForm/TreatmentHome";
 import VitalsForm from "../VitalsForm/VitalsForm";
 
@@ -62,7 +55,7 @@ function App() {
       <ThemeProvider theme={createMuiTheme}>
 
   {/* CONDITIONAL RENDERING OF APP BAR w/ NAV */}
-      {isAdmin ? <AdminHeader/>
+      { isAdmin ? <AdminHeader/>
       : nonAdmin ? <Nav/> 
       : def
       }
@@ -95,6 +88,20 @@ function App() {
             <UserPage />
           </NonAdminProtectedRoute>
 
+          <AdminProtectedRoute
+            // logged in shows admin home page of all reports, else shows LoginPage
+            exact
+            path="/admin"
+          >
+            <Admin />
+          </AdminProtectedRoute>
+          <AdminProtectedRoute
+            // logged in shows individual report, else shows LoginPage
+            exact
+            path="/report/:id"
+          >
+            <FinalReport />
+          </AdminProtectedRoute>
 
           <NonAdminProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -175,21 +182,6 @@ function App() {
             <VitalsForm />
           </NonAdminProtectedRoute>
 
-
-          <AdminProtectedRoute
-          exact
-          path="/admin"
-          >
-            <Admin />
-          </AdminProtectedRoute>
-
-
-
-          {/* If none of the other routes matched, we will show a 404. */}
-          <Route>
-            <h1>404</h1>
-          </Route>
-       
         <Footer />
         </ThemeProvider>
         </Router>

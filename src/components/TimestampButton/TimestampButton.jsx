@@ -51,7 +51,7 @@ function TimestampButton() {
     return (
         <div>
             <div>
-              <Button onClick={clickMe} color="primary"
+              <Button onClick={clickMe} color="secondary"
               variant="contained"
               // onClick={() => handleClick()}
               >{buttonText}</Button>

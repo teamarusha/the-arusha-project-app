@@ -58,7 +58,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                             <em>None</em>
                         </MenuItem>
                         {dropdowns['anatomic_location'].map(item => <MenuItem key={'anatomic_location' + item.id}
-                            value={item.id}>{item.type}</MenuItem>)}
+                            value={item.id}>{item[`anatomic_location_type`]}</MenuItem>)}
                     </Select> <br /><br />
 
                     <InputLabel
@@ -79,7 +79,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                             <em>None</em>
                         </MenuItem>
                         {dropdowns['organ_system'].map(item => <MenuItem key={'organ_system' + item.id}
-                            value={item.id}>{item.type}</MenuItem>)}
+                            value={item.id}>{item[`organ_system_type`]}</MenuItem>)}
                     </Select> <br /><br />
 
                     <p>Symptom Onset calendar goes here</p> <br />
@@ -128,7 +128,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                             <em>None</em>
                         </MenuItem>
                         {dropdowns['initial_acuity'].map(item => <MenuItem key={'initial_acuity' + item.id}
-                            value={item.id}>{item.type}</MenuItem>)}
+                            value={item.id}>{item[`initial_acuity_type`]}</MenuItem>)}
                     </Select> <br /><br />
 
                     <InputLabel
@@ -149,7 +149,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                             <em>None</em>
                         </MenuItem>
                         {dropdowns['primary_impression'].map(item => <MenuItem key={'primary_impression' + item.id}
-                            value={item.id}>{item.type}</MenuItem>)}
+                            value={item.id}>{item[`primary_impression_type`]}</MenuItem>)}
                     </Select> <br /><br />
 
                     <p>Last Known Well calendar goes here</p>
