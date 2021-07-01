@@ -19,9 +19,6 @@ function AddVitalsButton({ vitalsMirror, setVitalsMirror }) {
     let newVitalsID = vitalsMirror[`${id}vitalsArray`].length + 1;
     console.log("new vitals ID", newVitalsID);
 
-
-
-
     setVitalsMirror({
       ...vitalsMirror,
       [id + "lastVital"]: newVitalsID,
@@ -45,8 +42,9 @@ function AddVitalsButton({ vitalsMirror, setVitalsMirror }) {
     <div>
       {vitalsMirror && (
         <div>
-          <p>Submit Vitals</p>
-          <Button onClick={AddVitals}>Add Vitals</Button>
+          <Button color="primary" variant="contained" onClick={AddVitals}>
+            Add Vitals
+          </Button>
         </div>
       )}
     </div>
