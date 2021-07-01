@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import IncidentFormResponse from "./IncidentFormResponse";
 import IncidentFormDisposition from "./IncidentFormDisposition";
 import IncidentFormScene from "./IncidentFormScene";
-import SummaryFieldSubmit from "../SummaryFieldSubmit/SummaryFieldSubmit";
+import AddEditPatient from "../AddEditPatient/AddEditPatient";
 import TimestampButton from "../TimestampButton/TimestampButton";
+import SummaryFieldSubmit from "../SummaryFieldSubmit/SummaryFieldSubmit";
 
 import {
   Accordion,
@@ -18,7 +19,6 @@ import {
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import useStyles from "./Styles";
-import AddEditPatient from "../AddEditPatient/AddEditPatient";
 
 function IncidentHome() {
   const classes = useStyles();
@@ -70,7 +70,6 @@ function IncidentHome() {
   }, [dropdowns.go]);
   // _________________________________________________
 
-
   return (
     <div className="container">
       <h2>Incident</h2>
@@ -87,14 +86,14 @@ function IncidentHome() {
         setVitalsMirror={setVitalsMirror}
       />
 
-      <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
+      {/* <p>Incident Mirror: {JSON.stringify(incidentMirror)}</p>
       <p>Incident Storage: {localStorage.getItem("incident")}</p>
       <p>Vitals Mirror: {JSON.stringify(vitalsMirror)}</p>
       <p>Vitals Storage: {localStorage.getItem("vitals")}</p>
       <p>Treatment Mirror: {JSON.stringify(treatmentMirror)}</p>
       <p>Treatment Storage: {localStorage.getItem("treatment")}</p>
       <p>Patients Mirror: {JSON.stringify(patientsMirror)}</p>
-      <p>Patients Storage: {localStorage.getItem("patients")}</p>
+      <p>Patients Storage: {localStorage.getItem("patients")}</p> */}
 
       <TimestampButton
         incidentMirror={incidentMirror}
