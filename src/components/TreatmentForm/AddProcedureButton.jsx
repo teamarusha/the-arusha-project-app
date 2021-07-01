@@ -40,8 +40,9 @@ function AddProcedureButton({ treatmentMirror, setTreatmentMirror }) {
     <div>
       {treatmentMirror && (
         <div>
-          <p>Submit Procedure</p>
-          <Button onClick={AddProcedure}>Add Procedure</Button>
+          <Button color="primary" variant="contained" onClick={AddProcedure}>
+            Add Procedure
+          </Button>
         </div>
       )}
     </div>
