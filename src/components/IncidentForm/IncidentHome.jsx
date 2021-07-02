@@ -185,9 +185,8 @@ function IncidentHome() {
         <br />
       
       </div>
-      <SummaryFieldSubmit />
-      </div>
-   
+      
+    </div>
   );
 }
 
