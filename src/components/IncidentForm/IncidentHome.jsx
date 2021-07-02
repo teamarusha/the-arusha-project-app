@@ -170,7 +170,7 @@ function IncidentHome() {
           </AccordionDetails>
         </Accordion>
       </div>
-      <SummaryFieldSubmit />
+      
     </div>
   );
 }
