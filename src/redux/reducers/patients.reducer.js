@@ -28,7 +28,7 @@ const patients = (
       '1primaryImpression': '',
       '1injuryLocation': '',
       '1injuryCause': '',
-      '1cardiacArrest': '',
+      '1cardiacArrest': 0,
       '1cardiacArrestEtiology': '',
       '1resuscitationAttempt': '',
       '1cardiacArrestWitness': '',

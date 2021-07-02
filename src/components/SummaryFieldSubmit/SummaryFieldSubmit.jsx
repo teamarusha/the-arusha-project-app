@@ -39,96 +39,142 @@ function SummaryFieldSubmit(params) {
   }
 
   const [errorMessages, setErrorMessages] = useState([]);
-  const [allowSubmission, setAllowSubmission] = useState(false);
+  const [allowSubmission, setAllowSubmission] = useState(true);
 
   useEffect(() => {
     checkInputs();
   }, [])
 
   function checkInputs() {
-
-    let incidentError = false;
-    let patientError = false;
-
-    let transdispError = false;
+    let incidentErrorMessage = `Missing input from incident form`;
+    let allErrorMessages = []
 
     // The whole check will loop through this array to determine where any incompletes are
-    let patientsArray = patientsMirror.patientsArray;
+    let patientArray = patientsMirror.patientArray;
 
-    for (let patient of patientsArray) {
-      // Loop through a patient's incident inputs
-      let incidentErrorMessage = `Missing input from incident form for patient ${patient}`;
-      let patientErrorMessage = `Missing input from patient form for patient ${patient}`;
-
-      for (let key in incidentMirror) {
-        console.log('key', key, 'value', incidentMirror[key]);
-
-        if (key === `${patient}transportDisposition`) {
-          if (incidentMirror[key] == 0) {
-            // error
-          } else if (incidentMirror[key] > 4) {
-            // no error
-          } else {
-            // no error yet
-          }
-
-        } else if (
-          key === `${patient}destinationCounty` ||
-          key === `${patient}destinationFacility` ||
-          key === `${patient}destinationState` ||
-          key === `${patient}destinationZipCode` ||
-          key === `${patient}transportDisposition` ||
-          key === `${patient}transportMethod` ||
-          key === `${patient}transportMode`
-        ) {
-
-        } else {
-          
-        }
-      }
-
-      for (let key in patientsMirror) {
-        console.log('key', key, 'value', incidentMirror[key]);
-
-        if (patientsMirror[key] === "") {
-          if (key !== 1) {
-
-
-          }
-        }
-      }
-
-
-
-
-
-
-      let tranDis = incidentMirror[patient + 'transportDisposition']
-
-      // let dispositionArray = incidentMirror[patient + 'dispositionArray'];
-      // let medicationArray = treatmentMirror[patient + 'medicationArray'];
-      // let procedureArray = treatmentMirror[patient + 'procedureArray'];
-      // let vitalsArray = treatmentMirror[patient + 'procedureArray'];
-
-      let cardArr = patientsMirror[patient + 'cardiacArrest'] // Must be > 1
-
-      // let medications = patientsMirror[patient + 'patientCurrMedications']
-      // let allergies = patientsMirror[patient + 'patientAllergies']
-      // let conditions = patientsMirror[patient + 'patientMedConditions']
+    // If any incident information is unfilled out, we give an error
+    if (
+      incidentMirror.alcoholDrugIndicators === "" ||
+      incidentMirror.crew === "" ||
+      incidentMirror.incidentCounty === "" ||
+      incidentMirror.incidentService === "" ||
+      incidentMirror.incidentState === "" ||
+      incidentMirror.incidentSummary === "" ||
+      incidentMirror.incidentZipCode === "" ||
+      incidentMirror.patientNumbers === "" ||
+      incidentMirror.possibleInjury === "" ||
+      incidentMirror.triageCat === "" ||
+      incidentMirror.unitArrivedDestination === "" ||
+      incidentMirror.unitArrivedPatient === "" ||
+      incidentMirror.unitArrivedScene === "" ||
+      incidentMirror.unitEnRoute === "" ||
+      incidentMirror.unitInService === "" ||
+      incidentMirror.unitLeftScene === "" ||
+      incidentMirror.unitNotified === "" ||
+      incidentMirror.unitTransferCare === ""
+    ) {
+      allErrorMessages.push(incidentErrorMessage);
+      setAllowSubmission(false);
     }
 
 
 
+    // Check all patient disposition info for missing inputs/ error cases
+    // Loop through a patient's incident inputs
+    for (let patient of patientArray) {
+      let incidentPatientErrorMessage = `Missing input from incident disposition form for patient ${patient}`;
 
-    // for (let key in incidentMirror) {
-    //   console.log('key', key, 'value', incidentMirror[key]);
-    //   if (incidentMirror[key] === "") {
-    //     if (key !== 1) {
-    //       incompleteCount++;
-    //       incompleteInputs.push(key)
-    //     }
-    //   }
-    // }
+      if (incidentMirror[`${patient}transportDisposition`] == 0) {
+        // THIS IS AN ERROR CASE
+        allErrorMessages.push(incidentPatientErrorMessage);
+        setAllowSubmission(false);
+      }
+
+      // If it isn't 0 and it is less than 4, we want to check the other inputs of transport disposition
+      else if (incidentMirror[`${patient}transportDisposition`] <= 4) {
+        if (
+          incidentMirror[`${patient}destinationCounty`] === '' ||
+          incidentMirror[`${patient}destinationFacility`] === '' ||
+          incidentMirror[`${patient}destinationState`] === '' ||
+          incidentMirror[`${patient}destinationZipCode`] === '' ||
+          incidentMirror[`${patient}transportDisposition`] === '' ||
+          incidentMirror[`${patient}transportMethod`] === '' ||
+          incidentMirror[`${patient}transportMode`] === ''
+        ) {
+          // THIS IS AN ERROR CASE
+          allErrorMessages.push(incidentPatientErrorMessage);
+          setAllowSubmission(false);
+        }
+      }
+    }
+
+
+    // Check Patients for error states and missing values
+    for (let patient of patientArray) {
+
+      let patientCardiacErrorMessage = `Missing input from patient cardiac arrest form for patient ${patient}`;
+
+
+      // Check patient cardiac first for missing inputs or error cases
+      if (patientsMirror[`${patient}cardiacArrest`] == 0) {
+        allErrorMessages.push(patientCardiacErrorMessage);
+        setAllowSubmission(false);
+      }
+      // If the Patient Form says yes to Cardiac Arrest, check its inputs
+      else if (patientsMirror[`${patient}cardiacArrest`] > 1) {
+        if (
+          patientsMirror[`${patient}aedApplicator`] === '' ||
+          patientsMirror[`${patient}aedDefibrillator`] === '' ||
+          patientsMirror[`${patient}aedUsePrior`] === '' ||
+          patientsMirror[`${patient}cardiacArrestEtiology`] === '' ||
+          patientsMirror[`${patient}cardiacArrestWitness`] === '' ||
+          patientsMirror[`${patient}cprInitiator`] === '' ||
+          patientsMirror[`${patient}cprProvided`] === '' ||
+          patientsMirror[`${patient}cprStopped`] === '' ||
+          patientsMirror[`${patient}resuscitationAttempt`] === '' ||
+          patientsMirror[`${patient}spontaneousCirculation`] === '' ||
+          patientsMirror[`${patient}timeCardiacArrest`] === ''
+        ) {
+          allErrorMessages.push(patientCardiacErrorMessage);
+          setAllowSubmission(false);
+        }
+      }
+
+      let patientErrorMessage = `Missing input from patient form for patient ${patient}`;
+      if (
+        patientsMirror[`${patient}anatomicLocation`] === '' ||
+        patientsMirror[`${patient}finalAcuity`] === '' ||
+        patientsMirror[`${patient}initialAcuity`] === '' ||
+        patientsMirror[`${patient}injuryCause`] === '' ||
+        patientsMirror[`${patient}injuryLocation`] === '' ||
+        patientsMirror[`${patient}lastKnownWell`] === '' ||
+        patientsMirror[`${patient}organSystem`] === '' ||
+        patientsMirror[`${patient}otherSymptoms`] === '' ||
+        patientsMirror[`${patient}patientAddress`] === '' ||
+        patientsMirror[`${patient}patientAge`] === '' ||
+        patientsMirror[`${patient}patientAgeUnits`] === '' ||
+        patientsMirror[`${patient}patientAllergies`] === '' ||
+        patientsMirror[`${patient}patientCurrMedications`] === '' ||
+        patientsMirror[`${patient}patientDateOfBirth`] === '' ||
+        patientsMirror[`${patient}patientFirstName`] === '' ||
+        patientsMirror[`${patient}patientGender`] === '' ||
+        patientsMirror[`${patient}patientHomeCounty`] === '' ||
+        patientsMirror[`${patient}patientHomeState`] === '' ||
+        patientsMirror[`${patient}patientHomeZip`] === '' ||
+        patientsMirror[`${patient}patientLastName`] === '' ||
+        patientsMirror[`${patient}patientMedConditions`] === '' ||
+        patientsMirror[`${patient}patientRace`] === '' ||
+        patientsMirror[`${patient}primaryImpression`] === '' ||
+        patientsMirror[`${patient}primarySymptom`] === '' ||
+        patientsMirror[`${patient}symptomOnset`] === ''
+      ) {
+        allErrorMessages.push(patientErrorMessage);
+        setAllowSubmission(false);
+
+      }
+    }
+
+    setErrorMessages(allErrorMessages)
   }
 
   const submitSummary = (event) => {
@@ -168,10 +214,11 @@ function SummaryFieldSubmit(params) {
           ></TextField>
           <br />
           <br />
-          <Button color="primary" variant="contained" onClick={submitSummary}>
+          <Button color="primary" variant="contained" disabled={!allowSubmission} onClick={submitSummary}>
             Submit Summary
           </Button>
-          <button onClick={checkInputs}>CHECK</button>
+          <p>{JSON.stringify(errorMessages)}</p>
+          {/* <button onClick={checkInputs}>CHECK</button> */}
         </div>
       )}
     </div>

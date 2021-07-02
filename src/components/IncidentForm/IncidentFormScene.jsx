@@ -93,9 +93,9 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             autoWidth
-            value={localIncident[`patientNumbers`]}
+            value={localIncident[`possibleInjury`]}
             onChange={(event) =>
-              submitValue({ key: `patientNumbers`, thing: event.target.value })
+              submitValue({ key: `possibleInjury`, thing: event.target.value })
             }
           >
             <MenuItem value="">

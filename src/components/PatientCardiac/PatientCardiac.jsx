@@ -46,7 +46,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
               })
             }
           >
-            <MenuItem value="">
+            <MenuItem value={0}>
               <em>None</em>
             </MenuItem>
             {dropdowns['cardiac_arrest'].map(item => <MenuItem key={'cardiac_arrest' + item.id}
