@@ -16,6 +16,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
   const dropdowns = useSelector((store) => store.dropdowns);
   const { id } = useParams();
 
+
   function submitValue(newParameter) {
     console.log(
       "Updating parameter in submitValue",
