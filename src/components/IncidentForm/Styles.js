@@ -28,6 +28,12 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 'auto',
       marginRight: 'auto'
     },
+  //   timestamp: {
+  //     width: '40%',
+  //     marginTop: 200,
+  // }
+  
+    
   }));
 
   export default useStyles;

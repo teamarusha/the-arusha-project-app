@@ -2,12 +2,14 @@ import React from "react";
 import { Component } from "react";
 import './KOPILogo.css';
 
+
+
 export default class KOPIMobileLogo extends Component {
   render() {
     return (
       <svg className='mobileLogo'
-        width="125"
-        height="125"
+        width="100"
+        height="100"
         viewBox="0 0 259 259"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
