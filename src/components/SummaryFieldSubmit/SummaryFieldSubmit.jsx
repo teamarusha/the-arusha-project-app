@@ -220,7 +220,9 @@ function SummaryFieldSubmit(params) {
           <Button color="primary" variant="contained" disabled={!allowSubmission} onClick={submitSummary}>
             Submit Summary
           </Button>
-          <p>{JSON.stringify(errorMessages)}</p>
+
+          {errorMessages && errorMessages.map((message, i) => <p key={i+'errormessage'}>{message}</p>)}
+          {/* <p>{JSON.stringify(errorMessages)}</p> */}
           {/* <button onClick={checkInputs}>CHECK</button> */}
         </div>
       )}
