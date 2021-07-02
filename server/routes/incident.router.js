@@ -22,7 +22,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         const {
             incident,
             patients,
-            treatments,
+            treatment,
             vitals
         } = req.body;
 
@@ -392,7 +392,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             // 2medication3
             returnPatientIDs.map((patientID, i) => {
 
-                treatments[String(i + 1) + "medicationArray"].map(med => {
+                treatment[String(i + 1) + "medicationArray"].map(med => {
 
                     let medTreatmentValues = [
                         patientID,
@@ -419,7 +419,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             // this query is much the same as the 
             returnPatientIDs.map((patientID, i) => {
 
-                treatments[String(i + 1) + "procedureArray"].map(proc => {
+                treatment[String(i + 1) + "procedureArray"].map(proc => {
 
                     let procedureValues = [
                         patientID,

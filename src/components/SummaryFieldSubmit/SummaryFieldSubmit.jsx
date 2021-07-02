@@ -186,10 +186,10 @@ function SummaryFieldSubmit(params) {
     dispatch({
       type: "POST_INCIDENT",
       payload: {
-        incidentMirror: incidentMirror,
-        patientsMirror: patientsMirror,
-        treatmentMirror: treatmentMirror,
-        vitalsMirror: vitalsMirror,
+        incident: incidentMirror,
+        patients: patientsMirror,
+        treatment: treatmentMirror,
+        vitals: vitalsMirror,
       },
     });
   };
