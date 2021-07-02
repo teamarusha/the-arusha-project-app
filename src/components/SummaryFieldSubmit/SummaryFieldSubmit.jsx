@@ -133,7 +133,8 @@ function SummaryFieldSubmit(params) {
           patientsMirror[`${patient}cprStopped`] === '' ||
           patientsMirror[`${patient}resuscitationAttempt`] === '' ||
           patientsMirror[`${patient}spontaneousCirculation`] === '' ||
-          patientsMirror[`${patient}timeCardiacArrest`] === ''
+          patientsMirror[`${patient}cardiacArrestDate`] === '' ||
+          patientsMirror[`${patient}cardiacArrestTime`] === ''
         ) {
           allErrorMessages.push(patientCardiacErrorMessage);
           setAllowSubmission(false);
@@ -147,7 +148,8 @@ function SummaryFieldSubmit(params) {
         patientsMirror[`${patient}initialAcuity`] === '' ||
         patientsMirror[`${patient}injuryCause`] === '' ||
         patientsMirror[`${patient}injuryLocation`] === '' ||
-        patientsMirror[`${patient}lastKnownWell`] === '' ||
+        patientsMirror[`${patient}lastKnownWellDate`] === '' ||
+        patientsMirror[`${patient}lastKnownWellTime`] === '' ||
         patientsMirror[`${patient}organSystem`] === '' ||
         patientsMirror[`${patient}otherSymptoms`] === '' ||
         patientsMirror[`${patient}patientAddress`] === '' ||
@@ -166,7 +168,8 @@ function SummaryFieldSubmit(params) {
         patientsMirror[`${patient}patientRace`] === '' ||
         patientsMirror[`${patient}primaryImpression`] === '' ||
         patientsMirror[`${patient}primarySymptom`] === '' ||
-        patientsMirror[`${patient}symptomOnset`] === ''
+        patientsMirror[`${patient}symptomOnsetDate`] === '' ||
+        patientsMirror[`${patient}symptomOnsetTime`] === ''
       ) {
         allErrorMessages.push(patientErrorMessage);
         setAllowSubmission(false);

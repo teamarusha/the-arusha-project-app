@@ -191,15 +191,27 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             id="date"
             label="Cardiac Arrest"
             type="date"
-            // defaultValue="0000-00-00"
-            // className={classes.textField}
+            value={patientsMirror[`${id}cardiacArrestDate`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}cardiacArrestDate`,
+                thing: event.target.value,
+              })
+            }
             InputLabelProps={{
               shrink: true,
             }}
           />&nbsp; &nbsp; <br /><br />
           <label for="appt">Time:</label>
           <input type="time" id="appt" name="appt"
-            min="09:00" max="18:00" required></input> <br /><br />
+            min="09:00" max="18:00"
+            value={patientsMirror[`${id}cardiacArrestTime`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}cardiacArrestTime`,
+                thing: event.target.value,
+              })
+            } required></input> <br /><br />
 
           <InputLabel
             id="demo-simple-select-autowidth-label">Reason for Stopping CPR/Resuscitation</InputLabel>
