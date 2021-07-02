@@ -88,44 +88,8 @@ function Drawer(props) {
         onOpen={() => setOpenDrawer(true)}
       >
         <List>
-          {user.id && (
-            <React.Fragment>
-              {/* INFO PAGE */}
-              <ListItem
-                component={Link}
-                to="/info"
-                classes={{ root: classes.item }}
-              >
-                <ListItemText classes={{ primary: classes.text }}>
-                  {" "}
-                  Info Page{" "}
-                </ListItemText>
-                <ListItemSecondaryAction edge="end">
-                  <ChevronRightIcon
-                    fontSize="large"
-                    style={{ color: "#5BC6CC" }}
-                  />
-                </ListItemSecondaryAction>
-              </ListItem>
-              <Divider classes={{ root: classes.root }} />
-            </React.Fragment>
-          )}
-
-          {/* ABOUT PAGE */}
-          <ListItem
-            component={Link}
-            to="/about"
-            classes={{ root: classes.item }}
-          >
-            <ListItemText classes={{ primary: classes.text }}>
-              {" "}
-              About{" "}
-            </ListItemText>
-            <ListItemSecondaryAction edge="end">
-              <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
-            </ListItemSecondaryAction>
-          </ListItem>
-          <Divider classes={{ root: classes.root }} />
+        
+         
 
           {/* INCIDENT */}
           <ListItem
@@ -141,34 +105,20 @@ function Drawer(props) {
               <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
             </ListItemSecondaryAction>
           </ListItem>
-          <Divider classes={{ root: classes.root }} />
+          <Divider classes={{root: classes.root}}/>
 
-          {/* PATIENT HOME */}
-          <ListItem
-            component={Link}
-            to="/patient"
-            classes={{ root: classes.item }}
-          >
-            <ListItemText classes={{ primary: classes.text }}>
-              {" "}
-              Patient Home{" "}
-            </ListItemText>
+     {/* PATIENT HOME */}
+        <ListItem  component={Link} to="/patient" classes={{root: classes.item}}>
+           <ListItemText classes={{primary: classes.text}}> Patient </ListItemText>
             <ListItemSecondaryAction edge="end">
               <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
             </ListItemSecondaryAction>
-          </ListItem>
-          <Divider classes={{ root: classes.root }} />
+         </ListItem>
+         <Divider classes={{root: classes.root}}/>
 
-          {/* TREATMENT HOME */}
-          <ListItem
-            component={Link}
-            to="/treatment"
-            classes={{ root: classes.item }}
-          >
-            <ListItemText classes={{ primary: classes.text }}>
-              {" "}
-              Treament Home{" "}
-            </ListItemText>
+    {/* TREATMENT HOME */}
+         <ListItem component={Link} to="/treatment" classes={{ root: classes.item }}>
+            <ListItemText classes={{ primary: classes.text }}> Treament </ListItemText>
             <ListItemSecondaryAction edge="end">
               <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
             </ListItemSecondaryAction>
@@ -199,23 +149,13 @@ function Drawer(props) {
             <ListItemText classes={{ primary: classes.text }}>
               Summary
             </ListItemText>
-          </ListItem>
-          <Divider classes={{ root: classes.root }} />
-
-          {/* VITALS HOME */}
-          <ListItem
-            component={Link}
-            to="/vitals"
-            classes={{ root: classes.item }}
-          >
-            <ListItemText classes={{ primary: classes.text }}>
-              {" "}
-              Vitals{" "}
-            </ListItemText>
             <ListItemSecondaryAction edge="end">
               <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
             </ListItemSecondaryAction>
           </ListItem>
+          <Divider classes={{ root: classes.root }} />
+
+        
 
           {/* REDUX COOKIE */}
           {/* <ListItem  component={Link} to="/dropdown" classes={{root: classes.item}}>
@@ -236,6 +176,7 @@ function Drawer(props) {
               {" "}
               <LogOutButton />{" "}
             </ListItemText>
+            
           </ListItem>
         </List>
       </SwipeableDrawer>

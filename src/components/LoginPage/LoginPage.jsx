@@ -3,10 +3,17 @@ import LoginForm from "../LoginForm/LoginForm";
 import { useHistory } from "react-router-dom";
 import { Grid, ThemeProvider, Link, Typography, Container } from "@material-ui/core";
 import createMuiTheme from "../GLOBALUI/Theme";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  register: {
+    marginBottom: 60,
+  }
+}));
 
 function LoginPage() {
   const history = useHistory();
-
+  const classes = useStyles();
   return (
     <ThemeProvider theme={createMuiTheme}>
       <Container style={{ marginBottom: '25%'}}>
@@ -24,7 +31,7 @@ function LoginPage() {
             history.push("/registration");
           }}
           color="secondary"
-        >
+        className={classes.register}>
           Register
         </Link>
       </Grid>
