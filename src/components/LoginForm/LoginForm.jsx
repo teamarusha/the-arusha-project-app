@@ -118,7 +118,7 @@ function LoginForm() {
             <Button
          type="submit"
          name="submit"
-         value="Register"
+         
          size="large"
          variant="contained"
          color="secondary"

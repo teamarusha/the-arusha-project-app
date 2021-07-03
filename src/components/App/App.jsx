@@ -13,6 +13,7 @@ import Footer from '../Footer/Footer';
 
 import NonAdminProtectedRoute from '../ProtectedRoute/NonAdminProtectedRoute';
 import AdminProtectedRoute from '../ProtectedRoute/AdminProtectedRoute';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
@@ -35,7 +36,7 @@ import VitalsForm from "../VitalsForm/VitalsForm";
 
 import Nav from '../Nav/Nav';
 import AdminHeader from '../Admin/AdminHeader';
-import {useSelector} from 'react-redux';
+// import {useSelector} from 'react-redux';
 
 function App() {
   const dispatch = useDispatch();
@@ -45,147 +46,206 @@ function App() {
   }, [dispatch]);
   
   // KEEPING TRACK OF USER REDUX STATE
-  const user = useSelector((store) => store.user);
-  let isAdmin = (user.is_admin == true)
-  let nonAdmin = (user.is_admin == false)
-  let def = null
+  // const user = useSelector((store) => store.user);
+  // let isAdmin = (user.is_admin == true)
+  // let nonAdmin = (user.is_admin == false)
+  // let def = (user == null || undefined)
 
   return (
-    <Router>
       <ThemeProvider theme={createMuiTheme}>
-
-  {/* CONDITIONAL RENDERING OF APP BAR w/ NAV */}
-      { isAdmin ? <AdminHeader/>
-      : nonAdmin ? <Nav/> 
-      : def
-      }
-
+    <Router>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+{/* -------------------------------------------------------FOR EVERYONE :)------------------------------------------------------- */}
+
+
+
           <Redirect exact from="/" to="/home" />
 
-          {/* Visiting localhost:3000/about will show the about page. */}
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/about"
-          >
-            <AboutPage />
-          </Route>
+          <ProtectedRoute exact path="/home">
+          <LandingPage />
+          </ProtectedRoute>
 
 
-          </Switch>
-          {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/user will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
-            Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-            
-          <NonAdminProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/user"
-          >
-            <UserPage />
-          </NonAdminProtectedRoute>
+{/* -------------------------------------------------------ADMIN ROUTES-------------------------------------------------------- */}
 
-          <AdminProtectedRoute
-            // logged in shows admin home page of all reports, else shows LoginPage
-            exact
-            path="/admin"
-          >
-            <Admin />
+        
+
+          <AdminProtectedRoute exact path="/login" authRedirect="/home">
+            <LoginPage />
           </AdminProtectedRoute>
+
           <AdminProtectedRoute
             // logged in shows individual report, else shows LoginPage
             exact
             path="/report/:id"
           >
+            <AdminHeader/>
             <FinalReport />
           </AdminProtectedRoute>
+        
 
-          <NonAdminProtectedRoute
+{/* -------------------------------------------------------NON ADMIN ROUTES-------------------------------------------------------- */}
+  
+
+
+          <NonAdminProtectedRoute exact path="/login" authRedirect="/home">
+            <LoginPage />
+          </NonAdminProtectedRoute>
+      
+          <NonAdminProtectedRoute exact path="/incident">
+            <Nav/>
+            <IncidentHome />
+          </NonAdminProtectedRoute>
+
+          <NonAdminProtectedRoute path="/incident/:id">
+            <Nav/>
+            <IncidentHome />
+          </NonAdminProtectedRoute>
+
+          <NonAdminProtectedRoute exact path="/patient">
+            <Nav/>
+            <PatientHome />
+          </NonAdminProtectedRoute>
+
+          <NonAdminProtectedRoute path="/patient/:id">
+            <Nav/>
+            <PatientHome />
+          </NonAdminProtectedRoute>
+
+          <NonAdminProtectedRoute exact path="/treatment">
+            <Nav/>
+            <TreatmentHome />
+          </NonAdminProtectedRoute>
+
+          <NonAdminProtectedRoute path="/treatment/:id">
+            <Nav/>
+            <TreatmentHome />
+          </NonAdminProtectedRoute>
+
+          <NonAdminProtectedRoute exact path="/vitals">
+            <Nav/>
+            <VitalsForm />
+          </NonAdminProtectedRoute>
+
+          <NonAdminProtectedRoute path="/vitals/:id">
+            <Nav/>
+            <VitalsForm />
+          </NonAdminProtectedRoute>
+          </Switch>
+        <Footer />
+        </Router>
+        </ThemeProvider>
+
+  );
+}
+
+export default App;
+
+
+  {/* CONDITIONAL RENDERING OF APP BAR w/ NAV */}
+      {/* {  isAdmin ? <AdminHeader/>
+      : nonAdmin ? <Nav/> 
+      : def
+      } */}
+
+// PLACE ABOVE ADMIN TOP ROUTES
+
+   {/* Visiting localhost:3000/about will show the about page. */}
+          {/* <Route
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/login"
+          >
+            {/* LoginPage */}
+            {/* <LoginPage /> */}
+          {/* <Route
+            exact
+            path="/registration"
+            >
+            <RegisterPage />
+          </Route> */}
+            {/* // shows AboutPage at all times (logged in or not)  */}
+
+
+          
+          {/* For protected routes, the view could show one of several things on the same route.
+            Visiting localhost:3000/user will show the UserPage if the user is logged in.
+            If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
+            Even though it seems like they are different pages, the user is always on localhost:3000/user */}
+
+
+            // PLACE ABOVE ADMIN  
+             {/* <NonAdminProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
             path="/info"
           >
             <InfoPage />
-          </NonAdminProtectedRoute>
+          </NonAdminProtectedRoute> */}
 
-          {/* When a value is supplied for the authRedirect prop the user will
+
+// PLACE BELOW REDIRECT TOP COMPONENT
+   {/* Visiting localhost:3000/about will show the about page. */}
+          {/* <Route
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/login"
+          >
+            {/* LoginPage */}
+            {/* <LoginPage /> */}
+          {/* <Route
+            exact
+            path="/registration"
+            >
+            <RegisterPage />
+          </Route> */}
+            {/* // shows AboutPage at all times (logged in or not)  */}
+
+// PLACE BELOW INITIAL ADMIN COMPONENT
+                 {/* <AdminProtectedRoute
+            // with authRedirect:
+            // - if logged in, redirects to "/admin"
+            // - else shows LoginPage at /login
+            exact
+            path="/admin"
+            authRedirect="/login"
+          >
+            <Admin />
+          </AdminProtectedRoute> */}
+
+// PLACE ABOVE INITIAL NONADMIN COMPONENT
+
+                  {/* <NonAdminProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/incident"
+          >
+            <IncidentHome />
+          </NonAdminProtectedRoute> */}
+
+// PLACE BELOW INITIAL NONADMIN COMPONENT
+                  {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
-          <NonAdminProtectedRoute
+          {/* <NonAdminProtectedRoute
             // with authRedirect:
             // - if logged in, redirects to "/user"
             // - else shows LoginPage at /login
             exact
             path="/login"
-            authRedirect="/user"
+            authRedirect="/incident"
           >
-            <LoginPage />
-          </NonAdminProtectedRoute>
+            <IncidentHome />
+          </NonAdminProtectedRoute> */}
 
-          <NonAdminProtectedRoute
+          {/* <NonAdminProtectedRoute
             // with authRedirect:
             // - if logged in, redirects to "/user"
             // - else shows RegisterPage at "/registration"
             exact
             path="/registration"
-            authRedirect="/user"
+            authRedirect="/incident"
           >
-            <RegisterPage />
-          </NonAdminProtectedRoute>
-
-          <NonAdminProtectedRoute
-            // with authRedirect:
-            // - if logged in, redirects to "/user"
-            // - else shows LandingPage at "/home"
-            exact
-            path="/home"
-            authRedirect="/user"
-          >
-            <LandingPage />
-
-          </NonAdminProtectedRoute>
-    
-
-
-          <NonAdminProtectedRoute exact path="/incident">
             <IncidentHome />
-          </NonAdminProtectedRoute>
-
-          <NonAdminProtectedRoute path="/incident/:id">
-            <IncidentHome />
-          </NonAdminProtectedRoute>
-
-          <NonAdminProtectedRoute exact path="/patient">
-            <PatientHome />
-          </NonAdminProtectedRoute>
-
-          <NonAdminProtectedRoute path="/patient/:id">
-            <PatientHome />
-          </NonAdminProtectedRoute>
-
-          <NonAdminProtectedRoute exact path="/treatment">
-            <TreatmentHome />
-          </NonAdminProtectedRoute>
-
-          <NonAdminProtectedRoute path="/treatment/:id">
-            <TreatmentHome />
-          </NonAdminProtectedRoute>
-
-          <NonAdminProtectedRoute exact path="/vitals">
-            <VitalsForm />
-          </NonAdminProtectedRoute>
-
-          <NonAdminProtectedRoute path="/vitals/:id">
-            <VitalsForm />
-          </NonAdminProtectedRoute>
-
-        <Footer />
-        </ThemeProvider>
-        </Router>
-  );
-}
-
-export default App;
+          </NonAdminProtectedRoute> */}

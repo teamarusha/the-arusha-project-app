@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import AddMedicationButton from "./AddMedicationButton";
 
 //Material UI imports
-import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
+import { InputLabel, MenuItem, Select, TextField,Container } from "@material-ui/core";
 
 const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
@@ -28,6 +28,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
   }
 
   return (
+    <Container >
     <div className="container">
       {localTreatment && (
         <div>
@@ -209,6 +210,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
         </div>
       )}
     </div>
+    </Container>
   );
 };
 

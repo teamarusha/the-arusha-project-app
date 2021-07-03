@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import LoginPage from '../LoginPage/LoginPage';
+
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
 // API for this component is the same as a regular route
@@ -25,7 +26,7 @@ import LoginPage from '../LoginPage/LoginPage';
 
 
 
-function NonAdminProtectedRoute(props) {
+function ProtectedRoute(props) {
   const user = useSelector((store) => store.user);
 
   // Using destructuring, this takes ComponentToProtect from component
@@ -41,7 +42,7 @@ function NonAdminProtectedRoute(props) {
 
   let ComponentToShow;
 
-  if (user.id && user.is_admin == false) {
+  if (user.id) {
     // if the user is logged in (only logged in users have ids)
     // show the component that is protected
     ComponentToShow = ComponentToProtect;
@@ -71,5 +72,4 @@ function NonAdminProtectedRoute(props) {
 
   );
 }
-
-export default NonAdminProtectedRoute;
+export default ProtectedRoute;

@@ -15,6 +15,7 @@ import {
   AccordionSummary,
   Button,
   Typography,
+  Container,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -71,7 +72,8 @@ function IncidentHome() {
   // _________________________________________________
 
   return (
-    <div className="container">
+    <Container component="main" maxWidth="xs" >
+      <div className={classes.paper}>
       <h2>Incident</h2>
       <br />
       <br />
@@ -98,21 +100,21 @@ function IncidentHome() {
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
+          style={{backgroundColor: '#5BC6CC'}}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1bh-content"
             id="panel1bh-header"
-            style={{ textAlign: "center" }}
           >
             <Typography
               classes={{ root: classes.text }}
-              className={classes.heading}
+              
             >
               Incident Response Form
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails classes={{root: classes.AccordionDetails }}>
             <IncidentFormResponse
               localIncident={incidentMirror}
               setLocalIncident={setIncidentMirror}
@@ -121,9 +123,11 @@ function IncidentHome() {
         </Accordion>
         <br />
         <Accordion
+          style={{backgroundColor: '#5BC6CC'}}
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
         >
+         
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2bh-content"
@@ -132,7 +136,7 @@ function IncidentHome() {
           >
             <Typography
               classes={{ root: classes.text }}
-              className={classes.heading}
+              
             >
               Incident Disposition Form
             </Typography>
@@ -143,11 +147,13 @@ function IncidentHome() {
               setLocalIncident={setIncidentMirror}
             />
           </AccordionDetails>
+          
         </Accordion>
         <br />
         <Accordion
           expanded={expanded === "panel3"}
           onChange={handleChange("panel3")}
+          style={{backgroundColor: '#5BC6CC'}}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -157,7 +163,7 @@ function IncidentHome() {
           >
             <Typography
               classes={{ root: classes.text }}
-              className={classes.heading}
+              
             >
               Incident Scene Form
             </Typography>
@@ -171,7 +177,8 @@ function IncidentHome() {
         </Accordion>
       </div>
       <SummaryFieldSubmit />
-    </div>
+      </div>
+    </Container>
   );
 }
 

@@ -1,4 +1,5 @@
-import {React, useState }from "react";
+import React from "react";
+import useState from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { Typography, Container } from "@material-ui/core";
@@ -47,21 +48,21 @@ function ElevationScroll(props) {
 
 
 // ADMIN HEADER COMPONENT
-export default function AdminHeader(props) {
+function AdminHeader(props) {
   const history = useHistory();
   const classes = useStyles();
-  const [toggleArrow, setToggleArrow] = useState(false)
+  // const [toggleArrow, setToggleArrow] = useState(false)
 
   return (
-    <ThemeProvider theme={createMuiTheme}>
     <React.Fragment>
+    <ThemeProvider theme={createMuiTheme}>
       <ElevationScroll>
         <AppBar position="fixed" color="primary">
           <Toolbar disableGutters={false}>
-          {toggleArrow ? <SubdirectoryArrowLeftIcon/>
-         : !toggleArrow }
+          {/* {toggleArrow ? <SubdirectoryArrowLeftIcon/>
+         : !toggleArrow } */}
             <KOPIAdminLogo />
-            <LogOutButton className={classes.button}/>
+            <LogOutButton />
           </Toolbar>
           <Container style={{ textAlign: "center" }}>
             <Typography variant="h3" className={classes.text}>Reports</Typography>
@@ -69,7 +70,9 @@ export default function AdminHeader(props) {
         </AppBar>
       </ElevationScroll>
       <div className={classes.toolbarMargin} />
-    </React.Fragment>
     </ThemeProvider>
+    </React.Fragment>
   );
 }
+
+export default AdminHeader;

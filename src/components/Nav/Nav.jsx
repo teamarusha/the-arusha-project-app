@@ -32,18 +32,27 @@ const useStyles = makeStyles((theme) => ({
   item: {
     textAlign: "center",
     maxHeight: "inherit",
+    marginTop:"8%",
+    marginBottom:"8%",
   },
   text: {
     fontFamily: "Red Hat Display",
     fontWeight: 400,
-
-    fontSize: '1.5rem',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    fontSize: '4vh',
+    margin:'auto',
     color: 'common'
-  },
+  }, 
   root : {
     backgroundColor: '#5BC6CC'
+  },
+  list: {
+    margin: 0,
+    height: '100%'
+  },
+  button : {
+  
+    padding: '100%',
+    
   }
 }));
 
@@ -60,7 +69,7 @@ function Drawer(props) {
 
 
   let nonAdminLoginLinkData = {
-    path: '/login',
+    path: '/home',
     text: 'Login / Register',
   };
 
@@ -70,7 +79,7 @@ function Drawer(props) {
   };
 
   if (user.id != null && user.is_admin == false) {
-    nonAdminLoginLinkData.path = '/user';
+    nonAdminLoginLinkData.path = '/home';
     nonAdminLoginLinkData.text = 'Home';
   } 
   else if (user.id !=null && user.is_admin == true){
@@ -90,28 +99,8 @@ function Drawer(props) {
      open={openDrawer} 
      onClose={()=> setOpenDrawer(false)} 
      onOpen={()=> setOpenDrawer(true)} >
- <List>
-        {user.id && (
-          <React.Fragment>
-    {/* INFO PAGE */}
-          <ListItem  component={Link} to="/info" classes={{root: classes.item}}>
-            <ListItemText classes={{primary: classes.text}}> Info Page </ListItemText>
-             <ListItemSecondaryAction edge="end">
-              <ChevronRightIcon fontSize='large' style={{color: '#5BC6CC'}}/>
-            </ListItemSecondaryAction>
-         </ListItem>
-         <Divider classes={{root: classes.root}}/>
-         </React.Fragment>
-          )}
-
-    {/* ABOUT PAGE */}
-        <ListItem  component={Link} to="/about" classes={{root: classes.item}}>
-           <ListItemText classes={{primary: classes.text}}> About </ListItemText>
-            <ListItemSecondaryAction edge="end">
-             <ChevronRightIcon fontSize='large' style={{color: '#5BC6CC'}}/>
-            </ListItemSecondaryAction>
-         </ListItem>
-         <Divider classes={{root: classes.root}}/>
+ <List classes={{root: classes.list}}>
+ 
 
     {/* INCIDENT */}
          <ListItem  component={Link} to="/incident" classes={{ root: classes.item }}>
@@ -120,20 +109,20 @@ function Drawer(props) {
               <ChevronRightIcon fontSize="large" style={{color: '#5BC6CC'}}/>
             </ListItemSecondaryAction>
           </ListItem>
-          <Divider classes={{root: classes.root}}/>
+          <Divider  classes={{root: classes.root}}/>
 
-     {/* PATIENT HOME */}
+     {/* PATIENT  */}
         <ListItem  component={Link} to="/patient" classes={{root: classes.item}}>
-           <ListItemText classes={{primary: classes.text}}> Patient Home </ListItemText>
+           <ListItemText classes={{primary: classes.text}}> Patient  </ListItemText>
             <ListItemSecondaryAction edge="end">
              <ChevronRightIcon fontSize='large' style={{color: '#5BC6CC'}}/>
             </ListItemSecondaryAction>
          </ListItem>
          <Divider classes={{root: classes.root}}/>
 
-    {/* TREATMENT HOME */}
+    {/* TREATMENT  */}
          <ListItem component={Link} to="/treatment" classes={{ root: classes.item }}>
-            <ListItemText classes={{ primary: classes.text }}> Treament Home </ListItemText>
+            <ListItemText classes={{ primary: classes.text }}> Treatment  </ListItemText>
             <ListItemSecondaryAction edge="end">
               <ChevronRightIcon fontSize="large" style={{color: '#5BC6CC'}}/>
             </ListItemSecondaryAction>
@@ -148,10 +137,18 @@ function Drawer(props) {
             </ListItemSecondaryAction>
             </ListItem>
             <Divider classes={{root: classes.root}}/>
+    {/* SUMMARY HOME */}
+          <ListItem component={Link} to="/vitals" classes={{ root: classes.item }}>
+            <ListItemText classes={{ primary: classes.text }}> Summary </ListItemText>
+            <ListItemSecondaryAction edge="end">
+              <ChevronRightIcon fontSize="large" style={{color: '#5BC6CC'}}/>
+            </ListItemSecondaryAction>
+            </ListItem>
+            <Divider classes={{root: classes.root}}/>
 
        
     {/* LOGOUT BUTTON */}
-        <ListItem  component={Link} to={nonAdminLoginLinkData.path} classes={{root: classes.item}}>
+        <ListItem  component={Link} to="/home" classes={{root: classes.item}}>
            <ListItemText classes={{primary: classes.text}}> <LogOutButton/> </ListItemText>
          </ListItem>
          
@@ -204,3 +201,5 @@ export default function Nav(props) {
     </React.Fragment>
   );
 }
+
+
