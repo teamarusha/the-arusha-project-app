@@ -12,7 +12,6 @@ import Footer from "../Footer/Footer";
 
 import NonAdminProtectedRoute from '../ProtectedRoute/NonAdminProtectedRoute';
 import AdminProtectedRoute from '../ProtectedRoute/AdminProtectedRoute';
-import SummaryFieldSubmit from "../SummaryFieldSubmit/SummaryFieldSubmit";
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
