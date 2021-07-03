@@ -76,12 +76,15 @@ function IncidentHome() {
   // _________________________________________________
 
   return (
+    <Container component="main" maxWidth="xs" >
+      <div className={classes.paper}>
+      
     
-    <div 
+    {/* <div 
     className="container" 
     style={{alignContent: 'center' }}
     >
-      <br />
+      <br /> */}
   
 
       <TimestampButton className={classes.timestamp}
@@ -109,21 +112,21 @@ function IncidentHome() {
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
+          style={{backgroundColor: '#5BC6CC'}}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1bh-content"
             id="panel1bh-header"
-            style={{ textAlign: "center" }}
           >
             <Typography
               classes={{ root: classes.text }}
-              className={classes.heading}
+              
             >
               RESPONSE
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails classes={{root: classes.AccordionDetails }}>
             <IncidentFormResponse
               localIncident={incidentMirror}
               setLocalIncident={setIncidentMirror}
@@ -136,6 +139,7 @@ function IncidentHome() {
           expanded={expanded === "panel3"}
           onChange={handleChange("panel3")}
         >
+         
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2bh-content"
@@ -144,7 +148,7 @@ function IncidentHome() {
           >
             <Typography
               classes={{ root: classes.text }}
-              className={classes.heading}
+              
             >
               SCENE
             </Typography>
@@ -155,6 +159,7 @@ function IncidentHome() {
               setLocalIncident={setIncidentMirror}
             />
           </AccordionDetails>
+          
         </Accordion>
         <br />
         <Accordion
@@ -169,7 +174,7 @@ function IncidentHome() {
           >
             <Typography
               classes={{ root: classes.text }}
-              className={classes.heading}
+              
             >
               DISPOSITION
             </Typography>
@@ -186,6 +191,7 @@ function IncidentHome() {
       
       </div>
     </div>
+    </Container>
   );
 }
 

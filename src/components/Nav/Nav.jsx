@@ -36,19 +36,28 @@ const useStyles = makeStyles((theme) => ({
   item: {
     textAlign: "center",
     maxHeight: "inherit",
+    marginTop:"8%",
+    marginBottom:"8%",
   },
   text: {
     fontFamily: "Red Hat Display",
     fontWeight: 400,
-
-    fontSize: "1.5rem",
-    marginLeft: "auto",
-    marginRight: "auto",
-    color: "common",
+    fontSize: '4vh',
+    margin:'auto',
+    color: 'common'
+  }, 
+  root : {
+    backgroundColor: '#5BC6CC'
   },
-  root: {
-    backgroundColor: "#5BC6CC",
+  list: {
+    margin: 0,
+    height: '100%'
   },
+  button : {
+  
+    padding: '100%',
+    
+  }
 }));
 
 // NAV DRAWER PROP.
@@ -61,8 +70,8 @@ function Drawer(props) {
   const user = useSelector((store) => store.user);
 
   let nonAdminLoginLinkData = {
-    path: "/login",
-    text: "Login / Register",
+    path: '/home',
+    text: 'Login / Register',
   };
 
   let adminLoginLinkData = {
@@ -71,11 +80,13 @@ function Drawer(props) {
   };
 
   if (user.id != null && user.is_admin == false) {
-    nonAdminLoginLinkData.path = "/user";
-    nonAdminLoginLinkData.text = "Home";
-  } else if (user.id != null && user.is_admin == true) {
-    adminLoginLinkData.path = "/admin";
-    adminLoginLinkData.text = "Home";
+    nonAdminLoginLinkData.path = '/home';
+    nonAdminLoginLinkData.text = 'Home';
+  } 
+  else if (user.id !=null && user.is_admin == true){
+    adminLoginLinkData.path = '/admin'
+    adminLoginLinkData.text = 'Home'
+
   }
 
   return (
@@ -88,7 +99,7 @@ function Drawer(props) {
         onClose={() => setOpenDrawer(false)}
         onOpen={() => setOpenDrawer(true)}
       >
-        <List>
+        <List classes={{root: classes.list}}>
 
           {/* INCIDENT */}
           <ListItem
@@ -117,7 +128,7 @@ function Drawer(props) {
 
           {/* TREATMENT */}
           <ListItem component={Link} to="/treatment" classes={{ root: classes.item }}>
-            <ListItemText classes={{ primary: classes.text }}> Treament </ListItemText>
+            <ListItemText classes={{ primary: classes.text }}> Treatment </ListItemText>
             <ListItemSecondaryAction edge="end">
               <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
             </ListItemSecondaryAction>
@@ -212,26 +223,4 @@ export default function Nav(props) {
 
 
 
-// {user.id && (
-//   <React.Fragment>
-//   {/* INFO PAGE */}
-//   <ListItem component={Link} to="/info" classes={{ root: classes.item }}>
-//     <ListItemText classes={{ primary: classes.text }}> Info Page </ListItemText>
-//     <ListItemSecondaryAction edge="end">
-//       <ChevronRightIcon fontSize='large' style={{ color: '#5BC6CC' }} />
-//     </ListItemSecondaryAction>
-//   </ListItem>
-//   <Divider classes={{ root: classes.root }} />
-// </React.Fragment>
-// )
-// }
 
-
-// {/* ABOUT PAGE */}
-// <ListItem component={Link} to="/about" classes={{ root: classes.item }}>
-// <ListItemText classes={{ primary: classes.text }}> About </ListItemText>
-// <ListItemSecondaryAction edge="end">
-//   <ChevronRightIcon fontSize='large' style={{ color: '#5BC6CC' }} />
-// </ListItemSecondaryAction>
-// </ListItem>
-// <Divider classes={{ root: classes.root }} />

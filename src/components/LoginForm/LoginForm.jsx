@@ -7,6 +7,7 @@ import globalUseStyle from '../GLOBALUI/globalUseStyles';
 import { ThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -53,6 +54,7 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const globalStyle = globalUseStyle();
+  const history = useHistory();
 
   const login = (event) => {
     event.preventDefault();
@@ -63,8 +65,11 @@ function LoginForm() {
         payload: {
           username: username,
           password: password,
-        },
+        }, 
       });
+      
+      history.push('/home')
+
     } else {
       dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
@@ -119,7 +124,6 @@ function LoginForm() {
             <Button
          type="submit"
          name="submit"
-         value="Register"
          size="large"
          variant="contained"
          color="secondary"

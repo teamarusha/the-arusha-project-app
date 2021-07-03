@@ -6,6 +6,7 @@ import globalUseStyle from '../GLOBALUI/globalUseStyles';
 import { ThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -50,9 +51,9 @@ function RegisterForm() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [regionID, setRegionID] = useState('');
-
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
+  const history = useHistory();
   const registerUser = (event) => {
     event.preventDefault();
     console.log(firstName, lastName, regionID);
@@ -66,6 +67,7 @@ function RegisterForm() {
         region_id: regionID
       },
     });
+    history.push('/home')
   }; // end registerUser
   
   const classes = useStyles();

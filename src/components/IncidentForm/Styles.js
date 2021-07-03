@@ -15,11 +15,14 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.text.secondary,
     },  
     rootExpanded: {
-      // backgroundColor: "#5BC6CC",
+     
       flexDirection: 'column'
     },
     paper: {
-      backgroundColor: "#99d5cf"
+      marginTop: theme.spacing(1),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
     },
     textfield: {
       margin: theme.spacing(1)
@@ -28,12 +31,10 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 'auto',
       marginRight: 'auto'
     },
-  //   timestamp: {
-  //     width: '40%',
-  //     marginTop: 200,
-  // }
-  
-    
+    AccordionDetails: {
+      alignItems: 'center'
+    }
   }));
+
 
   export default useStyles;

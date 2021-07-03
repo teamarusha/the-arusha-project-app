@@ -15,6 +15,7 @@ import {
   AccordionSummary,
   Button,
   Typography,
+  Container
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -68,7 +69,8 @@ function TreatmentHome() {
   }, [dropdowns.go]);
 
   return (
-    <div className="container">
+    <Container component="main" maxWidth="xs" >
+    <div className={classes.paper}>
       <h2>Treatment</h2>
       <br />
       <br />
@@ -93,6 +95,7 @@ function TreatmentHome() {
       <br />
       <div className={classes.root}>
         <Accordion
+         style={{backgroundColor: '#82E0E5'}}
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
         >
@@ -120,6 +123,7 @@ function TreatmentHome() {
         <br />
 
         <Accordion
+          style={{backgroundColor: '#5BC6CC'}}
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
         >
@@ -145,6 +149,7 @@ function TreatmentHome() {
         </Accordion>
       </div>
     </div>
+    </Container>
   );
 }
 

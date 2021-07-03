@@ -56,14 +56,14 @@ function ElevationScroll(props) {
 
 
 // ADMIN HEADER COMPONENT
-export default function AdminHeader(props) {
+function AdminHeader(props) {
   const history = useHistory();
   const classes = useStyles();
   // const [toggleArrow, setToggleArrow] = useState(false)
 
   return (
-    <ThemeProvider theme={createMuiTheme}>
     <React.Fragment>
+    <ThemeProvider theme={createMuiTheme}>
       <ElevationScroll>
         <AppBar position="fixed" color="primary">
           <Toolbar disableGutters={false}>
@@ -78,7 +78,9 @@ export default function AdminHeader(props) {
         </AppBar>
       </ElevationScroll>
       <div className={classes.toolbarMargin} />
-    </React.Fragment>
     </ThemeProvider>
+    </React.Fragment>
   );
 }
+
+export default AdminHeader;

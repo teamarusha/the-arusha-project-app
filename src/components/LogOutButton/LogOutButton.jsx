@@ -4,15 +4,21 @@ import {Button, Box}from '@material-ui/core';
 import globalUseStyle from '../GLOBALUI/globalUseStyles';
 import { ThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
+import { useHistory } from 'react-router-dom';
 
 function LogOutButton(props) {
-  const globalStyle = globalUseStyle();
+const history = useHistory();
   const dispatch = useDispatch();
+
+const handleClick = () => {
+  dispatch({ type: 'LOGOUT' })
+  history.push('/')
+}
   return (
     <ThemeProvider theme={createMuiTheme}>
-      <Box className={globalStyle.btnArea}>
+      
     <Button
-      onClick={() => dispatch({ type: 'LOGOUT' })}
+      onClick={handleClick}
       type="submit"
       name="submit"
       value="Register"
@@ -22,7 +28,6 @@ function LogOutButton(props) {
     >
       Log Out
     </Button>
-    </Box>
     </ThemeProvider>
   );
 }

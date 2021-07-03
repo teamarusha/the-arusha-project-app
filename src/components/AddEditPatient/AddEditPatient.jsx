@@ -31,7 +31,7 @@ function AddEditPatient({
 
   // Initializing all variables if this is the first form clicked on
   useEffect(() => {
-    // Initialize INDICENT
+    // Initialize INCIDENT
     if (incidentMirror === null) {
       localStorage.setItem("incident", JSON.stringify(incident));
       setIncidentMirror(incident);
