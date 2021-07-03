@@ -56,11 +56,19 @@ function App() {
     <Router>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-{/* -------------------------------------------------------FOR EVERYONE :)------------------------------------------------------- */}
-
-
-
           <Redirect exact from="/" to="/home" />
+
+          <Route exact path="/login" >
+            <LoginPage />
+          </Route>
+          <Route exact path="/registration" >
+            <RegisterPage />
+          </Route>
+
+{/* -------------------------------------------------------FOR EVERYONE LOGGED IN------------------------------------------------------- */}
+
+
+
 
           <ProtectedRoute exact path="/home">
           <LandingPage />
@@ -71,9 +79,6 @@ function App() {
 
         
 
-          <AdminProtectedRoute exact path="/login" authRedirect="/home">
-            <LoginPage />
-          </AdminProtectedRoute>
 
           <AdminProtectedRoute
             // logged in shows individual report, else shows LoginPage
@@ -93,10 +98,6 @@ function App() {
             <LoginPage />
           </NonAdminProtectedRoute>
       
-          <NonAdminProtectedRoute exact path="/incident">
-            <Nav/>
-            <IncidentHome />
-          </NonAdminProtectedRoute>
 
           <NonAdminProtectedRoute path="/incident/:id">
             <Nav/>

@@ -148,10 +148,10 @@ function Drawer(props) {
 
        
     {/* LOGOUT BUTTON */}
-        <ListItem  component={Link} to="/home" classes={{root: classes.item}}>
+    {/* <LogOutButton/>  */}
+        <ListItem  component={Link} to="/login" classes={{root: classes.item}}>
            <ListItemText classes={{primary: classes.text}}> <LogOutButton/> </ListItemText>
          </ListItem>
-         
     </List>
     </SwipeableDrawer>
      <IconButton

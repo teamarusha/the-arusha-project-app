@@ -8,6 +8,7 @@ import AdminHeader from '../Admin/AdminHeader';
 import Nav from '../Nav/Nav';
 import Admin from "../Admin/Admin";
 import IncidentHome from "../IncidentForm/IncidentHome";
+import LoginPage from "../LoginPage/LoginPage";
 
 function LandingPage() {
 
@@ -34,7 +35,7 @@ if(user.is_admin === true) {
     </div>
   )
 }
-
+ 
 
 }
 

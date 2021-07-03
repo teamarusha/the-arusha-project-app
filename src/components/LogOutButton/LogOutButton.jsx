@@ -12,7 +12,7 @@ const history = useHistory();
 
 const handleClick = () => {
   dispatch({ type: 'LOGOUT' })
-  history.push('/home')
+  history.push('/')
 }
   return (
     <ThemeProvider theme={createMuiTheme}>
