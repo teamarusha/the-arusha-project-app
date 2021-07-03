@@ -31,7 +31,7 @@ function AddEditPatient({
 
   // Initializing all variables if this is the first form clicked on
   useEffect(() => {
-    // Initialize INDICENT
+    // Initialize INCIDENT
     if (incidentMirror === null) {
       localStorage.setItem("incident", JSON.stringify(incident));
       setIncidentMirror(incident);
@@ -123,7 +123,7 @@ function AddEditPatient({
       [newPatientID + "destinationState"]: "",
       [newPatientID + "destinationCounty"]: "",
       [newPatientID + "destinationZipCode"]: "",
-      [newPatientID + "transportDisposition"]: "",
+      [newPatientID + "transportDisposition"]: 0,
       [newPatientID + "transportMethod"]: "",
       [newPatientID + "transportMode"]: "",
       [newPatientID + "destinationFacility"]: "",
@@ -148,8 +148,10 @@ function AddEditPatient({
       [newPatientID + "patientCurrMedications"]: "",
       [newPatientID + "anatomicLocation"]: "",
       [newPatientID + "organSystem"]: "",
-      [newPatientID + "symptomOnset"]: "",
-      [newPatientID + "lastKnownWell"]: "",
+      [newPatientID + "symptomOnsetDate"]: "",
+      [newPatientID + "symptomOnsetTime"]: "",
+      [newPatientID + "lastKnownWellDate"]: "",
+      [newPatientID + "lastKnownWellTime"]: "",
       [newPatientID + "primarySymptom"]: "",
       [newPatientID + "otherSymptoms"]: "",
       [newPatientID + "initialAcuity"]: "",
@@ -157,14 +159,15 @@ function AddEditPatient({
       [newPatientID + "primaryImpression"]: "",
       [newPatientID + "injuryLocation"]: "",
       [newPatientID + "injuryCause"]: "",
-      [newPatientID + "cardiacArrest"]: "",
+      [newPatientID + "cardiacArrest"]: 0,
       [newPatientID + "cardiacArrestEtiology"]: "",
       [newPatientID + "resuscitationAttempt"]: "",
       [newPatientID + "cardiacArrestWitness"]: "",
       [newPatientID + "aedUsePrior"]: "",
       [newPatientID + "cprProvided"]: "",
       [newPatientID + "spontaneousCirculation"]: "",
-      [newPatientID + "timeCardiacArrest"]: "",
+      [newPatientID + "cardiacArrestDate"]: "",
+      [newPatientID + "cardiacArrestTime"]: "",
       [newPatientID + "cprStopped"]: "",
       [newPatientID + "cprInitiator"]: "",
       [newPatientID + "aedApplicator"]: "",
@@ -175,6 +178,7 @@ function AddEditPatient({
       ...treatmentMirror,
       [newPatientID + "medicationArray"]: [1],
       [newPatientID + "lastMedication"]: 1,
+      [newPatientID + 'medicationTimestamp1']:"",
       [newPatientID + "medication1"]: "",
       [newPatientID + "routeAdministered1"]: "",
       [newPatientID + "dosage1"]: "",
@@ -183,6 +187,7 @@ function AddEditPatient({
       [newPatientID + "medsAdminBy1"]: "",
       [newPatientID + "procedureArray"]: [1],
       [newPatientID + "lastProcedure"]: 1,
+      [newPatientID + 'procedureTimestamp1']:"",
       [newPatientID + "procedure1"]: "",
       [newPatientID + "procedureAttempts1"]: "",
       [newPatientID + "successfulProcedure1"]: "",
@@ -206,6 +211,7 @@ function AddEditPatient({
       [newPatientID + "painScaleScore1"]: "",
       [newPatientID + "strokeScaleScore1"]: "",
       [newPatientID + "strokeScaleType1"]: "",
+      [newPatientID + 'vitalTimestamp1']:""
     });
   }
 

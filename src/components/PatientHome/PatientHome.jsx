@@ -26,7 +26,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { TextField, Paper, Grid } from "@material-ui/core";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -97,15 +96,17 @@ function PatientHome() {
 
   return (
     <div className="container">
-      <h2>Patients</h2>
       <br />
-      <br />
+     
       <TimestampButton
         incidentMirror={incidentMirror}
         setIncidentMirror={setIncidentMirror}
       />
+      <h2>PATIENTS</h2>
       <br />
       <br />
+      
+      
       <AddEditPatient
         formName={"patient"}
         incidentMirror={incidentMirror}

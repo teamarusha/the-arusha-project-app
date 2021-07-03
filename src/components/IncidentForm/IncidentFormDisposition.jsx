@@ -43,7 +43,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-            autoWidth
+            fullWidth
             value={localIncident[`${id}transportDisposition`]}
             onChange={(event) =>
               submitValue({
@@ -52,9 +52,9 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
               })
             }
           >
-            <MenuItem value={0}>
+            {/* <MenuItem value={0}>
               <em>None</em>
-            </MenuItem>
+            </MenuItem> */}
             {dropdowns["transport_disposition"].map((item) => (
               <MenuItem key={"transport_disposition" + item.id} value={item.id}>
                 {item["transport_disposition_type"]}
@@ -138,9 +138,9 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 })
               }
             >
-              <MenuItem value="">
+              {/* <MenuItem value="">
                 <em>None</em>
-              </MenuItem>
+              </MenuItem> */}
               {dropdowns["transport_method"].map((item) => (
                 <MenuItem key={"transport_method" + item.id} value={item.id}>
                   {item["transport_method_type"]}
@@ -155,7 +155,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
             <Select
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
-              autoWidth
+              fullWidth
               value={localIncident[`${id}transportMode`]}
               onChange={(event) =>
                 submitValue({
@@ -164,9 +164,9 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 })
               }
             >
-              <MenuItem value="">
+              {/* <MenuItem value="">
                 <em>None</em>
-              </MenuItem>
+              </MenuItem> */}
               {dropdowns["transport_mode"].map((item) => (
                 <MenuItem key={"transport_mode" + item.id} value={item.id}>
                   {item["transport_mode_type"]}
@@ -181,7 +181,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
             <Select
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
-              autoWidth
+              fullWidth
               value={localIncident[`${id}destinationFacility`]}
               onChange={(event) =>
                 submitValue({
@@ -190,9 +190,9 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 })
               }
             >
-              <MenuItem value="">
+              {/* <MenuItem value="">
                 <em>None</em>
-              </MenuItem>
+              </MenuItem> */}
               {dropdowns["destination_facility"].map((item) => (
                 <MenuItem
                   key={"destination_facility" + item.id}

@@ -1,5 +1,4 @@
 import React from "react";
-import useState from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { Typography, Container } from "@material-ui/core";
@@ -8,7 +7,7 @@ import KOPIAdminLogo from "../GLOBALUI/KOPILOGO/KOPIAdminLogo";
 import { makeStyles } from "@material-ui/styles";
 import SubdirectoryArrowLeftIcon from '@material-ui/icons/SubdirectoryArrowLeft';
 import LogOutButton from "../LogOutButton/LogOutButton";
-import {ThemeProvider} from '@material-ui/styles';
+import { ThemeProvider } from '@material-ui/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
 import globalUseStyle from "../GLOBALUI/globalUseStyles";
 import { useHistory } from "react-router";
@@ -22,13 +21,22 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
     marginBottom: "6em",
   },
-  adminButton : {
+  adminButton: {
     marginLeft: 'auto',
-    position: 'static'
+    position: 'static',
   },
   text: {
-    color: 'white'
-  }
+    color: 'white', 
+    paddingBottom: 40,
+    marginTop: -60,
+    
+  },
+  adlogo: {
+    marginTop: 50,
+},
+button: {
+  marginBottom: -10,
+}
 }));
 
 
@@ -61,8 +69,8 @@ function AdminHeader(props) {
           <Toolbar disableGutters={false}>
           {/* {toggleArrow ? <SubdirectoryArrowLeftIcon/>
          : !toggleArrow } */}
-            <KOPIAdminLogo />
-            <LogOutButton />
+            <KOPIAdminLogo className={classes.adlogo}/>
+            <LogOutButton className={classes.button}/>
           </Toolbar>
           <Container style={{ textAlign: "center" }}>
             <Typography variant="h3" className={classes.text}>Reports</Typography>

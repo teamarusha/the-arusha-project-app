@@ -8,7 +8,7 @@ import AdminHeader from '../Admin/AdminHeader';
 import Nav from '../Nav/Nav';
 import Admin from "../Admin/Admin";
 import IncidentHome from "../IncidentForm/IncidentHome";
-import LoginPage from "../LoginPage/LoginPage";
+
 
 function LandingPage() {
 
@@ -41,21 +41,3 @@ if(user.is_admin === true) {
 
 export default LandingPage;
 
-{/* <div className="container">
-  <LoginForm />
-  <Grid container justify="center">
-    <Typography variant="body1" component="h4">
-      New User?
-    </Typography>
-  </Grid>
-  <Grid container justify="center">
-    <Link
-      variant="body1"
-      component="button"
-      onClick={handleClick}
-      color="secondary"
-    >
-      Register
-    </Link>
-  </Grid>
-</div> */}

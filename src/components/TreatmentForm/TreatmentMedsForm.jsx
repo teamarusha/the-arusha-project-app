@@ -10,7 +10,7 @@ import { InputLabel, MenuItem, Select, TextField,Container } from "@material-ui/
 
 const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
-  const { id } = useParams;
+  const { id } = useParams();
 
   // Only handles when a value is changed by keystroke/inputfield clicks.
   // Does NOT handle initialization of new data.
@@ -68,12 +68,12 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 autoWidth
                 value={
                   localTreatment[
-                    `${id}medsAdminBy${localTreatment[`${id}lastMedication`]}`
+                    `${id}routeAdministered${localTreatment[`${id}lastMedication`]}`
                   ]
                 }
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}medsAdminBy${
+                    key: `${id}routeAdministered${
                       localTreatment[`${id}lastMedication`]
                     }`,
                     thing: event.target.value,
@@ -148,14 +148,14 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 autoWidth
                 value={
                   localTreatment[
-                    `${id}responseToProcedure${
+                    `${id}medicationResponse${
                       localTreatment[`${id}lastMedication`]
                     }`
                   ]
                 }
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}responseToProcedure${
+                    key: `${id}medicationResponse${
                       localTreatment[`${id}lastMedication`]
                     }`,
                     thing: event.target.value,
@@ -182,14 +182,14 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 autoWidth
                 value={
                   localTreatment[
-                    `${id}procedurePerformedBy${
+                    `${id}medsAdminBy${
                       localTreatment[`${id}lastMedication`]
                     }`
                   ]
                 }
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}procedurePerformedBy${
+                    key: `${id}medsAdminBy${
                       localTreatment[`${id}lastMedication`]
                     }`,
                     thing: event.target.value,

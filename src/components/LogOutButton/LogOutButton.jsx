@@ -22,7 +22,7 @@ const handleClick = () => {
       type="submit"
       name="submit"
       value="Register"
-      size="large"
+      size="medium"
       variant="contained"
       color="secondary"
     >

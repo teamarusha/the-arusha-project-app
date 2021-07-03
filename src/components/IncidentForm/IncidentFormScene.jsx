@@ -34,7 +34,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
         <div>
           <TextField
             id="outlined-basic"
-            label="Number of Patients"
+            label="# of Patients"
             variant="outlined"
             value={localIncident[`patientNumbers`]}
             onChange={(event) =>
@@ -82,6 +82,8 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
           ></TextField>
           <br />
           <br />
+          <br />
+
         </div>
       )}
       {dropdowns.go && localIncident && (
@@ -92,15 +94,15 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-            autoWidth
-            value={localIncident[`patientNumbers`]}
+            fullWidth
+            value={localIncident[`possibleInjury`]}
             onChange={(event) =>
-              submitValue({ key: `patientNumbers`, thing: event.target.value })
+              submitValue({ key: `possibleInjury`, thing: event.target.value })
             }
           >
-            <MenuItem value="">
+            {/* <MenuItem value="">
               <em>None</em>
-            </MenuItem>
+            </MenuItem> */}
             {dropdowns["possible_injury"].map((item) => (
               <MenuItem key={"possible_injury" + item.id} value={item.id}>
                 {item["possible_injury_type"]}
@@ -109,13 +111,16 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
           </Select>
           <br />
           <br />
+          <br />
+
           <InputLabel id="demo-simple-select-autowidth-label">
             Alcohol and Drug Use Indicators
           </InputLabel>
+
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-            autoWidth
+            fullWidth
             value={localIncident[`alcoholDrugIndicators`]}
             onChange={(event) =>
               submitValue({
@@ -124,9 +129,11 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
               })
             }
           >
-            <MenuItem value="">
+
+            {/* <MenuItem value="">
               <em>None</em>
-            </MenuItem>
+            </MenuItem> */}
+
             {dropdowns["alcohol_drug_use"].map((item) => (
               <MenuItem key={"alcohol_drug_use" + item.id} value={item.id}>
                 {item["alcohol_drug_use_type"]}

@@ -1,19 +1,14 @@
 import { put } from '@redux-saga/core/effects';
 import axios from 'axios';
 
-function* postIncident( action ) {
+function* postIncident(action) {
 
     console.log('IN POST INCIDENT SAGA');
-    
-
-
-
+    console.log('action.payload', action.payload);
     try {
+        yield axios.post(`/api/incident`, action.payload);
 
-        yield axios.post(`/api/incident`, {nonsense: true});
-        
         console.log('POST WORKED');
-        
 
     } catch (error) {
         console.log('POST INCIDENT ERROR:', error);

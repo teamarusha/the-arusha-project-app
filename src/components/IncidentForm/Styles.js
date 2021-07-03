@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.text.secondary,
     },  
     rootExpanded: {
-      // backgroundColor: "#5BC6CC",
+     
       flexDirection: 'column'
     },
     paper: {
@@ -37,39 +37,4 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-
-  // const useStyles = makeStyles((theme) => ({
-  //   paper: {
-  //     marginTop: theme.spacing(4),
-  //     display: 'flex',
-  //     flexDirection: 'column',
-  //     alignItems: 'center',
-  //   },
-  //   header: {
-  //     display: 'flex',
-  //     flexDirection: 'column',
-  //     alignItems: 'center',
-  //   },
-  //   divider: {
-  //     height: '2px',
-  //     marginTop: '1rem',
-  //     flexShrink: 0,
-  //     backgroundColor: 'rgba(0, 0, 0, 1)'
-  //   },
-  //   mobileIcon: {
-  //     margin: theme.spacing(1),
-  //     marginLeft: 'auto',
-  //     marginRight: 'auto',
-      
-  //   },
-  //   form: {
-  //     width: '100%',
-  //     marginTop: theme.spacing(1),
-  //   },
-  //   submit: {
-  //     margin: theme.spacing(3, 0, 2),
-  //     marginLeft: 'auto',
-  //     marginRight: 'auto'
-  //   },
-  // }));
   export default useStyles;

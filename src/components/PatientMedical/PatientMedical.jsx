@@ -68,6 +68,7 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
               })
             }
           ></TextField>
+          <p>If none apply, please type "None"</p>
         </div>
       )}
     </div>

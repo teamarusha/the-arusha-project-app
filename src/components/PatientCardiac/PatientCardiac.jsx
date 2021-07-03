@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // ----- Material UI -----
-import { InputLabel } from "@material-ui/core";
+import { InputLabel, TextField } from "@material-ui/core";
 import { Select } from "@material-ui/core";
 import { MenuItem } from "@material-ui/core";
 
@@ -27,11 +27,13 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
 
   return (
     <div className="container">
-      {dropdowns.go && patientsMirror && (
+      <h2>Patient Cardiac Arrest Form:</h2>
+      <br /><br />
+
+      {dropdowns.go && patientsMirror &&
         <div>
-          <InputLabel id="demo-simple-select-autowidth-label">
-            Cardiac Arrest?
-          </InputLabel>
+          <InputLabel
+            id="demo-simple-select-autowidth-label">Cardiac Arrest?</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
@@ -44,21 +46,23 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
               })
             }
           >
-            <MenuItem value="">
+            <MenuItem value={0}>
               <em>None</em>
             </MenuItem>
-            {dropdowns["cardiac_arrest"].map((item) => (
-              <MenuItem key={"cardiac_arrest" + item.id} value={item.id}>
-                {item[`cardiac_arrest_type`]}
-              </MenuItem>
-            ))}
+            {dropdowns['cardiac_arrest'].map(item => <MenuItem key={'cardiac_arrest' + item.id}
+              value={item.id}>{item[`cardiac_arrest_type`]}</MenuItem>)}
             {/* <MenuItem value={10}>Option 1</MenuItem> */}
-          </Select>{" "}
-          <br />
-          <br />
-          <InputLabel id="demo-simple-select-autowidth-label">
-            Cardiac Arrest Etiology
-          </InputLabel>
+
+          </Select> <br /><br />
+
+        </div>
+      }
+
+      {dropdowns.go && patientsMirror && patientsMirror[`${id}cardiacArrest`] > 1 &&
+        <div>
+
+          <InputLabel
+            id="demo-simple-select-autowidth-label">Cardiac Arrest Etiology</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
@@ -74,20 +78,12 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            {dropdowns["cardiac_arrest_etiology"].map((item) => (
-              <MenuItem
-                key={"cardiac_arrest_etiology" + item.id}
-                value={item.id}
-              >
-                {item[`cardiac_arrest_etiology_type`]}
-              </MenuItem>
-            ))}
-          </Select>{" "}
-          <br />
-          <br />
-          <InputLabel id="demo-simple-select-autowidth-label">
-            Resuscitation Attempted by EMS
-          </InputLabel>
+            {dropdowns['cardiac_arrest_etiology'].map(item => <MenuItem key={'cardiac_arrest_etiology' + item.id}
+              value={item.id}>{item[`cardiac_arrest_etiology_type`]}</MenuItem>)}
+          </Select> <br /><br />
+
+          <InputLabel
+            id="demo-simple-select-autowidth-label">Resuscitation Attempted by EMS</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
@@ -103,17 +99,12 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            {dropdowns["resuscitation_attempt"].map((item) => (
-              <MenuItem key={"resuscitation_attempt" + item.id} value={item.id}>
-                {item[`resuscitation_attempt_type`]}
-              </MenuItem>
-            ))}
-          </Select>{" "}
-          <br />
-          <br />
-          <InputLabel id="demo-simple-select-autowidth-label">
-            Arrest Witnessed By
-          </InputLabel>
+            {dropdowns['resuscitation_attempt'].map(item => <MenuItem key={'resuscitation_attempt' + item.id}
+              value={item.id}>{item[`resuscitation_attempt_type`]}</MenuItem>)}
+          </Select> <br /><br />
+
+          <InputLabel
+            id="demo-simple-select-autowidth-label">Arrest Witnessed By</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
@@ -129,20 +120,12 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            {dropdowns["cardiac_arrest_witness"].map((item) => (
-              <MenuItem
-                key={"cardiac_arrest_witness" + item.id}
-                value={item.id}
-              >
-                {item[`cardiac_arrest_witness_type`]}
-              </MenuItem>
-            ))}
-          </Select>{" "}
-          <br />
-          <br />
-          <InputLabel id="demo-simple-select-autowidth-label">
-            AED Use Prior to EMS Arrival?
-          </InputLabel>
+            {dropdowns['cardiac_arrest_witness'].map(item => <MenuItem key={'cardiac_arrest_witness' + item.id}
+              value={item.id}>{item[`cardiac_arrest_witness_type`]}</MenuItem>)}
+          </Select> <br /><br />
+
+          <InputLabel
+            id="demo-simple-select-autowidth-label">AED Use Prior to EMS Arrival?</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
@@ -158,17 +141,12 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            {dropdowns["aed_use_prior"].map((item) => (
-              <MenuItem key={"aed_use_prior" + item.id} value={item.id}>
-                {item[`aed_use_prior_type`]}
-              </MenuItem>
-            ))}
-          </Select>{" "}
-          <br />
-          <br />
-          <InputLabel id="demo-simple-select-autowidth-label">
-            Type of CPR Provided
-          </InputLabel>
+            {dropdowns['aed_use_prior'].map(item => <MenuItem key={'aed_use_prior' + item.id}
+              value={item.id}>{item[`aed_use_prior_type`]}</MenuItem>)}
+          </Select> <br /><br />
+
+          <InputLabel
+            id="demo-simple-select-autowidth-label">Type of CPR Provided</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
@@ -184,17 +162,12 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            {dropdowns["cpr_provided"].map((item) => (
-              <MenuItem key={"cpr_provided" + item.id} value={item.id}>
-                {item[`cpr_provided_type`]}
-              </MenuItem>
-            ))}
-          </Select>{" "}
-          <br />
-          <br />
-          <InputLabel id="demo-simple-select-autowidth-label">
-            Any Return of Spontaneous Circulation
-          </InputLabel>
+            {dropdowns['cpr_provided'].map(item => <MenuItem key={'cpr_provided' + item.id}
+              value={item.id}>{item[`cpr_provided_type`]}</MenuItem>)}
+          </Select> <br /><br />
+
+          <InputLabel
+            id="demo-simple-select-autowidth-label">Any Return of Spontaneous Circulation</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
@@ -210,22 +183,38 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            {dropdowns["spontaneous_circulation"].map((item) => (
-              <MenuItem
-                key={"spontaneous_circulation" + item.id}
-                value={item.id}
-              >
-                {item[`spontaneous_circulation_type`]}
-              </MenuItem>
-            ))}
-          </Select>{" "}
-          <br />
-          <br />
-          <p>Cardiac Arrest calendar goes here</p> <br />
-          <br />
-          <InputLabel id="demo-simple-select-autowidth-label">
-            Reason for Stopping CPR/Resuscitation
-          </InputLabel>
+            {dropdowns['spontaneous_circulation'].map(item => <MenuItem key={'spontaneous_circulation' + item.id}
+              value={item.id}>{item[`spontaneous_circulation_type`]}</MenuItem>)}
+          </Select> <br /><br />
+
+          <TextField
+            id="date"
+            label="Cardiac Arrest"
+            type="date"
+            value={patientsMirror[`${id}cardiacArrestDate`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}cardiacArrestDate`,
+                thing: event.target.value,
+              })
+            }
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />&nbsp; &nbsp; <br /><br />
+          <label for="appt">Time:</label>
+          <input type="time" id="appt" name="appt"
+            min="09:00" max="18:00"
+            value={patientsMirror[`${id}cardiacArrestTime`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}cardiacArrestTime`,
+                thing: event.target.value,
+              })
+            } required></input> <br /><br />
+
+          <InputLabel
+            id="demo-simple-select-autowidth-label">Reason for Stopping CPR/Resuscitation</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
@@ -241,17 +230,12 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            {dropdowns["cpr_stopped"].map((item) => (
-              <MenuItem key={"cpr_stopped" + item.id} value={item.id}>
-                {item[`cpr_stopped_type`]}
-              </MenuItem>
-            ))}
-          </Select>{" "}
-          <br />
-          <br />
-          <InputLabel id="demo-simple-select-autowidth-label">
-            Who First Initiated CPR
-          </InputLabel>
+            {dropdowns['cpr_stopped'].map(item => <MenuItem key={'cpr_stopped' + item.id}
+              value={item.id}>{item[`cpr_stopped_type`]}</MenuItem>)}
+          </Select> <br /><br />
+
+          <InputLabel
+            id="demo-simple-select-autowidth-label">Who First Initiated CPR</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
@@ -267,17 +251,12 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            {dropdowns["cpr_initiator"].map((item) => (
-              <MenuItem key={"cpr_initiator" + item.id} value={item.id}>
-                {item[`cpr_initiator_type`]}
-              </MenuItem>
-            ))}
-          </Select>{" "}
-          <br />
-          <br />
-          <InputLabel id="demo-simple-select-autowidth-label">
-            Who First Applied AED
-          </InputLabel>
+            {dropdowns['cpr_initiator'].map(item => <MenuItem key={'cpr_initiator' + item.id}
+              value={item.id}>{item[`cpr_initiator_type`]}</MenuItem>)}
+          </Select> <br /><br />
+
+          <InputLabel
+            id="demo-simple-select-autowidth-label">Who First Applied AED</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
@@ -293,17 +272,12 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            {dropdowns["aed_applicator"].map((item) => (
-              <MenuItem key={"aed_applicator" + item.id} value={item.id}>
-                {item[`aed_applicator_type`]}
-              </MenuItem>
-            ))}
-          </Select>{" "}
-          <br />
-          <br />
-          <InputLabel id="demo-simple-select-autowidth-label">
-            Who First Defibrillated the Patient
-          </InputLabel>
+            {dropdowns['aed_applicator'].map(item => <MenuItem key={'aed_applicator' + item.id}
+              value={item.id}>{item[`aed_applicator_type`]}</MenuItem>)}
+          </Select> <br /><br />
+
+          <InputLabel
+            id="demo-simple-select-autowidth-label">Who First Defibrillated the Patient</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
@@ -319,16 +293,12 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            {dropdowns["aed_defibrillator"].map((item) => (
-              <MenuItem key={"aed_defibrillator" + item.id} value={item.id}>
-                {item[`aed_defibrillator_type`]}
-              </MenuItem>
-            ))}
-          </Select>{" "}
-          <br />
-          <br />
+            {dropdowns['aed_defibrillator'].map(item => <MenuItem key={'aed_defibrillator' + item.id}
+              value={item.id}>{item[`aed_defibrillator_type`]}</MenuItem>)}
+          </Select> <br /><br />
         </div>
-      )}
+
+      }
     </div>
   );
 }
