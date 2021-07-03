@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -69,6 +69,8 @@ function Drawer(props) {
 
   const user = useSelector((store) => store.user);
 
+  const {id} = useParams();
+
   let nonAdminLoginLinkData = {
     path: '/home',
     text: 'Login / Register',
@@ -104,7 +106,7 @@ function Drawer(props) {
           {/* INCIDENT */}
           <ListItem
             component={Link}
-            to="/incident"
+            to={`/incident/${id}`}
             classes={{ root: classes.item }}
           >
             <ListItemText classes={{ primary: classes.text }}>
@@ -118,7 +120,7 @@ function Drawer(props) {
           <Divider classes={{ root: classes.root }} />
 
           {/* PATIENT */}
-          <ListItem component={Link} to="/patient" classes={{ root: classes.item }}>
+          <ListItem component={Link} to={`/patient/${id}`} classes={{ root: classes.item }}>
             <ListItemText classes={{ primary: classes.text }}> Patient </ListItemText>
             <ListItemSecondaryAction edge="end">
               <ChevronRightIcon fontSize='large' style={{ color: '#5BC6CC' }} />
@@ -127,7 +129,7 @@ function Drawer(props) {
           <Divider classes={{ root: classes.root }} />
 
           {/* TREATMENT */}
-          <ListItem component={Link} to="/treatment" classes={{ root: classes.item }}>
+          <ListItem component={Link} to={`/treatment/${id}`} classes={{ root: classes.item }}>
             <ListItemText classes={{ primary: classes.text }}> Treatment </ListItemText>
             <ListItemSecondaryAction edge="end">
               <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
@@ -137,7 +139,7 @@ function Drawer(props) {
 
           <ListItem
             component={Link}
-            to="/vitals"
+            to={`/vitals/${id}`}
             classes={{ root: classes.item }}
           >
             <ListItemText classes={{ primary: classes.text }}>
@@ -153,7 +155,7 @@ function Drawer(props) {
           {/* Summary */}
           <ListItem
             component={Link}
-            to="/summary"
+            to={`/summary/${id}`}
             classes={{ root: classes.item }}
           >
             <ListItemText classes={{ primary: classes.text }}>
