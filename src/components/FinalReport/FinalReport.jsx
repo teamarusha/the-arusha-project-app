@@ -122,7 +122,7 @@ function FinalReport() {
                             <div className='vitals'>
                                 <h3>VITALS</h3>
                                 {vit && (
-                                    <>
+                                    <div>
                                         {vit.map((item, index) => {
                                             return (
                                                 <div>
@@ -151,7 +151,7 @@ function FinalReport() {
                                                 </div>
                                             )
                                         })}
-                                    </>
+                                    </div>
                                 )}
 
                             </div>
@@ -187,7 +187,7 @@ function FinalReport() {
 
                         <h4>Medications Administered:</h4>
                         {med && (
-                            <>
+                            <div>
                                 {med.map((item, index) => {
                                     return (
                                         <div>
@@ -204,12 +204,12 @@ function FinalReport() {
                                         </div>
                                     )
                                 })}
-                            </>
+                            </div>
                         )}
 
                         <h4>Procedures Administered:</h4>
                         {pro && (
-                            <>
+                            <div>
                                 {pro.map((item, index) => {
                                     return (
                                         <div>
@@ -226,7 +226,7 @@ function FinalReport() {
                                         </div>
                                     )
                                 })}
-                            </>
+                            </div>
                         )}
                     </div>
                     <div className='disposition'>
