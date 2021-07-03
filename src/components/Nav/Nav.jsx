@@ -109,7 +109,7 @@ function Drawer(props) {
 
      {/* PATIENT HOME */}
         <ListItem  component={Link} to="/patient" classes={{root: classes.item}}>
-           <ListItemText classes={{primary: classes.text}}> Patient </ListItemText>
+           <ListItemText classes={{primary: classes.text}}> Patients </ListItemText>
             <ListItemSecondaryAction edge="end">
               <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
             </ListItemSecondaryAction>
