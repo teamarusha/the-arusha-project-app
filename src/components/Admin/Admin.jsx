@@ -43,7 +43,7 @@ function Admin() {
     console.log('reports:', reports)
     const classes = useStyles();
 
-   const rows = useSelector(store => store.table);
+    const rows = useSelector(store => store.table);
 
 
 
@@ -68,23 +68,23 @@ function Admin() {
         <Container>
             <Paper className={classes.root}>
             <TableContainer className={classes.container}>
-               <Table stickyHeader aria-label="sticky table">
+                <Table stickyHeader aria-label="sticky table">
                     <TableHead>
-                       <TableRow>
-                          
-                                <TableCell>Date</TableCell>
-                                <TableCell>Time</TableCell>
-                                <TableCell>Patient</TableCell>
-                                <TableCell>Responder</TableCell>
-                                <TableCell>Report</TableCell>
+                        <TableRow>
+
+                            <TableCell>Date</TableCell>
+                            <TableCell>Time</TableCell>
+                            <TableCell>Patient</TableCell>
+                            <TableCell>Responder</TableCell>
+                            <TableCell>Report</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {reports.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                             return (
                                 <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                                    
-                                       
+
+
                                     <TableCell>{moment(row.unit_notified).format('DD/MM/YYYY')}</TableCell>
                                     <TableCell>{moment(row.unit_notified).format('HH:MM:SS')}</TableCell>
                                     <TableCell>{row.patient_first_name} {row.patient_last_name}</TableCell>

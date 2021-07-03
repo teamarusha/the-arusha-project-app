@@ -1,4 +1,4 @@
-const treatments = (
+const treatment = (
   state =
     {
       '1medicationArray': [1],
@@ -34,4 +34,4 @@ const treatments = (
 
 // user will be on the redux state at:
 // state.user
-export default treatments;
+export default treatment;

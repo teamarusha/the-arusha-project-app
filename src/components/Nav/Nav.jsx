@@ -18,8 +18,9 @@ import {
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useState } from "react";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import LogOutButton from "../LogOutButton/LogOutButton";
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import LogOutButton from '../LogOutButton/LogOutButton';
+import SummaryFieldSubmit from '../SummaryFieldSubmit/SummaryFieldSubmit';
 
 // OVERHEAD COMPONENT STYLING
 const useStyles = makeStyles((theme) => ({
@@ -88,8 +89,6 @@ function Drawer(props) {
         onOpen={() => setOpenDrawer(true)}
       >
         <List>
-        
-         
 
           {/* INCIDENT */}
           <ListItem
@@ -105,19 +104,19 @@ function Drawer(props) {
               <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
             </ListItemSecondaryAction>
           </ListItem>
-          <Divider classes={{root: classes.root}}/>
+          <Divider classes={{ root: classes.root }} />
 
-     {/* PATIENT HOME */}
-        <ListItem  component={Link} to="/patient" classes={{root: classes.item}}>
-           <ListItemText classes={{primary: classes.text}}> Patients </ListItemText>
+          {/* PATIENT */}
+          <ListItem component={Link} to="/patient" classes={{ root: classes.item }}>
+            <ListItemText classes={{ primary: classes.text }}> Patient </ListItemText>
             <ListItemSecondaryAction edge="end">
-              <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
+              <ChevronRightIcon fontSize='large' style={{ color: '#5BC6CC' }} />
             </ListItemSecondaryAction>
-         </ListItem>
-         <Divider classes={{root: classes.root}}/>
+          </ListItem>
+          <Divider classes={{ root: classes.root }} />
 
-    {/* TREATMENT HOME */}
-         <ListItem component={Link} to="/treatment" classes={{ root: classes.item }}>
+          {/* TREATMENT */}
+          <ListItem component={Link} to="/treatment" classes={{ root: classes.item }}>
             <ListItemText classes={{ primary: classes.text }}> Treament </ListItemText>
             <ListItemSecondaryAction edge="end">
               <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
@@ -155,17 +154,6 @@ function Drawer(props) {
           </ListItem>
           <Divider classes={{ root: classes.root }} />
 
-        
-
-          {/* REDUX COOKIE */}
-          {/* <ListItem  component={Link} to="/dropdown" classes={{root: classes.item}}>
-           <ListItemText classes={{primary: classes.text}}> ReduxCookie </ListItemText>
-            <ListItemSecondaryAction edge="end">
-             <ChevronRightIcon fontSize='large' style={{color: '#5BC6CC'}}/>
-            </ListItemSecondaryAction>
-         </ListItem>
-         <Divider classes={{root: classes.root}}/> */}
-
           {/* LOGOUT BUTTON */}
           <ListItem
             component={Link}
@@ -176,7 +164,7 @@ function Drawer(props) {
               {" "}
               <LogOutButton />{" "}
             </ListItemText>
-            
+
           </ListItem>
         </List>
       </SwipeableDrawer>
@@ -221,3 +209,29 @@ export default function Nav(props) {
     </React.Fragment>
   );
 }
+
+
+
+// {user.id && (
+//   <React.Fragment>
+//   {/* INFO PAGE */}
+//   <ListItem component={Link} to="/info" classes={{ root: classes.item }}>
+//     <ListItemText classes={{ primary: classes.text }}> Info Page </ListItemText>
+//     <ListItemSecondaryAction edge="end">
+//       <ChevronRightIcon fontSize='large' style={{ color: '#5BC6CC' }} />
+//     </ListItemSecondaryAction>
+//   </ListItem>
+//   <Divider classes={{ root: classes.root }} />
+// </React.Fragment>
+// )
+// }
+
+
+// {/* ABOUT PAGE */}
+// <ListItem component={Link} to="/about" classes={{ root: classes.item }}>
+// <ListItemText classes={{ primary: classes.text }}> About </ListItemText>
+// <ListItemSecondaryAction edge="end">
+//   <ChevronRightIcon fontSize='large' style={{ color: '#5BC6CC' }} />
+// </ListItemSecondaryAction>
+// </ListItem>
+// <Divider classes={{ root: classes.root }} />

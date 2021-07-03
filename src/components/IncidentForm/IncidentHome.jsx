@@ -185,7 +185,6 @@ function IncidentHome() {
         <br />
       
       </div>
-      
     </div>
   );
 }

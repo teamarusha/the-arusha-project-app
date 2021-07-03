@@ -83,7 +83,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
           <br />
           <br />
           <br />
-         
+
         </div>
       )}
       {dropdowns.go && localIncident && (
@@ -95,9 +95,9 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth
-            value={localIncident[`patientNumbers`]}
+            value={localIncident[`possibleInjury`]}
             onChange={(event) =>
-              submitValue({ key: `patientNumbers`, thing: event.target.value })
+              submitValue({ key: `possibleInjury`, thing: event.target.value })
             }
           >
             {/* <MenuItem value="">
@@ -112,11 +112,11 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
           <br />
           <br />
           <br />
-           
+
           <InputLabel id="demo-simple-select-autowidth-label">
             Alcohol and Drug Use Indicators
           </InputLabel>
-         
+
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
@@ -129,11 +129,11 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
               })
             }
           >
-            
+
             {/* <MenuItem value="">
               <em>None</em>
             </MenuItem> */}
-          
+
             {dropdowns["alcohol_drug_use"].map((item) => (
               <MenuItem key={"alcohol_drug_use" + item.id} value={item.id}>
                 {item["alcohol_drug_use_type"]}

@@ -86,9 +86,6 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
                 {item[`gender_type`]}
               </MenuItem>
             ))}
-            {/* <MenuItem value={10}>Male</MenuItem>
-                    <MenuItem value={20}>Female</MenuItem>
-                    <MenuItem value={30}>Other</MenuItem> */}
           </Select>{" "}
           <br />
           <br />
@@ -113,21 +110,77 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
                 {item[`race_type`]}
               </MenuItem>
             ))}
-            {/* <MenuItem value={10}>African</MenuItem>
-                    <MenuItem value={20}>African-American</MenuItem>
-                    <MenuItem value={30}>American Indian</MenuItem> */}
+
           </Select>{" "}
           <br />
           <br />
-          <p>Date of Birth calendar goes here</p>
+
+          <TextField
+            id="outlined-basic"
+            label="Patient Age"
+            variant="outlined"
+            value={patientsMirror[`${id}patientAge`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}patientAge`,
+                thing: event.target.value,
+              })
+            }
+          ></TextField>{" "}
+          <br />
+          <br />
+
+          <InputLabel id="demo-simple-select-autowidth-label">Age Units</InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            autoWidth
+            value={patientsMirror[`${id}patientAgeUnits`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}patientAgeUnits`,
+                thing: event.target.value,
+              })
+            }
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {dropdowns["age_units"].map((item) => (
+              <MenuItem key={"age_units" + item.id} value={item.id}>
+                {item[`age_units_type`]}
+              </MenuItem>
+            ))}
+          </Select>{" "}
+          <br />
+          <br />
+          <TextField
+            id="date"
+            label="DOB:"
+            type="date"
+            value={patientsMirror[`${id}patientDateOfBirth`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}patientDateOfBirth`,
+                thing: event.target.value,
+              })
+            }
+            // defaultValue="0000-00-00"
+            // className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <br />
+          <br />
           <TextField
             id="outlined-basic"
             label="Patient Address"
             variant="outlined"
-            value={patientsMirror[`${id}patientAdress`]}
+            value={patientsMirror[`${id}patientAddress`]}
             onChange={(event) =>
               submitValue({
-                key: `${id}patientAdress`,
+                key: `${id}patientAddress`,
                 thing: event.target.value,
               })
             }

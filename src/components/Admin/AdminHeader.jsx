@@ -7,7 +7,7 @@ import KOPIAdminLogo from "../GLOBALUI/KOPILOGO/KOPIAdminLogo";
 import { makeStyles } from "@material-ui/styles";
 import SubdirectoryArrowLeftIcon from '@material-ui/icons/SubdirectoryArrowLeft';
 import LogOutButton from "../LogOutButton/LogOutButton";
-import {ThemeProvider} from '@material-ui/styles';
+import { ThemeProvider } from '@material-ui/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
 import globalUseStyle from "../GLOBALUI/globalUseStyles";
 import { useHistory } from "react-router";
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
     marginBottom: "6em",
   },
-  adminButton : {
+  adminButton: {
     marginLeft: 'auto',
     position: 'static',
   },

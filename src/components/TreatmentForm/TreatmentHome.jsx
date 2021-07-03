@@ -69,7 +69,7 @@ function TreatmentHome() {
 
   return (
     <div className="container">
-      <h2>Treament</h2>
+      <h2>Treatment</h2>
       <br />
       <br />
       <TimestampButton
