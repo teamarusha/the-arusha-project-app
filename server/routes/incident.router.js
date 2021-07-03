@@ -236,6 +236,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         console.log('9');
         // disposition
+        // IF IT IS >4 IT WILL JUST INSERT THE 1 THING
         await Promise.all(
             // const dispositionValues = {
             //     incident_disposition_id: incidentID,
@@ -251,21 +252,35 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
             returnPatientIDs.map((patientID, i) => {
 
-                return connection.query(`
-                INSERT INTO disposition ("patient_disposition_id","destination_state",
-                "destination_county","destination_zip", "transport_disposition_id",
-                "transport_method_id", "transport_mode_id","destination_facility_id")
-                VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`,
-                    [
-                        patientID,
-                        incident[String(i + 1) + 'destinationState'],
-                        incident[String(i + 1) + 'destinationCounty'],
-                        incident[String(i + 1) + 'destinationZipCode'],
-                        incident[String(i + 1) + 'transportDisposition'],
-                        incident[String(i + 1) + 'transportMethod'],
-                        incident[String(i + 1) + 'transportMode'],
-                        incident[String(i + 1) + 'destinationFacility']
-                    ]);
+                if (incident[String(i + 1) + 'transportDisposition'] > 4) {
+
+                    return connection.query(`
+                    INSERT INTO disposition ("patient_disposition_id","transport_disposition_id")
+                    VALUES ($1, $2);`,
+                        [
+                            patientID,
+                            incident[String(i + 1) + 'transportDisposition']
+                        ]);
+
+                } else {
+
+                    return connection.query(`
+                    INSERT INTO disposition ("patient_disposition_id","destination_state",
+                    "destination_county","destination_zip", "transport_disposition_id",
+                    "transport_method_id", "transport_mode_id","destination_facility_id")
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`,
+                        [
+                            patientID,
+                            incident[String(i + 1) + 'destinationState'],
+                            incident[String(i + 1) + 'destinationCounty'],
+                            incident[String(i + 1) + 'destinationZipCode'],
+                            incident[String(i + 1) + 'transportDisposition'],
+                            incident[String(i + 1) + 'transportMethod'],
+                            incident[String(i + 1) + 'transportMode'],
+                            incident[String(i + 1) + 'destinationFacility']
+                        ]);
+                }
+
             })
         );
 
@@ -307,7 +322,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         // allergies
         const allergyQuery = `INSERT INTO allergies ("patient_allergy_id","allergy")
                 VALUES ($1, $2)`;
-                console.log('12');
+        console.log('12');
         await Promise.all(
             returnPatientIDs.map((patientID, i) => {
 
@@ -367,32 +382,52 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         );
         // cardiacArrest
-        const cardiacQuery = `INSERT INTO cardiacarrest ("patient_cardiac_id",
-        "cardiac_arrest_id","cardiac_arrest_etiology_id","resuscitation_attempt_id",
-        "cardiac_arrest_witness_id","aed_use_prior_id","cpr_provided_id","spontaneous_circulation_id",
-        "time_cardiac_arrest","cpr_stopped_id", "cpr_initiator_id", "aed_applicator_id", "aed_defibrillator_id")
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);`;
+        // IF IT IS 1 IT WILL ONLY INSERT THE ONE THING
+
         console.log('15');
         await Promise.all(
             returnPatientIDs.map((patientID, i) => {
 
-                let cardiacValues = [
-                    patientID,
-                    patients[String(i + 1) + 'cardiacArrest'],
-                    patients[String(i + 1) + 'cardiacArrestEtiology'],
-                    patients[String(i + 1) + 'resuscitationAttempt'],
-                    patients[String(i + 1) + 'cardiacArrestWitness'],
-                    patients[String(i + 1) + 'aedUsePrior'],
-                    patients[String(i + 1) + 'cprProvided'],
-                    patients[String(i + 1) + 'spontaneousCirculation'],
-                    `${patients[String(i + 1) + 'cardiacArrestDate']} ${patients[String(i + 1) + 'cardiacArrestTime']}`,
-                    patients[String(i + 1) + 'cprStopped'],
-                    patients[String(i + 1) + 'cprInitiator'],
-                    patients[String(i + 1) + 'aedApplicator'],
-                    patients[String(i + 1) + 'aedDefibrillator']
-                ];
+                if (patients[String(i + 1) + 'cardiacArrest'] === 1) {
 
-                return connection.query(cardiacQuery, cardiacValues);
+                    const cardiacQuery = `INSERT INTO cardiacarrest ("patient_cardiac_id",
+                            "cardiac_arrest_id") VALUES ($1, $2);`;
+
+
+                    let cardiacValues = [
+                        patientID,
+                        patients[String(i + 1) + 'cardiacArrest']
+                    ];
+
+                    return connection.query(cardiacQuery, cardiacValues);
+
+                } else {
+
+                    const cardiacQuery = `INSERT INTO cardiacarrest ("patient_cardiac_id",
+                            "cardiac_arrest_id","cardiac_arrest_etiology_id","resuscitation_attempt_id",
+                            "cardiac_arrest_witness_id","aed_use_prior_id","cpr_provided_id","spontaneous_circulation_id",
+                            "time_cardiac_arrest","cpr_stopped_id", "cpr_initiator_id", "aed_applicator_id", "aed_defibrillator_id")
+                            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);`;
+
+
+                    let cardiacValues = [
+                        patientID,
+                        patients[String(i + 1) + 'cardiacArrest'],
+                        patients[String(i + 1) + 'cardiacArrestEtiology'],
+                        patients[String(i + 1) + 'resuscitationAttempt'],
+                        patients[String(i + 1) + 'cardiacArrestWitness'],
+                        patients[String(i + 1) + 'aedUsePrior'],
+                        patients[String(i + 1) + 'cprProvided'],
+                        patients[String(i + 1) + 'spontaneousCirculation'],
+                        `${patients[String(i + 1) + 'cardiacArrestDate']} ${patients[String(i + 1) + 'cardiacArrestTime']}`,
+                        patients[String(i + 1) + 'cprStopped'],
+                        patients[String(i + 1) + 'cprInitiator'],
+                        patients[String(i + 1) + 'aedApplicator'],
+                        patients[String(i + 1) + 'aedDefibrillator']
+                    ];
+
+                    return connection.query(cardiacQuery, cardiacValues);
+                }
             })
 
         );

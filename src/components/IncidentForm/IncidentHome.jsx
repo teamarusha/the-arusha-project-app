@@ -15,14 +15,19 @@ import {
   AccordionSummary,
   Button,
   Typography,
+  Container
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import useStyles from "./Styles";
 
+
+
+
 function IncidentHome() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  
 
   const dropdowns = useSelector((store) => store.dropdowns);
 
@@ -71,16 +76,22 @@ function IncidentHome() {
   // _________________________________________________
 
   return (
-    <div className="container">
-      <h2>Incident</h2>
+    
+    <div 
+    className="container" 
+    style={{alignContent: 'center' }}
+    >
       <br />
-      <br />
-      <TimestampButton
+  
+
+      <TimestampButton className={classes.timestamp}
         incidentMirror={incidentMirror}
         setIncidentMirror={setIncidentMirror}
       />
+       <br />
+      <h2>INCIDENT</h2>
       <br />
-      <br />
+      
       <AddEditPatient
         formName={"incident"}
         incidentMirror={incidentMirror}
@@ -109,11 +120,37 @@ function IncidentHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Incident Response Form
+              RESPONSE
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <IncidentFormResponse
+              localIncident={incidentMirror}
+              setLocalIncident={setIncidentMirror}
+            />
+          </AccordionDetails>
+        </Accordion>
+       <br />
+        
+        <Accordion
+          expanded={expanded === "panel3"}
+          onChange={handleChange("panel3")}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2bh-content"
+            id="panel2bh-header"
+            style={{ textAlign: "center" }}
+          >
+            <Typography
+              classes={{ root: classes.text }}
+              className={classes.heading}
+            >
+              SCENE
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <IncidentFormScene
               localIncident={incidentMirror}
               setLocalIncident={setIncidentMirror}
             />
@@ -134,7 +171,7 @@ function IncidentHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Incident Disposition Form
+              DISPOSITION
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -145,30 +182,8 @@ function IncidentHome() {
           </AccordionDetails>
         </Accordion>
         <br />
-        <Accordion
-          expanded={expanded === "panel3"}
-          onChange={handleChange("panel3")}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2bh-content"
-            id="panel2bh-header"
-            style={{ textAlign: "center" }}
-          >
-            <Typography
-              classes={{ root: classes.text }}
-              className={classes.heading}
-            >
-              Incident Scene Form
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <IncidentFormScene
-              localIncident={incidentMirror}
-              setLocalIncident={setIncidentMirror}
-            />
-          </AccordionDetails>
-        </Accordion>
+        <br />
+      
       </div>
     </div>
   );

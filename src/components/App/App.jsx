@@ -4,12 +4,11 @@ import {
   Route,
   Redirect,
   Switch,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 
-
-import Footer from '../Footer/Footer';
+import Footer from "../Footer/Footer";
 
 import NonAdminProtectedRoute from '../ProtectedRoute/NonAdminProtectedRoute';
 import AdminProtectedRoute from '../ProtectedRoute/AdminProtectedRoute';
@@ -29,14 +28,14 @@ import { ThemeProvider } from '@material-ui/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
 import './App.css';
 import IncidentHome from "../IncidentForm/IncidentHome";
-import PatientHome from '../PatientHome/PatientHome';
+import PatientHome from "../PatientHome/PatientHome";
 import TreatmentHome from "../TreatmentForm/TreatmentHome";
 import VitalsForm from "../VitalsForm/VitalsForm";
+import SummaryFieldSubmit from "../SummaryFieldSubmit/SummaryFieldSubmit";
 
-
-import Nav from '../Nav/Nav';
-import AdminHeader from '../Admin/AdminHeader';
-import { useSelector } from 'react-redux';
+import Nav from "../Nav/Nav";
+import AdminHeader from "../Admin/AdminHeader";
+import { useSelector } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,19 +46,15 @@ function App() {
 
   // KEEPING TRACK OF USER REDUX STATE
   const user = useSelector((store) => store.user);
-  let isAdmin = (user.is_admin == true)
-  let nonAdmin = (user.is_admin == false)
-  let def = null
+  let isAdmin = user.is_admin == true;
+  let nonAdmin = user.is_admin == false;
+  let def = null;
 
   return (
     <Router>
       <ThemeProvider theme={createMuiTheme}>
-
         {/* CONDITIONAL RENDERING OF APP BAR w/ NAV */}
-        {isAdmin ? <AdminHeader />
-          : nonAdmin ? <Nav />
-            : def
-        }
+        {isAdmin ? <AdminHeader /> : nonAdmin ? <Nav /> : def}
 
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -186,6 +181,10 @@ function App() {
           <NonAdminProtectedRoute exact path="/summary">
             <SummaryFieldSubmit />
           </NonAdminProtectedRoute>
+
+          <Route>
+            <h1>404</h1>
+          </Route>
 
           <Footer />
         </Switch>

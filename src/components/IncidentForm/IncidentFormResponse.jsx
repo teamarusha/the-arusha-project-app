@@ -33,7 +33,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
       {localIncident && (
         <TextField
           id="outlined-basic"
-          label="Crew Id"
+          label="Crew ID"
           variant="outlined"
           value={localIncident[`crew`]}
           onChange={(event) =>
@@ -41,7 +41,9 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
           }
         ></TextField>
       )}
-
+        <br />
+        <br />
+        <br />
       {dropdowns.go && localIncident && (
         <div>
           <InputLabel id="demo-simple-select-autowidth-label">
@@ -50,15 +52,17 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-            autoWidth
+            fullWidth
             value={localIncident[`triageCat`]}
             onChange={(event) =>
               submitValue({ key: `triageCat`, thing: event.target.value })
             }
           >
-            <MenuItem value="">
+            {/* <MenuItem value="">
               <em>None</em>
-            </MenuItem>
+            </MenuItem> */}
+
+      
             {dropdowns["triage_cat"].map((item) => (
               <MenuItem key={"triage_cat" + item.id} value={item.id}>
                 {item["triage_cat_type"]}
@@ -67,27 +71,30 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
           </Select>
           <br />
           <br />
+          <br />
           <InputLabel id="demo-simple-select-autowidth-label">
             Type of Service Requested
           </InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-            autoWidth
+            fullWidth
             value={localIncident[`incidentService`]}
             onChange={(event) =>
               submitValue({ key: `incidentService`, thing: event.target.value })
             }
           >
-            <MenuItem value="">
+            {/* <MenuItem value="">
               <em>None</em>
-            </MenuItem>
+            </MenuItem> */}
             {dropdowns["incident_service"].map((item) => (
               <MenuItem key={"incident_service" + item.id} value={item.id}>
                 {item["incident_service_type"]}
               </MenuItem>
             ))}
           </Select>
+          <br />
+          <br />
         </div>
       )}
     </div>

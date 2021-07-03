@@ -1,20 +1,25 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import KOPIMobileLogo from "../GLOBALUI/KOPILOGO/KOPIMobileLogo";
 import { makeStyles } from "@material-ui/styles";
 
-import { SwipeableDrawer, List, ListItem, ListItemText, ListItemSecondaryAction, Divider } from "@material-ui/core";
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import {
+  SwipeableDrawer,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  Divider,
+} from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
 import { useState } from "react";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import LogOutButton from '../LogOutButton/LogOutButton';
-
 import SummaryFieldSubmit from '../SummaryFieldSubmit/SummaryFieldSubmit';
 
 // OVERHEAD COMPONENT STYLING
@@ -24,10 +29,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "2em",
   },
   nav: {
-    width: '78%',
-    backgroundColor: '#E8E7E7',
-    boxShadow: '8px 8px 10px 3px rgba(0,0,0,0.56)',
-
+    width: "78%",
+    backgroundColor: "#E8E7E7",
+    boxShadow: "8px 8px 10px 3px rgba(0,0,0,0.56)",
   },
   item: {
     textAlign: "center",
@@ -37,19 +41,17 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Red Hat Display",
     fontWeight: 400,
 
-    fontSize: '1.5rem',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    color: 'common'
+    fontSize: "1.5rem",
+    marginLeft: "auto",
+    marginRight: "auto",
+    color: "common",
   },
   root: {
-    backgroundColor: '#5BC6CC'
-  }
+    backgroundColor: "#5BC6CC",
+  },
 }));
 
-
 // NAV DRAWER PROP.
-
 
 function Drawer(props) {
   const classes = useStyles();
@@ -58,48 +60,48 @@ function Drawer(props) {
 
   const user = useSelector((store) => store.user);
 
-
   let nonAdminLoginLinkData = {
-    path: '/login',
-    text: 'Login / Register',
+    path: "/login",
+    text: "Login / Register",
   };
 
   let adminLoginLinkData = {
-    path: '/login',
-    text: 'Login / Register',
+    path: "/login",
+    text: "Login / Register",
   };
 
   if (user.id != null && user.is_admin == false) {
-    nonAdminLoginLinkData.path = '/user';
-    nonAdminLoginLinkData.text = 'Home';
+    nonAdminLoginLinkData.path = "/user";
+    nonAdminLoginLinkData.text = "Home";
+  } else if (user.id != null && user.is_admin == true) {
+    adminLoginLinkData.path = "/admin";
+    adminLoginLinkData.text = "Home";
   }
-  else if (user.id != null && user.is_admin == true) {
-    adminLoginLinkData.path = '/admin'
-    adminLoginLinkData.text = 'Home'
-
-  }
-
 
   return (
     <React.Fragment>
-
       <SwipeableDrawer
         classes={{ paper: classes.nav }}
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
-        onOpen={() => setOpenDrawer(true)} >
+        onOpen={() => setOpenDrawer(true)}
+      >
         <List>
-          
-
-          
 
           {/* INCIDENT */}
-          <ListItem component={Link} to="/incident" classes={{ root: classes.item }}>
-            <ListItemText classes={{ primary: classes.text }}> Incident </ListItemText>
+          <ListItem
+            component={Link}
+            to="/incident"
+            classes={{ root: classes.item }}
+          >
+            <ListItemText classes={{ primary: classes.text }}>
+              {" "}
+              Incident{" "}
+            </ListItemText>
             <ListItemSecondaryAction edge="end">
-              <ChevronRightIcon fontSize="large" style={{ color: '#5BC6CC' }} />
+              <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
             </ListItemSecondaryAction>
           </ListItem>
           <Divider classes={{ root: classes.root }} />
@@ -115,52 +117,65 @@ function Drawer(props) {
 
           {/* TREATMENT */}
           <ListItem component={Link} to="/treatment" classes={{ root: classes.item }}>
-            <ListItemText classes={{ primary: classes.text }}> Treatment </ListItemText>
+            <ListItemText classes={{ primary: classes.text }}> Treament </ListItemText>
             <ListItemSecondaryAction edge="end">
-              <ChevronRightIcon fontSize="large" style={{ color: '#5BC6CC' }} />
+              <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
             </ListItemSecondaryAction>
           </ListItem>
           <Divider classes={{ root: classes.root }} />
 
-          {/* VITALS */}
-          <ListItem component={Link} to="/vitals" classes={{ root: classes.item }}>
-            <ListItemText classes={{ primary: classes.text }}> Vitals </ListItemText>
+          <ListItem
+            component={Link}
+            to="/vitals"
+            classes={{ root: classes.item }}
+          >
+            <ListItemText classes={{ primary: classes.text }}>
+              {" "}
+              Vitals{" "}
+            </ListItemText>
             <ListItemSecondaryAction edge="end">
-              <ChevronRightIcon fontSize="large" style={{ color: '#5BC6CC' }} />
+              <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
             </ListItemSecondaryAction>
           </ListItem>
           <Divider classes={{ root: classes.root }} />
 
-          {/* SUMMARY */}
-          <ListItem component={Link} to="/summary" classes={{ root: classes.item }}>
-            <ListItemText classes={{ primary: classes.text }}> Summary </ListItemText>
+          {/* Summary */}
+          <ListItem
+            component={Link}
+            to="/summary"
+            classes={{ root: classes.item }}
+          >
+            <ListItemText classes={{ primary: classes.text }}>
+              Summary
+            </ListItemText>
             <ListItemSecondaryAction edge="end">
-              <ChevronRightIcon fontSize="large" style={{ color: '#5BC6CC' }} />
+              <ChevronRightIcon fontSize="large" style={{ color: "#5BC6CC" }} />
             </ListItemSecondaryAction>
           </ListItem>
           <Divider classes={{ root: classes.root }} />
-
 
           {/* LOGOUT BUTTON */}
-          <ListItem component={Link} to={nonAdminLoginLinkData.path} classes={{ root: classes.item }}>
-            <ListItemText classes={{ primary: classes.text }}> <LogOutButton /> </ListItemText>
-          </ListItem>
+          <ListItem
+            component={Link}
+            to={nonAdminLoginLinkData.path}
+            classes={{ root: classes.item }}
+          >
+            <ListItemText classes={{ primary: classes.text }}>
+              {" "}
+              <LogOutButton />{" "}
+            </ListItemText>
 
+          </ListItem>
         </List>
       </SwipeableDrawer>
-      <IconButton
-        onClick={() => setOpenDrawer(!openDrawer)}
-        disableRipple
-      >
-        <MenuIcon style={{ fontSize: 50, color: 'white' }} />
+      <IconButton onClick={() => setOpenDrawer(!openDrawer)} disableRipple>
+        <MenuIcon style={{ fontSize: 50, color: "white" }} />
       </IconButton>
     </React.Fragment>
   );
 }
 
 // NAV HEADER SCROLL PROP.
-
-
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -174,7 +189,6 @@ function ElevationScroll(props) {
     elevation: trigger ? 4 : 0,
   });
 }
-
 
 // NAV HEADER COMPONENT
 

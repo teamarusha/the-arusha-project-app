@@ -12,12 +12,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import LogOutButton from '../LogOutButton/LogOutButton';
+import { Container } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+
 
 
 const useStyles = makeStyles({
     root: {
         width: '100%',
+        marginTop: 130,
     },
     container: {
         maxHeight: 440,
@@ -62,31 +65,8 @@ function Admin() {
     }
 
     return (
-        // JSON.stringify(reports)
-        // <table>
-        //     <thead>
-        //         <tr>
-        //             <th>Date</th>
-        //             <th>Time</th>
-        //             <th>Patient</th>
-        //             <th>Responder</th>
-        //             <th>Report</th>
-        //         </tr>
-        //     </thead>
-        //     <tbody>
-        //         {reports.map((row) =>
-        //             <tr key={row.id}>
-
-        //                 <td>{moment(row.unit_notified).format('DD/MM/YYYY')}</td>
-        //                 <td>{moment(row.unit_notified).format('HH:MM:SS')}</td>
-        //                 <td>{row.patient_first_name} {row.patient_last_name}</td>
-        //                 <td>{row.user_first_name} {row.user_last_name}</td>
-        //                 <td><button onClick={handleClick(row)}>Report</button></td>
-        //             </tr>
-        //         )}
-        //     </tbody>
-        // </table>
-        <Paper className={classes.root}>
+        <Container>
+            <Paper className={classes.root}>
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
@@ -109,9 +89,9 @@ function Admin() {
                                     <TableCell>{moment(row.unit_notified).format('HH:MM:SS')}</TableCell>
                                     <TableCell>{row.patient_first_name} {row.patient_last_name}</TableCell>
                                     <TableCell>{row.user_first_name} {row.user_last_name}</TableCell>
-                                    <TableCell><button onClick={() => handleClick(row)}>Report</button></TableCell>
-
-
+                                    <TableCell><Button size="small" variant="contained" color="secondary"onClick={() => handleClick(row)}>Report</Button></TableCell>
+  
+                                 
                                 </TableRow>
                             );
                         })}
@@ -128,7 +108,7 @@ function Admin() {
                 onChangeRowsPerPage={handleChangeRowsPerPage}
             />
         </Paper>
-
+        </Container>
     )
 }
 

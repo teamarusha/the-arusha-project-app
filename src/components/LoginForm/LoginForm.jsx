@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     marginLeft: 'auto',
     marginRight: 'auto',
+    marginBottom: 40,
     
   },
   form: {
@@ -71,7 +72,7 @@ function LoginForm() {
 
   return (
     <ThemeProvider theme={createMuiTheme}>
-      <div className={classes.header}>
+      {/* <div className={classes.header}>
         <Typography component="h2" variant="h1">
           The 
         </Typography>
@@ -80,7 +81,7 @@ function LoginForm() {
            Arusha Project
         </Typography>
         </div>
-        <Divider classes={{root: classes.divider}}/>
+        <Divider classes={{root: classes.divider}}/> */}
         <Container component="main" maxWidth="xs" >
       <CssBaseline />
       <div className={classes.paper}>
@@ -88,7 +89,7 @@ function LoginForm() {
       <KOPIMobileLogo/>
       </div>
         <Typography component="h1" variant="h4">
-          Log in
+          Log In
         </Typography>
         <form className={classes.form} onSubmit={login}>
           <TextField
