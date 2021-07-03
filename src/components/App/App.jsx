@@ -52,8 +52,8 @@ function App() {
   // let def = (user == null || undefined)
 
   return (
-    <Router>
       <ThemeProvider theme={createMuiTheme}>
+    <Router>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -135,12 +135,11 @@ function App() {
           </NonAdminProtectedRoute>
 
           <NonAdminProtectedRoute exact path="/summary">
+            <Nav/>
             <SummaryFieldSubmit />
           </NonAdminProtectedRoute>
 
-          <NonAdminProtectedRoute exact path="/summary">
-            <SummaryFieldSubmit />
-          </NonAdminProtectedRoute>
+        
 
           <Route>
             <h1>404</h1>
