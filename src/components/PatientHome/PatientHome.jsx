@@ -125,6 +125,7 @@ function PatientHome() {
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
+          style={{backgroundColor: '#d3d3d3'}}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -151,6 +152,7 @@ function PatientHome() {
         <Accordion
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
+          style={{backgroundColor: '#d3d3d3'}}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -175,6 +177,7 @@ function PatientHome() {
         <br />
 
         <Accordion
+        style={{backgroundColor: '#d3d3d3'}}
           expanded={expanded === "panel3"}
           onChange={handleChange("panel3")}
         >
@@ -201,6 +204,7 @@ function PatientHome() {
         <br />
 
         <Accordion
+        style={{backgroundColor: '#d3d3d3'}}
           expanded={expanded === "panel4"}
           onChange={handleChange("panel4")}
         >
@@ -227,6 +231,7 @@ function PatientHome() {
         <br />
 
         <Accordion
+        style={{backgroundColor: '#d3d3d3'}}
           expanded={expanded === "panel5"}
           onChange={handleChange("panel5")}
         >

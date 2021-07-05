@@ -97,7 +97,7 @@ function TreatmentHome() {
       <br />
       <div className={classes.root}>
         <Accordion
-         style={{backgroundColor: '#82E0E5'}}
+         style={{backgroundColor: '#d3d3d3'}}
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
         >
@@ -125,7 +125,8 @@ function TreatmentHome() {
        <br />
 
         <Accordion
-          style={{backgroundColor: '#5BC6CC'}}
+        style={{backgroundColor: '#d3d3d3'}}
+          
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
         >
@@ -150,7 +151,7 @@ function TreatmentHome() {
           </AccordionDetails>
         </Accordion>
         <br />
-        <br />
+    <br />
       </div>
     </div>
     </Container>
