@@ -8,8 +8,8 @@ export default class KOPIMobileLogo extends Component {
   render() {
     return (
       <svg className='mobileLogo'
-        width="100"
-        height="100"
+        width="75"
+        height="75"
         viewBox="0 0 259 259"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

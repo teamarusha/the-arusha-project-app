@@ -1,13 +1,13 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-
+import useStyles from "./Styles";
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 
 const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
-
+  const classes = useStyles();
   // useEffect(() => {
   //   console.log("UPDATING browser storage", localIncident);
   //   localStorage.setItem("incident", JSON.stringify(localIncident));
@@ -50,6 +50,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
             Triage Category
           </InputLabel>
           <Select
+             
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth
@@ -64,7 +65,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
 
       
             {dropdowns["triage_cat"].map((item) => (
-              <MenuItem key={"triage_cat" + item.id} value={item.id}>
+              <MenuItem key={"triage_cat" + item.id} value={item.id} >
                 {item["triage_cat_type"]}
               </MenuItem>
             ))}
@@ -76,6 +77,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
             Type of Service Requested
           </InputLabel>
           <Select
+            
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth
@@ -88,7 +90,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
               <em>None</em>
             </MenuItem> */}
             {dropdowns["incident_service"].map((item) => (
-              <MenuItem key={"incident_service" + item.id} value={item.id}>
+              <MenuItem key={"incident_service" + item.id} value={item.id} >
                 {item["incident_service_type"]}
               </MenuItem>
             ))}

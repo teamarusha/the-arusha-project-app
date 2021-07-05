@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import useStyles from "./Styles"
 
 import AddMedicationButton from "./AddMedicationButton";
 
@@ -26,6 +27,8 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
       [newParameter.key]: newParameter.thing,
     });
   }
+
+const classes = useStyles();
 
   return (
     <Container >
@@ -63,6 +66,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 Administered Route
               </InputLabel>
               <Select
+                classes={{root: classes.select}}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
@@ -84,7 +88,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                   <em>None</em>
                 </MenuItem>
                 {dropdowns["med_admin_route"].map((item) => (
-                  <MenuItem key={"med_admin_route" + item.id} value={item.id}>
+                  <MenuItem key={"med_admin_route" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                     {item["med_admin_route_type"]}
                   </MenuItem>
                 ))}
@@ -113,6 +117,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 Dosage Units
               </InputLabel>
               <Select
+                classes={{root: classes.select}}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
@@ -132,7 +137,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                   <em>None</em>
                 </MenuItem>
                 {dropdowns["med_dosage_units"].map((item) => (
-                  <MenuItem key={"med_dosage_units" + item.id} value={item.id}>
+                  <MenuItem key={"med_dosage_units" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                     {item["med_dosage_units_type"]}
                   </MenuItem>
                 ))}
@@ -143,6 +148,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 Response to Medication
               </InputLabel>
               <Select
+                classes={{root: classes.select}}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
@@ -166,7 +172,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                   <em>None</em>
                 </MenuItem>
                 {dropdowns["med_response"].map((item) => (
-                  <MenuItem key={"med_response" + item.id} value={item.id}>
+                  <MenuItem key={"med_response" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                     {item["med_response_type"]}
                   </MenuItem>
                 ))}
@@ -177,6 +183,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 Role/Type of Person Administering Medication
               </InputLabel>
               <Select
+                classes={{root: classes.select}}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 autoWidth
@@ -200,7 +207,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                   <em>None</em>
                 </MenuItem>
                 {dropdowns["med_admin_by"].map((item) => (
-                  <MenuItem key={"med_admin_by" + item.id} value={item.id}>
+                  <MenuItem key={"med_admin_by" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                     {item["med_admin_by_type"]}
                   </MenuItem>
                 ))}

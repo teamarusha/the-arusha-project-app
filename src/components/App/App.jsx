@@ -65,19 +65,19 @@ function App() {
             <RegisterPage />
           </Route>
 
-{/* -------------------------------------------------------FOR EVERYONE LOGGED IN------------------------------------------------------- */}
+          {/* -------------------------------------------------------FOR EVERYONE LOGGED IN------------------------------------------------------- */}
 
 
 
 
           <ProtectedRoute exact path="/home">
-          <LandingPage />
+            <LandingPage />
           </ProtectedRoute>
 
 
-{/* -------------------------------------------------------ADMIN ROUTES-------------------------------------------------------- */}
+          {/* -------------------------------------------------------ADMIN ROUTES-------------------------------------------------------- */}
 
-        
+
 
 
           <AdminProtectedRoute
@@ -85,61 +85,68 @@ function App() {
             exact
             path="/report/:id"
           >
-            <AdminHeader/>
+            <AdminHeader />
             <FinalReport />
           </AdminProtectedRoute>
-        
 
-{/* -------------------------------------------------------NON ADMIN ROUTES-------------------------------------------------------- */}
-  
+
+          {/* -------------------------------------------------------NON ADMIN ROUTES-------------------------------------------------------- */}
+
 
 
           <NonAdminProtectedRoute exact path="/login" authRedirect="/home">
             <LoginPage />
           </NonAdminProtectedRoute>
-      
+
+          {/* <NonAdminProtectedRoute path="/incident/">
+            <Nav />
+            <IncidentHome />
+          </NonAdminProtectedRoute> */}
 
           <NonAdminProtectedRoute path="/incident/:id">
-            <Nav/>
+            <Nav />
             <IncidentHome />
           </NonAdminProtectedRoute>
 
           <NonAdminProtectedRoute exact path="/patient">
-            <Nav/>
+            <Nav />
             <PatientHome />
           </NonAdminProtectedRoute>
 
           <NonAdminProtectedRoute path="/patient/:id">
-            <Nav/>
+            <Nav />
             <PatientHome />
           </NonAdminProtectedRoute>
 
           <NonAdminProtectedRoute exact path="/treatment">
-            <Nav/>
+            <Nav />
             <TreatmentHome />
           </NonAdminProtectedRoute>
 
           <NonAdminProtectedRoute path="/treatment/:id">
-            <Nav/>
+            <Nav />
             <TreatmentHome />
           </NonAdminProtectedRoute>
 
           <NonAdminProtectedRoute exact path="/vitals">
-            <Nav/>
+            <Nav />
             <VitalsForm />
           </NonAdminProtectedRoute>
 
           <NonAdminProtectedRoute path="/vitals/:id">
-            <Nav/>
+            <Nav />
             <VitalsForm />
           </NonAdminProtectedRoute>
 
           <NonAdminProtectedRoute exact path="/summary">
-            <Nav/>
+            <Nav />
             <SummaryFieldSubmit />
           </NonAdminProtectedRoute>
 
-        
+          <NonAdminProtectedRoute path="/summary/:id">
+            <Nav />
+            <SummaryFieldSubmit />
+          </NonAdminProtectedRoute>
 
           <Route>
             <h1>404</h1>
@@ -147,12 +154,11 @@ function App() {
 
           <Footer />
         </Switch>
-      </ThemeProvider>
     </Router>
+      </ThemeProvider>
   );
 }
 
 export default App;
 
 
-  

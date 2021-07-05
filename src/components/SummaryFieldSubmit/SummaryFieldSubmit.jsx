@@ -2,8 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import TimestampButton from "../TimestampButton/TimestampButton";
 //____________________Material UI Imports____________________
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField, Container } from "@material-ui/core";
+import {makeStyles} from '@material-ui/styles'
+
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(1),
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'center',
+    alignItems: 'center'
+  }
+}))
+
 function SummaryFieldSubmit(params) {
+  const classes= useStyles();
   const dispatch = useDispatch();
 
 
@@ -194,6 +208,8 @@ function SummaryFieldSubmit(params) {
     });
   };
   return (
+    <Container component="main" maxWidth="xs" >
+      <div className={classes.paper}>
     <div>
       {incidentMirror && (
         <div>
@@ -227,6 +243,8 @@ function SummaryFieldSubmit(params) {
         </div>
       )}
     </div>
+    </div>
+    </Container>
   );
 }
 export default SummaryFieldSubmit;

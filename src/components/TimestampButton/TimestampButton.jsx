@@ -186,6 +186,7 @@ function TimestampButton({ incidentMirror, setIncidentMirror }) {
         <Button onClick={advanceDispatch} color="secondary"
           variant="contained"
           disabled={incidentMirror.dispatchButton === "Service Complete"}
+          style={{marginTop: 15}}
         >
           {incidentMirror.dispatchButton}
         </Button>

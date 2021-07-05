@@ -19,6 +19,13 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 'auto',
       marginRight: 'auto'
     },
+  paper: {
+    marginTop: theme.spacing(1),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center'
+  }
   }));
 
   export default useStyles;

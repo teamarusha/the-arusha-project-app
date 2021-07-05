@@ -1,11 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-
+import useStyles from "./Styles";
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 
 const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
+  const classes = useStyles();
   const dropdowns = useSelector((store) => store.dropdowns);
 
   // useEffect(() => {
@@ -92,6 +93,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
             Possible Injury
           </InputLabel>
           <Select
+            
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth
@@ -104,7 +106,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
               <em>None</em>
             </MenuItem> */}
             {dropdowns["possible_injury"].map((item) => (
-              <MenuItem key={"possible_injury" + item.id} value={item.id}>
+              <MenuItem key={"possible_injury" + item.id} value={item.id} >
                 {item["possible_injury_type"]}
               </MenuItem>
             ))}
@@ -118,6 +120,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
           </InputLabel>
 
           <Select
+            
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth
@@ -135,7 +138,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
             </MenuItem> */}
 
             {dropdowns["alcohol_drug_use"].map((item) => (
-              <MenuItem key={"alcohol_drug_use" + item.id} value={item.id}>
+              <MenuItem key={"alcohol_drug_use" + item.id} value={item.id} >
                 {item["alcohol_drug_use_type"]}
               </MenuItem>
             ))}
