@@ -1,7 +1,7 @@
 import React from "react";
 
 // ----- Material UI -----
-import { TextField } from "@material-ui/core";
+import { TextField, Typography } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,11 +26,18 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
 
   return (
     <div className="container">
+      
       {patientsMirror && (
         <div>
+           <Typography>If none apply, please type "None"</Typography>
+           <br />
+
           <TextField
             id="outlined-basic"
             label="Allergies"
+            multiline
+            rows={3}
+            fullWidth
             variant="outlined"
             value={patientsMirror[`${id}patientAllergies`]}
             onChange={(event) =>
@@ -46,6 +53,9 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
             id="outlined-basic"
             label="Current Medications"
             variant="outlined"
+            fullWidth
+            multiline
+            rows={3}
             value={patientsMirror[`${id}patientCurrMedications`]}
             onChange={(event) =>
               submitValue({
@@ -60,6 +70,9 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
             id="outlined-basic"
             label="Previous Medical Conditions"
             variant="outlined"
+            fullWidth
+            multiline
+            rows={3}
             value={patientsMirror[`${id}patientMedConditions`]}
             onChange={(event) =>
               submitValue({
@@ -68,7 +81,7 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
               })
             }
           ></TextField>
-          <p>If none apply, please type "None"</p>
+         
         </div>
       )}
     </div>

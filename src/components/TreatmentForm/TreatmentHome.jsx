@@ -70,16 +70,18 @@ function TreatmentHome() {
 
   return (
     <Container component="main" maxWidth="xs" >
-    <div className={classes.paper}>
-      <h2>Treatment</h2>
       <br />
       <br />
-      <TimestampButton
+       <TimestampButton
         incidentMirror={incidentMirror}
         setIncidentMirror={setIncidentMirror}
       />
+    <div className={classes.paper}>
+      <h2>TREATMENT</h2>
+      
+     
       <br />
-      <br />
+      
       <AddEditPatient
         formName={"treatment"}
         incidentMirror={incidentMirror}
@@ -109,7 +111,7 @@ function TreatmentHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Medication Administered
+              MEDICATION ADMINISTERED
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -120,7 +122,7 @@ function TreatmentHome() {
           </AccordionDetails>
         </Accordion>
 
-        <br />
+       <br />
 
         <Accordion
           style={{backgroundColor: '#5BC6CC'}}
@@ -137,7 +139,7 @@ function TreatmentHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Procedure Administered
+              PROCEDURE ADMINISTERED
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -147,6 +149,8 @@ function TreatmentHome() {
             />
           </AccordionDetails>
         </Accordion>
+        <br />
+        <br />
       </div>
     </div>
     </Container>

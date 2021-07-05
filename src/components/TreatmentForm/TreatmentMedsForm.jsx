@@ -32,16 +32,12 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
     <div className="container">
       {localTreatment && (
         <div>
-          <AddMedicationButton
-            treatmentMirror={localTreatment}
-            setTreatmentMirror={setLocalTreatment}
-          />
-          <br />
-          <br />
+          
           <TextField
             id="outlined-basic"
             label="Medication Administered"
             variant="outlined"
+            fullWidth
             value={
               localTreatment[
                 `${id}medication${localTreatment[`${id}lastMedication`]}`
@@ -57,6 +53,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
           &nbsp;
           <br />
           <br />
+          
           {dropdowns.go && localTreatment && (
             <div>
               <InputLabel id="demo-simple-select-autowidth-label">
@@ -65,7 +62,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
               <Select
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localTreatment[
                     `${id}routeAdministered${localTreatment[`${id}lastMedication`]}`
@@ -80,15 +77,14 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                   })
                 }
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
+               
                 {dropdowns["med_admin_route"].map((item) => (
                   <MenuItem key={"med_admin_route" + item.id} value={item.id}>
                     {item["med_admin_route_type"]}
                   </MenuItem>
                 ))}
               </Select>
+              <br />
               <br />
               <br />
               <TextField
@@ -109,13 +105,14 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
               ></TextField>
               <br />
               <br />
+              <br />
               <InputLabel id="demo-simple-select-autowidth-label">
                 Dosage Units
               </InputLabel>
               <Select
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localTreatment[
                     `${id}units${localTreatment[`${id}lastMedication`]}`
@@ -128,9 +125,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                   })
                 }
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
+                
                 {dropdowns["med_dosage_units"].map((item) => (
                   <MenuItem key={"med_dosage_units" + item.id} value={item.id}>
                     {item["med_dosage_units_type"]}
@@ -139,13 +134,14 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
               </Select>
               <br />
               <br />
+              <br />
               <InputLabel id="demo-simple-autowidth-label">
                 Response to Medication
               </InputLabel>
               <Select
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localTreatment[
                     `${id}medicationResponse${
@@ -162,9 +158,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                   })
                 }
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
+               
                 {dropdowns["med_response"].map((item) => (
                   <MenuItem key={"med_response" + item.id} value={item.id}>
                     {item["med_response_type"]}
@@ -173,13 +167,14 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
               </Select>
               <br />
               <br />
+              <br />
               <InputLabel id="demo-simple-autowidth-label">
                 Role/Type of Person Administering Medication
               </InputLabel>
               <Select
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localTreatment[
                     `${id}medsAdminBy${
@@ -196,15 +191,21 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                   })
                 }
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
+            
                 {dropdowns["med_admin_by"].map((item) => (
                   <MenuItem key={"med_admin_by" + item.id} value={item.id}>
                     {item["med_admin_by_type"]}
                   </MenuItem>
                 ))}
               </Select>
+              <br />
+          <br />
+          <br />
+              <AddMedicationButton
+            treatmentMirror={localTreatment}
+            setTreatmentMirror={setLocalTreatment}
+          />
+         
             </div>
           )}
         </div>

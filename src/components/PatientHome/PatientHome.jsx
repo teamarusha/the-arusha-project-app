@@ -102,9 +102,10 @@ function PatientHome() {
         incidentMirror={incidentMirror}
         setIncidentMirror={setIncidentMirror}
       />
+      <br />
       <h2>PATIENTS</h2>
       <br />
-      <br />
+   
       
       
       <AddEditPatient
@@ -135,7 +136,7 @@ function PatientHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Demographics
+              DEMOGRAPHICS
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -161,7 +162,7 @@ function PatientHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Medical History
+              MEDICAL HISTORY
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -187,7 +188,7 @@ function PatientHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Symptoms
+              SYMPTOMS
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -213,7 +214,7 @@ function PatientHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Injury
+              INJURY
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -239,7 +240,7 @@ function PatientHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Cardiac Arrest
+              CARDIAC ARREST
             </Typography>
           </AccordionSummary>
           <AccordionDetails>

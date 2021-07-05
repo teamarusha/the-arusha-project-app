@@ -79,13 +79,13 @@ function IncidentHome() {
     <Container component="main" maxWidth="xs" >
       <div className={classes.paper}>
       
-    
-    {/* <div 
+{/*     
+    <div 
     className="container" 
     style={{alignContent: 'center' }}
-    >
-      <br /> */}
-  
+    > */}
+      <br />
+      <br />
 
       <TimestampButton className={classes.timestamp}
         incidentMirror={incidentMirror}

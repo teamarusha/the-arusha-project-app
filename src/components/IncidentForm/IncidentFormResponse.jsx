@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 //Material UI imports
-import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
+import { InputLabel, MenuItem, Select, TextField, Container } from "@material-ui/core";
 
 const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
@@ -29,11 +29,13 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
   }
 
   return (
+    <Container>
     <div className="container">
       {localIncident && (
         <TextField
           id="outlined-basic"
           label="Crew ID"
+          
           variant="outlined"
           value={localIncident[`crew`]}
           onChange={(event) =>
@@ -94,10 +96,11 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
             ))}
           </Select>
           <br />
-          <br />
+          
         </div>
       )}
     </div>
+    </Container>
   );
 };
 
