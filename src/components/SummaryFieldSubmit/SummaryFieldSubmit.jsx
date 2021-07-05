@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import TimestampButton from "../TimestampButton/TimestampButton";
 //____________________Material UI Imports____________________
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField, Container, Typography } from "@material-ui/core";
 function SummaryFieldSubmit(params) {
   const dispatch = useDispatch();
 
@@ -194,19 +194,30 @@ function SummaryFieldSubmit(params) {
     });
   };
   return (
+    <Container>
     <div>
       {incidentMirror && (
         <div>
+          <br />
+          <br />
+          
           <TimestampButton
             incidentMirror={incidentMirror}
             setIncidentMirror={setIncidentMirror}
           />
           <br />
-          <br />
+          {errorMessages && errorMessages.map((message, i) => <Typography style={{ color: 'red' }} key={i+'errormessage'}>{message}</Typography>)}
+          {/* <p>{JSON.stringify(errorMessages)}</p> */}
+          {/* <button onClick={checkInputs}>CHECK</button> */}
+           <h2>SUMMARY</h2>
+          
+         
           <TextField
             id="outlined-basic"
-            label="Incident Summary"
+            multiline
+            rows={12}
             variant="outlined"
+            fullWidth
             value={incidentMirror.incidentSummary}
             onChange={(event) =>
               submitValue({
@@ -218,15 +229,15 @@ function SummaryFieldSubmit(params) {
           <br />
           <br />
           <Button color="primary" variant="contained" disabled={!allowSubmission} onClick={submitSummary}>
-            Submit Summary
+            Submit Report
           </Button>
-
-          {errorMessages && errorMessages.map((message, i) => <p key={i+'errormessage'}>{message}</p>)}
-          {/* <p>{JSON.stringify(errorMessages)}</p> */}
-          {/* <button onClick={checkInputs}>CHECK</button> */}
+            <br />
+            <br />
+        
         </div>
       )}
     </div>
+    </Container>
   );
 }
 export default SummaryFieldSubmit;

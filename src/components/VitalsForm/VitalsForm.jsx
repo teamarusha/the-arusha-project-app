@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import {Container} from "@material-ui/core"
 
 import AddVitalsButton from "./AddVitalsButton";
 import AddEditPatient from "../AddEditPatient/AddEditPatient";
@@ -76,16 +77,19 @@ const VitalsForm = () => {
   }
 
   return (
+    <Container>
     <div className="container">
-      <h2>Vitals</h2>
-      <br />
-      <br />
-      <TimestampButton
+    <br />
+    <TimestampButton
         incidentMirror={incidentMirror}
         setIncidentMirror={setIncidentMirror}
       />
       <br />
+      
+      <h2>VITALS</h2>
+     
       <br />
+      
       <AddEditPatient
         formName={"vitals"}
         incidentMirror={incidentMirror}
@@ -102,16 +106,13 @@ const VitalsForm = () => {
 
       {localVitals && (
         <div>
-          <AddVitalsButton
-            vitalsMirror={localVitals}
-            setVitalsMirror={setLocalVitals}
-          />
-          <br />
-          <br />
+          
+        
           <TextField
             id="outlined-basic"
-            label="Systolic Blood Pressure (SBP"
+            label="Systolic Blood Pressure (SBP)"
             variant="outlined"
+            fullWidth
             value={
               localVitals[
                 `${id}systolicBloodPressure${localVitals[`${id}lastVital`]}`
@@ -128,11 +129,12 @@ const VitalsForm = () => {
           ></TextField>
           &nbsp;
           <br />
-          <br />
+        
           <TextField
             id="outlined-basic"
             label="Heart Rate"
             variant="outlined"
+            fullWidth
             value={
               localVitals[`${id}heartRate${localVitals[`${id}lastVital`]}`]
             }
@@ -149,6 +151,7 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Pulse Oximetry"
             variant="outlined"
+            fullWidth
             value={
               localVitals[`${id}pulseOximetry${localVitals[`${id}lastVital`]}`]
             }
@@ -165,6 +168,7 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Respiratory Rate"
             variant="outlined"
+            fullWidth
             value={
               localVitals[
                 `${id}respiratoryRate${localVitals[`${id}lastVital`]}`
@@ -183,6 +187,7 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Blood Glucose Level"
             variant="outlined"
+            fullWidth
             value={
               localVitals[
                 `${id}bloodGlucoseLevel${localVitals[`${id}lastVital`]}`
@@ -201,6 +206,7 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Glasgow Coma Score-Eye"
             variant="outlined"
+            fullWidth
             value={
               localVitals[
                 `${id}glasgowComaScoreEye${localVitals[`${id}lastVital`]}`
@@ -219,6 +225,7 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Glasgow Coma Score-Verbal"
             variant="outlined"
+            fullWidth
             value={
               localVitals[
                 `${id}glasgowComaScoreVerbal${localVitals[`${id}lastVital`]}`
@@ -239,6 +246,7 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Glasgow Coma Score-Motor"
             variant="outlined"
+            fullWidth
             value={
               localVitals[
                 `${id}glasgowComaScoreMotor${localVitals[`${id}lastVital`]}`
@@ -259,6 +267,7 @@ const VitalsForm = () => {
             id="outlined-basic"
             label="Glasgow Coma Score-Qualifier"
             variant="outlined"
+            fullWidth
             value={
               localVitals[
                 `${id}glasgowComaScoreQualifier${localVitals[`${id}lastVital`]}`
@@ -275,6 +284,7 @@ const VitalsForm = () => {
           ></TextField>
           <br />
           <br />
+          <br />
           {dropdowns.go && (
             <div>
               <InputLabel id="demo-simple-select-autowidth-label">
@@ -283,7 +293,7 @@ const VitalsForm = () => {
               <Select
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localVitals[
                     `${id}responsivenessLevel${localVitals[`${id}lastVital`]}`
@@ -298,9 +308,7 @@ const VitalsForm = () => {
                   })
                 }
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
+             
                 {dropdowns["responsiveness_level"].map((item) => (
                   <MenuItem
                     key={"responsiveness_level" + item.id}
@@ -318,7 +326,7 @@ const VitalsForm = () => {
               <Select
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localVitals[
                     `${id}painScaleScore${localVitals[`${id}lastVital`]}`
@@ -331,9 +339,7 @@ const VitalsForm = () => {
                   })
                 }
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
+                
                 {dropdowns["pain_scale"].map((item) => (
                   <MenuItem key={"${id}pain_scale" + item.id} value={item.id}>
                     {item["pain_scale_type"]}
@@ -348,7 +354,7 @@ const VitalsForm = () => {
               <Select
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localVitals[
                     `${id}strokeScaleScore${localVitals[`${id}lastVital`]}`
@@ -363,9 +369,7 @@ const VitalsForm = () => {
                   })
                 }
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
+               
                 {dropdowns["stroke_score"].map((item) => (
                   <MenuItem key={"stroke_score" + item.id} value={item.id}>
                     {item["stroke_score_type"]}
@@ -380,7 +384,7 @@ const VitalsForm = () => {
               <Select
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localVitals[
                     `${id}strokeScaleType${localVitals[`${id}lastVital`]}`
@@ -393,20 +397,28 @@ const VitalsForm = () => {
                   })
                 }
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
+                
                 {dropdowns["stroke_scale"].map((item) => (
                   <MenuItem key={"stroke_scale" + item.id} value={item.id}>
                     {item["stroke_scale_type"]}
                   </MenuItem>
                 ))}
               </Select>
+              <br />
+              <br />
+              <br />
+              <AddVitalsButton
+            vitalsMirror={localVitals}
+            setVitalsMirror={setLocalVitals}
+          />
+          <br />
+          <br />
             </div>
           )}
         </div>
       )}
     </div>
+    </Container>
   );
 };
 
