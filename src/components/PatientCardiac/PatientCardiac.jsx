@@ -222,7 +222,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-            autoWidth
+            fullWidth
             value={patientsMirror[`${id}cprInitiator`]}
             onChange={(event) =>
               submitValue({
