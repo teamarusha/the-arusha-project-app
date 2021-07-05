@@ -1,14 +1,14 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-
+import useStyles from "./Styles";
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField, Container } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 
 const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
-
+  const classes = useStyles();
   // useEffect(() => {
   //   console.log("UPDATING browser storage", localIncident);
   //   localStorage.setItem("incident", JSON.stringify(localIncident));
@@ -42,6 +42,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
             Transportation Disposition
           </InputLabel>
           <Select
+            
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth
@@ -57,7 +58,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
               <em>None</em>
             </MenuItem> */}
             {dropdowns["transport_disposition"].map((item) => (
-              <MenuItem key={"transport_disposition" + item.id} value={item.id}>
+              <MenuItem key={"transport_disposition" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                 {item["transport_disposition_type"]}
               </MenuItem>
             ))}
@@ -128,6 +129,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
               EMS Transport Method
             </InputLabel>
             <Select
+              
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               fullWidth
@@ -143,7 +145,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 <em>None</em>
               </MenuItem> */}
               {dropdowns["transport_method"].map((item) => (
-                <MenuItem key={"transport_method" + item.id} value={item.id}>
+                <MenuItem key={"transport_method" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                   {item["transport_method_type"]}
                 </MenuItem>
               ))}
@@ -155,6 +157,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
               Transport Mode From Scene
             </InputLabel>
             <Select
+              
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               fullWidth
@@ -170,7 +173,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 <em>None</em>
               </MenuItem> */}
               {dropdowns["transport_mode"].map((item) => (
-                <MenuItem key={"transport_mode" + item.id} value={item.id}>
+                <MenuItem key={"transport_mode" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                   {item["transport_mode_type"]}
                 </MenuItem>
               ))}
@@ -182,6 +185,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
               Type of Destination
             </InputLabel>
             <Select
+              
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               fullWidth
@@ -198,6 +202,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
               </MenuItem> */}
               {dropdowns["destination_facility"].map((item) => (
                 <MenuItem
+                  classes={{root: classes.menuItem}}
                   key={"destination_facility" + item.id}
                   value={item.id}
                 >

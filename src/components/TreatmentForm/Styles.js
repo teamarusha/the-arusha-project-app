@@ -25,6 +25,13 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
       alignItems: 'center'
     },
+    select: {
+      whiteSpace: 'normal',
+    },
+    menuItem: {
+      whiteSpace: 'normal',
+    },
+  
   }));
 
   export default useStyles;

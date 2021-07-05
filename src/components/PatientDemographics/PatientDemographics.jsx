@@ -8,10 +8,11 @@ import { InputLabel } from '@material-ui/core';
 import { Select } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import useStyles from "../TreatmentForm/Styles";
 
 
 function PatientDemographics({ patientsMirror, setPatientsMirror }) {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);
   const { id } = useParams();
@@ -81,7 +82,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           >
          
             {dropdowns["gender"].map((item) => (
-              <MenuItem key={"gender" + item.id} value={item.id}>
+              <MenuItem key={"gender" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                 {item[`gender_type`]}
               </MenuItem>
             ))}
@@ -104,7 +105,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           >
             
             {dropdowns["race"].map((item) => (
-              <MenuItem key={"race" + item.id} value={item.id}>
+              <MenuItem key={"race" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                 {item[`race_type`]}
               </MenuItem>
             ))}
@@ -163,7 +164,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           >
            
             {dropdowns["age_units"].map((item) => (
-              <MenuItem key={"age_units" + item.id} value={item.id}>
+              <MenuItem key={"age_units" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                 {item[`age_units_type`]}
               </MenuItem>
             ))}

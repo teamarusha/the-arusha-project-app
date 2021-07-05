@@ -79,11 +79,6 @@ function IncidentHome() {
     <Container component="main" maxWidth="xs" >
       <div className={classes.paper}>
       
-{/*     
-    <div 
-    className="container" 
-    style={{alignContent: 'center' }}
-    > */}
       <br />
       <br />
 

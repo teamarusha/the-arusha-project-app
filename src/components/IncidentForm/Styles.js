@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(1),
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center'
+      alignItems: 'center',
+      textAlign: 'center'
     },
     textfield: {
       margin: theme.spacing(1)
@@ -33,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
     },
     AccordionDetails: {
       alignItems: 'center'
+    },
+    menuItem: {
+      whiteSpace: 'normal'
     }
   }));
 

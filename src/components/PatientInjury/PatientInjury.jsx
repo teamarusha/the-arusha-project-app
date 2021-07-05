@@ -8,7 +8,10 @@ import { InputLabel } from "@material-ui/core";
 import { Select } from "@material-ui/core";
 import { MenuItem } from "@material-ui/core";
 
+import useStyles from "../TreatmentForm/Styles";
+
 function PatientInjury({ patientsMirror, setPatientsMirror }) {
+  const classes = useStyles();
   const dropdowns = useSelector((store) => store.dropdowns);
   const { id } = useParams();
 
@@ -46,7 +49,7 @@ function PatientInjury({ patientsMirror, setPatientsMirror }) {
           >
           
             {dropdowns["injury_location"].map((item) => (
-              <MenuItem key={"injury_location" + item.id} value={item.id}>
+              <MenuItem key={"injury_location" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                 {item[`injury_location_type`]}
               </MenuItem>
             ))}
@@ -71,7 +74,7 @@ function PatientInjury({ patientsMirror, setPatientsMirror }) {
           >
            
             {dropdowns["injury_cause"].map((item) => (
-              <MenuItem key={"injury_cause" + item.id} value={item.id}>
+              <MenuItem key={"injury_cause" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                 {item[`injury_cause_type`]}
               </MenuItem>
             ))}

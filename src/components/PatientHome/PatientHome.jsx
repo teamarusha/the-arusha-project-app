@@ -15,6 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Accordion } from "@material-ui/core";
 import { AccordionDetails } from "@material-ui/core";
 import { AccordionSummary } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -45,6 +46,13 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "auto",
     marginRight: "auto",
   },
+  paper: {
+    marginTop: theme.spacing(1),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center'
+  }
 }));
 
 function PatientHome() {
@@ -95,7 +103,8 @@ function PatientHome() {
   }, [dropdowns.go]);
 
   return (
-    <div className="container">
+    <Container component ="main" maxWidth="xs">
+    <div className={classes.paper}>
       <br />
      
       <TimestampButton
@@ -257,6 +266,7 @@ function PatientHome() {
         </Accordion>
       </div>
     </div>
+    </Container>
   );
 }
 

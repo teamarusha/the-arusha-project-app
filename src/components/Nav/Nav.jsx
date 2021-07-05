@@ -6,7 +6,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import KOPIMobileLogo from "../GLOBALUI/KOPILOGO/KOPIMobileLogo";
 import { makeStyles } from "@material-ui/styles";
-
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import {
   SwipeableDrawer,
   List,
@@ -14,6 +15,7 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   Divider,
+  Button
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -39,12 +41,26 @@ const useStyles = makeStyles((theme) => ({
     marginTop:"8%",
     marginBottom:"8%",
   },
+  ButtonItem: {
+    textAlign: "center",
+    marginTop:"0%",
+    marginBottom:"0%",
+    padding: 0
+  },
   text: {
     fontFamily: "Red Hat Display",
     fontWeight: 400,
     fontSize: '4vh',
     margin:'auto',
     color: 'common'
+  }, 
+  buttonText: {
+    fontFamily: "Red Hat Display",
+    fontSize: '4vh',
+    paddingBottom: 0,
+    paddingTop: 0,
+    color: 'common',
+    textAlign:'center'
   }, 
   root : {
     backgroundColor: '#5BC6CC'
@@ -54,15 +70,25 @@ const useStyles = makeStyles((theme) => ({
     height: '100%'
   },
   button : {
-  
-    padding: '100%',
-    
+    width: '100%',
+    height: '12vh',
+    padding: 0,
+    borderRadius: 0,
+    fontSize: '3.2vh',
+    marginTop: '3%',
   }
 }));
 
 // NAV DRAWER PROP.
 
 function Drawer(props) {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch({ type: 'LOGOUT' })
+    history.push('/')
+  }
   const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -171,18 +197,29 @@ function Drawer(props) {
           <ListItem
             component={Link}
             to={nonAdminLoginLinkData.path}
-            classes={{ root: classes.item }}
+            classes={{ root: classes.buttonItem }}
+            disableGutters={false}
           >
-            <ListItemText classes={{ primary: classes.text }}>
-              {" "}
-              <LogOutButton />{" "}
-            </ListItemText>
+            
+            <Button
+            classes={{root: classes.button}}
+            onClick={handleClick}
+            type="submit"
+            name="submit"
+            value="Register"
+            variant="contained"
+            color="secondary"
+            
+          >
+            Log Out
+          </Button>
+            
 
           </ListItem>
         </List>
       </SwipeableDrawer>
       <IconButton onClick={() => setOpenDrawer(!openDrawer)} disableRipple>
-        <MenuIcon style={{ fontSize: 50, color: "white" }} />
+        <MenuIcon style={{ fontSize: 60, color: "white" }} />
       </IconButton>
     </React.Fragment>
   );
@@ -199,7 +236,7 @@ function ElevationScroll(props) {
   });
 
   return React.cloneElement(children, {
-    elevation: trigger ? 4 : 0,
+    elevation: trigger ? 6 : 0,
   });
 }
 

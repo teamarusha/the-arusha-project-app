@@ -2,7 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import {Container} from "@material-ui/core"
+import useStyles from "./Styles"
+
 
 import AddVitalsButton from "./AddVitalsButton";
 import AddEditPatient from "../AddEditPatient/AddEditPatient";
@@ -15,9 +16,11 @@ import {
   MenuItem,
   Select,
   TextField,
+  Container
 } from "@material-ui/core";
 
 const VitalsForm = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const { id } = useParams();
   const dropdowns = useSelector((store) => store.dropdowns);
@@ -77,8 +80,9 @@ const VitalsForm = () => {
   }
 
   return (
-    <Container>
-    <div className="container">
+    <Container component="main" maxWidth="xs" >
+    <div className={classes.paper}>
+    
     <br />
     <TimestampButton
         incidentMirror={incidentMirror}
@@ -291,6 +295,7 @@ const VitalsForm = () => {
                 Level of Responsiveness
               </InputLabel>
               <Select
+                
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
@@ -311,6 +316,7 @@ const VitalsForm = () => {
              
                 {dropdowns["responsiveness_level"].map((item) => (
                   <MenuItem
+                    classes={{root: classes.menuItem}}
                     key={"responsiveness_level" + item.id}
                     value={item.id}
                   >
@@ -324,6 +330,7 @@ const VitalsForm = () => {
                 Pain Scale Score
               </InputLabel>
               <Select
+                
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
@@ -341,7 +348,7 @@ const VitalsForm = () => {
               >
                 
                 {dropdowns["pain_scale"].map((item) => (
-                  <MenuItem key={"${id}pain_scale" + item.id} value={item.id}>
+                  <MenuItem key={"${id}pain_scale" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                     {item["pain_scale_type"]}
                   </MenuItem>
                 ))}
@@ -352,6 +359,7 @@ const VitalsForm = () => {
                 Stroke Scale Score
               </InputLabel>
               <Select
+                
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
@@ -371,7 +379,7 @@ const VitalsForm = () => {
               >
                
                 {dropdowns["stroke_score"].map((item) => (
-                  <MenuItem key={"stroke_score" + item.id} value={item.id}>
+                  <MenuItem key={"stroke_score" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                     {item["stroke_score_type"]}
                   </MenuItem>
                 ))}
@@ -382,6 +390,7 @@ const VitalsForm = () => {
                 Stroke Scale Type
               </InputLabel>
               <Select
+                
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
@@ -399,7 +408,7 @@ const VitalsForm = () => {
               >
                 
                 {dropdowns["stroke_scale"].map((item) => (
-                  <MenuItem key={"stroke_scale" + item.id} value={item.id}>
+                  <MenuItem key={"stroke_scale" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                     {item["stroke_scale_type"]}
                   </MenuItem>
                 ))}
@@ -418,6 +427,7 @@ const VitalsForm = () => {
         </div>
       )}
     </div>
+    
     </Container>
   );
 };

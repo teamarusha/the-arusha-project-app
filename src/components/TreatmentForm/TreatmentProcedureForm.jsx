@@ -128,6 +128,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
               >
                 {dropdowns["procedure_successful"].map((item) => (
                   <MenuItem
+                    classes={{root: classes.menuItem}}
                     key={"procedure_successful" + item.id}
                     value={item.id}
                   >
@@ -163,6 +164,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
               >
                 {dropdowns["procedure_response"].map((item) => (
                   <MenuItem
+                    classes={{root: classes.menuItem}}
                     key={"procedure_response" + item.id}
                     value={item.id}
                   >
@@ -198,6 +200,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
               >
                 {dropdowns["procedure_performer"].map((item) => (
                   <MenuItem
+                    classes={{root: classes.menuItem}}
                     key={"procedure_performer" + item.id}
                     value={item.id}
                   >

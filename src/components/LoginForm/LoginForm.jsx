@@ -43,6 +43,11 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto'
   },
+  logo: {
+    width: '100px',
+    height: '100px'
+
+  }
 }));
 
 
@@ -91,7 +96,7 @@ function LoginForm() {
       <CssBaseline />
       <div className={classes.paper}>
      <div className={classes.mobileIcon}>
-      <KOPIMobileLogo/>
+      <KOPIMobileLogo className={classes.logo}/>
       </div>
         <Typography component="h1" variant="h4">
           Log In
