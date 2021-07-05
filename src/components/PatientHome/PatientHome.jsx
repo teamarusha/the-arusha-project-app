@@ -102,9 +102,10 @@ function PatientHome() {
         incidentMirror={incidentMirror}
         setIncidentMirror={setIncidentMirror}
       />
+      <br />
       <h2>PATIENTS</h2>
       <br />
-      <br />
+   
       
       
       <AddEditPatient
@@ -124,6 +125,7 @@ function PatientHome() {
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
+          style={{backgroundColor: '#d3d3d3'}}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -135,7 +137,7 @@ function PatientHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Demographics
+              DEMOGRAPHICS
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -150,6 +152,7 @@ function PatientHome() {
         <Accordion
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
+          style={{backgroundColor: '#d3d3d3'}}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -161,7 +164,7 @@ function PatientHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Medical History
+              MEDICAL HISTORY
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -174,6 +177,7 @@ function PatientHome() {
         <br />
 
         <Accordion
+        style={{backgroundColor: '#d3d3d3'}}
           expanded={expanded === "panel3"}
           onChange={handleChange("panel3")}
         >
@@ -187,7 +191,7 @@ function PatientHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Symptoms
+              SYMPTOMS
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -200,6 +204,7 @@ function PatientHome() {
         <br />
 
         <Accordion
+        style={{backgroundColor: '#d3d3d3'}}
           expanded={expanded === "panel4"}
           onChange={handleChange("panel4")}
         >
@@ -213,7 +218,7 @@ function PatientHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Injury
+              INJURY
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -226,6 +231,7 @@ function PatientHome() {
         <br />
 
         <Accordion
+        style={{backgroundColor: '#d3d3d3'}}
           expanded={expanded === "panel5"}
           onChange={handleChange("panel5")}
         >
@@ -239,7 +245,7 @@ function PatientHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Cardiac Arrest
+              CARDIAC ARREST
             </Typography>
           </AccordionSummary>
           <AccordionDetails>

@@ -70,16 +70,18 @@ function TreatmentHome() {
 
   return (
     <Container component="main" maxWidth="xs" >
-    <div className={classes.paper}>
-      <h2>Treatment</h2>
       <br />
       <br />
-      <TimestampButton
+       <TimestampButton
         incidentMirror={incidentMirror}
         setIncidentMirror={setIncidentMirror}
       />
+    <div className={classes.paper}>
+      <h2>TREATMENT</h2>
+      
+     
       <br />
-      <br />
+      
       <AddEditPatient
         formName={"treatment"}
         incidentMirror={incidentMirror}
@@ -95,7 +97,7 @@ function TreatmentHome() {
       <br />
       <div className={classes.root}>
         <Accordion
-         style={{backgroundColor: '#82E0E5'}}
+         style={{backgroundColor: '#d3d3d3'}}
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
         >
@@ -109,7 +111,7 @@ function TreatmentHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Medication Administered
+              MEDICATION ADMINISTERED
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -120,10 +122,11 @@ function TreatmentHome() {
           </AccordionDetails>
         </Accordion>
 
-        <br />
+       <br />
 
         <Accordion
-          style={{backgroundColor: '#5BC6CC'}}
+        style={{backgroundColor: '#d3d3d3'}}
+          
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
         >
@@ -137,7 +140,7 @@ function TreatmentHome() {
               classes={{ root: classes.text }}
               className={classes.heading}
             >
-              Procedure Administered
+              PROCEDURE ADMINISTERED
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -147,6 +150,8 @@ function TreatmentHome() {
             />
           </AccordionDetails>
         </Accordion>
+        <br />
+    <br />
       </div>
     </div>
     </Container>

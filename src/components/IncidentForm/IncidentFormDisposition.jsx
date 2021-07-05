@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 //Material UI imports
-import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
+import { InputLabel, MenuItem, Select, TextField, Container } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 
 const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
@@ -34,6 +34,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
   const { id } = useParams();
 
   return (
+    <Container>
     <div className="container">
       {dropdowns.go && localIncident && (
         <div>
@@ -112,7 +113,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
               }
             ></TextField>
             <br />
-            <br />
+           
           </div>
         )}
 
@@ -129,7 +130,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
             <Select
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
-              autoWidth
+              fullWidth
               value={localIncident[`${id}transportMethod`]}
               onChange={(event) =>
                 submitValue({
@@ -147,6 +148,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 </MenuItem>
               ))}
             </Select>
+            <br />
             <br />
             <br />
             <InputLabel id="demo-simple-select-autowidth-label">
@@ -173,6 +175,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 </MenuItem>
               ))}
             </Select>
+            <br />
             <br />
             <br />
             <InputLabel id="demo-simple-select-autowidth-label">
@@ -205,6 +208,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
           </div>
         )}
     </div>
+    </Container>
   );
 };
 

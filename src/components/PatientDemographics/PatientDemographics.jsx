@@ -63,13 +63,14 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           ></TextField>{" "}
           <br />
           <br />
+          <br />
           <InputLabel id="demo-simple-select-autowidth-label">
             Gender
           </InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-            autoWidth
+            fullWidth
             value={patientsMirror[`${id}patientGender`]}
             onChange={(event) =>
               submitValue({
@@ -78,9 +79,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
               })
             }
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
+         
             {dropdowns["gender"].map((item) => (
               <MenuItem key={"gender" + item.id} value={item.id}>
                 {item[`gender_type`]}
@@ -89,11 +88,12 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           </Select>{" "}
           <br />
           <br />
+          <br />
           <InputLabel id="demo-simple-select-autowidth-label">Race</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-            autoWidth
+            fullWidth
             value={patientsMirror[`${id}patientRace`]}
             onChange={(event) =>
               submitValue({
@@ -102,9 +102,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
               })
             }
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
+            
             {dropdowns["race"].map((item) => (
               <MenuItem key={"race" + item.id} value={item.id}>
                 {item[`race_type`]}
@@ -114,47 +112,8 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           </Select>{" "}
           <br />
           <br />
-
-          <TextField
-            id="outlined-basic"
-            label="Patient Age"
-            variant="outlined"
-            value={patientsMirror[`${id}patientAge`]}
-            onChange={(event) =>
-              submitValue({
-                key: `${id}patientAge`,
-                thing: event.target.value,
-              })
-            }
-          ></TextField>{" "}
-          <br />
-          <br />
-
-          <InputLabel id="demo-simple-select-autowidth-label">Age Units</InputLabel>
-          <Select
-            labelId="demo-simple-select-autowidth-label"
-            id="demo-simple-select-autowidth"
-            autoWidth
-            value={patientsMirror[`${id}patientAgeUnits`]}
-            onChange={(event) =>
-              submitValue({
-                key: `${id}patientAgeUnits`,
-                thing: event.target.value,
-              })
-            }
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {dropdowns["age_units"].map((item) => (
-              <MenuItem key={"age_units" + item.id} value={item.id}>
-                {item[`age_units_type`]}
-              </MenuItem>
-            ))}
-          </Select>{" "}
-          <br />
-          <br />
-          <TextField
+            <br />
+            <TextField
             id="date"
             label="DOB:"
             type="date"
@@ -173,9 +132,49 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           />
           <br />
           <br />
+          <br />
           <TextField
             id="outlined-basic"
-            label="Patient Address"
+            label="Age"
+            variant="outlined"
+            value={patientsMirror[`${id}patientAge`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}patientAge`,
+                thing: event.target.value,
+              })
+            }
+          ></TextField>{" "}
+          <br />
+          <br />
+
+          <InputLabel id="demo-simple-select-autowidth-label">Age Units</InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            fullWidth
+            value={patientsMirror[`${id}patientAgeUnits`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}patientAgeUnits`,
+                thing: event.target.value,
+              })
+            }
+          >
+           
+            {dropdowns["age_units"].map((item) => (
+              <MenuItem key={"age_units" + item.id} value={item.id}>
+                {item[`age_units_type`]}
+              </MenuItem>
+            ))}
+          </Select>{" "}
+          <br />
+          
+          <br />
+          <br />
+          <TextField
+            id="outlined-basic"
+            label="Home Address"
             variant="outlined"
             value={patientsMirror[`${id}patientAddress`]}
             onChange={(event) =>
@@ -185,9 +184,11 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
               })
             }
           ></TextField>
+          <br />
+          <br />
           <TextField
             id="outlined-basic"
-            label="State of Residence"
+            label="State"
             variant="outlined"
             value={patientsMirror[`${id}patientHomeState`]}
             onChange={(event) =>
@@ -201,7 +202,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           <br />
           <TextField
             id="outlined-basic"
-            label="County of Residence"
+            label="County"
             variant="outlined"
             value={patientsMirror[`${id}patientHomeCounty`]}
             onChange={(event) =>
@@ -211,9 +212,11 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
               })
             }
           ></TextField>
+          <br />
+          <br />
           <TextField
             id="outlined-basic"
-            label="Residence ZIP Code"
+            label="Zip Code"
             variant="outlined"
             value={patientsMirror[`${id}patientHomeZip`]}
             onChange={(event) =>
