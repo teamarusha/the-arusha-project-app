@@ -88,15 +88,28 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
             id="date"
             label="Symptom Onset"
             type="date"
-            // defaultValue="0000-00-00"
-            // className={classes.textField}
+            value={patientsMirror[`${id}symptomOnsetDate`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}symptomOnsetDate`,
+                thing: event.target.value,
+              })
+            }
             InputLabelProps={{
               shrink: true,
             }}
           />&nbsp; &nbsp; <br /><br />
           <label for="appt">Time:</label>
           <input type="time" id="appt" name="appt"
-            min="09:00" max="18:00" required></input> <br /><br />
+            min="09:00" max="18:00" 
+            value={patientsMirror[`${id}symptomOnsetTime`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}symptomOnsetTime`,
+                thing: event.target.value,
+              })
+            }
+            required></input> <br /><br />
 
           <TextField
             id="outlined-basic"
@@ -146,6 +159,27 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
           </Select> <br /><br />
 
           <InputLabel
+            id="demo-simple-select-autowidth-label">Final Patient Aquity</InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            autoWidth
+            value={patientsMirror[`${id}finalAcuity`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}finalAcuity`,
+                thing: event.target.value,
+              })
+            }
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {dropdowns['final_acuity'].map(item => <MenuItem key={'final_acuity' + item.id}
+              value={item.id}>{item[`final_acuity_type`]}</MenuItem>)}
+          </Select> <br /><br />
+
+          <InputLabel
             id="demo-simple-select-autowidth-label">Provider's Primary Impression</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
@@ -171,12 +205,29 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
             id="date"
             label="Last Known Well:"
             type="date"
-            // defaultValue="0000-00-00"
-            // className={classes.textField}
+            value={patientsMirror[`${id}lastKnownWellDate`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}lastKnownWellDate`,
+                thing: event.target.value,
+              })
+            }
             InputLabelProps={{
               shrink: true,
             }}
           />
+          <br /><br />
+          <label for="appt">Time:</label>
+          <input type="time" id="appt" name="appt"
+            min="09:00" max="18:00" 
+            value={patientsMirror[`${id}lastKnownWellTime`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}lastKnownWellTime`,
+                thing: event.target.value,
+              })
+            }
+            required></input> <br /><br />
 
         </div>
       }
