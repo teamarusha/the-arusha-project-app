@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import useStyles from "./Styles";
 //Material UI imports
-import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
+import { InputLabel, MenuItem, Select, TextField, Container } from "@material-ui/core";
 
 const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
@@ -29,11 +29,13 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
   }
 
   return (
+    <Container>
     <div className="container">
       {localIncident && (
         <TextField
           id="outlined-basic"
           label="Crew ID"
+          
           variant="outlined"
           value={localIncident[`crew`]}
           onChange={(event) =>
@@ -65,7 +67,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
 
       
             {dropdowns["triage_cat"].map((item) => (
-              <MenuItem key={"triage_cat" + item.id} value={item.id} >
+              <MenuItem key={"triage_cat" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                 {item["triage_cat_type"]}
               </MenuItem>
             ))}
@@ -90,16 +92,17 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
               <em>None</em>
             </MenuItem> */}
             {dropdowns["incident_service"].map((item) => (
-              <MenuItem key={"incident_service" + item.id} value={item.id} >
+              <MenuItem key={"incident_service" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                 {item["incident_service_type"]}
               </MenuItem>
             ))}
           </Select>
           <br />
-          <br />
+          
         </div>
       )}
     </div>
+    </Container>
   );
 };
 

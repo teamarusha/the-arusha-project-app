@@ -225,10 +225,17 @@ function AddEditPatient({
     <div>
       {patientsMirror && (
         <div>
+            <Button color="primary" variant="contained" onClick={addPatient}>
+              Add Patient
+            </Button>
+            <br />
+          <br />
+          <br />
           {patientsMirror &&
             patientsMirror.patientArray.map((value) => (
+            
               <Button
-                color="primary"
+                color="secondary"
                 variant="contained"
                 key={`${value}changePatient`}
                 disabled={id == value}
@@ -237,11 +244,8 @@ function AddEditPatient({
                 Edit Patient {value}
               </Button>
             ))}
-          <br />
-          <br />
-          <Button color="primary" variant="contained" onClick={addPatient}>
-            Add Patient
-          </Button>
+          
+         
         </div>
       )}
     </div>

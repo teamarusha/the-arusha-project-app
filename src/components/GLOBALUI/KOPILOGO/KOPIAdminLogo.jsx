@@ -9,7 +9,7 @@ export default class KOPIAdminLogo extends Component {
       <svg className='adminLogo'
         width="120"
         height="120"
-        viewBox="0 0 289 209"
+        viewBox="0 0 299 209"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >

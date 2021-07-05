@@ -31,12 +31,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
 
   return (
     <div className="container">
-      <AddProcedureButton
-        treatmentMirror={localTreatment}
-        setTreatmentMirror={setLocalTreatment}
-      />
-      <br />
-      <br />
+      
 
       {localTreatment && (
         <div>
@@ -48,7 +43,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
               <Select
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localTreatment[
                     `${id}procedure${localTreatment[`${id}lastProcedure`]}`
@@ -63,9 +58,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                   })
                 }
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
+              
                 {dropdowns["procedure_list"].map((item) => (
                   <MenuItem key={"procedure_list" + item.id} value={item.id}>
                     {item["procedure_list_type"]}
@@ -74,13 +67,14 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
               </Select>
               <br />
               <br />
+              <br />
               <InputLabel id="demo-simple-select-autowidth-label">
-                Number of Procedure Attempts
+                # of Procedure Attempts
               </InputLabel>
               <Select
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localTreatment[
                     `${id}procedureAttempts${
@@ -108,13 +102,14 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
               </Select>
               <br />
               <br />
+              <br />
               <InputLabel id="demo-simple-select-autowidth-label">
                 Procedure Successful
               </InputLabel>
               <Select
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localTreatment[
                     `${id}successfulProcedure${
@@ -133,6 +128,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
               >
                 {dropdowns["procedure_successful"].map((item) => (
                   <MenuItem
+                    classes={{root: classes.menuItem}}
                     key={"procedure_successful" + item.id}
                     value={item.id}
                   >
@@ -142,13 +138,14 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
               </Select>
               <br />
               <br />
+              <br />
               <InputLabel id="demo-simple-select-autowidth-label">
                 Response to Procedure
               </InputLabel>
               <Select
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localTreatment[
                     `${id}responseToProcedure${
@@ -167,6 +164,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
               >
                 {dropdowns["procedure_response"].map((item) => (
                   <MenuItem
+                    classes={{root: classes.menuItem}}
                     key={"procedure_response" + item.id}
                     value={item.id}
                   >
@@ -176,13 +174,14 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
               </Select>
               <br />
               <br />
+              <br />
               <InputLabel id="demo-simple-select-autowidth-label">
                 Role/Type of Person Performing Procedure
               </InputLabel>
               <Select
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localTreatment[
                     `${id}procedurePerformedBy${
@@ -201,6 +200,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
               >
                 {dropdowns["procedure_performer"].map((item) => (
                   <MenuItem
+                    classes={{root: classes.menuItem}}
                     key={"procedure_performer" + item.id}
                     value={item.id}
                   >
@@ -208,6 +208,14 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                   </MenuItem>
                 ))}
               </Select>
+              <br />
+      <br />
+      <br />
+              <AddProcedureButton
+        treatmentMirror={localTreatment}
+        setTreatmentMirror={setLocalTreatment}
+      />
+    
             </div>
           )}
         </div>

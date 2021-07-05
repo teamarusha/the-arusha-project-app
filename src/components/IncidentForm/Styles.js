@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
     },
     AccordionDetails: {
       alignItems: 'center'
+    },
+    menuItem: {
+      whiteSpace: 'normal'
     }
   }));
 

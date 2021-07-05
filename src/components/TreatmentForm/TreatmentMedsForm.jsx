@@ -35,16 +35,12 @@ const classes = useStyles();
     <div className="container">
       {localTreatment && (
         <div>
-          <AddMedicationButton
-            treatmentMirror={localTreatment}
-            setTreatmentMirror={setLocalTreatment}
-          />
-          <br />
-          <br />
+          
           <TextField
             id="outlined-basic"
             label="Medication Administered"
             variant="outlined"
+            fullWidth
             value={
               localTreatment[
                 `${id}medication${localTreatment[`${id}lastMedication`]}`
@@ -60,6 +56,7 @@ const classes = useStyles();
           &nbsp;
           <br />
           <br />
+          
           {dropdowns.go && localTreatment && (
             <div>
               <InputLabel id="demo-simple-select-autowidth-label">
@@ -69,7 +66,7 @@ const classes = useStyles();
                 classes={{root: classes.select}}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localTreatment[
                     `${id}routeAdministered${localTreatment[`${id}lastMedication`]}`
@@ -84,15 +81,14 @@ const classes = useStyles();
                   })
                 }
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
+               
                 {dropdowns["med_admin_route"].map((item) => (
                   <MenuItem key={"med_admin_route" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                     {item["med_admin_route_type"]}
                   </MenuItem>
                 ))}
               </Select>
+              <br />
               <br />
               <br />
               <TextField
@@ -113,6 +109,7 @@ const classes = useStyles();
               ></TextField>
               <br />
               <br />
+              <br />
               <InputLabel id="demo-simple-select-autowidth-label">
                 Dosage Units
               </InputLabel>
@@ -120,7 +117,7 @@ const classes = useStyles();
                 classes={{root: classes.select}}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localTreatment[
                     `${id}units${localTreatment[`${id}lastMedication`]}`
@@ -133,15 +130,14 @@ const classes = useStyles();
                   })
                 }
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
+                
                 {dropdowns["med_dosage_units"].map((item) => (
                   <MenuItem key={"med_dosage_units" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                     {item["med_dosage_units_type"]}
                   </MenuItem>
                 ))}
               </Select>
+              <br />
               <br />
               <br />
               <InputLabel id="demo-simple-autowidth-label">
@@ -151,7 +147,7 @@ const classes = useStyles();
                 classes={{root: classes.select}}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localTreatment[
                     `${id}medicationResponse${
@@ -168,15 +164,14 @@ const classes = useStyles();
                   })
                 }
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
+               
                 {dropdowns["med_response"].map((item) => (
-                  <MenuItem key={"med_response" + item.id} value={item.id} classes={{root: classes.menuItem}}>
+                  <MenuItem key={"med_response" + item.id} value={item.id} classes={{root: classes.menuItem}} >
                     {item["med_response_type"]}
                   </MenuItem>
                 ))}
               </Select>
+              <br />
               <br />
               <br />
               <InputLabel id="demo-simple-autowidth-label">
@@ -186,7 +181,7 @@ const classes = useStyles();
                 classes={{root: classes.select}}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
-                autoWidth
+                fullWidth
                 value={
                   localTreatment[
                     `${id}medsAdminBy${
@@ -203,15 +198,21 @@ const classes = useStyles();
                   })
                 }
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
+            
                 {dropdowns["med_admin_by"].map((item) => (
                   <MenuItem key={"med_admin_by" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                     {item["med_admin_by_type"]}
                   </MenuItem>
                 ))}
               </Select>
+              <br />
+          <br />
+          <br />
+              <AddMedicationButton
+            treatmentMirror={localTreatment}
+            setTreatmentMirror={setLocalTreatment}
+          />
+         
             </div>
           )}
         </div>

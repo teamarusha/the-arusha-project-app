@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center'
+  },
+  menuItem: {
+    whiteSpace: 'normal'
   }
   }));
 
