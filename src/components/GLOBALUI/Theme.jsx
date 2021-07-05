@@ -15,6 +15,9 @@ export default createMuiTheme({
         },
         secondary: {
             main: `${KOPIOrange}`
+        },
+        textSecondary: {
+            main: 'white'
         }
     },
     typography: {

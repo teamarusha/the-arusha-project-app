@@ -235,7 +235,7 @@ function AddEditPatient({
             patientsMirror.patientArray.map((value) => (
             
               <Button
-                color="primary"
+                color="secondary"
                 variant="contained"
                 key={`${value}changePatient`}
                 disabled={id == value}

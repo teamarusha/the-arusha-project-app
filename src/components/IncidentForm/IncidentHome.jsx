@@ -112,7 +112,7 @@ function IncidentHome() {
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
-          style={{backgroundColor: '#5BC6CC'}}
+          style={{backgroundColor: '#d3d3d3'}}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -138,6 +138,7 @@ function IncidentHome() {
         <Accordion
           expanded={expanded === "panel3"}
           onChange={handleChange("panel3")}
+          style={{backgroundColor: '#d3d3d3'}}
         >
          
           <AccordionSummary
@@ -165,6 +166,7 @@ function IncidentHome() {
         <Accordion
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
+          style={{backgroundColor: '#d3d3d3'}}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
