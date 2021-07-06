@@ -1,4 +1,4 @@
-import { put } from '@redux-saga/core/effects';
+// import { put } from '@redux-saga/core/effects';
 import axios from 'axios';
 
 function* postIncident(action) {

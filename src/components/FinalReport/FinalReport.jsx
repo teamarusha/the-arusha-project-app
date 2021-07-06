@@ -31,7 +31,6 @@ const useStyles = makeStyles({
         alignItems: 'center',
 
     },
-
 });
 
 function FinalReport() {
@@ -192,10 +191,10 @@ function FinalReport() {
                             <div className='injury'>
                                 <h3>INJURY</h3>
                                 {report.injury_cause_type && report.injury_location_type ?
-                                    <>
+                                    <div>
                                         <p>Type: {report.injury_location_type}</p>
                                         <p>Cause: {report.injury_cause_type}</p>
-                                    </>
+                                    </div>
                                     :
                                     <p>None</p>
 
@@ -208,7 +207,7 @@ function FinalReport() {
                                 <h3>CARDIAC ARREST</h3>
                                 <p>Cardiac Arrest? {report.cardiac_arrest_type}</p>
                                 {report.time_cardiac_arrest &&
-                                    <>
+                                    <div>
                                         <p>Date: {moment(report.time_cardiac_arrest).format('DD/MM/YYYY')}</p>
                                         <p>Time: {moment(report.time_cardiac_arrest).format('hh:mm:ss')}</p>
 
@@ -222,7 +221,7 @@ function FinalReport() {
                                         <p>Who First Initiated CPR? {report.aed_initiator_type}</p>
                                         <p>Who First Applied AED? {report.aed_applicator_type}</p>
                                         <p>Who First Defibrillated the Patient? {report.aed_defibrillator_type}</p>
-                                    </>
+                                    </div>
 
 
                                 }
@@ -339,14 +338,14 @@ function FinalReport() {
                                 <h3>DISPOSITION</h3>
                                 <p>Transport Disposition: {report.transport_disposition_type}</p>
                                 {report.destination_state &&
-                                    <>
+                                    <div>
                                         <p>Destination State: {report.destination_state}</p>
                                         <p>Destination County: {report.destination_county}</p>
                                         <p>Destination Zip: {report.destination_zip}</p>
                                         <p>Transport Method: {report.transport_method_type}</p>
                                         <p>Transport Mode from Scene: {report.transport_mode_type}</p>
                                         <p>Type of Destination: {report.destination_facility_type}</p>
-                                    </>
+                                    </div>
                                 }
 
                             </div>

@@ -1,6 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // ---- Material UI ----
 import { TextField } from '@material-ui/core';

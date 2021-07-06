@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
 import "./LandingPage.css";
-import { Typography, Grid, Link } from "@material-ui/core";
+
 // CUSTOM COMPONENTS
 import {useSelector} from 'react-redux';
 import AdminHeader from '../Admin/AdminHeader';
@@ -12,12 +11,7 @@ import IncidentHome from "../IncidentForm/IncidentHome";
 
 function LandingPage() {
 
-  const history = useHistory();
   const user = useSelector((store) => store.user);
-
-  const handleClick = (event) => {
-    history.push("/registration");
-  };
 
   
 if(user.is_admin === true) {

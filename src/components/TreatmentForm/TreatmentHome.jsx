@@ -13,7 +13,6 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Button,
   Typography,
   Container,
   makeStyles
@@ -53,9 +52,7 @@ function TreatmentHome() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);
-  const [localTreatment, setLocalTreatment] = useState(
-    JSON.parse(localStorage.getItem("treatment"))
-  );
+  const localTreatment = JSON.parse(localStorage.getItem("treatment"));
   const [expanded, setExpanded] = useState(false);
   const [incidentMirror, setIncidentMirror] = useState(
     JSON.parse(localStorage.getItem("incident"))
@@ -80,9 +77,7 @@ function TreatmentHome() {
   }, [localTreatment]);
 
   // ____________________DROPDOWNS____________________
-  let [localDropdownMirror, setLocalDropdownMirror] = useState(
-    JSON.parse(localStorage.getItem("dropdowns"))
-  );
+  const localDropdownMirror = JSON.parse(localStorage.getItem("dropdowns"));
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("dropdowns")) === null) {
@@ -101,35 +96,36 @@ function TreatmentHome() {
   return (
     <Container component="main" maxWidth="xs" >
       <div className={classes.paper}>
-      <br />
-      
-       <TimestampButton
-        incidentMirror={incidentMirror}
-        setIncidentMirror={setIncidentMirror}
-      />
-      <br />
-    
-      <h2>TREATMENT</h2>
-      
-     
-      <br />
-      
-      <AddEditPatient
-        formName={"treatment"}
-        incidentMirror={incidentMirror}
-        setIncidentMirror={setIncidentMirror}
-        patientsMirror={patientsMirror}
-        setPatientsMirror={setPatientsMirror}
-        treatmentMirror={treatmentMirror}
-        setTreatmentMirror={setTreatmentMirror}
-        vitalsMirror={vitalsMirror}
-        setVitalsMirror={setVitalsMirror}
-      />
-      <br />
-      <br />
+        <br />
+
+        <TimestampButton
+          incidentMirror={incidentMirror}
+          setIncidentMirror={setIncidentMirror}
+        />
+        <br />
+
+        <h2>TREATMENT</h2>
+
+
+        <br />
+
+        <AddEditPatient
+          formName={"treatment"}
+          incidentMirror={incidentMirror}
+          setIncidentMirror={setIncidentMirror}
+          patientsMirror={patientsMirror}
+          setPatientsMirror={setPatientsMirror}
+          treatmentMirror={treatmentMirror}
+          setTreatmentMirror={setTreatmentMirror}
+          vitalsMirror={vitalsMirror}
+          setVitalsMirror={setVitalsMirror}
+        />
+        <br />
+        <br />
+      </div>
       <div className={classes.root}>
         <Accordion
-         style={{backgroundColor: '#d3d3d3'}}
+          style={{ backgroundColor: '#d3d3d3' }}
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
         >
@@ -154,11 +150,11 @@ function TreatmentHome() {
           </AccordionDetails>
         </Accordion>
 
-       <br />
+        <br />
 
         <Accordion
-        style={{backgroundColor: '#d3d3d3'}}
-          
+          style={{ backgroundColor: '#d3d3d3' }}
+
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
         >
@@ -183,9 +179,9 @@ function TreatmentHome() {
           </AccordionDetails>
         </Accordion>
         <br />
-    <br />
+        <br />
       </div>
-    </div>
+
     </Container>
   );
 }

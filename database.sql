@@ -256,6 +256,7 @@ CREATE TABLE "alcohol_drug_use" (
 
 INSERT INTO "alcohol_drug_use" ("alcohol_drug_use_type")
 VALUES
+('No Alcohol or Drug Use'),
 ('Alcohol Containers/Paraphernalia at Scene'),
 ('Drug Paraphernalia at Scene'),
 ('Patient Admits to Alcohol Use'),

@@ -8,7 +8,6 @@ import AddEditPatient from "../AddEditPatient/AddEditPatient";
 import TimestampButton from "../TimestampButton/TimestampButton";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
 
 // ----- Material UI -----
 import { makeStyles } from "@material-ui/core/styles";
@@ -18,14 +17,7 @@ import { AccordionSummary } from "@material-ui/core";
 import { Container } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 
-// ----- More Material UI -----
-// import globalUseStyle from "./globalUseStyles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import { TextField, Paper, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,9 +76,7 @@ function PatientHome() {
     localStorage.setItem("patients", JSON.stringify(patientsMirror));
   }, [patientsMirror]);
   // ____________________DROPDOWNS____________________
-  let [localDropdownMirror, setLocalDropdownMirror] = useState(
-    JSON.parse(localStorage.getItem("dropdowns"))
-  );
+  const localDropdownMirror = JSON.parse(localStorage.getItem("dropdowns"));
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("dropdowns")) === null) {
@@ -103,38 +93,39 @@ function PatientHome() {
   }, [dropdowns.go]);
 
   return (
-    <Container component ="main" maxWidth="xs">
-    <div className={classes.paper}>
-      <br />
-     
-      <TimestampButton
-        incidentMirror={incidentMirror}
-        setIncidentMirror={setIncidentMirror}
-      />
-      <br />
-      <h2>PATIENTS</h2>
-      <br />
-   
-      
-      
-      <AddEditPatient
-        formName={"patient"}
-        incidentMirror={incidentMirror}
-        setIncidentMirror={setIncidentMirror}
-        patientsMirror={patientsMirror}
-        setPatientsMirror={setPatientsMirror}
-        treatmentMirror={treatmentMirror}
-        setTreatmentMirror={setTreatmentMirror}
-        vitalsMirror={vitalsMirror}
-        setVitalsMirror={setVitalsMirror}
-      />
-      <br />
-      <br />
+    <Container component="main" maxWidth="xs">
+      <div className={classes.paper}>
+        <br />
+
+        <TimestampButton
+          incidentMirror={incidentMirror}
+          setIncidentMirror={setIncidentMirror}
+        />
+        <br />
+        <h2>PATIENTS</h2>
+        <br />
+
+
+
+        <AddEditPatient
+          formName={"patient"}
+          incidentMirror={incidentMirror}
+          setIncidentMirror={setIncidentMirror}
+          patientsMirror={patientsMirror}
+          setPatientsMirror={setPatientsMirror}
+          treatmentMirror={treatmentMirror}
+          setTreatmentMirror={setTreatmentMirror}
+          vitalsMirror={vitalsMirror}
+          setVitalsMirror={setVitalsMirror}
+        />
+        <br />
+        <br />
+      </div>
       <div className={classes.root}>
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
-          style={{backgroundColor: '#d3d3d3'}}
+          style={{ backgroundColor: '#d3d3d3' }}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -161,7 +152,7 @@ function PatientHome() {
         <Accordion
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
-          style={{backgroundColor: '#d3d3d3'}}
+          style={{ backgroundColor: '#d3d3d3' }}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -186,7 +177,7 @@ function PatientHome() {
         <br />
 
         <Accordion
-        style={{backgroundColor: '#d3d3d3'}}
+          style={{ backgroundColor: '#d3d3d3' }}
           expanded={expanded === "panel3"}
           onChange={handleChange("panel3")}
         >
@@ -213,7 +204,7 @@ function PatientHome() {
         <br />
 
         <Accordion
-        style={{backgroundColor: '#d3d3d3'}}
+          style={{ backgroundColor: '#d3d3d3' }}
           expanded={expanded === "panel4"}
           onChange={handleChange("panel4")}
         >
@@ -240,7 +231,7 @@ function PatientHome() {
         <br />
 
         <Accordion
-        style={{backgroundColor: '#d3d3d3'}}
+          style={{ backgroundColor: '#d3d3d3' }}
           expanded={expanded === "panel5"}
           onChange={handleChange("panel5")}
         >
@@ -265,7 +256,7 @@ function PatientHome() {
           </AccordionDetails>
         </Accordion>
       </div>
-    </div>
+
     </Container>
   );
 }
