@@ -13,7 +13,6 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Button,
   Typography,
   Container
 } from "@material-ui/core";
@@ -23,9 +22,7 @@ function TreatmentHome() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);
-  const [localTreatment, setLocalTreatment] = useState(
-    JSON.parse(localStorage.getItem("treatment"))
-  );
+  const localTreatment = JSON.parse(localStorage.getItem("treatment"));
   const [expanded, setExpanded] = useState(false);
   const [incidentMirror, setIncidentMirror] = useState(
     JSON.parse(localStorage.getItem("incident"))
@@ -50,9 +47,7 @@ function TreatmentHome() {
   }, [localTreatment]);
 
   // ____________________DROPDOWNS____________________
-  let [localDropdownMirror, setLocalDropdownMirror] = useState(
-    JSON.parse(localStorage.getItem("dropdowns"))
-  );
+  const localDropdownMirror = JSON.parse(localStorage.getItem("dropdowns"));
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("dropdowns")) === null) {

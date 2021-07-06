@@ -14,13 +14,13 @@ import NonAdminProtectedRoute from '../ProtectedRoute/NonAdminProtectedRoute';
 import AdminProtectedRoute from '../ProtectedRoute/AdminProtectedRoute';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
+// import AboutPage from '../AboutPage/AboutPage';
+// import UserPage from '../UserPage/UserPage';
+// import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import Admin from '../Admin/Admin';
+// import Admin from '../Admin/Admin';
 import FinalReport from '../FinalReport/FinalReport';
 
 

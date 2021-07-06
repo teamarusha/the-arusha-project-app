@@ -10,15 +10,9 @@ function SummaryFieldSubmit(params) {
   const [incidentMirror, setIncidentMirror] = useState(
     JSON.parse(localStorage.getItem("incident"))
   );
-  const [patientsMirror, setPatientsMirror] = useState(
-    JSON.parse(localStorage.getItem("patients"))
-  );
-  const [treatmentMirror, setTreatmentMirror] = useState(
-    JSON.parse(localStorage.getItem("treatment"))
-  );
-  const [vitalsMirror, setVitalsMirror] = useState(
-    JSON.parse(localStorage.getItem("vitals"))
-  );
+  const patientsMirror = JSON.parse(localStorage.getItem("patients"));
+  const treatmentMirror = JSON.parse(localStorage.getItem("treatment"));
+  const vitalsMirror = JSON.parse(localStorage.getItem("vitals"));
   // ____________________WATCHER FUNCTION____________________
   useEffect(() => {
     console.log("UPDATING browser storage", incidentMirror);
@@ -84,7 +78,7 @@ function SummaryFieldSubmit(params) {
     for (let patient of patientArray) {
       let incidentPatientErrorMessage = `Missing input from incident disposition form for patient ${patient}`;
 
-      if (incidentMirror[`${patient}transportDisposition`] == 0) {
+      if (incidentMirror[`${patient}transportDisposition`] === 0) {
         // THIS IS AN ERROR CASE
         allErrorMessages.push(incidentPatientErrorMessage);
         setAllowSubmission(false);
@@ -116,7 +110,7 @@ function SummaryFieldSubmit(params) {
 
 
       // Check patient cardiac first for missing inputs or error cases
-      if (patientsMirror[`${patient}cardiacArrest`] == 0) {
+      if (patientsMirror[`${patient}cardiacArrest`] === 0) {
         allErrorMessages.push(patientCardiacErrorMessage);
         setAllowSubmission(false);
       }

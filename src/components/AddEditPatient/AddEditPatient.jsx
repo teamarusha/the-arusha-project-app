@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -18,7 +17,6 @@ function AddEditPatient({
   setVitalsMirror,
 }) {
   // Redux stores for all important variables
-  const dropdowns = useSelector((store) => store.dropdowns);
   const incident = useSelector((store) => store.incident);
   const patients = useSelector((store) => store.patients);
   const treatment = useSelector((store) => store.treatment);
@@ -238,7 +236,7 @@ function AddEditPatient({
                 color="secondary"
                 variant="contained"
                 key={`${value}changePatient`}
-                disabled={id == value}
+                disabled={id === value}
                 onClick={() => changePatient(value)}
               >
                 Edit Patient {value}

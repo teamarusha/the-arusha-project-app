@@ -7,13 +7,12 @@ import IncidentFormDisposition from "./IncidentFormDisposition";
 import IncidentFormScene from "./IncidentFormScene";
 import AddEditPatient from "../AddEditPatient/AddEditPatient";
 import TimestampButton from "../TimestampButton/TimestampButton";
-import SummaryFieldSubmit from "../SummaryFieldSubmit/SummaryFieldSubmit";
+
 
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Button,
   Typography,
   Container
 } from "@material-ui/core";
@@ -56,9 +55,7 @@ function IncidentHome() {
   }, [incidentMirror]);
 
   // ____________________DROPDOWNS____________________
-  let [localDropdownMirror, setLocalDropdownMirror] = useState(
-    JSON.parse(localStorage.getItem("dropdowns"))
-  );
+  const localDropdownMirror = JSON.parse(localStorage.getItem("dropdowns"));
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("dropdowns")) === null) {

@@ -13,13 +13,11 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import moment from 'moment';
 
 //Material UI imports
 import {
-  Button,
   InputLabel,
   MenuItem,
   Select,
@@ -59,7 +57,7 @@ const VitalsForm = () => {
   const [localVitals, setLocalVitals] = useState(
     JSON.parse(localStorage.getItem("vitals"))
   );
-  const [expanded, setExpanded] = useState(false);
+  // const [expanded, setExpanded] = useState(false);
   const [incidentMirror, setIncidentMirror] = useState(
     JSON.parse(localStorage.getItem("incident"))
   );
@@ -74,9 +72,7 @@ const VitalsForm = () => {
   );
 
   // ____________________DROPDOWNS____________________
-  let [localDropdownMirror, setLocalDropdownMirror] = useState(
-    JSON.parse(localStorage.getItem("dropdowns"))
-  );
+  const localDropdownMirror = JSON.parse(localStorage.getItem("dropdowns"));
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("dropdowns")) === null) {

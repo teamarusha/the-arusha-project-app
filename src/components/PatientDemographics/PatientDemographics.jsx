@@ -1,6 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 // ---- Material UI ----
 import { TextField } from '@material-ui/core';
@@ -8,11 +7,9 @@ import { InputLabel } from '@material-ui/core';
 import { Select } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 
 
 function PatientDemographics({ patientsMirror, setPatientsMirror }) {
-  const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);
   const { id } = useParams();
 

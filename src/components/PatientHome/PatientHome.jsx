@@ -8,7 +8,6 @@ import AddEditPatient from "../AddEditPatient/AddEditPatient";
 import TimestampButton from "../TimestampButton/TimestampButton";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
 
 // ----- Material UI -----
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,14 +16,7 @@ import { AccordionDetails } from "@material-ui/core";
 import { AccordionSummary } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 
-// ----- More Material UI -----
-// import globalUseStyle from "./globalUseStyles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import { TextField, Paper, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,9 +68,7 @@ function PatientHome() {
     localStorage.setItem("patients", JSON.stringify(patientsMirror));
   }, [patientsMirror]);
   // ____________________DROPDOWNS____________________
-  let [localDropdownMirror, setLocalDropdownMirror] = useState(
-    JSON.parse(localStorage.getItem("dropdowns"))
-  );
+  const localDropdownMirror = JSON.parse(localStorage.getItem("dropdowns"));
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("dropdowns")) === null) {

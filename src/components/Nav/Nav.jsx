@@ -20,7 +20,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { useState } from "react";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import SummaryFieldSubmit from '../SummaryFieldSubmit/SummaryFieldSubmit';
 
 // OVERHEAD COMPONENT STYLING
 const useStyles = makeStyles((theme) => ({
@@ -81,11 +80,11 @@ function Drawer(props) {
     text: "Login / Register",
   };
 
-  if (user.id != null && user.is_admin == false) {
+  if (user.id != null && user.is_admin === false) {
     nonAdminLoginLinkData.path = '/home';
     nonAdminLoginLinkData.text = 'Home';
   } 
-  else if (user.id !=null && user.is_admin == true){
+  else if (user.id !=null && user.is_admin === true){
     adminLoginLinkData.path = '/admin'
     adminLoginLinkData.text = 'Home'
 

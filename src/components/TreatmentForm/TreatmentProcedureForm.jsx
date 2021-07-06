@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -8,7 +7,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import moment from 'moment';
 
@@ -265,7 +263,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                       {
                         localTreatment[`${id}procedureArray`].map((proc, i) => {
 
-                          if (proc != localTreatment[`${id}lastProcedure`]) {
+                          if (proc !== localTreatment[`${id}lastProcedure`]) {
 
                             return (
                               <TableRow hover role="checkbox" tabIndex={-1} key={id + "patientmed" + proc}>
