@@ -8,8 +8,10 @@ import { TextField } from "@material-ui/core";
 import { InputLabel } from "@material-ui/core";
 import { Select } from "@material-ui/core";
 import { MenuItem } from "@material-ui/core";
+import useStyles from "../TreatmentForm/Styles";
 
 function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
+  const classes = useStyles();
 
   const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);
@@ -58,7 +60,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
            
           
             {dropdowns['anatomic_location'].map(item => <MenuItem key={'anatomic_location' + item.id}
-              value={item.id}>{item[`anatomic_location_type`]}</MenuItem>)}
+              value={item.id} classes={{root: classes.menuItem}} >{item[`anatomic_location_type`]}</MenuItem>)}
           </Select> <br /><br /><br />
 
           <InputLabel
@@ -77,7 +79,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
           >
            
             {dropdowns['organ_system'].map(item => <MenuItem key={'organ_system' + item.id}
-              value={item.id}>{item[`organ_system_type`]}</MenuItem>)}
+              value={item.id} classes={{root: classes.menuItem}} >{item[`organ_system_type`]} </MenuItem>)}
           </Select> <br /><br /><br />
 
           {/* <p>Symptom Onset calendar goes here</p> <br /> */}
@@ -156,7 +158,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
           >
             
             {dropdowns['initial_acuity'].map(item => <MenuItem key={'initial_acuity' + item.id}
-              value={item.id}>{item[`initial_acuity_type`]}</MenuItem>)}
+              value={item.id} classes={{root: classes.menuItem}} >{item[`initial_acuity_type`]} </MenuItem>)}
           </Select> <br /><br /><br />
 
           <InputLabel
@@ -196,7 +198,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
           >
           
             {dropdowns['primary_impression'].map(item => <MenuItem key={'primary_impression' + item.id}
-              value={item.id}>{item[`primary_impression_type`]}</MenuItem>)}
+              value={item.id} classes={{root: classes.menuItem}} >{item[`primary_impression_type`]}  </MenuItem>)}
           </Select> <br /><br /><br />
 
           {/* <p>Last Known Well calendar goes here</p> */}

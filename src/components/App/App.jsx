@@ -52,8 +52,8 @@ function App() {
   // let def = (user == null || undefined)
 
   return (
-    <Router>
       <ThemeProvider theme={createMuiTheme}>
+    <Router>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -154,8 +154,8 @@ function App() {
 
           <Footer />
         </Switch>
-      </ThemeProvider>
     </Router>
+      </ThemeProvider>
   );
 }
 

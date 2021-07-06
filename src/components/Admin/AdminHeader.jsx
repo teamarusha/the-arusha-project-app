@@ -1,7 +1,7 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import { Typography, Container } from "@material-ui/core";
+import { Typography, Container, Grid } from "@material-ui/core";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import KOPIAdminLogo from "../GLOBALUI/KOPILOGO/KOPIAdminLogo";
 import { makeStyles } from "@material-ui/styles";
@@ -21,22 +21,36 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
     marginBottom: "6em",
   },
-  adminButton: {
-    marginLeft: 'auto',
-    position: 'static',
-  },
   text: {
     color: 'white', 
-    paddingBottom: 40,
-    marginTop: -60,
-    
+    marginRight: '5%'
   },
-  adlogo: {
-    marginTop: 50,
+appBar : {
+  flexDirection: 'row',
+  display: 'inline',
+  width: '100%'
 },
-button: {
-  marginBottom: -10,
-}
+toolBar: {
+  alignItems: 'center'
+},
+gi1: {
+  textAlign: 'left'
+},
+gi2: {
+  textAlign: 'center'
+},
+gi3: {
+  marginLeft: 'auto',
+  textAlign: 'end'
+},
+giContainer: {
+  alignContent: 'center',
+  display: 'contents',
+  justifyContent: 'center'
+},
+
+
+
 }));
 
 
@@ -65,16 +79,32 @@ function AdminHeader(props) {
     <React.Fragment>
     <ThemeProvider theme={createMuiTheme}>
       <ElevationScroll>
-        <AppBar position="fixed" color="primary">
-          <Toolbar disableGutters={false}>
-          {/* {toggleArrow ? <SubdirectoryArrowLeftIcon/>
-         : !toggleArrow } */}
-            <KOPIAdminLogo className={classes.adlogo}/>
-            <LogOutButton className={classes.button}/>
-          </Toolbar>
-          <Container style={{ textAlign: "center" }}>
+        <AppBar position="fixed" color="primary" classes={{root: classes.appBar}}>
+          <Toolbar disableGutters={false} classes={{root: classes.toolBar}}>
+              <Grid container direction="row" alignContent='center' classes={{root: classes.giContainer}} xl>
+       
+         
+         {/* className={classes.adlogo} */}
+          <Grid item xs={4} s={4} md={4} lg={4} xl={4} classes={{root: classes.gi1}}>
+            <KOPIAdminLogo />
+            </Grid>
+            
+            
+         <Grid item xs={4} s={4} md={4} lg={4} xl={4} classes={{root: classes.gi2}}>
             <Typography variant="h3" className={classes.text}>Reports</Typography>
-          </Container>
+            </Grid>
+            
+            
+           
+          <Grid item xs={4} s={4} md={4} lg={4} xl={4} classes={{root: classes.gi3}}>
+            <LogOutButton />
+            </Grid>
+            
+            
+          
+          </Grid>
+          </Toolbar>
+
         </AppBar>
       </ElevationScroll>
       <div className={classes.toolbarMargin} />

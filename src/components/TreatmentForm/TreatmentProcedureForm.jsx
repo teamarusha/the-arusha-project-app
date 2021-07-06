@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import useStyles from "./Styles";
+import AddProcedureButton from "./AddProcedureButton";
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,39 +12,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import moment from 'moment';
 
-import AddProcedureButton from "./AddProcedureButton";
-
 //Material UI imports
-import { InputLabel, MenuItem, Select, Container, makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 900,
-    marginTop: 65,
-    marginBottom: 65,
-
-  },
-  all: {
-    marginLeft: 40,
-    paddingTop: 25,
-    paddingBottom: 25,
-    marginRight: 40,
-
-  },
-  header: {
-    alignItems: 'center',
-
-  },
-  vitals: {
-
-  }
-});
+import { InputLabel, MenuItem, Select, TextField, Container } from "@material-ui/core";
 
 const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
   const { id } = useParams();
   const classes = useStyles();
-
   // Only handles when a value is changed by keystroke/inputfield clicks.
   // Does NOT handle initialization of new data.
   function submitValue(newParameter) {
@@ -62,8 +38,6 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
 
   return (
     <Container>
-
-
       <div className="container">
 
 
@@ -157,6 +131,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                 >
                   {dropdowns["procedure_successful"].map((item) => (
                     <MenuItem
+                      classes={{ root: classes.menuItem }}
                       key={"procedure_successful" + item.id}
                       value={item.id}
                     >
@@ -190,6 +165,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                 >
                   {dropdowns["procedure_response"].map((item) => (
                     <MenuItem
+                      classes={{ root: classes.menuItem }}
                       key={"procedure_response" + item.id}
                       value={item.id}
                     >
@@ -223,6 +199,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                 >
                   {dropdowns["procedure_performer"].map((item) => (
                     <MenuItem
+                      classes={{ root: classes.menuItem }}
                       key={"procedure_performer" + item.id}
                       value={item.id}
                     >
@@ -240,12 +217,11 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
 
               </div>
             )}
-
             {dropdowns.go && localTreatment && localTreatment[`${id}procedureArray`].length > 1 &&
 
               <div>
                 <h3>Medications Recorded</h3>
-                <TableContainer className={classes.vitals}>
+                <TableContainer>
                   <Table size='small'>
                     <TableHead>
                       <TableRow >

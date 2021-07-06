@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Accordion } from "@material-ui/core";
 import { AccordionDetails } from "@material-ui/core";
 import { AccordionSummary } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
 
@@ -37,6 +38,13 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "auto",
     marginRight: "auto",
   },
+  paper: {
+    marginTop: theme.spacing(1),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center'
+  }
 }));
 
 function PatientHome() {
@@ -85,37 +93,39 @@ function PatientHome() {
   }, [dropdowns.go]);
 
   return (
-    <div className="container">
-      <br />
-     
-      <TimestampButton
-        incidentMirror={incidentMirror}
-        setIncidentMirror={setIncidentMirror}
-      />
-      <br />
-      <h2>PATIENTS</h2>
-      <br />
-   
-      
-      
-      <AddEditPatient
-        formName={"patient"}
-        incidentMirror={incidentMirror}
-        setIncidentMirror={setIncidentMirror}
-        patientsMirror={patientsMirror}
-        setPatientsMirror={setPatientsMirror}
-        treatmentMirror={treatmentMirror}
-        setTreatmentMirror={setTreatmentMirror}
-        vitalsMirror={vitalsMirror}
-        setVitalsMirror={setVitalsMirror}
-      />
-      <br />
-      <br />
+    <Container component="main" maxWidth="xs">
+      <div className={classes.paper}>
+        <br />
+
+        <TimestampButton
+          incidentMirror={incidentMirror}
+          setIncidentMirror={setIncidentMirror}
+        />
+        <br />
+        <h2>PATIENTS</h2>
+        <br />
+
+
+
+        <AddEditPatient
+          formName={"patient"}
+          incidentMirror={incidentMirror}
+          setIncidentMirror={setIncidentMirror}
+          patientsMirror={patientsMirror}
+          setPatientsMirror={setPatientsMirror}
+          treatmentMirror={treatmentMirror}
+          setTreatmentMirror={setTreatmentMirror}
+          vitalsMirror={vitalsMirror}
+          setVitalsMirror={setVitalsMirror}
+        />
+        <br />
+        <br />
+      </div>
       <div className={classes.root}>
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
-          style={{backgroundColor: '#d3d3d3'}}
+          style={{ backgroundColor: '#d3d3d3' }}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -142,7 +152,7 @@ function PatientHome() {
         <Accordion
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
-          style={{backgroundColor: '#d3d3d3'}}
+          style={{ backgroundColor: '#d3d3d3' }}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -167,7 +177,7 @@ function PatientHome() {
         <br />
 
         <Accordion
-        style={{backgroundColor: '#d3d3d3'}}
+          style={{ backgroundColor: '#d3d3d3' }}
           expanded={expanded === "panel3"}
           onChange={handleChange("panel3")}
         >
@@ -194,7 +204,7 @@ function PatientHome() {
         <br />
 
         <Accordion
-        style={{backgroundColor: '#d3d3d3'}}
+          style={{ backgroundColor: '#d3d3d3' }}
           expanded={expanded === "panel4"}
           onChange={handleChange("panel4")}
         >
@@ -221,7 +231,7 @@ function PatientHome() {
         <br />
 
         <Accordion
-        style={{backgroundColor: '#d3d3d3'}}
+          style={{ backgroundColor: '#d3d3d3' }}
           expanded={expanded === "panel5"}
           onChange={handleChange("panel5")}
         >
@@ -246,7 +256,8 @@ function PatientHome() {
           </AccordionDetails>
         </Accordion>
       </div>
-    </div>
+
+    </Container>
   );
 }
 

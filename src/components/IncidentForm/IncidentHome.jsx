@@ -26,7 +26,7 @@ import useStyles from "./Styles";
 function IncidentHome() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  
+
 
   const dropdowns = useSelector((store) => store.dropdowns);
 
@@ -75,41 +75,37 @@ function IncidentHome() {
   return (
     <Container component="main" maxWidth="xs" >
       <div className={classes.paper}>
-      
-{/*     
-    <div 
-    className="container" 
-    style={{alignContent: 'center' }}
-    > */}
-      <br />
-      <br />
 
-      <TimestampButton className={classes.timestamp}
-        incidentMirror={incidentMirror}
-        setIncidentMirror={setIncidentMirror}
-      />
-       <br />
-      <h2>INCIDENT</h2>
-      <br />
-      
-      <AddEditPatient
-        formName={"incident"}
-        incidentMirror={incidentMirror}
-        setIncidentMirror={setIncidentMirror}
-        patientsMirror={patientsMirror}
-        setPatientsMirror={setPatientsMirror}
-        treatmentMirror={treatmentMirror}
-        setTreatmentMirror={setTreatmentMirror}
-        vitalsMirror={vitalsMirror}
-        setVitalsMirror={setVitalsMirror}
-      />
-      <br />
-      <br />
+
+        <br />
+
+        <TimestampButton className={classes.timestamp}
+          incidentMirror={incidentMirror}
+          setIncidentMirror={setIncidentMirror}
+        />
+        <br />
+        <h2>INCIDENT</h2>
+        <br />
+
+        <AddEditPatient
+          formName={"incident"}
+          incidentMirror={incidentMirror}
+          setIncidentMirror={setIncidentMirror}
+          patientsMirror={patientsMirror}
+          setPatientsMirror={setPatientsMirror}
+          treatmentMirror={treatmentMirror}
+          setTreatmentMirror={setTreatmentMirror}
+          vitalsMirror={vitalsMirror}
+          setVitalsMirror={setVitalsMirror}
+        />
+        <br />
+        <br />
+      </div>
       <div className={classes.root}>
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
-          style={{backgroundColor: '#d3d3d3'}}
+          style={{ backgroundColor: '#d3d3d3' }}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -118,26 +114,26 @@ function IncidentHome() {
           >
             <Typography
               classes={{ root: classes.text }}
-              
+
             >
               RESPONSE
             </Typography>
           </AccordionSummary>
-          <AccordionDetails classes={{root: classes.AccordionDetails }}>
+          <AccordionDetails classes={{ root: classes.AccordionDetails }}>
             <IncidentFormResponse
               localIncident={incidentMirror}
               setLocalIncident={setIncidentMirror}
             />
           </AccordionDetails>
         </Accordion>
-       <br />
-        
+        <br />
+
         <Accordion
           expanded={expanded === "panel3"}
           onChange={handleChange("panel3")}
-          style={{backgroundColor: '#d3d3d3'}}
+          style={{ backgroundColor: '#d3d3d3' }}
         >
-         
+
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2bh-content"
@@ -146,7 +142,7 @@ function IncidentHome() {
           >
             <Typography
               classes={{ root: classes.text }}
-              
+
             >
               SCENE
             </Typography>
@@ -157,13 +153,13 @@ function IncidentHome() {
               setLocalIncident={setIncidentMirror}
             />
           </AccordionDetails>
-          
+
         </Accordion>
         <br />
         <Accordion
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
-          style={{backgroundColor: '#d3d3d3'}}
+          style={{ backgroundColor: '#d3d3d3' }}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -173,7 +169,7 @@ function IncidentHome() {
           >
             <Typography
               classes={{ root: classes.text }}
-              
+
             >
               DISPOSITION
             </Typography>
@@ -187,9 +183,8 @@ function IncidentHome() {
         </Accordion>
         <br />
         <br />
-      
+
       </div>
-    </div>
     </Container>
   );
 }

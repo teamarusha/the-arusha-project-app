@@ -3,10 +3,19 @@ import { useState } from "react";
 
 // ----- Material UI -----
 import Button from '@material-ui/core/Button';
+import { makeStyles } from "@material-ui/styles";
 
+const useStyles = makeStyles((theme) => ({
+button: {
+  fontSize: 'large',
+  height: '10vh',
+  width: '35vh',
+}
+   
+}));
 
 function TimestampButton({ incidentMirror, setIncidentMirror }) {
-
+  const classes = useStyles();
   function submitValue(newParameter) {
     console.log(
       "Updating parameter in submitValue",
@@ -186,6 +195,8 @@ function TimestampButton({ incidentMirror, setIncidentMirror }) {
         <Button onClick={advanceDispatch} color="secondary"
           variant="contained"
           disabled={incidentMirror.dispatchButton === "Service Complete"}
+          style={{marginTop: 10}}
+          className={classes.button}
         >
           {incidentMirror.dispatchButton}
         </Button>

@@ -1,7 +1,7 @@
 import { useHistory, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { Box, Container, Grid, makeStyles } from '@material-ui/core';
+import { Box, Container, Grid, makeStyles, withStyles } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,6 +11,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import moment from 'moment';
 import React from 'react';
+
 
 const useStyles = makeStyles({
     root: {
@@ -30,9 +31,6 @@ const useStyles = makeStyles({
         alignItems: 'center',
 
     },
-    vitals: {
-
-    }
 });
 
 function FinalReport() {
@@ -131,20 +129,15 @@ function FinalReport() {
                                 <h3>VITALS</h3>
 
                                 {vit && vit.length != 0 ?
-                                    <div>
-
-                                        <div>
+                                   
 
                                             <TableContainer className={classes.vitals}>
-                                                <Table size='small' options={{
-                                                    rowStyle: {
-                                                        fontSize: 2,
-                                                    }
-                                                }}>
+                                                <Table>
+
                                                     <TableHead>
                                                         <TableRow >
-                                                            <TableCell size="small">Date</TableCell>
-                                                            <TableCell>Time</TableCell>
+                                                            <TableCell>Date</TableCell>
+                                                            <TableCell >Time</TableCell>
                                                             <TableCell>SBP</TableCell>
                                                             <TableCell>HR</TableCell>
                                                             <TableCell>PO</TableCell>
@@ -165,7 +158,7 @@ function FinalReport() {
                                                         {vit.map((item, index) => {
                                                             return (
                                                                 <TableRow hover role="checkbox" tabIndex={-1} key={item.id}>
-                                                                    <TableCell>{moment(item.vitals_timestamp).format('DD/MM/YYYY')}</TableCell>
+                                                                    <TableCell >{moment(item.vitals_timestamp).format('DD/MM/YYYY')}</TableCell>
                                                                     <TableCell>{moment(item.vitals_timestamp).format('hh:mm:ss')}</TableCell>
                                                                     <TableCell>{item.systolic_bp}</TableCell>
                                                                     <TableCell>{item.heart_rate}</TableCell>
@@ -189,9 +182,7 @@ function FinalReport() {
                                                 </Table>
 
                                             </TableContainer>
-                                        </div>
-
-                                    </div>
+                                      
                                     :
                                     <p>None</p>
                                 }
@@ -244,7 +235,7 @@ function FinalReport() {
 
                                 <h4>Medications Administered:</h4>
                                 {med && med.length != 0 ?
-                                    <div>
+                                    
 
 
                                         <TableContainer className={classes.vitals}>
@@ -288,14 +279,14 @@ function FinalReport() {
 
 
 
-                                    </div>
+                                    
                                     :
                                     <p>None</p>
                                 }
 
                                 <h4>Procedures Administered:</h4>
                                 {pro && pro.length != 0 ?
-                                    <div>
+                                    
                                         <TableContainer className={classes.vitals}>
                                             <Table size='small' options={{
                                                 rowStyle: {
@@ -338,8 +329,7 @@ function FinalReport() {
 
 
 
-                                    </div>
-
+                                   
                                     :
                                     <p>None</p>
                                 }

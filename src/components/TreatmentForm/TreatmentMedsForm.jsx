@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import useStyles from "./Styles"
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -15,33 +16,32 @@ import AddMedicationButton from "./AddMedicationButton";
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField, Container, makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 900,
-    marginTop: 65,
-    marginBottom: 65,
+// const useStyles = makeStyles({
+//   root: {
+//     maxWidth: 900,
+//     marginTop: 65,
+//     marginBottom: 65,
 
-  },
-  all: {
-    marginLeft: 40,
-    paddingTop: 25,
-    paddingBottom: 25,
-    marginRight: 40,
+//   },
+//   all: {
+//     marginLeft: 40,
+//     paddingTop: 25,
+//     paddingBottom: 25,
+//     marginRight: 40,
 
-  },
-  header: {
-    alignItems: 'center',
+//   },
+//   header: {
+//     alignItems: 'center',
 
-  },
-  vitals: {
+//   },
+//   vitals: {
 
-  }
-});
+//   }
+// });
 
 const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
   const { id } = useParams();
-  const classes = useStyles();
 
   // Only handles when a value is changed by keystroke/inputfield clicks.
   // Does NOT handle initialization of new data.
@@ -57,6 +57,8 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
       [newParameter.key]: newParameter.thing,
     });
   }
+
+  const classes = useStyles();
 
   return (
     <Container >
@@ -91,6 +93,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                   Administered Route
                 </InputLabel>
                 <Select
+                  classes={{ root: classes.select }}
                   labelId="demo-simple-select-autowidth-label"
                   id="demo-simple-select-autowidth"
                   fullWidth
@@ -109,7 +112,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 >
 
                   {dropdowns["med_admin_route"].map((item) => (
-                    <MenuItem key={"med_admin_route" + item.id} value={item.id}>
+                    <MenuItem key={"med_admin_route" + item.id} value={item.id} classes={{ root: classes.menuItem }}>
                       {item["med_admin_route_type"]}
                     </MenuItem>
                   ))}
@@ -140,6 +143,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                   Dosage Units
                 </InputLabel>
                 <Select
+                  classes={{ root: classes.select }}
                   labelId="demo-simple-select-autowidth-label"
                   id="demo-simple-select-autowidth"
                   fullWidth
@@ -157,7 +161,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 >
 
                   {dropdowns["med_dosage_units"].map((item) => (
-                    <MenuItem key={"med_dosage_units" + item.id} value={item.id}>
+                    <MenuItem key={"med_dosage_units" + item.id} value={item.id} classes={{ root: classes.menuItem }}>
                       {item["med_dosage_units_type"]}
                     </MenuItem>
                   ))}
@@ -169,6 +173,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                   Response to Medication
                 </InputLabel>
                 <Select
+                  classes={{ root: classes.select }}
                   labelId="demo-simple-select-autowidth-label"
                   id="demo-simple-select-autowidth"
                   fullWidth
@@ -188,7 +193,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 >
 
                   {dropdowns["med_response"].map((item) => (
-                    <MenuItem key={"med_response" + item.id} value={item.id}>
+                    <MenuItem key={"med_response" + item.id} value={item.id} classes={{ root: classes.menuItem }} >
                       {item["med_response_type"]}
                     </MenuItem>
                   ))}
@@ -200,6 +205,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                   Role/Type of Person Administering Medication
                 </InputLabel>
                 <Select
+                  classes={{ root: classes.select }}
                   labelId="demo-simple-select-autowidth-label"
                   id="demo-simple-select-autowidth"
                   fullWidth
@@ -219,7 +225,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 >
 
                   {dropdowns["med_admin_by"].map((item) => (
-                    <MenuItem key={"med_admin_by" + item.id} value={item.id}>
+                    <MenuItem key={"med_admin_by" + item.id} value={item.id} classes={{ root: classes.menuItem }}>
                       {item["med_admin_by_type"]}
                     </MenuItem>
                   ))}
@@ -234,54 +240,53 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
 
               </div>
             )}
-
-            {dropdowns.go && localTreatment && localTreatment[`${id}medicationArray`].length > 1 &&
-
-              <div>
-                <h3>Medications Recorded</h3>
-                <TableContainer className={classes.vitals}>
-                  <Table size='small'>
-                    <TableHead>
-                      <TableRow >
-                        <TableCell size="small">Date</TableCell>
-                        <TableCell>Time</TableCell>
-                        <TableCell>Medication</TableCell>
-                        <TableCell>Administered Route</TableCell>
-                        <TableCell>Dosage</TableCell>
-                        <TableCell>Dosage Units</TableCell>
-                        <TableCell>Response to Medication</TableCell>
-                        <TableCell>Role/Type of Person Administering Medication</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-
-                      {
-                        localTreatment[`${id}medicationArray`].map((med, i) => {
-
-                          if (med !== localTreatment[`${id}lastMedication`]) {
-
-                            return (
-                              <TableRow hover role="checkbox" tabIndex={-1} key={id + "patientmed" + med}>
-                                <TableCell>{moment(localTreatment[`${id}medicationTimestamp${med}`]).format('DD/MM/YYYY')}</TableCell>
-                                <TableCell>{moment(localTreatment[`${id}medicationTimestamp${med}`]).format('hh:mm:ss')}</TableCell>
-                                <TableCell>{localTreatment[`${id}medication${med}`]}</TableCell>
-                                <TableCell>{dropdowns['med_admin_route'][localTreatment[`${id}routeAdministered${med}`]-1]['med_admin_route_type']}</TableCell>
-                                <TableCell>{localTreatment[`${id}dosage${med}`]}</TableCell>
-                                <TableCell>{dropdowns['med_dosage_units'][localTreatment[`${id}units${med}`]-1]['med_dosage_units_type']}</TableCell>
-                                <TableCell>{dropdowns['med_response'][localTreatment[`${id}medicationResponse${med}`]-1]['med_response_type']}</TableCell>
-                                <TableCell>{dropdowns['med_admin_by'][localTreatment[`${id}medsAdminBy${med}`]-1]['med_admin_by_type']}</TableCell>
-                              </TableRow>
-                            )
-                          }
-                        })}
-                    </TableBody>
-                  </Table>
-
-                </TableContainer>
-              </div>
-            }
           </div>
         )}
+        {dropdowns.go && localTreatment && localTreatment[`${id}medicationArray`].length > 1 &&
+
+          <div>
+            <h3>Medications Recorded</h3>
+            <TableContainer className={classes.vitals}>
+              <Table size='small'>
+                <TableHead>
+                  <TableRow >
+                    <TableCell size="small">Date</TableCell>
+                    <TableCell>Time</TableCell>
+                    <TableCell>Medication</TableCell>
+                    <TableCell>Administered Route</TableCell>
+                    <TableCell>Dosage</TableCell>
+                    <TableCell>Dosage Units</TableCell>
+                    <TableCell>Response to Medication</TableCell>
+                    <TableCell>Role/Type of Person Administering Medication</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+
+                  {
+                    localTreatment[`${id}medicationArray`].map((med, i) => {
+
+                      if (med !== localTreatment[`${id}lastMedication`]) {
+
+                        return (
+                          <TableRow hover role="checkbox" tabIndex={-1} key={id + "patientmed" + med}>
+                            <TableCell>{moment(localTreatment[`${id}medicationTimestamp${med}`]).format('DD/MM/YYYY')}</TableCell>
+                            <TableCell>{moment(localTreatment[`${id}medicationTimestamp${med}`]).format('hh:mm:ss')}</TableCell>
+                            <TableCell>{localTreatment[`${id}medication${med}`]}</TableCell>
+                            <TableCell>{dropdowns['med_admin_route'][localTreatment[`${id}routeAdministered${med}`] - 1]['med_admin_route_type']}</TableCell>
+                            <TableCell>{localTreatment[`${id}dosage${med}`]}</TableCell>
+                            <TableCell>{dropdowns['med_dosage_units'][localTreatment[`${id}units${med}`] - 1]['med_dosage_units_type']}</TableCell>
+                            <TableCell>{dropdowns['med_response'][localTreatment[`${id}medicationResponse${med}`] - 1]['med_response_type']}</TableCell>
+                            <TableCell>{dropdowns['med_admin_by'][localTreatment[`${id}medsAdminBy${med}`] - 1]['med_admin_by_type']}</TableCell>
+                          </TableRow>
+                        )
+                      }
+                    })}
+                </TableBody>
+              </Table>
+
+            </TableContainer>
+          </div>
+        }
       </div>
     </Container>
   );
