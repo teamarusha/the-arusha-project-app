@@ -2,16 +2,16 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
+import useStyles from "./Styles";
 import AddProcedureButton from "./AddProcedureButton";
 
 //Material UI imports
-import { InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
+import { InputLabel, MenuItem, Select, TextField, Container } from "@material-ui/core";
 
 const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
   const { id } = useParams();
-
+  const classes = useStyles();
   // Only handles when a value is changed by keystroke/inputfield clicks.
   // Does NOT handle initialization of new data.
   function submitValue(newParameter) {
@@ -30,6 +30,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
   }
 
   return (
+    <Container>
     <div className="container">
       
 
@@ -221,6 +222,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
         </div>
       )}
     </div>
+    </Container>
   );
 };
 
