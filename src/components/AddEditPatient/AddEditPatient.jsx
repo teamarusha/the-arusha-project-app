@@ -236,7 +236,7 @@ function AddEditPatient({
                 color="secondary"
                 variant="contained"
                 key={`${value}changePatient`}
-                disabled={id === value}
+                disabled={id == value}
                 onClick={() => changePatient(value)}
               >
                 Edit Patient {value}
