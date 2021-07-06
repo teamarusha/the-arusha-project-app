@@ -79,7 +79,7 @@ function IncidentHome() {
     <Container component="main" maxWidth="xs" >
       <div className={classes.paper}>
       
-      <br />
+    
       <br />
 
       <TimestampButton className={classes.timestamp}

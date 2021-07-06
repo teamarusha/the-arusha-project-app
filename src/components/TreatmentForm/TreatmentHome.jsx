@@ -8,16 +8,46 @@ import AddEditPatient from "../AddEditPatient/AddEditPatient";
 import TimestampButton from "../TimestampButton/TimestampButton";
 
 //____________________Material UI Imports____________________
-import useStyles from "./Styles";
+
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Button,
   Typography,
-  Container
+  Container,
+  makeStyles
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: "33.33%",
+    flexShrink: 0,
+    // textAlign: 'center',
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    // color: theme.palette.text.secondary,
+  },
+
+  text: {
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  paper: {
+    marginTop: theme.spacing(1),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center'
+  }
+}));
+
 
 function TreatmentHome() {
   const classes = useStyles();
@@ -70,13 +100,15 @@ function TreatmentHome() {
 
   return (
     <Container component="main" maxWidth="xs" >
+      <div className={classes.paper}>
       <br />
-      <br />
+      
        <TimestampButton
         incidentMirror={incidentMirror}
         setIncidentMirror={setIncidentMirror}
       />
-    <div className={classes.paper}>
+      <br />
+    
       <h2>TREATMENT</h2>
       
      
