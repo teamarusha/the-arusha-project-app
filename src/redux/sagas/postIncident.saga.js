@@ -1,4 +1,4 @@
-// import { put } from '@redux-saga/core/effects';
+import { put } from '@redux-saga/core/effects';
 import axios from 'axios';
 
 function* postIncident(action) {
@@ -9,6 +9,8 @@ function* postIncident(action) {
         yield axios.post(`/api/incident`, action.payload);
 
         console.log('POST WORKED');
+        
+        yield put({ type: 'RESET_STORAGE'})
 
     } catch (error) {
         console.log('POST INCIDENT ERROR:', error);

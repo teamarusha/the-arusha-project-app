@@ -456,13 +456,13 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
                         let medTreatmentValues = [
                             patientID,
-                            patients[String(i + 1) + 'medication' + med],
-                            patients[String(i + 1) + 'routeAdministered' + med],
-                            patients[String(i + 1) + 'medsAdminBy' + med],
-                            patients[String(i + 1) + 'dosage' + med],
-                            patients[String(i + 1) + 'units' + med],
-                            patients[String(i + 1) + 'medicationResponse' + med],
-                            patients[String(i + 1) + 'medicationTimestamp' + med]
+                            treatment[String(i + 1) + 'medication' + med],
+                            treatment[String(i + 1) + 'routeAdministered' + med],
+                            treatment[String(i + 1) + 'medsAdminBy' + med],
+                            treatment[String(i + 1) + 'dosage' + med],
+                            treatment[String(i + 1) + 'units' + med],
+                            treatment[String(i + 1) + 'medicationResponse' + med],
+                            treatment[String(i + 1) + 'medicationTimestamp' + med]
                         ];
 
                         return connection.query(medTreatmentQuery, medTreatmentValues);
@@ -487,12 +487,12 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
                         let procedureValues = [
                             patientID,
-                            patients[String(i + 1) + 'procedure' + proc],
-                            patients[String(i + 1) + 'procedureAttempts' + proc],
-                            patients[String(i + 1) + 'successfulProcedure' + proc],
-                            patients[String(i + 1) + 'responseToProcedure' + proc],
-                            patients[String(i + 1) + 'procedurePerformedBy' + proc],
-                            patients[String(i + 1) + 'procedureTimestamp' + proc]
+                            treatment[String(i + 1) + 'procedure' + proc],
+                            treatment[String(i + 1) + 'procedureAttempts' + proc],
+                            treatment[String(i + 1) + 'successfulProcedure' + proc],
+                            treatment[String(i + 1) + 'responseToProcedure' + proc],
+                            treatment[String(i + 1) + 'procedurePerformedBy' + proc],
+                            treatment[String(i + 1) + 'procedureTimestamp' + proc]
                         ];
 
                         return connection.query(procedureQuery, procedureValues);
@@ -523,20 +523,20 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
                         let vitalValues = [
                             patientID,
-                            patients[String(i + 1) + 'systolicBloodPressure' + vital],
-                            patients[String(i + 1) + 'heartRate' + vital],
-                            patients[String(i + 1) + 'pulseOximetry' + vital],
-                            patients[String(i + 1) + 'respiratoryRate' + vital],
-                            patients[String(i + 1) + 'bloodGlucoseLevel' + vital],
-                            patients[String(i + 1) + 'glasgowComaScoreEye' + vital],
-                            patients[String(i + 1) + 'glasgowComaScoreVerbal' + vital],
-                            patients[String(i + 1) + 'glasgowComaScoreMotor' + vital],
-                            patients[String(i + 1) + 'glasgowComaScoreQualifier' + vital],
-                            patients[String(i + 1) + 'responsivenessLevel' + vital],
-                            patients[String(i + 1) + 'painScaleScore' + vital],
-                            patients[String(i + 1) + 'strokeScaleScore' + vital],
-                            patients[String(i + 1) + 'strokeScaleType' + vital],
-                            patients[String(i + 1) + 'vitalTimestamp' + vital]
+                            vitals[String(i + 1) + 'systolicBloodPressure' + vital],
+                            vitals[String(i + 1) + 'heartRate' + vital],
+                            vitals[String(i + 1) + 'pulseOximetry' + vital],
+                            vitals[String(i + 1) + 'respiratoryRate' + vital],
+                            vitals[String(i + 1) + 'bloodGlucoseLevel' + vital],
+                            vitals[String(i + 1) + 'glasgowComaScoreEye' + vital],
+                            vitals[String(i + 1) + 'glasgowComaScoreVerbal' + vital],
+                            vitals[String(i + 1) + 'glasgowComaScoreMotor' + vital],
+                            vitals[String(i + 1) + 'glasgowComaScoreQualifier' + vital],
+                            vitals[String(i + 1) + 'responsivenessLevel' + vital],
+                            vitals[String(i + 1) + 'painScaleScore' + vital],
+                            vitals[String(i + 1) + 'strokeScaleScore' + vital],
+                            vitals[String(i + 1) + 'strokeScaleType' + vital],
+                            vitals[String(i + 1) + 'vitalTimestamp' + vital]
                         ];
 
                         return connection.query(vitalQuery, vitalValues);

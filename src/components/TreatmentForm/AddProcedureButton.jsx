@@ -7,7 +7,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
 function AddProcedureButton({ treatmentMirror, setTreatmentMirror }) {
-  const treatment = useSelector((store) => store.treatment);
+  // const treatment = useSelector((store) => store.treatment);
 
   // router/redux
   const history = useHistory();

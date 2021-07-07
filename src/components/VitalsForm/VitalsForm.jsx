@@ -75,24 +75,6 @@ const VitalsForm = () => {
     localStorage.setItem("vitals", JSON.stringify(localVitals));
   }, [localVitals]);
 
-  // IMPORTED FOR DEMO
-
-  useEffect(() => {
-    console.log("UPDATING incident browser storage", incidentMirror);
-    localStorage.setItem("incident", JSON.stringify(incidentMirror));
-  }, [incidentMirror]);
-
-  useEffect(() => {
-    console.log("UPDATING patients browser storage", patientsMirror);
-    localStorage.setItem("patients", JSON.stringify(patientsMirror));
-  }, [patientsMirror]);
-
-  useEffect(() => {
-    console.log("UPDATING treatment browser storage", treatmentMirror);
-    localStorage.setItem("treatment", JSON.stringify(treatmentMirror));
-  }, [treatmentMirror]);
-
-
 
   // Only handles when a value is changed by keystroke/inputfield clicks.
   // Does NOT handle initialization of new data.
@@ -446,8 +428,8 @@ const VitalsForm = () => {
               />
               <br />
               <br />
-              {/* 
-              {dropdowns.go && localVitals && localVitals[`${id}vitalsArray`] &&
+              
+              {dropdowns.go && localVitals && localVitals[`${id}lastVital`] > 1 &&
 
                 <div>
                   <h2>Vitals Recorded</h2>
@@ -506,7 +488,7 @@ const VitalsForm = () => {
                   </TableContainer>
                 </div>
               }
-              */}
+             
               <br />
               <br />
               <br />

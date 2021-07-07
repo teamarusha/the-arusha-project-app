@@ -369,6 +369,7 @@ CREATE TABLE "responsiveness_level" (
 
 INSERT INTO "responsiveness_level" ("responsiveness_level_type")
 VALUES
+('N/A'),
 ('Alert'),
 ('Verbal'),
 ('Painful'),
@@ -381,6 +382,7 @@ CREATE TABLE "pain_scale" (
 
 INSERT INTO "pain_scale" ("pain_scale_type")
 VALUES
+("N/A"),
 (0),
 (1),
 (2),
@@ -400,6 +402,7 @@ CREATE TABLE "stroke_score" (
 
 INSERT INTO "stroke_score" ("stroke_score_type")
 VALUES
+('N/A'),
 ('Negative'),
 ('Non-Conclusive'),
 ('Positive');
@@ -411,6 +414,7 @@ CREATE TABLE "stroke_scale" (
 
 INSERT INTO "stroke_scale" ("stroke_scale_type")
 VALUES
+('N/A'),
 ('Cincinnati Prehospital Stroke Scale (CPSS)'),
 ('Los Angeles Prehospital Stroke Screen (LAPSS)'),
 ('Massachusetts Stroke Scale (MSS)'),

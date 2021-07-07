@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
 function AddVitalsButton({ vitalsMirror, setVitalsMirror }) {
-  const vitals = useSelector((store) => store.vitals);
+  // const vitals = useSelector((store) => store.vitals);
 
   // router/redux
   const { id } = useParams();

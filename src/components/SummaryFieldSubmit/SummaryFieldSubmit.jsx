@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TimestampButton from "../TimestampButton/TimestampButton";
 //____________________Material UI Imports____________________
 import { Button, TextField, Container, Typography } from "@material-ui/core";
-import {makeStyles} from '@material-ui/styles'
+import { makeStyles } from '@material-ui/styles'
+import { useHistory } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -17,8 +18,11 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function SummaryFieldSubmit(params) {
-  const classes= useStyles();
+  const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const incident = useSelector(store => store.incident)
 
 
   const [incidentMirror, setIncidentMirror] = useState(
@@ -49,13 +53,29 @@ function SummaryFieldSubmit(params) {
   const [errorMessages, setErrorMessages] = useState([]);
   const [allowSubmission, setAllowSubmission] = useState(true);
 
+  // Check inputs for missing values and errors as the component mounts
   useEffect(() => {
     checkInputs();
   }, [])
 
+  // Watches the incident reducer, if reinitialize is true, go to incident/1 and reinitialize the form
+  useEffect(() => {
+    if (incident.reinitialize === true) {
+      history.push('/incident/1');
+    }
+  }, [incident])
+
+  // Watches as a summary is input, unlocks submission if it is satisfactory.
+  useEffect(() => {
+    if (incidentMirror.incidentSummary !== "") {
+      checkInputs();
+    }
+  }, [incidentMirror])
+
   function checkInputs() {
     let incidentErrorMessage = `Missing input from incident form`;
-    let allErrorMessages = []
+    let allErrorMessages = [];
+    setAllowSubmission(true);
 
     // The whole check will loop through this array to determine where any incompletes are
     let patientArray = patientsMirror.patientArray;
@@ -204,50 +224,50 @@ function SummaryFieldSubmit(params) {
   return (
     <Container component="main" maxWidth="xs" >
       <div className={classes.paper}>
-   
-    <div>
-      {incidentMirror && (
+
         <div>
-          <br />
-          <br />
-          
-          <TimestampButton
-            incidentMirror={incidentMirror}
-            setIncidentMirror={setIncidentMirror}
-          />
-          <br />
-          {errorMessages && errorMessages.map((message, i) => <Typography style={{ color: 'red' }} key={i+'errormessage'}>{message}</Typography>)}
-          {/* <p>{JSON.stringify(errorMessages)}</p> */}
-          {/* <button onClick={checkInputs}>CHECK</button> */}
-           <h2>SUMMARY</h2>
-          
-         
-          <TextField
-            id="outlined-basic"
-            multiline
-            rows={12}
-            variant="outlined"
-            fullWidth
-            value={incidentMirror.incidentSummary}
-            onChange={(event) =>
-              submitValue({
-                key: `incidentSummary`,
-                thing: event.target.value,
-              })
-            }
-          ></TextField>
-          <br />
-          <br />
-          <Button color="primary" variant="contained" disabled={!allowSubmission} onClick={submitSummary}>
-            Submit Report
-          </Button>
-            <br />
-            <br />
-        
+          {incidentMirror && (
+            <div>
+              <br />
+              <br />
+
+              <TimestampButton
+                incidentMirror={incidentMirror}
+                setIncidentMirror={setIncidentMirror}
+              />
+              <br />
+              {errorMessages && errorMessages.map((message, i) => <Typography style={{ color: 'red' }} key={i + 'errormessage'}>{message}</Typography>)}
+              {/* <p>{JSON.stringify(errorMessages)}</p> */}
+              {/* <button onClick={checkInputs}>CHECK</button> */}
+              <h2>SUMMARY</h2>
+
+
+              <TextField
+                id="outlined-basic"
+                multiline
+                rows={12}
+                variant="outlined"
+                fullWidth
+                value={incidentMirror.incidentSummary}
+                onChange={(event) =>
+                  submitValue({
+                    key: `incidentSummary`,
+                    thing: event.target.value,
+                  })
+                }
+              ></TextField>
+              <br />
+              <br />
+              <Button color="primary" variant="contained" disabled={!allowSubmission} onClick={submitSummary}>
+                Submit Report
+              </Button>
+              <br />
+              <br />
+
+            </div>
+          )}
         </div>
-      )}
-    </div>
-    </div>
+      </div>
     </Container>
   );
 }

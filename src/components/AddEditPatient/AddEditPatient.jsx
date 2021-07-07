@@ -27,54 +27,75 @@ function AddEditPatient({
   const history = useHistory();
   const { id } = useParams();
 
-  // Initializing all variables if this is the first form clicked on
+  // Initializing all variables if this is the first form clicked on 
+  // OR if you are coming from the form submission, check for incident reinitialization
   useEffect(() => {
-    // Initialize INCIDENT
-    if (incidentMirror === null) {
-      localStorage.setItem("incident", JSON.stringify(incident));
-      setIncidentMirror(incident);
-    } else {
-      dispatch({
-        type: "SET_INCIDENT",
-        payload: JSON.parse(localStorage.getItem("incident")),
-      });
-      setIncidentMirror(JSON.parse(localStorage.getItem("incident")));
-    }
+    // Reinitialize localStorage if we just submit the form
+    if (incident.reinitialize === true) {
+      // Resets reinitialize value of reducer to false
+      dispatch({ type: "REINITIALIZE_INCIDENT" });
 
-    // Initialize TREATMENT
-    if (treatmentMirror === null) {
+      // Reinitialize INCIDENT Local Storage
+      localStorage.setItem("incident", JSON.stringify(incident));
+      setIncidentMirror({ ...incident, ['reinitialize']: false });
+      // Reinitialize TREATMENT Local Storage
       localStorage.setItem("treatment", JSON.stringify(treatment));
       setTreatmentMirror(treatment);
-    } else {
-      dispatch({
-        type: "SET_TREATMENT",
-        payload: JSON.parse(localStorage.getItem("treatment")),
-      });
-      setTreatmentMirror(JSON.parse(localStorage.getItem("treatment")));
-    }
-
-    // Initialize VITALS
-    if (vitalsMirror === null) {
+      // Reinitialize VITALS Local Storage
       localStorage.setItem("vitals", JSON.stringify(vitals));
       setVitalsMirror(vitals);
-    } else {
-      dispatch({
-        type: "SET_VITALS",
-        payload: JSON.parse(localStorage.getItem("vitals")),
-      });
-      setVitalsMirror(JSON.parse(localStorage.getItem("vitals")));
-    }
-
-    // // Initialize PATIENTS
-    if (patientsMirror === null) {
+      // Reinitialize PATIENTS Local Storage
       localStorage.setItem("patients", JSON.stringify(patients));
       setPatientsMirror(patients);
+
     } else {
-      dispatch({
-        type: "SET_PATIENTS",
-        payload: JSON.parse(localStorage.getItem("patients")),
-      });
-      setPatientsMirror(JSON.parse(localStorage.getItem("patients")));
+      // Initialize INCIDENT
+      if (incidentMirror === null) {
+        localStorage.setItem("incident", JSON.stringify(incident));
+        setIncidentMirror(incident);
+      } else {
+        // dispatch({
+        //   type: "SET_INCIDENT",
+        //   payload: JSON.parse(localStorage.getItem("incident")),
+        // });
+        setIncidentMirror(JSON.parse(localStorage.getItem("incident")));
+      }
+
+      // Initialize TREATMENT
+      if (treatmentMirror === null) {
+        localStorage.setItem("treatment", JSON.stringify(treatment));
+        setTreatmentMirror(treatment);
+      } else {
+        // dispatch({
+        //   type: "SET_TREATMENT",
+        //   payload: JSON.parse(localStorage.getItem("treatment")),
+        // });
+        setTreatmentMirror(JSON.parse(localStorage.getItem("treatment")));
+      }
+
+      // Initialize VITALS
+      if (vitalsMirror === null) {
+        localStorage.setItem("vitals", JSON.stringify(vitals));
+        setVitalsMirror(vitals);
+      } else {
+        // dispatch({
+        //   type: "SET_VITALS",
+        //   payload: JSON.parse(localStorage.getItem("vitals")),
+        // });
+        setVitalsMirror(JSON.parse(localStorage.getItem("vitals")));
+      }
+
+      // // Initialize PATIENTS
+      if (patientsMirror === null) {
+        localStorage.setItem("patients", JSON.stringify(patients));
+        setPatientsMirror(patients);
+      } else {
+        // dispatch({
+        //   type: "SET_PATIENTS",
+        //   payload: JSON.parse(localStorage.getItem("patients")),
+        // });
+        setPatientsMirror(JSON.parse(localStorage.getItem("patients")));
+      }
     }
   }, []);
 
@@ -176,7 +197,7 @@ function AddEditPatient({
       ...treatmentMirror,
       [newPatientID + "medicationArray"]: [1],
       [newPatientID + "lastMedication"]: 1,
-      [newPatientID + 'medicationTimestamp1']:"",
+      [newPatientID + 'medicationTimestamp1']: "",
       [newPatientID + "medication1"]: "",
       [newPatientID + "routeAdministered1"]: "",
       [newPatientID + "dosage1"]: "",
@@ -185,7 +206,7 @@ function AddEditPatient({
       [newPatientID + "medsAdminBy1"]: "",
       [newPatientID + "procedureArray"]: [1],
       [newPatientID + "lastProcedure"]: 1,
-      [newPatientID + 'procedureTimestamp1']:"",
+      [newPatientID + 'procedureTimestamp1']: "",
       [newPatientID + "procedure1"]: "",
       [newPatientID + "procedureAttempts1"]: "",
       [newPatientID + "successfulProcedure1"]: "",
@@ -205,11 +226,11 @@ function AddEditPatient({
       [newPatientID + "glasgowComaScoreEye1"]: "",
       [newPatientID + "glasgowComaScoreVerbal1"]: "",
       [newPatientID + "glasgowComaScoreMotor1"]: "",
-      [newPatientID + "glasgowComaScoreQualifier1"]: "",
-      [newPatientID + "painScaleScore1"]: "",
-      [newPatientID + "strokeScaleScore1"]: "",
-      [newPatientID + "strokeScaleType1"]: "",
-      [newPatientID + 'vitalTimestamp1']:""
+      [newPatientID + "glasgowComaScoreQualifier1"]: 1,
+      [newPatientID + "painScaleScore1"]: 1,
+      [newPatientID + "strokeScaleScore1"]: 1,
+      [newPatientID + "strokeScaleType1"]: 1,
+      [newPatientID + 'vitalTimestamp1']: ""
     });
   }
 
@@ -223,15 +244,15 @@ function AddEditPatient({
     <div>
       {patientsMirror && (
         <div>
-            <Button color="primary" variant="contained" onClick={addPatient}>
-              Add Patient
-            </Button>
-            <br />
+          <Button color="primary" variant="contained" onClick={addPatient}>
+            Add Patient
+          </Button>
+          <br />
           <br />
           <br />
           {patientsMirror &&
             patientsMirror.patientArray.map((value) => (
-            
+
               <Button
                 color="secondary"
                 variant="contained"
@@ -243,8 +264,8 @@ function AddEditPatient({
                 Edit Patient {value}
               </Button>
             ))}
-          
-         
+
+
         </div>
       )}
     </div>

@@ -70,11 +70,6 @@ function PatientHome() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  // ____________________WATCHER FUNCTION____________________
-  useEffect(() => {
-    console.log("UPDATING patients browser storage", patientsMirror);
-    localStorage.setItem("patients", JSON.stringify(patientsMirror));
-  }, [patientsMirror]);
   // ____________________DROPDOWNS____________________
   const localDropdownMirror = JSON.parse(localStorage.getItem("dropdowns"));
 

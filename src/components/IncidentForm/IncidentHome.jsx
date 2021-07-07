@@ -20,13 +20,9 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import useStyles from "./Styles";
 
-
-
-
 function IncidentHome() {
   const classes = useStyles();
   const dispatch = useDispatch();
-
 
   const dropdowns = useSelector((store) => store.dropdowns);
 
@@ -48,11 +44,6 @@ function IncidentHome() {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  // ____________________WATCHER FUNCTION____________________
-  useEffect(() => {
-    console.log("UPDATING browser storage", incidentMirror);
-    localStorage.setItem("incident", JSON.stringify(incidentMirror));
-  }, [incidentMirror]);
 
   // ____________________DROPDOWNS____________________
   const localDropdownMirror = JSON.parse(localStorage.getItem("dropdowns"));

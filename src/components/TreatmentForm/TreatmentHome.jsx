@@ -52,7 +52,7 @@ function TreatmentHome() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const dropdowns = useSelector((store) => store.dropdowns);
-  const localTreatment = JSON.parse(localStorage.getItem("treatment"));
+  // const [localTreatment, setLocalTreatment] = useState(JSON.parse(localStorage.getItem("treatment")));
   const [expanded, setExpanded] = useState(false);
   const [incidentMirror, setIncidentMirror] = useState(
     JSON.parse(localStorage.getItem("incident"))
@@ -70,11 +70,6 @@ function TreatmentHome() {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  // ____________________WATCHER FUNCTION____________________
-  useEffect(() => {
-    console.log("UPDATING browser storage", localTreatment);
-    localStorage.setItem("treatment", JSON.stringify(localTreatment));
-  }, [localTreatment]);
 
   // ____________________DROPDOWNS____________________
   const localDropdownMirror = JSON.parse(localStorage.getItem("dropdowns"));
@@ -120,6 +115,7 @@ function TreatmentHome() {
           vitalsMirror={vitalsMirror}
           setVitalsMirror={setVitalsMirror}
         />
+        
         <br />
         <br />
       </div>
