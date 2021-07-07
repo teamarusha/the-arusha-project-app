@@ -68,6 +68,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
             Gender
           </InputLabel>
           <Select
+            classes={{ root: classes.menuItem }}
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth
@@ -79,9 +80,9 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
               })
             }
           >
-         
+
             {dropdowns["gender"].map((item) => (
-              <MenuItem key={"gender" + item.id} value={item.id} classes={{root: classes.menuItem}}>
+              <MenuItem key={"gender" + item.id} value={item.id} classes={{ root: classes.menuItem }}>
                 {item[`gender_type`]}
               </MenuItem>
             ))}
@@ -91,6 +92,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           <br />
           <InputLabel id="demo-simple-select-autowidth-label">Race</InputLabel>
           <Select
+            classes={{ root: classes.menuItem }}
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth
@@ -102,9 +104,9 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
               })
             }
           >
-            
+
             {dropdowns["race"].map((item) => (
-              <MenuItem key={"race" + item.id} value={item.id} classes={{root: classes.menuItem}}>
+              <MenuItem key={"race" + item.id} value={item.id} classes={{ root: classes.menuItem }}>
                 {item[`race_type`]}
               </MenuItem>
             ))}
@@ -112,8 +114,8 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           </Select>{" "}
           <br />
           <br />
-            <br />
-            <TextField
+          <br />
+          <TextField
             id="date"
             label="DOB:"
             type="date"
@@ -161,15 +163,15 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
               })
             }
           >
-           
+
             {dropdowns["age_units"].map((item) => (
-              <MenuItem key={"age_units" + item.id} value={item.id} classes={{root: classes.menuItem}}>
+              <MenuItem key={"age_units" + item.id} value={item.id} classes={{ root: classes.menuItem }}>
                 {item[`age_units_type`]}
               </MenuItem>
             ))}
           </Select>{" "}
           <br />
-          
+
           <br />
           <br />
           <TextField

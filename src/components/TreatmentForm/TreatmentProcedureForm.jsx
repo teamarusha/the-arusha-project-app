@@ -49,6 +49,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                   Procedure Type
                 </InputLabel>
                 <Select
+                  classes={{ root: classes.menuItem }}
                   labelId="demo-simple-select-autowidth-label"
                   id="demo-simple-select-autowidth"
                   fullWidth
@@ -180,6 +181,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                   Role/Type of Person Performing Procedure
                 </InputLabel>
                 <Select
+                  classes={{ root: classes.menuItem }}
                   labelId="demo-simple-select-autowidth-label"
                   id="demo-simple-select-autowidth"
                   fullWidth
