@@ -27,11 +27,18 @@ function AddEditPatient({
   const history = useHistory();
   const { id } = useParams();
 
-  // Initializing all variables if this is the first form clicked on 
+  // KEY PIECE OF FUNCTIONALITY FOR THE APP - DATA INITIALIZATION
+  // If this is the first time reaching one of the form pages, localStorage will be empty
+    // if this is the case, we set the localStorage for each value to be the default corresponding value from Redux
+  // If we are coming from the Summary page, the reinitialize value of the incident reducer will be true, 
+    // if this is the case, we clear out localStorage, 
+    // then we set the localStorage for each value to be the default corresponding value from Redux 
   // OR if you are coming from the form submission, check for incident reinitialization
   useEffect(() => {
+
     // Reinitialize localStorage if we just submit the form
     if (incident.reinitialize === true) {
+
       // Resets reinitialize value of reducer to false
       dispatch({ type: "REINITIALIZE_INCIDENT" });
 
