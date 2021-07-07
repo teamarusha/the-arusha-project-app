@@ -157,7 +157,7 @@ function FinalReport() {
                                                     <TableBody>
                                                         {vit.map((item, index) => {
                                                             return (
-                                                                <TableRow hover role="checkbox" tabIndex={-1} key={item.id}>
+                                                                <TableRow hover role="checkbox" tabIndex={-1} key={'vitals'+item.id}>
                                                                     <TableCell >{moment(item.vitals_timestamp).format('DD/MM/YYYY')}</TableCell>
                                                                     <TableCell>{moment(item.vitals_timestamp).format('hh:mm:ss')}</TableCell>
                                                                     <TableCell>{item.systolic_bp}</TableCell>
@@ -259,7 +259,7 @@ function FinalReport() {
                                                 <TableBody>
                                                     {med.map((item, index) => {
                                                         return (
-                                                            <TableRow hover role="checkbox" tabIndex={-1} key={item.id}>
+                                                            <TableRow hover role="checkbox" tabIndex={-1} key={'meds'+item.id}>
                                                                 <TableCell>{moment(item.med_timestamp).format('DD/MM/YYYY')}</TableCell>
                                                                 <TableCell>{moment(item.med_timestamp).format('hh:mm:ss')}</TableCell>
                                                                 <TableCell>{item.med_name}</TableCell>
@@ -308,7 +308,7 @@ function FinalReport() {
                                                 <TableBody>
                                                     {pro.map((item, index) => {
                                                         return (
-                                                            <TableRow hover role="checkbox" tabIndex={-1} key={item.id}>
+                                                            <TableRow hover role="checkbox" tabIndex={-1} key={'pro'+item.id}>
 
 
                                                                 <TableCell>{moment(item.procedure_timestamp).format('DD/MM/YYYY')}</TableCell>
