@@ -88,7 +88,7 @@ const VitalsForm = () => {
     setLocalVitals({ ...localVitals, [newParameter.key]: newParameter.thing });
   }
 
-  
+
 
   return (
     <Container component="main" maxWidth="xs" >
@@ -396,7 +396,7 @@ const VitalsForm = () => {
                 Stroke Scale Type
               </InputLabel>
               <Select
-
+                classes={{ root: classes.menuItem }}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
@@ -414,7 +414,7 @@ const VitalsForm = () => {
               >
 
                 {dropdowns["stroke_scale"].map((item) => (
-                  <MenuItem key={"stroke_scale" + item.id} value={item.id}>
+                  <MenuItem key={"stroke_scale" + item.id} value={item.id} classes={{ root: classes.menuItem }}>
                     {item["stroke_scale_type"]}
                   </MenuItem>
                 ))}
@@ -428,7 +428,7 @@ const VitalsForm = () => {
               />
               <br />
               <br />
-              
+
               {dropdowns.go && localVitals && localVitals[`${id}lastVital`] > 1 &&
 
                 <div>
@@ -488,7 +488,7 @@ const VitalsForm = () => {
                   </TableContainer>
                 </div>
               }
-             
+
               <br />
               <br />
               <br />
