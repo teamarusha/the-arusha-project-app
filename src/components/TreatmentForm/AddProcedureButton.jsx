@@ -31,7 +31,7 @@ function AddProcedureButton({ treatmentMirror, setTreatmentMirror }) {
       // Instead it looks at the ProcedureArray and adds the next procedure based on that
       // THIS ID IS NOT THE Procedure ID FROM THE DATABASE,
       // THIS VALUE MEANS NOTHING AFTER SUBMISSION
-      let newProcedureID = treatmentMirror[`${id}procedureArray`].length + 1;
+      let newProcedureID = treatmentMirror[`${id}lastProcedure`] + 1;
       console.log("new procedure ID", newProcedureID);
 
       const timestamp = Date.now();
