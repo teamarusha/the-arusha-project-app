@@ -377,23 +377,23 @@ VALUES
 
 CREATE TABLE "pain_scale" (
     "id" SERIAL PRIMARY KEY,
-    "pain_scale_type" int
+    "pain_scale_type" varchar(10)
 );
 
 INSERT INTO "pain_scale" ("pain_scale_type")
 VALUES
-("N/A"),
-(0),
-(1),
-(2),
-(3),
-(4),
-(5),
-(6),
-(7),
-(8),
-(9),
-(10);
+('N/A'),
+('0'),
+('1'),
+('2'),
+('3'),
+('4'),
+('5'),
+('6'),
+('7'),
+('8'),
+('9'),
+('10');
 
 CREATE TABLE "stroke_score" (
     "id" SERIAL PRIMARY KEY,
