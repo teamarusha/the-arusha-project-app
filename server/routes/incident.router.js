@@ -518,6 +518,9 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
                     if (vital !== vitals[String(i + 1) + "lastVital"]) {
 
+                        // console.log('ADDING VITALS', patientID, i+1, vital,  String(i + 1) + 'systolicBloodPressure' + vital);
+                        
+
                         let vitalValues = [
                             patientID,
                             patients[String(i + 1) + 'systolicBloodPressure' + vital],

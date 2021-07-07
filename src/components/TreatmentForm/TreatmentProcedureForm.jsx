@@ -217,10 +217,10 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
 
               </div>
             )}
-            {dropdowns.go && localTreatment && localTreatment[`${id}procedureArray`].length > 1 &&
+            {/* {dropdowns.go && localTreatment && localTreatment[`${id}procedureArray`] &&
 
               <div>
-                <h3>Medications Recorded</h3>
+                <h3>Procedures Recorded</h3>
                 <TableContainer>
                   <Table size='small'>
                     <TableHead>
@@ -259,7 +259,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
 
                 </TableContainer>
               </div>
-            }
+            } */}
           </div>
         )}
       </div>
