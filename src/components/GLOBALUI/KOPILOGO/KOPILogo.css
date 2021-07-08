@@ -1,8 +1,15 @@
+/* STYLING DEPENDENCIES FOR LOGOS */
+
+/* POSITIONS LOGO FOR NON ADMIN USERS TO THE RIGHT
+OF THE APP BAR AT ALL TIMES */
 .mobileLogo {
     margin-left: auto;
     position: static;
 }
 
+
+/* POSITIONS LOGO FOR ADMIN USERS TO THE LEFT
+OF THE APP BAR AT ALL TIMES */
 .adminLogo {
     margin-right: auto;
     position: static;

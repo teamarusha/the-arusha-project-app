@@ -1,21 +1,16 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import { Typography, Container, Grid } from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import KOPIAdminLogo from "../GLOBALUI/KOPILOGO/KOPIAdminLogo";
 import { makeStyles } from "@material-ui/styles";
-import SubdirectoryArrowLeftIcon from '@material-ui/icons/SubdirectoryArrowLeft';
 import LogOutButton from "../LogOutButton/LogOutButton";
 import { ThemeProvider } from '@material-ui/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
-import globalUseStyle from "../GLOBALUI/globalUseStyles";
-import { useHistory } from "react-router";
 
 
 // ADMIN HEADER COMPONENT STYLING
-// const useStyles= globalUseStyle();
-
 const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
@@ -48,9 +43,6 @@ giContainer: {
   display: 'contents',
   justifyContent: 'center'
 },
-
-
-
 }));
 
 
@@ -70,10 +62,12 @@ function ElevationScroll(props) {
 
 
 // ADMIN HEADER COMPONENT
+// NOTE: We did not add a button to return to the previous page, this can still 
+// be achieved using the browser's back arrow.
+
 function AdminHeader(props) {
-  const history = useHistory();
   const classes = useStyles();
-  // const [toggleArrow, setToggleArrow] = useState(false)
+  
 
   return (
     <React.Fragment>
@@ -84,7 +78,7 @@ function AdminHeader(props) {
               <Grid container direction="row" alignContent='center' classes={{root: classes.giContainer}} xl>
        
          
-         {/* className={classes.adlogo} */}
+         
           <Grid item xs={4} s={4} md={4} lg={4} xl={4} classes={{root: classes.gi1}}>
             <KOPIAdminLogo />
             </Grid>

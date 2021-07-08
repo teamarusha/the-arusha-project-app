@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import createMuiTheme from '../GLOBALUI/Theme';
 
+// STYLING DEPENDENCY FOR GLOBAL COMPONENTS THROUGHOUT THE APPLICATION
 
 const globalUseStyle = makeStyles((theme) => ({
 
