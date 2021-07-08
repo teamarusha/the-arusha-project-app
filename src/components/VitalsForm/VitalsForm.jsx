@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import useStyles from "./Styles"
 
-
 import AddVitalsButton from "./AddVitalsButton";
 import AddEditPatient from "../AddEditPatient/AddEditPatient";
 import TimestampButton from "../TimestampButton/TimestampButton";
@@ -24,14 +23,15 @@ import {
   Select,
   TextField,
   Container,
-  makeStyles
 } from "@material-ui/core";
 
 const VitalsForm = () => {
+  //DECLARE VARIABLES FOR USE OF FUNCTIONS
   const classes = useStyles();
   const dispatch = useDispatch();
   const { id } = useParams();
 
+  // GRABS DROPDOWNS FROM DROPDOWN REDUCER
   const dropdowns = useSelector((store) => store.dropdowns);
 
   const [localVitals, setLocalVitals] = useState(
@@ -95,16 +95,15 @@ const VitalsForm = () => {
       <div className={classes.paper}>
 
         <br />
+        {/* RENDERS TIMESTAMP BUTTON */}
         <TimestampButton
           incidentMirror={incidentMirror}
           setIncidentMirror={setIncidentMirror}
         />
         <br />
-
         <h2>VITALS</h2>
-
         <br />
-
+        {/* RENDERS ADD PATIENT AND EDIT PATIENT BUTTONS FROM THIS COMPONENT */}
         <AddEditPatient
           formName={"vitals"}
           incidentMirror={incidentMirror}
@@ -120,10 +119,9 @@ const VitalsForm = () => {
         <br />
       </div>
 
+      {/* TEXT FIELD AND DROPDOWN INPUTS FOR VITALS */}
       {localVitals && (
         <div>
-
-
           <TextField
             id="outlined-basic"
             label="Systolic Blood Pressure (SBP)"
@@ -422,13 +420,14 @@ const VitalsForm = () => {
               <br />
               <br />
               <br />
+              {/* ON CLICK SAVES ADDED VITALS */}
               <AddVitalsButton
                 vitalsMirror={localVitals}
                 setVitalsMirror={setLocalVitals}
               />
               <br />
               <br />
-
+              {/* TABLE THAT RENDERS ALL ADDED VITALS */}
               {dropdowns.go && localVitals && localVitals[`${id}lastVital`] > 1 &&
 
                 <div>

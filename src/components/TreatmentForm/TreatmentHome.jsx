@@ -19,6 +19,8 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
+
+// ADJUSTS STYLING FOR MUI COMPONENTS WITH THESE CLASSES
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -27,11 +29,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     flexBasis: "33.33%",
     flexShrink: 0,
-    // textAlign: 'center',
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    // color: theme.palette.text.secondary,
   },
 
   text: {
@@ -49,10 +49,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 function TreatmentHome() {
+  // DECLARE VARIABLES FOR USE OF THESE FUNCTIONS
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  // GRAB DROPDOWNS STORED IN DROPDOWNS REDUCER
   const dropdowns = useSelector((store) => store.dropdowns);
-  // const [localTreatment, setLocalTreatment] = useState(JSON.parse(localStorage.getItem("treatment")));
+
   const [expanded, setExpanded] = useState(false);
   const [incidentMirror, setIncidentMirror] = useState(
     JSON.parse(localStorage.getItem("incident"))
@@ -92,18 +95,16 @@ function TreatmentHome() {
     <Container component="main" maxWidth="xs" >
       <div className={classes.paper}>
         <br />
-
+        {/* RENDER TIMESTAMP BUTTON */}
         <TimestampButton
           incidentMirror={incidentMirror}
           setIncidentMirror={setIncidentMirror}
         />
         <br />
-
         <h2>TREATMENT</h2>
-
-
         <br />
 
+        {/* ADD PATIENT AND EDIT PATIENT BUTTONS */}
         <AddEditPatient
           formName={"treatment"}
           incidentMirror={incidentMirror}
@@ -115,11 +116,11 @@ function TreatmentHome() {
           vitalsMirror={vitalsMirror}
           setVitalsMirror={setVitalsMirror}
         />
-        
         <br />
         <br />
       </div>
       <div className={classes.root}>
+        {/* MEDICATION ADMINISTERED ACCORDIAN */}
         <Accordion
           style={{ backgroundColor: '#d3d3d3' }}
           expanded={expanded === "panel1"}
@@ -145,9 +146,9 @@ function TreatmentHome() {
             />
           </AccordionDetails>
         </Accordion>
-
         <br />
 
+        {/* PROCEDURES ADMINISTERED ACCORDIAN */}
         <Accordion
           style={{ backgroundColor: '#d3d3d3' }}
 

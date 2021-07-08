@@ -34,6 +34,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
     <div className="container">
       {patientsMirror && dropdowns.go && (
         <div>
+          {/* PATIENT FIRST NAME TEXTFIELD */}
           <TextField
             id="outlined-basic"
             label="First Name"
@@ -49,6 +50,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           &nbsp;
           <br />
           <br />
+          {/* PATIENT LAST NAME TEXTFIELD */}
           <TextField
             id="outlined-basic"
             label="Last Name"
@@ -64,6 +66,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           <br />
           <br />
           <br />
+          {/* GENDER DROPDOWN MENU */}
           <InputLabel id="demo-simple-select-autowidth-label">
             Gender
           </InputLabel>
@@ -90,6 +93,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           <br />
           <br />
           <br />
+          {/* RACE DROPDOWN MENU */}
           <InputLabel id="demo-simple-select-autowidth-label">Race</InputLabel>
           <Select
             classes={{ root: classes.menuItem }}
@@ -115,6 +119,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           <br />
           <br />
           <br />
+          {/* DATE OF BIRTH TEXTFIELD */}
           <TextField
             id="date"
             label="DOB:"
@@ -126,8 +131,6 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
                 thing: event.target.value,
               })
             }
-            // defaultValue="0000-00-00"
-            // className={classes.textField}
             InputLabelProps={{
               shrink: true,
             }}
@@ -135,6 +138,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           <br />
           <br />
           <br />
+          {/* AGE TEXTFIELD */}
           <TextField
             id="outlined-basic"
             label="Age"
@@ -149,7 +153,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           ></TextField>{" "}
           <br />
           <br />
-
+          {/* AGE UNITS DROPDOWN MENU */}
           <InputLabel id="demo-simple-select-autowidth-label">Age Units</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
@@ -174,6 +178,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
 
           <br />
           <br />
+          {/* ADDRESS TEXTFIELD */}
           <TextField
             id="outlined-basic"
             label="Home Address"
@@ -188,6 +193,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           ></TextField>
           <br />
           <br />
+          {/* HOME STATE TEXTFIELD */}
           <TextField
             id="outlined-basic"
             label="State"
@@ -202,6 +208,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           ></TextField>{" "}
           &nbsp; <br />
           <br />
+          {/* HOME COUNTY TEXTFIELD */}
           <TextField
             id="outlined-basic"
             label="County"
@@ -216,6 +223,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           ></TextField>
           <br />
           <br />
+          {/* HOME ZIP CODE TEXTFIELD */}
           <TextField
             id="outlined-basic"
             label="Zip Code"

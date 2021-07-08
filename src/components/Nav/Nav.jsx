@@ -21,7 +21,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useState } from "react";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import LogOutButton from '../LogOutButton/LogOutButton';
+
 
 // OVERHEAD COMPONENT STYLING
 const useStyles = makeStyles((theme) => ({

@@ -5,13 +5,13 @@ import { useState } from "react";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from "@material-ui/styles";
 
+// ADJUST STYLES FOR MUI COMPONENT WITH CLASS: BUTTON
 const useStyles = makeStyles((theme) => ({
-button: {
-  fontSize: 'large',
-  height: '10vh',
-  width: '35vh',
-}
-   
+  button: {
+    fontSize: 'large',
+    height: '10vh',
+    width: '35vh',
+  }
 }));
 
 function TimestampButton({ incidentMirror, setIncidentMirror }) {
@@ -30,13 +30,7 @@ function TimestampButton({ incidentMirror, setIncidentMirror }) {
     });
   }
 
-  // useEffect(() => {
-  //   console.log("UPDATING browser storage", incidentMirror);
-  //   localStorage.setItem("incident", JSON.stringify(incidentMirror));
-  // }, [incidentMirror]);
-
   function advanceDispatch() {
-    // console.log('Button clicked...');
 
     const timestamp = Date.now(); // This would be the timestamp you want to format
     console.log(
@@ -195,7 +189,7 @@ function TimestampButton({ incidentMirror, setIncidentMirror }) {
         <Button onClick={advanceDispatch} color="secondary"
           variant="contained"
           disabled={incidentMirror.dispatchButton === "Service Complete"}
-          style={{marginTop: 10}}
+          style={{ marginTop: 10 }}
           className={classes.button}
         >
           {incidentMirror.dispatchButton}

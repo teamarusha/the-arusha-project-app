@@ -1,3 +1,4 @@
+// STORES TREATMENT INPUT INFORMATION
 const treatment = (state = defaultTreatment, action) => {
   switch (action.type) {
     case 'SET_TREATMENT':

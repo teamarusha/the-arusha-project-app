@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core';
-import createMuiTheme from '../GLOBALUI/Theme';
 
 
 const globalUseStyle = makeStyles((theme) => ({
@@ -18,7 +17,7 @@ const globalUseStyle = makeStyles((theme) => ({
     width: '55%',
     marginTop: theme.spacing(1),
   },
-  h2 : {
+  h2: {
     margin: theme.spacing(0, 45, 0, 45)
   },
   nav: {
@@ -29,20 +28,20 @@ const globalUseStyle = makeStyles((theme) => ({
 
     // DROPDOWN MENU STYLING DEPENDENCIES
     dropdown: {
-          root: {
-            width: "100%",
-            maxWidth: 360,
-            backgroundColor: theme.palette.background.paper,
-          },
-          heading: {
-            fontSize: theme.typography.pxToRem(15),
-            flexBasis: "33.33%",
-            flexShrink: 0,
-          }, 
+      root: {
+        width: "100%",
+        maxWidth: 360,
+        backgroundColor: theme.palette.background.paper,
+      },
+      heading: {
+        fontSize: theme.typography.pxToRem(15),
+        flexBasis: "33.33%",
+        flexShrink: 0,
+      },
     },
 
     // REGISTRATION STYLING DEPENDENCIES
-    register : {
+    register: {
       submit: {
         margin: theme.spacing(3, 1, 2, 1),
       },
@@ -82,16 +81,16 @@ const globalUseStyle = makeStyles((theme) => ({
         marginRight: 'auto',
         color: 'common'
       },
-      root : {
+      root: {
         backgroundColor: '#5BC6CC',
-    },
-    adminButton : {
-      marginLeft: 'auto',
-      position: 'static'
-    }
+      },
+      adminButton: {
+        marginLeft: 'auto',
+        position: 'static'
+      }
 
     }
-  
+
   }
 }));
 

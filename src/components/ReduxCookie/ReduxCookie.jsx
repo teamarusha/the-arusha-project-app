@@ -5,13 +5,11 @@ import Nav from '../Nav/Nav';
 
 function ReduxCookie() {
 
+    // GRAB DROP DOWNS AND INCIDENT INFORMATION STORED IN DESIGNATED REDUCERS
     const dropdowns = useSelector(store => store.dropdowns);
-    const patients = useSelector(store => store.patients);
     const incident = useSelector(store => store.incident);
-    const treatment = useSelector(store => store.treatment);
-    const vitals = useSelector(store => store.vitals);
 
-
+    //DECLARE VARIABLE FOR USE OF DISPATCH FUNCTION
     const dispatch = useDispatch();
 
     let [localIncident, setLocalIncident] = useState(JSON.parse(localStorage.getItem('incident')));
@@ -47,39 +45,19 @@ function ReduxCookie() {
         }
     }, [dropdowns.go]);
 
-    // function triggerMastodon() {
-    //     dispatch({type: 'POST_INCIDENT'})
-    // }
-
-
-
-
-
     return (
         <React.Fragment>
-        <Nav />
-        <div>
-            {/* <button onClick={triggerMastodon}>
-                Mastodon
-            </button> */}
-            {dropdowns.go &&
-                <div>
-                    {/* <p>Local Storage dropdowns: {localStorage.getItem('dropdowns')}</p>
-                    <p>Dropdown Reducer: {JSON.stringify(dropdowns)}</p> */}
-                    <p>Local Storage Incident: {localStorage.getItem('incident')}</p>
-                    <p>Incident Reducer: {JSON.stringify(incident)}</p>
-                    <p>Local Incident Mirror: {JSON.stringify(localIncident)}</p>
-                    {/* <p>Local Storage dropdowns: {localStorage.getItem('dropdowns')}</p>
-                    <p>Dropdown Reducer: {JSON.stringify(dropdowns)}</p>
-                    <p>Local Storage dropdowns: {localStorage.getItem('dropdowns')}</p>
-                    <p>Dropdown Reducer: {JSON.stringify(dropdowns)}</p> */}
-                </div>
-            }
-
-
-
-        </div>
-        </React.Fragment>  
+            <Nav />
+            <div>
+                {dropdowns.go &&
+                    <div>
+                        <p>Local Storage Incident: {localStorage.getItem('incident')}</p>
+                        <p>Incident Reducer: {JSON.stringify(incident)}</p>
+                        <p>Local Incident Mirror: {JSON.stringify(localIncident)}</p>
+                    </div>
+                }
+            </div>
+        </React.Fragment>
     )
 }
 

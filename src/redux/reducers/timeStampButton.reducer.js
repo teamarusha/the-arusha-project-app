@@ -1,3 +1,4 @@
+// STORES TIMESTAMP INFORMATION
 const timeStampReducer = (state = 'Dispatched') => {
 
     switch (buttonText) {

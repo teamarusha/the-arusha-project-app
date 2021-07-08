@@ -13,7 +13,7 @@ function LandingPage() {
 
   const user = useSelector((store) => store.user);
 
-  
+// landing page different based on whether login is admin or responder
 if(user.is_admin === true) {
   return (
     <div>

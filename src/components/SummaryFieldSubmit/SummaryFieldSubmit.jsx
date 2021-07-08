@@ -6,7 +6,7 @@ import { Button, TextField, Container, Typography } from "@material-ui/core";
 import { makeStyles } from '@material-ui/styles'
 import { useHistory } from "react-router-dom";
 
-
+//ADJUST STYLES FOR MUI COMPONENTS WITH PAPER CLASS
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(1),
@@ -17,11 +17,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function SummaryFieldSubmit(params) {
+function SummaryFieldSubmit() {
+  // DECLARE VARIABLES FOR USE OF THESE FUNCTIONS
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
 
+  //GRAB INCIDENT INFORMATION STORED IN INCIDENT REDUCER
   const incident = useSelector(store => store.incident)
 
 
@@ -237,11 +239,9 @@ function SummaryFieldSubmit(params) {
               />
               <br />
               {errorMessages && errorMessages.map((message, i) => <Typography style={{ color: 'red' }} key={i + 'errormessage'}>{message}</Typography>)}
-              {/* <p>{JSON.stringify(errorMessages)}</p> */}
-              {/* <button onClick={checkInputs}>CHECK</button> */}
               <h2>SUMMARY</h2>
 
-
+              {/* SUMMARY TEXTFIELD */}
               <TextField
                 id="outlined-basic"
                 multiline
@@ -258,6 +258,7 @@ function SummaryFieldSubmit(params) {
               ></TextField>
               <br />
               <br />
+              {/* SUBMIT REPORT BUTTON */}
               <Button color="primary" variant="contained" disabled={!allowSubmission} onClick={submitSummary}>
                 Submit Report
               </Button>

@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
+// global style use
 const useStyles = makeStyles((theme) => ({
     root: {
       width: "100%",

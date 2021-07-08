@@ -10,9 +10,12 @@ import { MenuItem } from "@material-ui/core";
 import useStyles from "../TreatmentForm/Styles";
 
 function PatientCardiac({ patientsMirror, setPatientsMirror }) {
+  // declare variables for use of functions
   const classes = useStyles();
-  const dropdowns = useSelector((store) => store.dropdowns);
   const { id } = useParams();
+  // grab dropdown info stored in reducer 
+  const dropdowns = useSelector((store) => store.dropdowns);
+
 
   function submitValue(newParameter) {
     console.log(
@@ -29,7 +32,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
 
   return (
     <div className="container">
-
+      {/* CARDIAC ARREST DROPDOWN */}
 
       {dropdowns.go && patientsMirror &&
         <div>
@@ -48,7 +51,6 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
               })
             }
           >
-
             {dropdowns['cardiac_arrest'].map(item => <MenuItem key={'cardiac_arrest' + item.id}
               value={item.id} classes={{ root: classes.menuItem }}>{item[`cardiac_arrest_type`]}</MenuItem>)}
             {/* <MenuItem value={10}>Option 1</MenuItem> */}
@@ -57,7 +59,8 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
 
         </div>
       }
-
+      {/* if there was cardiac arrest - all following dropdowns will show */}
+      {/* CA ETIOLOGY */}
       {dropdowns.go && patientsMirror && patientsMirror[`${id}cardiacArrest`] > 1 &&
         <div>
 
@@ -80,7 +83,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             {dropdowns['cardiac_arrest_etiology'].map(item => <MenuItem key={'cardiac_arrest_etiology' + item.id}
               value={item.id} classes={{ root: classes.menuItem }}>{item[`cardiac_arrest_etiology_type`]}</MenuItem>)}
           </Select> <br /><br /><br />
-
+          {/* RESUSCITATION ATTEMPTED DROPDOWN */}
           <InputLabel
             id="demo-simple-select-autowidth-label">Resuscitation Attempted by EMS</InputLabel>
           <Select
@@ -100,7 +103,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             {dropdowns['resuscitation_attempt'].map(item => <MenuItem key={'resuscitation_attempt' + item.id}
               value={item.id} classes={{ root: classes.menuItem }}>{item[`resuscitation_attempt_type`]}</MenuItem>)}
           </Select> <br /><br /><br />
-
+          {/* CA RESUSCITATION DROPDOWN */}
           <InputLabel
             id="demo-simple-select-autowidth-label">Arrest Witnessed By</InputLabel>
           <Select
@@ -120,7 +123,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             {dropdowns['cardiac_arrest_witness'].map(item => <MenuItem key={'cardiac_arrest_witness' + item.id}
               value={item.id} classes={{ root: classes.menuItem }}>{item[`cardiac_arrest_witness_type`]}</MenuItem>)}
           </Select> <br /><br /><br />
-
+          {/* AED USE PRIOR DROPDOWN */}
           <InputLabel
             id="demo-simple-select-autowidth-label">AED Use Prior to EMS Arrival?</InputLabel>
           <Select
@@ -140,7 +143,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             {dropdowns['aed_use_prior'].map(item => <MenuItem key={'aed_use_prior' + item.id}
               value={item.id} classes={{ root: classes.menuItem }}>{item[`aed_use_prior_type`]}</MenuItem>)}
           </Select> <br /><br /><br />
-
+          {/* CPR PROVIDED DROPDOWN */}
           <InputLabel
             id="demo-simple-select-autowidth-label">Type of CPR Provided</InputLabel>
           <Select
@@ -160,7 +163,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             {dropdowns['cpr_provided'].map(item => <MenuItem key={'cpr_provided' + item.id}
               value={item.id} classes={{ root: classes.menuItem }}>{item[`cpr_provided_type`]}</MenuItem>)}
           </Select> <br /><br /><br />
-
+          {/* SPONTANEOUS CIRCULATION DROPDOWN */}
           <InputLabel
             id="demo-simple-select-autowidth-label">Any Return of Spontaneous Circulation</InputLabel>
           <Select
@@ -176,11 +179,10 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
               })
             }
           >
-
             {dropdowns['spontaneous_circulation'].map(item => <MenuItem key={'spontaneous_circulation' + item.id}
               value={item.id} classes={{ root: classes.menuItem }}>{item[`spontaneous_circulation_type`]}</MenuItem>)}
           </Select> <br /><br /><br />
-
+          {/* Timestamp of cardiac arrest */}
           <TextField
             id="date"
             label="Cardiac Arrest"
@@ -207,6 +209,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
               })
             } required></input> <br /><br /><br />
 
+          {/* STOPPED CPR REASON DROPDOWN */}
           <InputLabel
             id="demo-simple-select-autowidth-label">Reason for Stopping CPR/Resuscitation</InputLabel>
           <Select
@@ -227,6 +230,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
               value={item.id} classes={{ root: classes.menuItem }}>{item[`cpr_stopped_type`]}</MenuItem>)}
           </Select> <br /><br /><br />
 
+          {/* WHO INITIATED CPR DROPDOWN */}
           <InputLabel
             id="demo-simple-select-autowidth-label">Who First Initiated CPR</InputLabel>
           <Select
@@ -247,6 +251,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
               value={item.id} classes={{ root: classes.menuItem }}>{item[`cpr_initiator_type`]}</MenuItem>)}
           </Select> <br /><br /><br />
 
+          {/* WHO APPLIED AED DROPDOWN */}
           <InputLabel
             id="demo-simple-select-autowidth-label">Who First Applied AED</InputLabel>
           <Select
@@ -267,6 +272,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
               value={item.id} classes={{ root: classes.menuItem }}>{item[`aed_applicator_type`]}</MenuItem>)}
           </Select> <br /><br /><br />
 
+          {/* WHO DEFIBRILLATED DROPDOWN */}
           <InputLabel
             id="demo-simple-select-autowidth-label">Who First Defibrillated the Patient</InputLabel>
           <Select
