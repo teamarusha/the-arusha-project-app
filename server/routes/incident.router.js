@@ -45,8 +45,11 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         };
 
-
+        // Begin the query
         await connection.query('BEGIN');
+
+        // INCIDENT
+        // We return the incident ID in order to use it with related queries later
         const incidentInsertResults = await connection.query(`
             INSERT INTO incident ("user_id","incident_service_id","crew_id","triage_cat_id","number_patients",
             "unit_notified","unit_enroute","unit_arrived_scene","arrived_patient",
@@ -72,12 +75,11 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             ]);
 
 
-        // ANOTHER VERY IMPORTANT PARAMETER
-
+        // ANOTHER VERY IMPORTANT PARAMETER - The Incident ID number from the database
         const incidentID = incidentInsertResults.rows[0].id;
 
 
-
+        // SCENE
         await connection.query(`
             INSERT INTO scene ("incident_scene_id","incident_state","incident_zip","incident_county",
             "possible_injury_id","alcohol_drug_use_id")
@@ -93,14 +95,14 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         );
 
 
-        // patient
+        // PATIENT
         const patientQuery = `INSERT INTO patient ("patient_incident_id","patient_first_name",
                 "patient_last_name","address", "home_county","home_state", "home_zip","gender_id",
                 race_id, date_of_birth, age, age_units_id)
                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
                 RETURNING id;`;
 
-
+        // Declare an array that we will loop over to insert all information for all patients
         const returnPatientIDs = [];
         const patientReturn = await Promise.all(
 
@@ -128,14 +130,15 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
 
 
-        // Puts returned ids into 
+        // Puts returned ids into array declared above for use with later queries
+        // For all remaining queries, we will have to insert information for each patient 
         for (let newReturn of patientReturn) {
             returnPatientIDs.push(newReturn.rows[0].id);
         }
 
 
-        // disposition
-        // IF IT IS >4 IT WILL JUST INSERT THE 1 THING
+        // DISPOSITION
+        // IF IT IS >4 IT WILL JUST INSERT THE DISPOSITION VALUE
         await Promise.all(
 
             returnPatientIDs.map((patientID, i) => {
@@ -172,7 +175,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             })
         );
 
-        // medicalConditions
+        // MEDICAL CONDITIONS
         const medCondQuery = `INSERT INTO medicalconditions ("patient_condition_id","medical_conditions")
                 VALUES ($1, $2)`;
 
@@ -189,7 +192,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         );
 
-        // currentMedications
+        // CURRENT MEDICATIONS
         const currMedQuery = `INSERT INTO currentmedication ("patient_current_med_id","medication")
                 VALUES ($1, $2)`;
 
@@ -206,7 +209,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         );
 
-        // allergies
+        // ALLERGIES
         const allergyQuery = `INSERT INTO allergies ("patient_allergy_id","allergy")
                 VALUES ($1, $2)`;
 
@@ -223,7 +226,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         );
 
-        // symptoms
+        // SYMPTOMS
         const symptomQuery = `INSERT INTO symptoms ("patient_symptoms_id",
         "anatomic_location_id","organ_system_id","time_symptom_onset",
         "time_last_known_well","primary_symptom","other_symptoms","initial_acuity_id",
@@ -250,7 +253,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             })
 
         );
-        // injury
+        // INJURY
         const injuryQuery = `INSERT INTO injury ("patient_injury_id",
         "injury_location_id","injury_cause_id")
         VALUES ($1, $2, $3);`;
@@ -268,10 +271,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             })
 
         );
-        // cardiacArrest
-        // IF IT IS 1 IT WILL ONLY INSERT THE ONE THING
-
-
+        // CARDIAC AREST
+        // IF IT IS 1 IT WILL ONLY INSERT THE cardiacArrest VALUE FOR THE PATIENT
         await Promise.all(
             returnPatientIDs.map((patientID, i) => {
 
