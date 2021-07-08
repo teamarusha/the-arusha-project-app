@@ -1,6 +1,6 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 // ----- Material UI -----
@@ -11,9 +11,12 @@ import { MenuItem } from "@material-ui/core";
 import useStyles from "../TreatmentForm/Styles";
 
 function PatientInjury({ patientsMirror, setPatientsMirror }) {
+  // DECLARE VARIABLES FOR USE OF FUNCTIONS
   const classes = useStyles();
-  const dropdowns = useSelector((store) => store.dropdowns);
   const { id } = useParams();
+  // GRAB DROPDOWNS STORED IN REDUCER
+  const dropdowns = useSelector((store) => store.dropdowns);
+
 
   function submitValue(newParameter) {
     console.log(
@@ -29,7 +32,9 @@ function PatientInjury({ patientsMirror, setPatientsMirror }) {
   }
 
   return (
+
     <div className="container">
+      {/* OPTIONAL DROPDOWN - TYPE OF INJURY */}
       {dropdowns.go && patientsMirror && (
         <div>
           <InputLabel id="demo-simple-select-autowidth-label">
@@ -47,9 +52,8 @@ function PatientInjury({ patientsMirror, setPatientsMirror }) {
               })
             }
           >
-          
             {dropdowns["injury_location"].map((item) => (
-              <MenuItem key={"injury_location" + item.id} value={item.id} classes={{root: classes.menuItem}}>
+              <MenuItem key={"injury_location" + item.id} value={item.id} classes={{ root: classes.menuItem }}>
                 {item[`injury_location_type`]}
               </MenuItem>
             ))}
@@ -57,13 +61,15 @@ function PatientInjury({ patientsMirror, setPatientsMirror }) {
           <br />
           <br />
           <br />
+
+          {/* OPTIONAL DROPDOWN - CAUSE OF INJURY */}
           <InputLabel id="demo-simple-select-autowidth-label">
             Cause of Injury
           </InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-           fullWidth
+            fullWidth
             value={patientsMirror[`${id}injuryCause`]}
             onChange={(event) =>
               submitValue({
@@ -72,16 +78,12 @@ function PatientInjury({ patientsMirror, setPatientsMirror }) {
               })
             }
           >
-           
             {dropdowns["injury_cause"].map((item) => (
-              <MenuItem key={"injury_cause" + item.id} value={item.id} classes={{root: classes.menuItem}}>
+              <MenuItem key={"injury_cause" + item.id} value={item.id} classes={{ root: classes.menuItem }}>
                 {item[`injury_cause_type`]}
               </MenuItem>
             ))}
           </Select>
-         
-
-          
         </div>
       )}
     </div>

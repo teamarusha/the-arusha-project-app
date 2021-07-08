@@ -1,3 +1,4 @@
+// STORES PATIENT INFORMATION
 const patients = (state = defaultPatients, action) => {
   switch (action.type) {
     case 'SET_PATIENTS':

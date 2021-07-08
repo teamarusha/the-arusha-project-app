@@ -1,32 +1,36 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {Button, Box}from '@material-ui/core';
-import globalUseStyle from '../GLOBALUI/globalUseStyles';
+
+// styling
+import { Button } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '../GLOBALUI/Theme';
-import { useHistory } from 'react-router-dom';
+
 
 function LogOutButton(props) {
-const history = useHistory();
+  //declare variables for use of functions
+  const history = useHistory();
   const dispatch = useDispatch();
 
-const handleClick = () => {
-  dispatch({ type: 'LOGOUT' })
-  history.push('/')
-}
+  //initializes logout actions
+  const handleClick = () => {
+    dispatch({ type: 'LOGOUT' })
+    history.push('/')
+  }
   return (
     <ThemeProvider theme={createMuiTheme}>
-      
-    <Button
-      onClick={handleClick}
-      type="submit"
-      name="submit"
-      value="Register"
-      size="medium"
-      variant="contained"
-      color="secondary"
-    >
-      Log Out
+      {/* logout button */}
+      <Button
+        onClick={handleClick}
+        type="submit"
+        name="submit"
+        value="Register"
+        size="medium"
+        variant="contained"
+        color="secondary"
+      >
+        Log Out
     </Button>
     </ThemeProvider>
   );

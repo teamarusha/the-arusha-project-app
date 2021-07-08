@@ -12,29 +12,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function LoginPage() {
+  // declare variables for use of functions
   const history = useHistory();
   const classes = useStyles();
   return (
     <ThemeProvider theme={createMuiTheme}>
-      <Container style={{ marginBottom: '25%'}}>
-      <LoginForm />
-      <Grid container justify="center">
-        <Typography variant="body1" component="h4">
-          New User?
+      <Container style={{ marginBottom: '25%' }}>
+        {/* login form from loginform component */}
+        <LoginForm />
+        <Grid container justify="center">
+          <Typography variant="body1" component="h4">
+            New User?
         </Typography>
-      </Grid>
-      <Grid container justify="center">
-        <Link
-          variant="body1"
-          component="button"
-          onClick={() => {
-            history.push("/registration");
-          }}
-          color="secondary"
-        className={classes.register}>
-          Register
+        </Grid>
+        <Grid container justify="center">
+          {/* registration link which redirects to registration page upon click */}
+          <Link
+            variant="body1"
+            component="button"
+            onClick={() => {
+              history.push("/registration");
+            }}
+            color="secondary"
+            className={classes.register}>
+            Register
         </Link>
-      </Grid>
+        </Grid>
       </Container>
     </ThemeProvider>
   );

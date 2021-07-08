@@ -1,4 +1,5 @@
 import React from "react";
+//Material UI components
 import { makeStyles } from "@material-ui/core/styles";
 import globalUseStyle from "./globalUseStyles";
 import Accordion from "@material-ui/core/Accordion";
@@ -11,6 +12,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { TextField, Paper, Grid } from "@material-ui/core";
 
+// changes styling for material ui components with these classes
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -45,12 +47,12 @@ const themeSpace = makeStyles((theme) => ( {
 }))
 
 export default function ControlledAccordions() {
+  // declare variable for use of these functions
   const classes = useStyles();
   const bottom = themeSpace();
+
   const [expanded, setExpanded] = React.useState(false);
   const [selectedID, setSelectedID] = React.useState(false);
-
-//   const rootClass = !expanded ? classes.rootExpanded : classes.root;
 
   const handleListItemClick = (event, id) => {
     setSelectedID(id);

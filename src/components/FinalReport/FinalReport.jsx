@@ -1,18 +1,19 @@
 import { useHistory, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect, useState } from 'react'
-import { Box, Container, Grid, makeStyles, withStyles } from '@material-ui/core';
+import { useEffect } from 'react'
+import moment from 'moment';
+import React from 'react';
+
+//Material UI components
+import { Box, Container, Grid, makeStyles } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import moment from 'moment';
-import React from 'react';
 
-
+// changes styling of MUI components with these classes
 const useStyles = makeStyles({
     root: {
         maxWidth: 900,
@@ -34,18 +35,20 @@ const useStyles = makeStyles({
 });
 
 function FinalReport() {
+    // declares variable for use of these functions
     const { id } = useParams();
     const dispatch = useDispatch();
-    const history = useHistory();
     const classes = useStyles();
 
+    // grabs report information for selected client from reducer
     const report = useSelector(store => store.report);
-    console.log('report:', report.med)
+
+    // declare variable for each of these arrays in report in order to map out their objects in array
     const med = report.med
     const vit = report.vit
     const pro = report.pro
 
-    // console.log('med name insulin:',med.med_name)
+    // initializes fetch of individual patient care report based on which patient selected
     useEffect(() => {
         console.log('in useEffect param:', id)
         dispatch({ type: 'FETCH_REPORT', payload: id })
@@ -53,7 +56,6 @@ function FinalReport() {
 
 
     return (
-        // <p>{JSON.stringify(report)}</p>
         <Container >
             <Grid
                 container
@@ -63,14 +65,12 @@ function FinalReport() {
                 justify="center"
                 style={{ minHeight: '100vh' }}
             >
-
                 <Grid item lg={10}>
                     <Box boxShadow={3} className={classes.root}>
-
                         <div className={classes.all}>
                             <div className={classes.header}>
                                 <h1>Patient Care Report #{id}</h1>
-
+                                {/* response information */}
                                 <h3>RESPONSE</h3>
                                 <p>Incident #: {report.patient_incident_id}</p>
                                 <p>Responder: {report.user_first_name} {report.user_last_name}</p>
@@ -88,16 +88,17 @@ function FinalReport() {
                                 <p>Unit Back In Service: {moment(report.unit_in_service).format('DD/MM/YYYY hh:mm:ss')}</p>
 
                             </div>
-                            <div className='scene'>
-                                <h3>SCENE</h3>
-                                <p># of Patients at Scene: {report.number_patients} </p>
-                                <p>Incident State: {report.incident_state}</p>
-                                <p>Incident County: {report.incident_county}</p>
-                                <p>Incident Zip: {report.incident_zip}</p>
-                                <p>Possible Injury? {report.possible_injury_type}</p>
-                                <p>Alcohol/Drug Use Indicators: {report.alcohol_drug_use_type}</p>
-                            </div>
-                            <div className='patient'>
+                            {/* scene information */}
+                            <h3>SCENE</h3>
+                            <p># of Patients at Scene: {report.number_patients} </p>
+                            <p>Incident State: {report.incident_state}</p>
+                            <p>Incident County: {report.incident_county}</p>
+                            <p>Incident Zip: {report.incident_zip}</p>
+                            <p>Possible Injury? {report.possible_injury_type}</p>
+                            <p>Alcohol/Drug Use Indicators: {report.alcohol_drug_use_type}</p>
+
+                            {/* patient information */}
+                            <div>
                                 <h3>PATIENT INFORMATION</h3>
                                 <p>First Name: {report.patient_first_name}</p>
                                 <p>Last Name: {report.patient_last_name}</p>
@@ -113,7 +114,7 @@ function FinalReport() {
                                 <p>Current Medications: {report.medication}</p>
                                 <p>Previous Medical Conditions: {report.medical_conditions}</p>
                             </div>
-                            <div className='symptoms'>
+                            <div>
                                 <h3>SYMPTOMS</h3>
                                 <p>Symptom Onset: {moment(report.time_symptom_onset).format('DD/MM/YYYY hh:mm:ss')}</p>
                                 <p>Last Known Well: {moment(report.time_last_known_well).format('DD/MM/YYYY hh:mm:ss')}</p>
@@ -125,77 +126,81 @@ function FinalReport() {
                                 <p>Initial Patient Acuity: {report.initial_acuity_type}</p>
                                 <p>Final Patient Acuity: {report.final_acuity_type}</p>
                             </div>
-                            <div className='vitals'>
+                            {/* vitals */}
+                            <div>
                                 <h3>VITALS</h3>
-
+                                {/* if there are vitals then show table of all vitals */}
                                 {vit && vit.length != 0 ?
-                                   
 
-                                            <TableContainer className={classes.vitals}>
-                                                <Table>
 
-                                                    <TableHead>
-                                                        <TableRow >
-                                                            <TableCell>Date</TableCell>
-                                                            <TableCell >Time</TableCell>
-                                                            <TableCell>SBP</TableCell>
-                                                            <TableCell>HR</TableCell>
-                                                            <TableCell>PO</TableCell>
-                                                            <TableCell>RR</TableCell>
-                                                            <TableCell>BCL</TableCell>
-                                                            <TableCell>GCS Eye</TableCell>
-                                                            <TableCell>GCS Verbal</TableCell>
-                                                            <TableCell>GCS Motor</TableCell>
-                                                            <TableCell>GCS Qualifier</TableCell>
-                                                            <TableCell>AVPU</TableCell>
-                                                            <TableCell>Pain Scale Score</TableCell>
-                                                            <TableCell>Stroke Scale Score</TableCell>
-                                                            <TableCell>Pain Scale Type</TableCell>
+                                    <TableContainer className={classes.vitals}>
+                                        <Table>
 
+                                            <TableHead>
+                                                <TableRow >
+                                                    <TableCell>Date</TableCell>
+                                                    <TableCell >Time</TableCell>
+                                                    <TableCell>SBP</TableCell>
+                                                    <TableCell>HR</TableCell>
+                                                    <TableCell>PO</TableCell>
+                                                    <TableCell>RR</TableCell>
+                                                    <TableCell>BCL</TableCell>
+                                                    <TableCell>GCS Eye</TableCell>
+                                                    <TableCell>GCS Verbal</TableCell>
+                                                    <TableCell>GCS Motor</TableCell>
+                                                    <TableCell>GCS Qualifier</TableCell>
+                                                    <TableCell>AVPU</TableCell>
+                                                    <TableCell>Pain Scale Score</TableCell>
+                                                    <TableCell>Stroke Scale Score</TableCell>
+                                                    <TableCell>Pain Scale Type</TableCell>
+
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {vit.map((item, index) => {
+                                                    return (
+                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'vitals' + item.id}>
+                                                            <TableCell >{moment(item.vitals_timestamp).format('DD/MM/YYYY')}</TableCell>
+                                                            <TableCell>{moment(item.vitals_timestamp).format('hh:mm:ss')}</TableCell>
+                                                            <TableCell>{item.systolic_bp}</TableCell>
+                                                            <TableCell>{item.heart_rate}</TableCell>
+                                                            <TableCell>{item.pulse_oximetry}</TableCell>
+                                                            <TableCell>{item.respiratory_rate}</TableCell>
+                                                            <TableCell>{item.blood_glucose}</TableCell>
+                                                            <TableCell>{item.glasgow_eye}</TableCell>
+                                                            <TableCell>{item.glasgow_verbal}</TableCell>
+                                                            <TableCell>{item.glasgow_motor}</TableCell>
+                                                            <TableCell>{item.glasgow_qualifier}</TableCell>
+
+
+                                                            <TableCell>{item.responsiveness_level}</TableCell>
+                                                            <TableCell>{item.pain_scale}</TableCell>
+                                                            <TableCell>{item.stroke_score}</TableCell>
+                                                            <TableCell>{item.stroke_scale}</TableCell>
                                                         </TableRow>
-                                                    </TableHead>
-                                                    <TableBody>
-                                                        {vit.map((item, index) => {
-                                                            return (
-                                                                <TableRow hover role="checkbox" tabIndex={-1} key={'vitals'+item.id}>
-                                                                    <TableCell >{moment(item.vitals_timestamp).format('DD/MM/YYYY')}</TableCell>
-                                                                    <TableCell>{moment(item.vitals_timestamp).format('hh:mm:ss')}</TableCell>
-                                                                    <TableCell>{item.systolic_bp}</TableCell>
-                                                                    <TableCell>{item.heart_rate}</TableCell>
-                                                                    <TableCell>{item.pulse_oximetry}</TableCell>
-                                                                    <TableCell>{item.respiratory_rate}</TableCell>
-                                                                    <TableCell>{item.blood_glucose}</TableCell>
-                                                                    <TableCell>{item.glasgow_eye}</TableCell>
-                                                                    <TableCell>{item.glasgow_verbal}</TableCell>
-                                                                    <TableCell>{item.glasgow_motor}</TableCell>
-                                                                    <TableCell>{item.glasgow_qualifier}</TableCell>
+                                                    )
+                                                })}
+                                            </TableBody>
+                                        </Table>
 
-
-                                                                    <TableCell>{item.responsiveness_level}</TableCell>
-                                                                    <TableCell>{item.pain_scale}</TableCell>
-                                                                    <TableCell>{item.stroke_score}</TableCell>
-                                                                    <TableCell>{item.stroke_scale}</TableCell>
-                                                                </TableRow>
-                                                            )
-                                                        })}
-                                                    </TableBody>
-                                                </Table>
-
-                                            </TableContainer>
-                                      
+                                    </TableContainer>
+                                    // if no vitals then render 'None'
                                     :
                                     <p>None</p>
                                 }
 
                             </div>
-                            <div className='injury'>
+                            <div>
+                                {/* injury information */}
                                 <h3>INJURY</h3>
+                                {/* if injury then render */}
                                 {report.injury_cause_type && report.injury_location_type ?
                                     <div>
                                         <p>Type: {report.injury_location_type}</p>
                                         <p>Cause: {report.injury_cause_type}</p>
                                     </div>
                                     :
+                                    // if no injury then render 'none'
                                     <p>None</p>
 
                                 }
@@ -203,9 +208,11 @@ function FinalReport() {
 
 
 
-                            <div className='cardiac'>
+                            <div>
+                                {/* cardiac arrest info */}
                                 <h3>CARDIAC ARREST</h3>
                                 <p>Cardiac Arrest? {report.cardiac_arrest_type}</p>
+                                {/* if any cardiac arrest render the rest of these items */}
                                 {report.time_cardiac_arrest &&
                                     <div>
                                         <p>Date: {moment(report.time_cardiac_arrest).format('DD/MM/YYYY')}</p>
@@ -222,119 +229,109 @@ function FinalReport() {
                                         <p>Who First Applied AED? {report.aed_applicator_type}</p>
                                         <p>Who First Defibrillated the Patient? {report.aed_defibrillator_type}</p>
                                     </div>
-
-
                                 }
-
-
-
                             </div>
 
-                            <div className='treatment'>
+                            <div>
                                 <h3>TREATMENT</h3>
-
                                 <h4>Medications Administered:</h4>
+                                {/* if any medications render medication table */}
                                 {med && med.length != 0 ?
-                                    
 
+                                    <TableContainer className={classes.vitals}>
+                                        <Table size='small' options={{
+                                            rowStyle: {
+                                                fontSize: 2,
+                                            }
+                                        }}>
+                                            {/* table header values */}
+                                            <TableHead>
+                                                <TableRow >
+                                                    <TableCell size="small">Date</TableCell>
+                                                    <TableCell>Time</TableCell>
+                                                    <TableCell>Medication</TableCell>
+                                                    <TableCell>Administered Route</TableCell>
+                                                    <TableCell>Dosage</TableCell>
+                                                    <TableCell>Dosage Units</TableCell>
+                                                    <TableCell>Response to Medication</TableCell>
+                                                    <TableCell>Role/Type of Person Administering Medication</TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {/* header row values */}
+                                                {med.map((item, index) => {
+                                                    return (
+                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'meds' + item.id}>
+                                                            <TableCell>{moment(item.med_timestamp).format('DD/MM/YYYY')}</TableCell>
+                                                            <TableCell>{moment(item.med_timestamp).format('hh:mm:ss')}</TableCell>
+                                                            <TableCell>{item.med_name}</TableCell>
+                                                            <TableCell>{item.med_admin_route_type}</TableCell>
+                                                            <TableCell>{item.med_dosage}</TableCell>
+                                                            <TableCell>{item.med_dosage_units}</TableCell>
+                                                            <TableCell>{item.med_response}</TableCell>
+                                                            <TableCell>{item.med_admin_by_type}</TableCell>
 
-                                        <TableContainer className={classes.vitals}>
-                                            <Table size='small' options={{
-                                                rowStyle: {
-                                                    fontSize: 2,
-                                                }
-                                            }}>
-                                                <TableHead>
-                                                    <TableRow >
-                                                        <TableCell size="small">Date</TableCell>
-                                                        <TableCell>Time</TableCell>
-                                                        <TableCell>Medication</TableCell>
-                                                        <TableCell>Administered Route</TableCell>
-                                                        <TableCell>Dosage</TableCell>
-                                                        <TableCell>Dosage Units</TableCell>
-                                                        <TableCell>Response to Medication</TableCell>
-                                                        <TableCell>Role/Type of Person Administering Medication</TableCell>
-                                                    </TableRow>
-                                                </TableHead>
-                                                <TableBody>
-                                                    {med.map((item, index) => {
-                                                        return (
-                                                            <TableRow hover role="checkbox" tabIndex={-1} key={'meds'+item.id}>
-                                                                <TableCell>{moment(item.med_timestamp).format('DD/MM/YYYY')}</TableCell>
-                                                                <TableCell>{moment(item.med_timestamp).format('hh:mm:ss')}</TableCell>
-                                                                <TableCell>{item.med_name}</TableCell>
-                                                                <TableCell>{item.med_admin_route_type}</TableCell>
-                                                                <TableCell>{item.med_dosage}</TableCell>
-                                                                <TableCell>{item.med_dosage_units}</TableCell>
-                                                                <TableCell>{item.med_response}</TableCell>
-                                                                <TableCell>{item.med_admin_by_type}</TableCell>
+                                                        </TableRow>
+                                                    )
+                                                })}
+                                            </TableBody>
+                                        </Table>
 
-                                                            </TableRow>
-                                                        )
-                                                    })}
-                                                </TableBody>
-                                            </Table>
+                                    </TableContainer>
 
-                                        </TableContainer>
-
-
-
-                                    
+                                    // if no medications then render "none"
                                     :
                                     <p>None</p>
                                 }
 
                                 <h4>Procedures Administered:</h4>
+                                {/* if any procedures then render table */}
                                 {pro && pro.length != 0 ?
-                                    
-                                        <TableContainer className={classes.vitals}>
-                                            <Table size='small' options={{
-                                                rowStyle: {
-                                                    fontSize: 2,
-                                                }
-                                            }}>
-                                                <TableHead>
-                                                    <TableRow >
-                                                        <TableCell size="small">Date</TableCell>
-                                                        <TableCell>Time</TableCell>
-                                                        <TableCell>Procedure</TableCell>
-                                                        <TableCell># of Procedure Attempts</TableCell>
-                                                        <TableCell>Procedure Successful?</TableCell>
-                                                        <TableCell>Response to Procedure</TableCell>
-                                                        <TableCell>Role/Type of Person Performing Procedure</TableCell>
 
-                                                    </TableRow>
-                                                </TableHead>
-                                                <TableBody>
-                                                    {pro.map((item, index) => {
-                                                        return (
-                                                            <TableRow hover role="checkbox" tabIndex={-1} key={'pro'+item.id}>
+                                    <TableContainer className={classes.vitals}>
+                                        <Table size='small'>
+                                            {/* table header values */}
+                                            <TableHead>
+                                                <TableRow >
+                                                    <TableCell size="small">Date</TableCell>
+                                                    <TableCell>Time</TableCell>
+                                                    <TableCell>Procedure</TableCell>
+                                                    <TableCell># of Procedure Attempts</TableCell>
+                                                    <TableCell>Procedure Successful?</TableCell>
+                                                    <TableCell>Response to Procedure</TableCell>
+                                                    <TableCell>Role/Type of Person Performing Procedure</TableCell>
+
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {/* table row values */}
+                                                {pro.map((item, index) => {
+                                                    return (
+                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'pro' + item.id}>
 
 
-                                                                <TableCell>{moment(item.procedure_timestamp).format('DD/MM/YYYY')}</TableCell>
-                                                                <TableCell>{moment(item.procedure_timestamp).format('hh:mm:ss')}</TableCell>
-                                                                <TableCell>{item.procedure_name}</TableCell>
-                                                                <TableCell>{item.procedures_attempted}</TableCell>
-                                                                <TableCell>{item.procedure_successful}</TableCell>
-                                                                <TableCell>{item.procedure_response}</TableCell>
-                                                                <TableCell>{item.procedure_performer}</TableCell>
+                                                            <TableCell>{moment(item.procedure_timestamp).format('DD/MM/YYYY')}</TableCell>
+                                                            <TableCell>{moment(item.procedure_timestamp).format('hh:mm:ss')}</TableCell>
+                                                            <TableCell>{item.procedure_name}</TableCell>
+                                                            <TableCell>{item.procedures_attempted}</TableCell>
+                                                            <TableCell>{item.procedure_successful}</TableCell>
+                                                            <TableCell>{item.procedure_response}</TableCell>
+                                                            <TableCell>{item.procedure_performer}</TableCell>
 
-                                                            </TableRow>
-                                                        )
-                                                    })}
-                                                </TableBody>
-                                            </Table>
+                                                        </TableRow>
+                                                    )
+                                                })}
+                                            </TableBody>
+                                        </Table>
+                                    </TableContainer>
 
-                                        </TableContainer>
-
-
-
-                                   
+                                    // if no procedures then render "none"
                                     :
                                     <p>None</p>
                                 }
                             </div>
-                            <div className='disposition'>
+                            <div>
+                                {/* disposition section */}
                                 <h3>DISPOSITION</h3>
                                 <p>Transport Disposition: {report.transport_disposition_type}</p>
                                 {report.destination_state &&
@@ -349,23 +346,17 @@ function FinalReport() {
                                 }
 
                             </div>
-                            <div className='summary'>
+                            {/* summary section */}
+                            <div>
                                 <h3>SUMMARY</h3>
                                 <p>{report.incident_summary}</p>
                             </div>
-
-
-
-
-
-
                         </div>
                     </Box>
                 </Grid>
-
             </Grid >
         </Container >
     )
-}
+}//end Final Report
 
 export default FinalReport;

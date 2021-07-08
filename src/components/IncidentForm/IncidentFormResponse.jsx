@@ -8,11 +8,7 @@ import { InputLabel, MenuItem, Select, TextField, Container } from "@material-ui
 const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
   const dropdowns = useSelector((store) => store.dropdowns);
   const classes = useStyles();
-  // useEffect(() => {
-  //   console.log("UPDATING browser storage", localIncident);
-  //   localStorage.setItem("incident", JSON.stringify(localIncident));
-  // }, [localIncident]);
-
+  
   // Only handles when a value is changed by keystroke/inputfield clicks.
   // Does NOT handle initialization of new data.
   function submitValue(newParameter) {
@@ -32,6 +28,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
     <Container>
     <div className="container">
       {localIncident && (
+        // CREW ID textfield
         <TextField
           id="outlined-basic"
           label="Crew ID"
@@ -46,6 +43,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
         <br />
         <br />
         <br />
+        {/* Triage Category dropdown */}
       {dropdowns.go && localIncident && (
         <div>
           <InputLabel id="demo-simple-select-autowidth-label">
@@ -61,11 +59,6 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
               submitValue({ key: `triageCat`, thing: event.target.value })
             }
           >
-            {/* <MenuItem value="">
-              <em>None</em>
-            </MenuItem> */}
-
-      
             {dropdowns["triage_cat"].map((item) => (
               <MenuItem key={"triage_cat" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                 {item["triage_cat_type"]}
@@ -75,6 +68,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
           <br />
           <br />
           <br />
+          {/* Type of Service Requested dropdown  */}
           <InputLabel id="demo-simple-select-autowidth-label">
             Type of Service Requested
           </InputLabel>
@@ -88,9 +82,6 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
               submitValue({ key: `incidentService`, thing: event.target.value })
             }
           >
-            {/* <MenuItem value="">
-              <em>None</em>
-            </MenuItem> */}
             {dropdowns["incident_service"].map((item) => (
               <MenuItem key={"incident_service" + item.id} value={item.id} classes={{root: classes.menuItem}}>
                 {item["incident_service_type"]}
@@ -98,7 +89,6 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
             ))}
           </Select>
           <br />
-          
         </div>
       )}
     </div>

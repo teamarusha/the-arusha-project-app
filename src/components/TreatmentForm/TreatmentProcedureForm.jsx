@@ -16,7 +16,9 @@ import moment from 'moment';
 import { InputLabel, MenuItem, Select, TextField, Container } from "@material-ui/core";
 
 const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
+  // GRABS DROPDOWNS FROM DROPDOWNS REDUCER
   const dropdowns = useSelector((store) => store.dropdowns);
+  //DECLARE VARIABLES FOR USE OF THESE FUNCTIONS
   const { id } = useParams();
   const classes = useStyles();
   // Only handles when a value is changed by keystroke/inputfield clicks.
@@ -33,14 +35,14 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
       [newParameter.key]: newParameter.thing,
     });
 
-    // localStorage.setItem(`${newParameter.key}`, JSON.stringify(newParameter.thing));
+
   }
 
   return (
     <Container>
       <div className="container">
 
-
+        {/* TEXTFIELDS AND DROPDOWN FOR ADDING PROCEDURES */}
         {localTreatment && (
           <div>
             {dropdowns.go && (
@@ -212,6 +214,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
                 <br />
                 <br />
                 <br />
+                {/* ON CLICK - SAVES VALUES FOR ABOVE PROCEDURE */}
                 <AddProcedureButton
                   treatmentMirror={localTreatment}
                   setTreatmentMirror={setLocalTreatment}
@@ -220,7 +223,7 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
               </div>
             )}
             {dropdowns.go && localTreatment && localTreatment[`${id}lastProcedure`] > 1 &&
-
+              // TABLE OF ALL ADDED PROCEDURES
               <div>
                 <h3>Procedures Recorded</h3>
                 <TableContainer>

@@ -3,13 +3,13 @@ import React from "react";
 // ----- Material UI -----
 import { TextField, Typography } from "@material-ui/core";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 function PatientMedical({ patientsMirror, setPatientsMirror }) {
-  const dispatch = useDispatch();
-  const dropdowns = useSelector((store) => store.dropdowns);
+  //set variable id to equal params of page
   const { id } = useParams();
+
+
+
 
   function submitValue(newParameter) {
     console.log(
@@ -26,12 +26,13 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
 
   return (
     <div className="container">
-      
+
       {patientsMirror && (
         <div>
-           <Typography>If none apply, please type "None"</Typography>
-           <br />
+          <Typography>If none apply, please type "None"</Typography>
+          <br />
 
+          {/* ALLERGIES TEXTFIELD */}
           <TextField
             id="outlined-basic"
             label="Allergies"
@@ -49,6 +50,8 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
           ></TextField>{" "}
           &nbsp; <br />
           <br />
+
+          {/* CURRENT MEDICATIONS TEXTFIELD */}
           <TextField
             id="outlined-basic"
             label="Current Medications"
@@ -66,6 +69,8 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
           ></TextField>{" "}
           &nbsp; <br />
           <br />
+
+          {/* PREVIOUS MEDICAL CONDITIONS TEXTFIELD */}
           <TextField
             id="outlined-basic"
             label="Previous Medical Conditions"
@@ -81,7 +86,6 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
               })
             }
           ></TextField>
-         
         </div>
       )}
     </div>

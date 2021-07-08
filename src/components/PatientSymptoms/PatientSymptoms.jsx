@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -10,11 +9,13 @@ import { MenuItem } from "@material-ui/core";
 import useStyles from "../TreatmentForm/Styles";
 
 function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
+  // DECLARE VARIABLES FOR USE OF THESE FUNCTIONS
   const classes = useStyles();
-
-  const dispatch = useDispatch();
-  const dropdowns = useSelector((store) => store.dropdowns);
   const { id } = useParams();
+
+  // GET DROPDOWNS THAT ARE BEING STORED IN REDUCER
+  const dropdowns = useSelector((store) => store.dropdowns);
+
 
   function submitValue(newParameter) {
     console.log(
@@ -30,13 +31,10 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
   }
 
   return (
-    // <div>
     <Container>
-
       <div className="container">
 
-
-
+        {/* ANATOMIC LOCATION DROP DOWN MENU */}
         {dropdowns.go && patientsMirror &&
           <div>
             <InputLabel
@@ -53,12 +51,11 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                 })
               }
             >
-
-
               {dropdowns['anatomic_location'].map(item => <MenuItem key={'anatomic_location' + item.id}
                 value={item.id} classes={{ root: classes.menuItem }} >{item[`anatomic_location_type`]}</MenuItem>)}
             </Select> <br /><br /><br />
 
+            {/* ORGAN SYSTEM DROPDOWN MENU */}
             <InputLabel
               id="demo-simple-select-autowidth-label">Chief Complaint Organ System</InputLabel>
             <Select
@@ -73,12 +70,11 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                 })
               }
             >
-
               {dropdowns['organ_system'].map(item => <MenuItem key={'organ_system' + item.id}
                 value={item.id} classes={{ root: classes.menuItem }} >{item[`organ_system_type`]} </MenuItem>)}
             </Select> <br /><br /><br />
 
-            {/* <p>Symptom Onset calendar goes here</p> <br /> */}
+            {/* Symptom Onset DATE TEXTFIELD */}
             <TextField
               id="date"
               label="Symptom Onset"
@@ -105,7 +101,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                 })
               }
               required></input> <br /><br />
-
+            {/* PRIMARY SYMPTOM TEXTFIELD */}
             <TextField
               id="outlined-basic"
               label="Primary Symptom"
@@ -122,6 +118,8 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
               }
             >
             </TextField> &nbsp;<br /><br />
+
+            {/* OTHER SYMPTOMS TEXTFIELD */}
             <TextField
               id="outlined-basic"
               label="Other Associated Symptoms"
@@ -138,6 +136,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
               }>
             </TextField> <br /><br /><br />
 
+            {/* INITIAL AQUITY DROPDOWN MENU */}
             <InputLabel
               id="demo-simple-select-autowidth-label">Initial Patient Aquity</InputLabel>
             <Select
@@ -153,11 +152,11 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                 })
               }
             >
-
               {dropdowns['initial_acuity'].map(item => <MenuItem key={'initial_acuity' + item.id}
                 value={item.id} classes={{ root: classes.menuItem }} >{item[`initial_acuity_type`]} </MenuItem>)}
             </Select> <br /><br /><br />
 
+            {/* FINAL AQUITY DROPDOWN MENU */}
             <InputLabel
               id="demo-simple-select-autowidth-label">Final Patient Aquity</InputLabel>
             <Select
@@ -173,13 +172,11 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                 })
               }
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
               {dropdowns['final_acuity'].map(item => <MenuItem key={'final_acuity' + item.id}
                 value={item.id} classes={{ root: classes.menuItem }}>{item[`final_acuity_type`]}</MenuItem>)}
             </Select> <br /><br />
 
+            {/* PRIMARY IMPRESSION DROPDOWN MENU */}
             <InputLabel
               id="demo-simple-select-autowidth-label">Provider's Primary Impression</InputLabel>
             <Select
@@ -195,12 +192,11 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                 })
               }
             >
-
               {dropdowns['primary_impression'].map(item => <MenuItem key={'primary_impression' + item.id}
                 value={item.id} classes={{ root: classes.menuItem }} >{item[`primary_impression_type`]}  </MenuItem>)}
             </Select> <br /><br /><br />
 
-            {/* <p>Last Known Well calendar goes here</p> */}
+            {/* LAST KNOWN WELL DATE TEXTFIELD */}
             <TextField
               id="date"
               label="Last Known Well:"
@@ -217,9 +213,10 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
               }}
             />
             <br /><br />
+            {/* LAST KNOWN WELL TIME INPUT */}
             <label for="appt">Time:</label>
             <input type="time" id="appt" name="appt"
-              min="09:00" max="18:00"
+              min="00:00" max="24:00"
               value={patientsMirror[`${id}lastKnownWellTime`]}
               onChange={(event) =>
                 submitValue({
@@ -228,12 +225,8 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                 })
               }
               required></input> <br /><br />
-
           </div>
         }
-
-
-
       </div>
     </Container>
   );

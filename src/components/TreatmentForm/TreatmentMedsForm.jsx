@@ -16,31 +16,13 @@ import AddMedicationButton from "./AddMedicationButton";
 //Material UI imports
 import { InputLabel, MenuItem, Select, TextField, Container, makeStyles } from "@material-ui/core";
 
-// const useStyles = makeStyles({
-//   root: {
-//     maxWidth: 900,
-//     marginTop: 65,
-//     marginBottom: 65,
-
-//   },
-//   all: {
-//     marginLeft: 40,
-//     paddingTop: 25,
-//     paddingBottom: 25,
-//     marginRight: 40,
-
-//   },
-//   header: {
-//     alignItems: 'center',
-
-//   },
-//   vitals: {
-
-//   }
-// });
 
 const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
+  // GRAB DROPDOWN FROM DROPDOWN REDUCER
   const dropdowns = useSelector((store) => store.dropdowns);
+
+  //DECLARE VARIABLES FOR USE OF THESE FUNCTIONS
+  const classes = useStyles();
   const { id } = useParams();
 
   // Only handles when a value is changed by keystroke/inputfield clicks.
@@ -58,14 +40,14 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
     });
   }
 
-  const classes = useStyles();
+
 
   return (
     <Container >
       <div className="container">
         {localTreatment && (
           <div>
-
+            {/* MEDICATION ADMINISTERED TEXTFIELD */}
             <TextField
               id="outlined-basic"
               label="Medication Administered"
@@ -86,7 +68,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
             &nbsp;
             <br />
             <br />
-
+            {/* ADMINISTERED ROUTE TEXTFIELD */}
             {dropdowns.go && localTreatment && (
               <div>
                 <InputLabel id="demo-simple-select-autowidth-label">
@@ -120,6 +102,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 <br />
                 <br />
                 <br />
+                {/* DOSAGE TEXTFIELD */}
                 <TextField
                   id="outlined-basic"
                   label="Dosage"
@@ -139,6 +122,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 <br />
                 <br />
                 <br />
+                {/* DOSAGE UNITS DROPDOWN */}
                 <InputLabel id="demo-simple-select-autowidth-label">
                   Dosage Units
                 </InputLabel>
@@ -169,6 +153,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 <br />
                 <br />
                 <br />
+                {/* RESPONSE TO MED DROPDOWN */}
                 <InputLabel id="demo-simple-autowidth-label">
                   Response to Medication
                 </InputLabel>
@@ -191,7 +176,6 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                     })
                   }
                 >
-
                   {dropdowns["med_response"].map((item) => (
                     <MenuItem key={"med_response" + item.id} value={item.id} classes={{ root: classes.menuItem }} >
                       {item["med_response_type"]}
@@ -201,6 +185,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 <br />
                 <br />
                 <br />
+                {/* ROLE OF PERSON DROPDOWN */}
                 <InputLabel id="demo-simple-autowidth-label">
                   Role/Type of Person Administering Medication
                 </InputLabel>
@@ -223,7 +208,6 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                     })
                   }
                 >
-
                   {dropdowns["med_admin_by"].map((item) => (
                     <MenuItem key={"med_admin_by" + item.id} value={item.id} classes={{ root: classes.menuItem }}>
                       {item["med_admin_by_type"]}
@@ -233,6 +217,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
                 <br />
                 <br />
                 <br />
+                {/* ADD MEDICATION BUTTON - ADDS/SAVES VALUES ABOVE */}
                 <AddMedicationButton
                   treatmentMirror={localTreatment}
                   setTreatmentMirror={setLocalTreatment}
@@ -242,7 +227,7 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
             )}
           </div>
         )}
-
+        {/* TABLE RENDERING ALL ADDED MEDICATIONS */}
         {dropdowns.go && localTreatment && localTreatment[`${id}lastMedication`] > 1 &&
 
           <div>
