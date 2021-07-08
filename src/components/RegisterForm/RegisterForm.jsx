@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     marginLeft: 'auto',
     marginRight: 'auto',
+    marginBottom: 40,
 
   },
   form: {
@@ -80,7 +81,6 @@ function RegisterForm() {
 
   return (
     <ThemeProvider theme={createMuiTheme}>
-      <Divider classes={{ root: classes.divider }} />
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
         <div className={classes.paper}>

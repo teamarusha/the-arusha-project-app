@@ -67,6 +67,9 @@ function ElevationScroll(props) {
 
 
 // ADMIN HEADER COMPONENT
+// NOTE: We did not add a button to return to the previous page, this can still 
+// be achieved using the browser's back arrow.
+
 function AdminHeader(props) {
 
   const classes = useStyles();

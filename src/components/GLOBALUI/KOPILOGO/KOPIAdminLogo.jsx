@@ -1,8 +1,12 @@
 import React from "react";
 import { Component } from "react";
+
+// STYLING DEPENDENCY FOR This COMPONENT
 import './KOPILogo.css';
 
 
+// SVG ICON USED AS LOGO FOR THE ADMIN HEADER
+// NOTE: if you increase width and height, you must also adjust the viewBox to be larger.
 export default class KOPIAdminLogo extends Component {
   render() {
     return (
@@ -44,6 +48,6 @@ export default class KOPIAdminLogo extends Component {
           fill="#70CCD0"
         />
       </svg>
-    );
+    );``
   }
 }

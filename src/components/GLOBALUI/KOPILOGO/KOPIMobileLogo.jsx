@@ -1,9 +1,12 @@
 import React from "react";
 import { Component } from "react";
+
+// STYLING DEPENDENCY FOR This COMPONENT
 import './KOPILogo.css';
 
 
-
+// SVG ICON USED AS LOGO FOR THE NON ADMIN HEADER
+// NOTE: if you increase width and height, you must also adjust the viewBox to be larger.
 export default class KOPIMobileLogo extends Component {
   render() {
     return (
