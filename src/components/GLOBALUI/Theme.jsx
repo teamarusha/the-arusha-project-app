@@ -1,9 +1,13 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
+// VARIABLES SET TO COLOR CODES PRIMARY, SECONDARY, AND COMMON COLORS
 const KOPIWhite ="#FFF"
 const KOPITeal ="#5BC6CC"
 const KOPIOrange= "#FF900E"
 
+
+
+// THEMING COMPONENT TO BE SET AS THEME DEPENDENCY WITHIN <ThemeProvider/> COMPONENTS
 export default createMuiTheme({
 
     palette:{
