@@ -3,8 +3,6 @@ import { put } from '@redux-saga/core/effects';
 import axios from 'axios';
 
 function* getDropdowns() {
-
-    console.log('in dropdown saga');
     let dropdownTables = [
         "cardiac_arrest",
         "cardiac_arrest_etiology",
@@ -55,7 +53,6 @@ function* getDropdowns() {
     for (let table of dropdownTables) {
         try {
 
-            console.log('DOING A GET FOR TABLE:', table);
             const dropdown = yield axios.get(`/api/dropdown/${table}`, { params: { table: table } });
             yield put({ type: 'ADD_DROPDOWN_OBJECT', payload: { key: table, value: dropdown.data } });
             count++;

@@ -17,7 +17,6 @@ function AddVitalsButton({ vitalsMirror, setVitalsMirror }) {
     // THIS ID IS NOT THE Procedure ID FROM THE DATABASE,
     // THIS VALUE MEANS NOTHING AFTER SUBMISSION
     let newVitalsID = vitalsMirror[`${id}vitalsArray`].length + 1;
-    console.log("new vitals ID", newVitalsID);
 
     const timestamp = Date.now();
 

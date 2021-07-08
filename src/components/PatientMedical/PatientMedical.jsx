@@ -12,12 +12,6 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
 
 
   function submitValue(newParameter) {
-    console.log(
-      "Updating parameter in submitValue",
-      newParameter.key,
-      newParameter.thing
-    );
-
     setPatientsMirror({
       ...patientsMirror,
       [newParameter.key]: newParameter.thing,

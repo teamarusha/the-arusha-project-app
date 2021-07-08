@@ -35,17 +35,10 @@ function SummaryFieldSubmit() {
   const vitalsMirror = JSON.parse(localStorage.getItem("vitals"));
   // ____________________WATCHER FUNCTION____________________
   useEffect(() => {
-    console.log("UPDATING browser storage", incidentMirror);
     localStorage.setItem("incident", JSON.stringify(incidentMirror));
   }, [incidentMirror]);
 
   function submitValue(newParameter) {
-    console.log(
-      "Updating parameter in submitValue",
-      newParameter.key,
-      newParameter.thing
-    );
-
     setIncidentMirror({
       ...incidentMirror,
       [newParameter.key]: newParameter.thing,
@@ -212,7 +205,6 @@ function SummaryFieldSubmit() {
 
   const submitSummary = (event) => {
     event.preventDefault();
-    console.log("Summary submitted");
     dispatch({
       type: "POST_INCIDENT",
       payload: {

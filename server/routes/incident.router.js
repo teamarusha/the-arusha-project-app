@@ -13,7 +13,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     // const sampleStamp = '2021-03-23 12:23:33';
 
     const connection = await pool.connect();
-    // console.log('req.body', req.body);
+
 
 
 
@@ -26,8 +26,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             vitals
         } = req.body;
 
-        console.log('1');
-        console.log('2');
+
         const incidentValues = {
             user_id: userID,
             incident_service_id: incident.incidentService,
@@ -46,7 +45,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         };
 
-        console.log('3');
+
         await connection.query('BEGIN');
         const incidentInsertResults = await connection.query(`
             INSERT INTO incident ("user_id","incident_service_id","crew_id","triage_cat_id","number_patients",
@@ -71,12 +70,12 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                 incidentValues.unit_in_service,
                 incidentValues.incident_summary
             ]);
-        console.log('4');
+
 
         // ANOTHER VERY IMPORTANT PARAMETER
-        console.log('INCIDENTINSERTRESULTS', incidentInsertResults.rows[0].id);
+
         const incidentID = incidentInsertResults.rows[0].id;
-        console.log('5');
+
 
 
         await connection.query(`
@@ -93,7 +92,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             ]
         );
 
-        console.log('6');
+
         // patient
         const patientQuery = `INSERT INTO patient ("patient_incident_id","patient_first_name",
                 "patient_last_name","address", "home_county","home_state", "home_zip","gender_id",
@@ -103,7 +102,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
 
         const returnPatientIDs = [];
-        console.log('7');
         const patientReturn = await Promise.all(
 
             patients.patientArray.map((patient, i) => {
@@ -128,15 +126,14 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         );
 
-        console.log('8');
+
 
         // Puts returned ids into 
         for (let newReturn of patientReturn) {
-            console.log('newReturn.rows[0].id', newReturn.rows[0].id);
             returnPatientIDs.push(newReturn.rows[0].id);
         }
 
-        console.log('9');
+
         // disposition
         // IF IT IS >4 IT WILL JUST INSERT THE 1 THING
         await Promise.all(
@@ -179,7 +176,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         const medCondQuery = `INSERT INTO medicalconditions ("patient_condition_id","medical_conditions")
                 VALUES ($1, $2)`;
 
-        console.log('10');
         await Promise.all(
             returnPatientIDs.map((patientID, i) => {
 
@@ -196,7 +192,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         // currentMedications
         const currMedQuery = `INSERT INTO currentmedication ("patient_current_med_id","medication")
                 VALUES ($1, $2)`;
-        console.log('11');
+
         await Promise.all(
             returnPatientIDs.map((patientID, i) => {
 
@@ -213,7 +209,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         // allergies
         const allergyQuery = `INSERT INTO allergies ("patient_allergy_id","allergy")
                 VALUES ($1, $2)`;
-        console.log('12');
+
         await Promise.all(
             returnPatientIDs.map((patientID, i) => {
 
@@ -233,7 +229,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         "time_last_known_well","primary_symptom","other_symptoms","initial_acuity_id",
         "final_acuity_id","primary_impression_id")
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
-        console.log('13');
+
         await Promise.all(
             returnPatientIDs.map((patientID, i) => {
 
@@ -258,7 +254,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         const injuryQuery = `INSERT INTO injury ("patient_injury_id",
         "injury_location_id","injury_cause_id")
         VALUES ($1, $2, $3);`;
-        console.log('14');
+
         await Promise.all(
             returnPatientIDs.map((patientID, i) => {
 
@@ -275,7 +271,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         // cardiacArrest
         // IF IT IS 1 IT WILL ONLY INSERT THE ONE THING
 
-        console.log('15');
+
         await Promise.all(
             returnPatientIDs.map((patientID, i) => {
 
@@ -327,7 +323,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         "med_name","med_admin_route_id","med_admin_by_id",
         "med_dosage","med_dosage_units_id","med_response_id","med_timestamp")
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
-        console.log('16');
+
         await Promise.all(
             // First we map (loop) through all of the patients,
             // patientID is the returned patient ID from the database
@@ -367,7 +363,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         "procedure_response_id","procedure_performer_id","procedure_timestamp")
         VALUES ($1, $2, $3, $4, $5, $6, $7);`;
 
-        console.log('17');
         await Promise.all(
             // this query is much the same as the 
             returnPatientIDs.map((patientID, i) => {
@@ -399,8 +394,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         "stroke_score_id", "stroke_scale_id", "vitals_timestamp")
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15);`;
 
-
-        console.log('18');
         await Promise.all(
             // this query is much the same as the 
             returnPatientIDs.map((patientID, i) => {
@@ -408,8 +401,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                 vitals[String(i + 1) + "vitalsArray"].map(vital => {
 
                     if (vital !== vitals[String(i + 1) + "lastVital"]) {
-
-                        // console.log('ADDING VITALS', patientID, i+1, vital,  String(i + 1) + 'systolicBloodPressure' + vital);
 
                         let vitalValues = [
                             patientID,
@@ -435,7 +426,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             })
         );
 
-        console.log('19');
         await connection.query('COMMIT')
         res.sendStatus(201);
     } catch (error) {

@@ -17,12 +17,6 @@ const useStyles = makeStyles((theme) => ({
 function TimestampButton({ incidentMirror, setIncidentMirror }) {
   const classes = useStyles();
   function submitValue(newParameter) {
-    console.log(
-      "Updating parameter in submitValue",
-      newParameter.key,
-      newParameter.thing
-    );
-
     setIncidentMirror({
       ...incidentMirror,
       [newParameter.key1]: newParameter.thing1,
@@ -33,16 +27,6 @@ function TimestampButton({ incidentMirror, setIncidentMirror }) {
   function advanceDispatch() {
 
     const timestamp = Date.now(); // This would be the timestamp you want to format
-    console.log(
-      new Intl.DateTimeFormat("en-GB", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-      }).format(timestamp)
-    );
 
     switch (incidentMirror.dispatchButton) {
 

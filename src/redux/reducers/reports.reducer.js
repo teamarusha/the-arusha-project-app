@@ -1,6 +1,5 @@
 // STORES ALL TABLE VALUES FROM ALL PATIENTS FROM ALL REPORTS
 const reportsTable = (state = [], action) => {
-  console.log('hello from the reports reducer');
 
   // set all reports with data from server
   if (action.type === 'SET_REPORTS') {

@@ -12,12 +12,6 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
   // Only handles when a value is changed by keystroke/inputfield clicks.
   // Does NOT handle initialization of new data.
   function submitValue(newParameter) {
-    console.log(
-      "Updating parameter in submitValue",
-      newParameter.key,
-      newParameter.thing
-    );
-
     setLocalIncident({
       ...localIncident,
       [newParameter.key]: newParameter.thing,

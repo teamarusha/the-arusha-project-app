@@ -11,12 +11,6 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
 
 
   function submitValue(newParameter) {
-    console.log(
-      "Updating parameter in submitValue",
-      newParameter.key,
-      newParameter.thing
-    );
-
     setLocalIncident({
       ...localIncident,
       [newParameter.key]: newParameter.thing,

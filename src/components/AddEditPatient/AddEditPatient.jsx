@@ -48,7 +48,7 @@ function AddEditPatient({
       // Reinitialize TREATMENT Local Storage
       localStorage.setItem("treatment", JSON.stringify(treatment));
       setTreatmentMirror(treatment);
-      // Reinitialize VITALS Local Storage
+      // Reinitialize VITALS Local Storage`
       localStorage.setItem("vitals", JSON.stringify(vitals));
       setVitalsMirror(vitals);
       // Reinitialize PATIENTS Local Storage
@@ -61,10 +61,6 @@ function AddEditPatient({
         localStorage.setItem("incident", JSON.stringify(incident));
         setIncidentMirror(incident);
       } else {
-        // dispatch({
-        //   type: "SET_INCIDENT",
-        //   payload: JSON.parse(localStorage.getItem("incident")),
-        // });
         setIncidentMirror(JSON.parse(localStorage.getItem("incident")));
       }
 
@@ -73,10 +69,6 @@ function AddEditPatient({
         localStorage.setItem("treatment", JSON.stringify(treatment));
         setTreatmentMirror(treatment);
       } else {
-        // dispatch({
-        //   type: "SET_TREATMENT",
-        //   payload: JSON.parse(localStorage.getItem("treatment")),
-        // });
         setTreatmentMirror(JSON.parse(localStorage.getItem("treatment")));
       }
 
@@ -85,10 +77,6 @@ function AddEditPatient({
         localStorage.setItem("vitals", JSON.stringify(vitals));
         setVitalsMirror(vitals);
       } else {
-        // dispatch({
-        //   type: "SET_VITALS",
-        //   payload: JSON.parse(localStorage.getItem("vitals")),
-        // });
         setVitalsMirror(JSON.parse(localStorage.getItem("vitals")));
       }
 
@@ -97,10 +85,6 @@ function AddEditPatient({
         localStorage.setItem("patients", JSON.stringify(patients));
         setPatientsMirror(patients);
       } else {
-        // dispatch({
-        //   type: "SET_PATIENTS",
-        //   payload: JSON.parse(localStorage.getItem("patients")),
-        // });
         setPatientsMirror(JSON.parse(localStorage.getItem("patients")));
       }
     }
@@ -108,22 +92,18 @@ function AddEditPatient({
 
   // ----------Watchers to update Storage on patient addition----------
   useEffect(() => {
-    console.log("UPDATING incident browser storage", incidentMirror);
     localStorage.setItem("incident", JSON.stringify(incidentMirror));
   }, [incidentMirror]);
 
   useEffect(() => {
-    console.log("UPDATING patients browser storage", patientsMirror);
     localStorage.setItem("patients", JSON.stringify(patientsMirror));
   }, [patientsMirror]);
 
   useEffect(() => {
-    console.log("UPDATING treatment browser storage", treatmentMirror);
     localStorage.setItem("treatment", JSON.stringify(treatmentMirror));
   }, [treatmentMirror]);
 
   useEffect(() => {
-    console.log("UPDATING vitals browser storage", vitalsMirror);
     localStorage.setItem("vitals", JSON.stringify(vitalsMirror));
   }, [vitalsMirror]);
 
@@ -141,7 +121,6 @@ function AddEditPatient({
     // THIS ID IS NOT THE PATIENT'S ID FROM THE DATABASE,
     // THIS VALUE MEANS NOTHING AFTER SUBMISSION
     let newPatientID = patientsMirror.patientArray.length + 1;
-    console.log("new patient ID", newPatientID);
 
     setIncidentMirror({
       ...incidentMirror,

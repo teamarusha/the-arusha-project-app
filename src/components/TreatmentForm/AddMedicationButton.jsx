@@ -31,7 +31,6 @@ function AddMedicationButton({ treatmentMirror, setTreatmentMirror }) {
       // THIS ID IS NOT THE Medication ID FROM THE DATABASE,
       // THIS VALUE MEANS NOTHING AFTER SUBMISSION
       let newMedicationID = treatmentMirror[`${id}medicationArray`].length + 1;
-      console.log("new medication ID", id, treatmentMirror);
 
       const timestamp = Date.now();
 

@@ -6,10 +6,8 @@ function* fetchReport(action) {
     try {
         //yield makes us wait until the async thing (axios) is done
         //keep the response in a variable to access later
-        console.log(action.payload)
         const response = yield axios.get(`/api/reports/${action.payload}`)
         //when its done successfully then 'dispatch' the action to set reducer
-        console.log('response data:', response.data)
         yield put({ type: 'SET_REPORT', payload: response.data })
 
     } catch (error) {

@@ -50,7 +50,6 @@ function FinalReport() {
 
     // initializes fetch of individual patient care report based on which patient selected
     useEffect(() => {
-        console.log('in useEffect param:', id)
         dispatch({ type: 'FETCH_REPORT', payload: id })
     }, []);
 

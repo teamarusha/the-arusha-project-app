@@ -44,7 +44,6 @@ function Admin() {
 
     //grabs reportsTable information from reducer where information is being stored
     const reports = useSelector((store) => store.reportsTable);
-    console.log('reports:', reports)
 
     //sets number of rows per page of admin table
     const [page, setPage] = useState(0);
@@ -61,7 +60,6 @@ function Admin() {
 
     //when report button clicked - redirects you to patient care report of that selected patient
     function handleClick(row) {
-        console.log('in handle click')
         history.push(`/report/${row.id}`)
     }
 

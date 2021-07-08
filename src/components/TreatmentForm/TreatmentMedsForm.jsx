@@ -28,12 +28,6 @@ const TreatmentMedsForm = ({ localTreatment, setLocalTreatment }) => {
   // Only handles when a value is changed by keystroke/inputfield clicks.
   // Does NOT handle initialization of new data.
   function submitValue(newParameter) {
-    console.log(
-      "Updating parameter in submitValue",
-      newParameter.key,
-      newParameter.thing
-    );
-
     setLocalTreatment({
       ...localTreatment,
       [newParameter.key]: newParameter.thing,
