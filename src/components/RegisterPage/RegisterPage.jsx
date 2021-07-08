@@ -35,6 +35,8 @@ function RegisterPage() {
           Login
         </Link>
       </Grid>
+      <br />
+      <br />
       </Container>
     </ThemeProvider>
   );
