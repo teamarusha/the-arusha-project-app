@@ -14,17 +14,21 @@ Before you get started, make sure you have the following software installed on y
 - [PostrgeSQL](https://www.postgresql.org/)
 - [Nodemon](https://nodemon.io/)
 
-## Installation
-
-1. Create a database called 'arusha_project', we recommend using PostgreSQL to manage your server to database connection and Postico to run the database queries, as those were what we used. If you would like to name your database something else, you will need to change `arusha_project` to the name of your new database name in `server/modules/pool.js`
-
-1. The queries in the database.sql file are available for easy population of the data needed for the application.
-1. Open your preferred code editor and run 'npm install'
-1. Open two terminal windows
-   i. In one of those windows run 'npm run server'
-   i. In the other run 'npm run client'; once you run the client it will automatically open a browser tab of the project for you.
-
 ## Usage
+
+## Setup
+- Run `npm install`
+- Create a `.env` file at the root of the project and paste this line into the file:
+  ```
+  SERVER_SESSION_SECRET=superDuperSecret
+  ```
+- Replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. 
+- Start postgres if not running already by using `brew services start postgresql`
+- Run `npm run server`
+- Run `npm run client`
+- Navigate to `localhost:3000`
+
+- Create a database called 'arusha_project', we recommend using PostgreSQL to manage your server to database connection and Postico to run the database queries, as those were what we used. If you would like to name your database something else, you will need to change `arusha_project` to the name of your new database name in `server/modules/pool.js`
 
 ## Built With
 

@@ -1,6 +1,7 @@
 import { put } from '@redux-saga/core/effects';
 import axios from 'axios';
 
+// SENDS INCIIDENT INFORMATION TO SERVER
 function* postIncident(action) {
 
     console.log('IN POST INCIDENT SAGA');

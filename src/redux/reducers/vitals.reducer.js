@@ -1,3 +1,4 @@
+// STORES VITALS INFORMATION
 const vitals = (state = defaultVitals, action) => {
   switch (action.type) {
     case 'SET_VITALS':

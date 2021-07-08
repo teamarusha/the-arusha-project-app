@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
+// ADJUSTS STYLING FOR MUI COMPONENTS WITH THESE CLASSES GLOBALLY IN APP
 const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',

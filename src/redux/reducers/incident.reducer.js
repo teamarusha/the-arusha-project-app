@@ -1,3 +1,4 @@
+// STORES INCIDENT INFORMATION
 const incident = (state = defaultIncident, action) => {
   switch (action.type) {
     case 'SET_INCIDENT':

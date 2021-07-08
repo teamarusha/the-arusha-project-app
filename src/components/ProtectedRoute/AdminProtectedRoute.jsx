@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import LoginPage from '../LoginPage/LoginPage';
 
 // A Custom Wrapper Component -- This will keep our code DRY.
@@ -12,19 +12,6 @@ import LoginPage from '../LoginPage/LoginPage';
 // so your server-side route must implement real security
 // by checking req.isAuthenticated for authentication
 // and by checking req.user for authorization
-
-
-// let nonAdminLoginLinkData = {
-//   path: '/login',
-//   text: 'Login / Register',
-// };
-
-// let adminLoginLinkData = {
-//   path: '/login',
-//   text: 'Login / Register',
-// };
-
-
 
 function AdminProtectedRoute(props) {
   const user = useSelector((store) => store.user);
@@ -51,7 +38,6 @@ function AdminProtectedRoute(props) {
     // if the mode is 'login', show the LoginPage
     ComponentToShow = LoginPage;
   }
-
 
   // redirect a logged in user if an authRedirect prop has been provided
   if (user.id && authRedirect != null) {

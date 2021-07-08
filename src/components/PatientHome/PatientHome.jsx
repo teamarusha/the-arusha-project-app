@@ -18,7 +18,7 @@ import { Container } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
 
-
+//CHANGE STYLING FOR MUI COMPONENTS WITH THESE CLASSES
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -27,11 +27,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     flexBasis: "33.33%",
     flexShrink: 0,
-    // textAlign: 'center',
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    // color: theme.palette.text.secondary,
   },
 
   text: {
@@ -48,9 +46,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function PatientHome() {
+  //DECLARE VARIABLES FOR USE OF THESE FUNCTIONS
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
   const dispatch = useDispatch();
+
+  const [expanded, setExpanded] = React.useState(false);
+
+  // GRAB DROPDOWNS STORED IN REDUCER
   const dropdowns = useSelector((store) => store.dropdowns);
 
   const [incidentMirror, setIncidentMirror] = useState(
@@ -91,7 +93,7 @@ function PatientHome() {
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
         <br />
-
+        {/* BIG TIMESTAMP BUTTON */}
         <TimestampButton
           incidentMirror={incidentMirror}
           setIncidentMirror={setIncidentMirror}
@@ -101,7 +103,7 @@ function PatientHome() {
         <br />
 
 
-
+        {/* ADD AND EDIT PATIENT BUTTONS */}
         <AddEditPatient
           formName={"patient"}
           incidentMirror={incidentMirror}
@@ -117,6 +119,7 @@ function PatientHome() {
         <br />
       </div>
       <div className={classes.root}>
+        {/* PATIENT DEMOGRAPHICS ACCORDIAN */}
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
@@ -144,6 +147,7 @@ function PatientHome() {
         </Accordion>
         <br />
 
+        {/* MEDICAL HISTORY ACCORDIAN */}
         <Accordion
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
@@ -171,6 +175,7 @@ function PatientHome() {
         </Accordion>
         <br />
 
+        {/* PATIENT SYMPTOMS ACCORDIAN */}
         <Accordion
           style={{ backgroundColor: '#d3d3d3' }}
           expanded={expanded === "panel3"}
@@ -198,6 +203,7 @@ function PatientHome() {
         </Accordion>
         <br />
 
+        {/* PATIENT INJURY ACCORDIAN */}
         <Accordion
           style={{ backgroundColor: '#d3d3d3' }}
           expanded={expanded === "panel4"}
@@ -224,7 +230,8 @@ function PatientHome() {
           </AccordionDetails>
         </Accordion>
         <br />
-
+        
+        {/* CARDIAC ARREST ACCORDIAN */}
         <Accordion
           style={{ backgroundColor: '#d3d3d3' }}
           expanded={expanded === "panel5"}

@@ -2,12 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+// pulls in incident form sub components
 import IncidentFormResponse from "./IncidentFormResponse";
 import IncidentFormDisposition from "./IncidentFormDisposition";
 import IncidentFormScene from "./IncidentFormScene";
 import AddEditPatient from "../AddEditPatient/AddEditPatient";
 import TimestampButton from "../TimestampButton/TimestampButton";
-
 
 import {
   Accordion,
@@ -17,13 +17,14 @@ import {
   Container
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
 import useStyles from "./Styles";
 
 function IncidentHome() {
+  // declares variables for use of functions
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  // grabs dropdown information stored in reducer
   const dropdowns = useSelector((store) => store.dropdowns);
 
   const [incidentMirror, setIncidentMirror] = useState(
@@ -66,18 +67,17 @@ function IncidentHome() {
   return (
     <Container component="main" maxWidth="xs" >
       <div className={classes.paper}>
-
-
         <br />
-
+        {/* Large time stamp button */}
         <TimestampButton className={classes.timestamp}
           incidentMirror={incidentMirror}
           setIncidentMirror={setIncidentMirror}
         />
         <br />
+        {/* home page */}
         <h2>INCIDENT</h2>
         <br />
-
+        {/* add / edit patient buttons */}
         <AddEditPatient
           formName={"incident"}
           incidentMirror={incidentMirror}
@@ -93,6 +93,7 @@ function IncidentHome() {
         <br />
       </div>
       <div className={classes.root}>
+        {/* response accordian */}
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
@@ -118,7 +119,7 @@ function IncidentHome() {
           </AccordionDetails>
         </Accordion>
         <br />
-
+        {/* scene accordian */}
         <Accordion
           expanded={expanded === "panel3"}
           onChange={handleChange("panel3")}
@@ -147,6 +148,7 @@ function IncidentHome() {
 
         </Accordion>
         <br />
+        {/* disposition accordian */}
         <Accordion
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}

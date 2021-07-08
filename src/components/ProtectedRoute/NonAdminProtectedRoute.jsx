@@ -12,19 +12,6 @@ import LoginPage from '../LoginPage/LoginPage';
 // by checking req.isAuthenticated for authentication
 // and by checking req.user for authorization
 
-
-// let nonAdminLoginLinkData = {
-//   path: '/login',
-//   text: 'Login / Register',
-// };
-
-// let adminLoginLinkData = {
-//   path: '/login',
-//   text: 'Login / Register',
-// };
-
-
-
 function NonAdminProtectedRoute(props) {
   const user = useSelector((store) => store.user);
 

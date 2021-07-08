@@ -27,31 +27,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         } = req.body;
 
         console.log('1');
-
-        // console.log('incident', incident);
-        // console.log('patients', patients);
-        // console.log('treatment', treatment);
-        // console.log('vitals', vitals);
-
-
-        // THE ORDER FOR BIG INSERT STATEMENT
-        // incident
-        // const incidentValues = {
-        //     user_id: user,
-        //     incident_type_id: 5,
-        //     crew_id: 1,
-        //     triage_cat_id: 2,
-        //     unit_notified: sampleStamp,
-        //     unit_enroute: sampleStamp,
-        //     unit_arrived_scene: sampleStamp,
-        //     arrived_patient: sampleStamp,
-        //     unit_left_scene: sampleStamp,
-        //     arrived_destination: sampleStamp,
-        //     transfer_of_care: sampleStamp,
-        //     unit_in_service: sampleStamp,
-        //     incident_summary: "It went well"
-
-        // };
         console.log('2');
         const incidentValues = {
             user_id: userID,
@@ -103,15 +78,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         const incidentID = incidentInsertResults.rows[0].id;
         console.log('5');
 
-        // scene
-        // const sceneQuery = {
-        //     incident_scene_id: incidentID,
-        //     incident_state: "Minnesota",
-        //     incident_zip: 55409,
-        //     incident_county: "Hennepin",
-        //     possible_injury_id: 3,
-        //     alcohol_drug_use_id: 5
-        // };
 
         await connection.query(`
             INSERT INTO scene ("incident_scene_id","incident_state","incident_zip","incident_county",
@@ -135,71 +101,13 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
                 RETURNING id;`;
 
-        // const samplePatients = [
-        //     {
-        //         patient_incident_id: 1,
-        //         patient_first_name: 'Charlie',
-        //         patient_last_name: 'Stokes',
-        //         address: '1234 Nicollet Ave',
-        //         home_county: 'Hennepin',
-        //         home_state: 'MN',
-        //         home_zip: '55409',
-        //         gender_id: 2,
-        //         race_id: 3,
-        //         date_of_birth: sampleStamp,
-        //         age: 29,
-        //         age_units_id: 1
-        //     }, {
-        //         patient_incident_id: 1,
-        //         patient_first_name: 'Chloe',
-        //         patient_last_name: 'Everson',
-        //         address: '4321 Nicollet Ave',
-        //         home_county: 'Hennepin',
-        //         home_state: 'MN',
-        //         home_zip: '55409',
-        //         gender_id: 1,
-        //         race_id: 2,
-        //         date_of_birth: sampleStamp,
-        //         age: 28,
-        //         age_units_id: 1
-        //     }, {
-        //         patient_incident_id: 1,
-        //         patient_first_name: 'Eyram',
-        //         patient_last_name: 'Tay',
-        //         address: '3142 Nicollet Ave',
-        //         home_county: 'Hennepin',
-        //         home_state: 'MN',
-        //         home_zip: '55409',
-        //         gender_id: 2,
-        //         race_id: 1,
-        //         date_of_birth: sampleStamp,
-        //         age: 27,
-        //         age_units_id: 1
-        //     }
-        // ]
 
-        // ANOTHER SUPER IMPORTANT THING - Patient ID array 
-        // holds patient's ACTUAL id from the database 
         const returnPatientIDs = [];
         console.log('7');
         const patientReturn = await Promise.all(
 
             patients.patientArray.map((patient, i) => {
 
-                // let patientValues = [
-                //     patient.patient_incident_id,
-                //     patient.patient_first_name,
-                //     patient.patient_last_name,
-                //     patient.address,
-                //     patient.home_county,
-                //     patient.home_state,
-                //     patient.home_zip,
-                //     patient.gender_id,
-                //     patient.race_id,
-                //     patient.date_of_birth,
-                //     patient.age,
-                //     patient.age_units_id
-                // ];
                 let patientValues = [
                     incidentID,
                     patients[String(patient) + 'patientFirstName'],
@@ -227,28 +135,11 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             console.log('newReturn.rows[0].id', newReturn.rows[0].id);
             returnPatientIDs.push(newReturn.rows[0].id);
         }
-        // console.log('1');
-        // console.log('2');
-        // console.log('3');
-        // console.log('4');
-        // console.log('5');
-        // console.log('returnPatientIDs', returnPatientIDs);
 
         console.log('9');
         // disposition
         // IF IT IS >4 IT WILL JUST INSERT THE 1 THING
         await Promise.all(
-            // const dispositionValues = {
-            //     incident_disposition_id: incidentID,
-            //     destination_state: "Minnesota",
-            //     destination_zip: 55044,
-            //     destination_county: "Dakota",
-            //     transport_disposition_id: 2,
-            //     transport_method_id: 2,
-            //     transport_mode_id: 3,
-            //     destination_type_id: 2
-            // };
-
 
             returnPatientIDs.map((patientID, i) => {
 
@@ -519,7 +410,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                     if (vital !== vitals[String(i + 1) + "lastVital"]) {
 
                         // console.log('ADDING VITALS', patientID, i+1, vital,  String(i + 1) + 'systolicBloodPressure' + vital);
-                        
 
                         let vitalValues = [
                             patientID,

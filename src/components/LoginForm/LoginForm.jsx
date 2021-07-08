@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {useSelector} from 'react-redux';
-import {Grid, TextField, Button, Typography, Container, CssBaseline, Divider, Box}from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { TextField, Button, Typography, Container, CssBaseline, Box } from '@material-ui/core';
 import KOPIMobileLogo from '../GLOBALUI/KOPILOGO/KOPIMobileLogo';
 import globalUseStyle from '../GLOBALUI/globalUseStyles';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -9,6 +9,7 @@ import createMuiTheme from '../GLOBALUI/Theme';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 
+// change styling for MUI components with these classes
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(4),
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     marginBottom: 40,
-    
+
   },
   form: {
     width: '100%',
@@ -53,8 +54,6 @@ const useStyles = makeStyles((theme) => ({
 
 function LoginForm() {
   const classes = useStyles();
-  const errors = useSelector(store => store.errors);
-  const user = useSelector((store) => store.user);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -70,9 +69,9 @@ function LoginForm() {
         payload: {
           username: username,
           password: password,
-        }, 
+        },
       });
-      
+
       history.push('/home')
 
     } else {
@@ -82,64 +81,58 @@ function LoginForm() {
 
   return (
     <ThemeProvider theme={createMuiTheme}>
-      {/* <div className={classes.header}>
-        <Typography component="h2" variant="h1">
-          The 
+      <Container component="main" maxWidth="xs" >
+        <CssBaseline />
+        <div className={classes.paper}>
+          <div className={classes.mobileIcon}>
+            {/* kopi logo */}
+            <KOPIMobileLogo className={classes.logo} />
+          </div>
+          <Typography component="h1" variant="h4">
+            Log In
         </Typography>
-        <br />
-        <Typography component="h2" variant="h1">
-           Arusha Project
-        </Typography>
+          <form className={classes.form} onSubmit={login}>
+            {/* username textfield */}
+            <TextField
+              variant="outlined"
+              margin="normal"
+              name="username"
+              value={username}
+              fullWidth
+              required
+              onChange={(event) => setUsername(event.target.value)}
+              label="Username"
+              type='text'
+              autoFocus
+            />
+            {/* password textfield */}
+            <TextField
+              variant="outlined"
+              margin="normal"
+              name="password"
+              value={password}
+              fullWidth
+              required
+              onChange={(event) => setPassword(event.target.value)}
+              label="Password"
+              type="password"
+            />
+            {/* login button */}
+            <Box className={globalStyle.btnArea}>
+              <Button
+                type="submit"
+                name="submit"
+                size="large"
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+              >
+                Sign In
+              </Button>
+            </Box>
+          </form>
         </div>
-        <Divider classes={{root: classes.divider}}/> */}
-        <Container component="main" maxWidth="xs" >
-      <CssBaseline />
-      <div className={classes.paper}>
-     <div className={classes.mobileIcon}>
-      <KOPIMobileLogo className={classes.logo}/>
-      </div>
-        <Typography component="h1" variant="h4">
-          Log In
-        </Typography>
-        <form className={classes.form} onSubmit={login}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            name="username"
-            value={username}
-            fullWidth
-            required
-            onChange={(event) => setUsername(event.target.value)}
-            label="Username"
-            type='text'
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            name="password"
-            value={password}
-            fullWidth
-            required
-            onChange={(event) => setPassword(event.target.value)}
-            label="Password"
-            type="password"   
-          />
-          <Box className={globalStyle.btnArea}>
-            <Button
-         type="submit"
-         name="submit"
-         size="large"
-         variant="contained"
-         color="secondary"
-         className={classes.submit}
-       >
-         Sign In
-       </Button>
-       </Box>
-        </form>
-      </div>
-    </Container>
+      </Container>
     </ThemeProvider>
   );
 }
