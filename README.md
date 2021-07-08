@@ -14,8 +14,6 @@ Before you get started, make sure you have the following software installed on y
 - [PostrgeSQL](https://www.postgresql.org/)
 - [Nodemon](https://nodemon.io/)
 
-## Usage
-
 ## Setup
 - Run `npm install`
 - Create a `.env` file at the root of the project and paste this line into the file:
