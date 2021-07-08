@@ -80,7 +80,6 @@ function RegisterForm() {
 
   return (
     <ThemeProvider theme={createMuiTheme}>
-      <Divider classes={{ root: classes.divider }} />
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
         <div className={classes.paper}>
