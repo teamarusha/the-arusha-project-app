@@ -257,6 +257,8 @@ function PatientHome() {
             />
           </AccordionDetails>
         </Accordion>
+        <br />
+        <br />
       </div>
 
     </Container>

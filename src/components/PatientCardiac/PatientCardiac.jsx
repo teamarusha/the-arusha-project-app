@@ -285,7 +285,8 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
 
             {dropdowns['aed_defibrillator'].map(item => <MenuItem key={'aed_defibrillator' + item.id}
               value={item.id} classes={{ root: classes.menuItem }}>{item[`aed_defibrillator_type`]}</MenuItem>)}
-          </Select> <br />
+          </Select> 
+          <br />
         </div>
 
       }
