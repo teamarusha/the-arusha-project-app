@@ -208,7 +208,7 @@ const VitalsForm = () => {
           ></TextField>
           <br />
           <br />
-          <TextField
+          {/* <TextField
             id="outlined-basic"
             label="Glasgow Coma Score-Eye"
             variant="outlined"
@@ -266,7 +266,7 @@ const VitalsForm = () => {
             }
           ></TextField>
           <br />
-          <br />
+          <br /> */}
           <TextField
             id="outlined-basic"
             label="Glasgow Coma Score-Qualifier"
@@ -319,6 +319,108 @@ const VitalsForm = () => {
                     value={item.id}
                   >
                     {item["responsiveness_level_type"]}
+                  </MenuItem>
+                ))}
+              </Select>
+              <br />
+              <br />
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Glasgow Coma Score-Eye
+              </InputLabel>
+              <Select
+
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                fullWidth
+                value={
+                  localVitals[
+                  `${id}glasgowComaScoreEye${localVitals[`${id}lastVital`]}`
+                  ]
+                }
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}glasgowComaScoreEye${localVitals[`${id}lastVital`]
+                      }`,
+                    thing: event.target.value,
+                  })
+                }
+              >
+
+                {dropdowns["glasgow_eye"].map((item) => (
+                  <MenuItem
+                    classes={{ root: classes.menuItem }}
+                    key={"glasgow_eye" + item.id}
+                    value={item.id}
+                  >
+                    {item["glasgow_eye_type"]}
+                  </MenuItem>
+                ))}
+              </Select>
+              <br />
+              <br />
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Glasgow Coma Score-Verbal
+              </InputLabel>
+              <Select
+
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                fullWidth
+                value={
+                  localVitals[
+                  `${id}glasgowComaScoreVerbal${localVitals[`${id}lastVital`]}`
+                  ]
+                }
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}glasgowComaScoreVerbal${localVitals[`${id}lastVital`]
+                      }`,
+                    thing: event.target.value,
+                  })
+                }
+              >
+
+                {dropdowns["glasgow_verbal"].map((item) => (
+                  <MenuItem
+                    classes={{ root: classes.menuItem }}
+                    key={"glasgow_verbal" + item.id}
+                    value={item.id}
+                  >
+                    {item["glasgow_verbal_type"]}
+                  </MenuItem>
+                ))}
+              </Select>
+              <br />
+              <br />
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Glasgow Coma Score-Motor
+              </InputLabel>
+              <Select
+
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                fullWidth
+                value={
+                  localVitals[
+                  `${id}glasgowComaScoreMotor${localVitals[`${id}lastVital`]}`
+                  ]
+                }
+                onChange={(event) =>
+                  submitValue({
+                    key: `${id}glasgowComaScoreMotor${localVitals[`${id}lastVital`]
+                      }`,
+                    thing: event.target.value,
+                  })
+                }
+              >
+
+                {dropdowns["glasgow_motor"].map((item) => (
+                  <MenuItem
+                    classes={{ root: classes.menuItem }}
+                    key={"glasgow_motor" + item.id}
+                    value={item.id}
+                  >
+                    {item["glasgow_motor_type"]}
                   </MenuItem>
                 ))}
               </Select>

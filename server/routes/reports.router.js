@@ -108,7 +108,10 @@ router.get('/:id', (req, res) => {
         'pulse_oximetry', pulse_oximetry, 'respiratory_rate', respiratory_rate, 'blood_glucose', blood_glucose, 
         'glasgow_eye', glasgow_eye, 'glasgow_verbal', glasgow_verbal, 'glasgow_motor', glasgow_motor, 'glasgow_qualifier', 
         glasgow_qualifier, 'responsiveness_level', responsiveness_level_type, 'pain_scale', pain_scale_type, 'stroke_score', 
-        stroke_score_type, 'stroke_scale', stroke_scale_type, 'vitals_timestamp', vitals_timestamp) as vitals FROM vitals 
+        stroke_score_type, 'stroke_scale', stroke_scale_type, 'vitals_timestamp', vitals_timestamp) as vitals FROM vitals
+      JOIN glasgow_eye ON glasgow_eye.id = vitals.glasgow_eye_id
+      JOIN glasgow_verbal ON glasgow_verbal.id = vitals.glasgow_verbal_id
+      JOIN glasgow_motor ON glasgow_motor.id = vitals.glasgow_motor_id
       JOIN responsiveness_level ON responsiveness_level.id = vitals.responsiveness_level_id
       JOIN pain_scale ON pain_scale.id = vitals.pain_scale_id
       JOIN stroke_score ON stroke_score.id = vitals.stroke_score_id

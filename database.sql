@@ -395,6 +395,48 @@ VALUES
 ('9'),
 ('10');
 
+CREATE TABLE "glasgow_eye" (
+    "id" SERIAL PRIMARY KEY,
+    "glasgow_eye_type" varchar(10)
+);
+
+INSERT INTO "glasgow_eye" ("glasgow_eye_type")
+VALUES
+('N/A'),
+('1'),
+('2'),
+('3'),
+('4');
+
+CREATE TABLE "glasgow_verbal" (
+    "id" SERIAL PRIMARY KEY,
+    "glasgow_verbal_type" varchar(10)
+);
+
+INSERT INTO "glasgow_verbal" ("glasgow_verbal_type")
+VALUES
+('N/A'),
+('1'),
+('2'),
+('3'),
+('4')
+('5');
+
+CREATE TABLE "glasgow_motor" (
+    "id" SERIAL PRIMARY KEY,
+    "glasgow_motor_type" varchar(10)
+);
+
+INSERT INTO "glasgow_motor" ("glasgow_motor_type")
+VALUES
+('N/A'),
+('1'),
+('2'),
+('3'),
+('4')
+('5')
+('6');
+
 CREATE TABLE "stroke_score" (
     "id" SERIAL PRIMARY KEY,
     "stroke_score_type" VARCHAR (20)
@@ -977,9 +1019,9 @@ CREATE TABLE vitals (
 	pulse_oximetry varchar(50),
 	respiratory_rate varchar(50),
 	blood_glucose varchar(50),
-	glasgow_eye varchar(50),
-	glasgow_verbal varchar(50),
-	glasgow_motor varchar(50),
+	glasgow_eye_id integer REFERENCES "glasgow_eye",
+	glasgow_verbal_id integer REFERENCES "glasgow_verbal",
+	glasgow_motor_id integer REFERENCES "glasgow_motor",
 	glasgow_qualifier varchar(50),
 	responsiveness_level_id integer REFERENCES "responsiveness_level",
 	pain_scale_id integer REFERENCES "pain_scale",
