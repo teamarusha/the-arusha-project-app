@@ -192,7 +192,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
               shrink: true,
             }}
           />&nbsp; &nbsp; <br /><br />
-          <label for="appt">Time:</label>
+          <label htmlFor="appt">Time:</label>
           <input type="time" id="appt" name="appt"
             min="09:00" max="18:00"
             value={patientsMirror[`${id}cardiacArrestTime`]}

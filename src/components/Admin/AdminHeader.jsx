@@ -10,7 +10,7 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import KOPIAdminLogo from "../GLOBALUI/KOPILOGO/KOPIAdminLogo";
 import { makeStyles } from "@material-ui/styles";
 import { ThemeProvider } from '@material-ui/styles';
-import createMuiTheme from '../GLOBALUI/Theme';
+import createTheme from '../GLOBALUI/Theme';
 
 
 
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   giContainer: {
     alignContent: 'center',
     display: 'contents',
-    justifyContent: 'center'
+    justifyContentContent: 'center'
   },
 }));
 
@@ -77,7 +77,7 @@ function AdminHeader(props) {
 
   return (
     <React.Fragment>
-      <ThemeProvider theme={createMuiTheme}>
+      <ThemeProvider theme={createTheme}>
         <ElevationScroll>
           <AppBar position="fixed" color="primary" classes={{ root: classes.appBar }}>
             <Toolbar disableGutters={false} classes={{ root: classes.toolBar }}>

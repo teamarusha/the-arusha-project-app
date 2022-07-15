@@ -15,7 +15,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import FinalReport from '../FinalReport/FinalReport';
 import { ThemeProvider } from '@material-ui/styles';
-import createMuiTheme from '../GLOBALUI/Theme';
+import createTheme from '../GLOBALUI/Theme';
 import './App.css';
 import IncidentHome from "../IncidentForm/IncidentHome";
 import PatientHome from "../PatientHome/PatientHome";
@@ -34,7 +34,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <ThemeProvider theme={createMuiTheme}>
+    <ThemeProvider theme={createTheme}>
       <Router>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}

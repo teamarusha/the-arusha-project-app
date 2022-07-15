@@ -81,14 +81,13 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         // SCENE
         await connection.query(`
-            INSERT INTO scene ("incident_scene_id","incident_state","incident_zip","incident_county",
+            INSERT INTO scene ("incident_scene_id","incident_city","incident_region",
             "possible_injury_id","alcohol_drug_use_id")
             VALUES ($1, $2, $3, $4, $5, $6);`,
             [
                 incidentID,
-                incident.incidentState,
-                incident.incidentZipCode,
-                incident.incidentCounty,
+                incident.incidentCity,
+                incident.incidentRegion,
                 incident.possibleInjury,
                 incident.alcoholDrugIndicators
             ]
@@ -97,7 +96,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         // PATIENT
         const patientQuery = `INSERT INTO patient ("patient_incident_id","patient_first_name",
-                "patient_last_name","address", "home_county","home_state", "home_zip","gender_id",
+                "patient_last_name","address", "home_region","home_city","gender_id",
                 race_id, date_of_birth, age, age_units_id)
                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
                 RETURNING id;`;
@@ -113,9 +112,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                     patients[String(patient) + 'patientFirstName'],
                     patients[String(patient) + 'patientLastName'],
                     patients[String(patient) + 'patientAddress'],
-                    patients[String(patient) + 'patientHomeCounty'],
-                    patients[String(patient) + 'patientHomeState'],
-                    patients[String(patient) + 'patientHomeZip'],
+                    patients[String(patient) + 'patientHomeRegion'],
+                    patients[String(patient) + 'patientHomeCity'],
                     patients[String(patient) + 'patientGender'],
                     patients[String(patient) + 'patientRace'],
                     patients[String(patient) + 'patientDateOfBirth'],
@@ -156,15 +154,13 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                 } else {
 
                     return connection.query(`
-                    INSERT INTO disposition ("patient_disposition_id","destination_state",
-                    "destination_county","destination_zip", "transport_disposition_id",
-                    "transport_method_id", "transport_mode_id","destination_facility_id")
+                    INSERT INTO disposition ("patient_disposition_id","destination_region", "destination_city",
+                    "transport_disposition_id", "transport_method_id", "transport_mode_id","destination_facility_id")
                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`,
                         [
                             patientID,
-                            incident[String(i + 1) + 'destinationState'],
-                            incident[String(i + 1) + 'destinationCounty'],
-                            incident[String(i + 1) + 'destinationZipCode'],
+                            incident[String(i + 1) + 'destinationRegion'],
+                            incident[String(i + 1) + 'destinationCity'],
                             incident[String(i + 1) + 'transportDisposition'],
                             incident[String(i + 1) + 'transportMethod'],
                             incident[String(i + 1) + 'transportMode'],

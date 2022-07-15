@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import ConfirmDialog from "../ConfirmDialog";
+import { useState } from "react";
 
 //Material UI Imports
 import { Button } from "@material-ui/core";
@@ -26,6 +28,8 @@ function AddEditPatient({
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
+
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   // KEY PIECE OF FUNCTIONALITY FOR THE APP - DATA INITIALIZATION
   // If this is the first time reaching one of the form pages, localStorage will be empty
@@ -93,18 +97,23 @@ function AddEditPatient({
   // ----------Watchers to update Storage on patient addition----------
   useEffect(() => {
     localStorage.setItem("incident", JSON.stringify(incidentMirror));
+    
   }, [incidentMirror]);
 
+  // localStorage.removeItem
   useEffect(() => {
     localStorage.setItem("patients", JSON.stringify(patientsMirror));
+    
   }, [patientsMirror]);
 
   useEffect(() => {
     localStorage.setItem("treatment", JSON.stringify(treatmentMirror));
+    
   }, [treatmentMirror]);
 
   useEffect(() => {
     localStorage.setItem("vitals", JSON.stringify(vitalsMirror));
+    
   }, [vitalsMirror]);
 
   useEffect(() => {
@@ -125,9 +134,8 @@ function AddEditPatient({
     setIncidentMirror({
       ...incidentMirror,
       dispositionArray: [...incidentMirror.dispositionArray, newPatientID],
-      [newPatientID + "destinationState"]: "",
-      [newPatientID + "destinationCounty"]: "",
-      [newPatientID + "destinationZipCode"]: "",
+      [newPatientID + "destinationRegion"]: "",
+      [newPatientID + "destinationCity"]: "",
       [newPatientID + "transportDisposition"]: 0,
       [newPatientID + "transportMethod"]: "",
       [newPatientID + "transportMode"]: "",
@@ -140,9 +148,8 @@ function AddEditPatient({
       [newPatientID + "patientFirstName"]: "",
       [newPatientID + "patientLastName"]: "",
       [newPatientID + "patientAddress"]: "",
-      [newPatientID + "patientHomeCounty"]: "",
-      [newPatientID + "patientHomeState"]: "",
-      [newPatientID + "patientHomeZip"]: "",
+      [newPatientID + "patientHomeRegion"]: "",
+      [newPatientID + "patientHomeCity"]: "",
       [newPatientID + "patientGender"]: "",
       [newPatientID + "patientRace"]: "",
       [newPatientID + "patientDateOfBirth"]: "",
@@ -220,6 +227,114 @@ function AddEditPatient({
     });
   }
 
+  // function removePatient(patientNumber) {
+  //   patientsMirror.patientArray.pop(patientNumber);
+  // }
+
+  function removePatient() {
+    console.log("remove patient button clicked");
+
+    patientsMirror.patientArray.pop();
+
+    let patientNumber = patientsMirror.patientArray.length;
+    let removedPatient = patientsMirror.patientArray.length + 1;
+
+    setIncidentMirror({
+      ...incidentMirror,
+      dispositionArray: [...incidentMirror.dispositionArray, patientNumber],
+      [removedPatient + "destinationRegion"]: "",
+      [removedPatient + "destinationCity"]: "",
+      [removedPatient + "transportDisposition"]: 0,
+      [removedPatient + "transportMethod"]: "",
+      [removedPatient + "transportMode"]: "",
+      [removedPatient + "destinationFacility"]: "",
+    });
+
+    setPatientsMirror({
+      ...patientsMirror,
+      patientArray: [...patientsMirror.patientArray, patientNumber],
+      [removedPatient + "patientFirstName"]: "",
+      [removedPatient + "patientLastName"]: "",
+      [removedPatient + "patientAddress"]: "",
+      [removedPatient + "patientHomeRegion"]: "",
+      [removedPatient + "patientHomeCity"]: "",
+      [removedPatient + "patientGender"]: "",
+      [removedPatient + "patientRace"]: "",
+      [removedPatient + "patientDateOfBirth"]: "",
+      [removedPatient + "patientAge"]: "",
+      [removedPatient + "patientAgeUnits"]: "",
+      [removedPatient + "patientMedConditions"]: "",
+      [removedPatient + "patientAllergies"]: "",
+      [removedPatient + "patientCurrMedications"]: "",
+      [removedPatient + "anatomicLocation"]: "",
+      [removedPatient + "organSystem"]: "",
+      [removedPatient + "symptomOnsetDate"]: "",
+      [removedPatient + "symptomOnsetTime"]: "",
+      [removedPatient + "lastKnownWellDate"]: "",
+      [removedPatient + "lastKnownWellTime"]: "",
+      [removedPatient + "primarySymptom"]: "",
+      [removedPatient + "otherSymptoms"]: "",
+      [removedPatient + "initialAcuity"]: "",
+      [removedPatient + "finalAcuity"]: "",
+      [removedPatient + "primaryImpression"]: "",
+      [removedPatient + "injuryLocation"]: "",
+      [removedPatient + "injuryCause"]: "",
+      [removedPatient + "cardiacArrest"]: 0,
+      [removedPatient + "cardiacArrestEtiology"]: "",
+      [removedPatient + "resuscitationAttempt"]: "",
+      [removedPatient + "cardiacArrestWitness"]: "",
+      [removedPatient + "aedUsePrior"]: "",
+      [removedPatient + "cprProvided"]: "",
+      [removedPatient + "spontaneousCirculation"]: "",
+      [removedPatient + "cardiacArrestDate"]: "",
+      [removedPatient + "cardiacArrestTime"]: "",
+      [removedPatient + "cprStopped"]: "",
+      [removedPatient + "cprInitiator"]: "",
+      [removedPatient + "aedApplicator"]: "",
+      [removedPatient + "aedDefibrillator"]: "",
+    });
+
+    setTreatmentMirror({
+      ...treatmentMirror,
+      [removedPatient + "medicationArray"]: [1],
+      [removedPatient + "lastMedication"]: 1,
+      [removedPatient + 'medicationTimestamp1']: "",
+      [removedPatient + "medication1"]: "",
+      [removedPatient + "routeAdministered1"]: "",
+      [removedPatient + "dosage1"]: "",
+      [removedPatient + "units1"]: "",
+      [removedPatient + "medicationResponse1"]: "",
+      [removedPatient + "medsAdminBy1"]: "",
+      [removedPatient + "procedureArray"]: [1],
+      [removedPatient + "lastProcedure"]: 1,
+      [removedPatient + 'procedureTimestamp1']: "",
+      [removedPatient + "procedure1"]: "",
+      [removedPatient + "procedureAttempts1"]: "",
+      [removedPatient + "successfulProcedure1"]: "",
+      [removedPatient + "responseToProcedure1"]: "",
+      [removedPatient + "procedurePerformedBy1"]: "",
+    });
+
+    setVitalsMirror({
+      ...vitalsMirror,
+      [removedPatient + "vitalsArray"]: [1],
+      [removedPatient + "lastVital"]: 1,
+      [removedPatient + "systolicBloodPressure1"]: "",
+      [removedPatient + "heartRate1"]: "",
+      [removedPatient + "pulseOximetry1"]: "",
+      [removedPatient + "respiratoryRate1"]: "",
+      [removedPatient + "bloodGlucoseLevel1"]: "",
+      [removedPatient + "glasgowComaScoreEye1"]: "",
+      [removedPatient + "glasgowComaScoreVerbal1"]: "",
+      [removedPatient + "glasgowComaScoreMotor1"]: "",
+      [removedPatient + "glasgowComaScoreQualifier1"]: 1,
+      [removedPatient + "painScaleScore1"]: 1,
+      [removedPatient + "strokeScaleScore1"]: 1,
+      [removedPatient + "strokeScaleType1"]: 1,
+      [removedPatient + 'vitalTimestamp1']: ""
+    });
+  }
+
   // Simply redirects to the patient page of a new patient
   // based on their position in the patientArray
   function changePatient(patientNumber) {
@@ -231,19 +346,12 @@ function AddEditPatient({
       {patientsMirror && (
         <div>
           {/* Add Patient Button */}
-          <Button color="primary" variant="contained" onClick={addPatient}>
-            Add Patient
-          </Button>
-          <br />
-          <br />
-          <br />
           {patientsMirror &&
             patientsMirror.patientArray.map((value) => (
               // Edit Patient Buttons
               <Button
                 color="secondary"
                 variant="contained"
-                size="small"
                 key={`${value}changePatient`}
                 disabled={id == value}
                 onClick={() => changePatient(value)}
@@ -251,7 +359,34 @@ function AddEditPatient({
                 Edit Patient {value}
               </Button>
             ))}
-
+          <br />
+          <br />
+          <br />
+          <Button
+            color="primary"
+            size="small"
+            variant="contained"
+            onClick={addPatient}
+          >
+            Add Patient
+          </Button>
+          &nbsp; &nbsp; &nbsp;
+          <Button
+            size="small"
+            color="default"
+            variant="outlined"
+            onClick={() => setConfirmOpen(true)}
+          >
+            Delete Patient
+          </Button>
+          <ConfirmDialog
+        title="Delete?"
+        open={confirmOpen}
+        setOpen={setConfirmOpen}
+        onConfirm={removePatient}
+      >
+        Are you sure you want to permanantly delete last patient?
+      </ConfirmDialog>
 
         </div>
       )}

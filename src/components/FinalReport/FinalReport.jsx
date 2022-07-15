@@ -61,7 +61,7 @@ function FinalReport() {
                 spacing={0}
                 direction="column"
                 alignItems="center"
-                justify="center"
+                justifyContent="center"
                 style={{ minHeight: '100vh' }}
             >
                 <Grid item lg={10}>
@@ -90,9 +90,8 @@ function FinalReport() {
                             {/* scene information */}
                             <h3>SCENE</h3>
                             <p># of Patients at Scene: {report.number_patients} </p>
-                            <p>Incident State: {report.incident_state}</p>
-                            <p>Incident County: {report.incident_county}</p>
-                            <p>Incident Zip: {report.incident_zip}</p>
+                            <p>Incident City: {report.incident_city}</p>
+                            <p>Incident Region: {report.incident_region}</p>
                             <p>Possible Injury? {report.possible_injury_type}</p>
                             <p>Alcohol/Drug Use Indicators: {report.alcohol_drug_use_type}</p>
 
@@ -102,9 +101,8 @@ function FinalReport() {
                                 <p>First Name: {report.patient_first_name}</p>
                                 <p>Last Name: {report.patient_last_name}</p>
                                 <p>Address: {report.address}</p>
-                                <p>Home State: {report.home_state}</p>
-                                <p>Home County: {report.home_county}</p>
-                                <p>Home Zip: {report.home_zip}</p>
+                                <p>Home Region: {report.home_region}</p>
+                                <p>Home City: {report.home_city}</p>
                                 <p>Date of Birth: {moment(report.date_of_birth).format('DD/MM/YYYY')}</p>
                                 <p>Age: {report.age} {report.age_units_type}</p>
                                 <p>Gender: {report.gender_type}</p>
@@ -335,9 +333,8 @@ function FinalReport() {
                                 <p>Transport Disposition: {report.transport_disposition_type}</p>
                                 {report.destination_state &&
                                     <div>
-                                        <p>Destination State: {report.destination_state}</p>
-                                        <p>Destination County: {report.destination_county}</p>
-                                        <p>Destination Zip: {report.destination_zip}</p>
+                                        <p>Destination Region: {report.destination_region}</p>
+                                        <p>Destination City: {report.destination_city}</p>
                                         <p>Transport Method: {report.transport_method_type}</p>
                                         <p>Transport Mode from Scene: {report.transport_mode_type}</p>
                                         <p>Type of Destination: {report.destination_facility_type}</p>

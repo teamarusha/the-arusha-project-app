@@ -878,9 +878,8 @@ CREATE TABLE incident (
 CREATE TABLE scene (
 	id SERIAL PRIMARY KEY,
 	incident_scene_id integer REFERENCES "incident",
-	incident_state varchar (100),
-	incident_zip varchar(100),
-	incident_county varchar(100),
+	incident_city varchar (100),
+	incident_region varchar(100),
 	possible_injury_id integer REFERENCES "possible_injury",
 	alcohol_drug_use_id integer REFERENCES "alcohol_drug_use"
 );
@@ -892,9 +891,8 @@ CREATE TABLE patient (
     patient_first_name varchar(100),
     patient_last_name varchar(100),
     address varchar(100),
-    home_county varchar(100),
-    home_state varchar(100),
-    home_zip varchar(100),
+    home_region varchar(100),
+    home_city varchar(100),
     gender_id integer REFERENCES "gender",
     race_id integer REFERENCES "race",
     date_of_birth date,
@@ -906,9 +904,8 @@ CREATE TABLE patient (
 CREATE TABLE disposition (
 	id SERIAL PRIMARY KEY,
 	patient_disposition_id integer REFERENCES "patient",
-	destination_state varchar(100),
-	destination_county varchar(100),
-	destination_zip varchar(100),
+	destination_region varchar(100),
+    destination_city varchar(100),
 	transport_disposition_id integer REFERENCES "transport_disposition",
 	transport_method_id integer REFERENCES "transport_method",
 	transport_mode_id integer REFERENCES "transport_mode",

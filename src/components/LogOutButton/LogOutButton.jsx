@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 // styling
 import { Button } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
-import createMuiTheme from '../GLOBALUI/Theme';
+import createTheme from '../GLOBALUI/Theme';
 
 
 function LogOutButton(props) {
@@ -19,7 +19,7 @@ function LogOutButton(props) {
     history.push('/')
   }
   return (
-    <ThemeProvider theme={createMuiTheme}>
+    <ThemeProvider theme={createTheme}>
       {/* logout button */}
       <Button
         onClick={handleClick}

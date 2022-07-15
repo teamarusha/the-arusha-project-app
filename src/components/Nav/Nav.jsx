@@ -21,6 +21,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useState } from "react";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ConfirmDialog from "../ConfirmDialog";
 
 
 // OVERHEAD COMPONENT STYLING
@@ -37,38 +38,38 @@ const useStyles = makeStyles((theme) => ({
   item: {
     textAlign: "center",
     maxHeight: "inherit",
-    marginTop:"8%",
-    marginBottom:"8%",
+    marginTop: "8%",
+    marginBottom: "8%",
   },
   ButtonItem: {
     textAlign: "center",
-    marginTop:"0%",
-    marginBottom:"0%",
+    marginTop: "0%",
+    marginBottom: "0%",
     padding: 0
   },
   text: {
     fontFamily: "Red Hat Display",
     fontWeight: 400,
     fontSize: '4vh',
-    margin:'auto',
+    margin: 'auto',
     color: 'common'
-  }, 
+  },
   buttonText: {
     fontFamily: "Red Hat Display",
     fontSize: '4vh',
     paddingBottom: 0,
     paddingTop: 0,
     color: 'common',
-    textAlign:'center'
-  }, 
-  root : {
+    textAlign: 'center'
+  },
+  root: {
     backgroundColor: '#5BC6CC'
   },
   list: {
     margin: 0,
     height: '100%'
   },
-  button : {
+  button: {
     width: '100%',
     height: '12vh',
     padding: 0,
@@ -80,21 +81,44 @@ const useStyles = makeStyles((theme) => ({
 
 // NAV DRAWER PROP.
 
-function Drawer(props) {
+function Drawer() {
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const handleClick = () => {
     dispatch({ type: 'LOGOUT' })
     history.push('/')
   }
+
+  function startOver() {
+    //Are you sure you want to Start Over? This will permanently erase all entered information.
+    dispatch({ type: "RESET_STORAGE" });
+    history.push(`/incident/${id}`)
+
+    // //       // Reinitialize INCIDENT Local Storage
+    // localStorage.setItem("incident", JSON.stringify(incident));
+    // setIncidentMirror({ ...incident, ['reinitialize']: false });
+    // // Reinitialize TREATMENT Local Storage
+    // localStorage.setItem("treatment", JSON.stringify(treatment));
+    // setTreatmentMirror(treatment);
+    // //       // Reinitialize VITALS Local Storage`
+    // localStorage.setItem("vitals", JSON.stringify(vitals));
+    // setVitalsMirror(vitals);
+    // //       // Reinitialize PATIENTS Local Storage
+    // localStorage.setItem("patients", JSON.stringify(patients));
+    // setPatientsMirror(patients);
+
+  }
+
   const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   const user = useSelector((store) => store.user);
 
-  const {id} = useParams();
+  const { id } = useParams();
 
   let nonAdminLoginLinkData = {
     path: '/home',
@@ -109,8 +133,8 @@ function Drawer(props) {
   if (user.id != null && user.is_admin === false) {
     nonAdminLoginLinkData.path = '/home';
     nonAdminLoginLinkData.text = 'Home';
-  } 
-  else if (user.id !=null && user.is_admin === true){
+  }
+  else if (user.id != null && user.is_admin === true) {
     adminLoginLinkData.path = '/admin'
     adminLoginLinkData.text = 'Home'
 
@@ -126,8 +150,7 @@ function Drawer(props) {
         onClose={() => setOpenDrawer(false)}
         onOpen={() => setOpenDrawer(true)}
       >
-        <List classes={{root: classes.list}}>
-
+        <List classes={{ root: classes.list }}>
           {/* INCIDENT */}
           <ListItem
             component={Link}
@@ -191,6 +214,34 @@ function Drawer(props) {
             </ListItemSecondaryAction>
           </ListItem>
           <Divider classes={{ root: classes.root }} />
+          {/* START OVER */}
+          <ListItem
+            onClick={() => setConfirmOpen(true)}
+            classes={{ root: classes.buttonItem }}
+            disableGutters={false}
+          >
+            <Button
+              classes={{ root: classes.button }}
+              type="refresh"
+              name="startOver"
+              variant="contained"
+              color="primary"
+
+            >
+              Start Over
+            </Button>
+          </ListItem>
+          <Divider classes={{ root: classes.root }} />
+
+           {/* Start Over Confirmation Modal */}
+          <ConfirmDialog
+            title="Start Over?"
+            open={confirmOpen}
+            setOpen={setConfirmOpen}
+            onConfirm={startOver}
+          >
+            Are you sure you want to erase all entered data?
+          </ConfirmDialog>
 
           {/* LOGOUT BUTTON */}
           <ListItem
@@ -199,20 +250,20 @@ function Drawer(props) {
             classes={{ root: classes.buttonItem }}
             disableGutters={false}
           >
-            
+
             <Button
-            classes={{root: classes.button}}
-            onClick={handleClick}
-            type="submit"
-            name="submit"
-            value="Register"
-            variant="contained"
-            color="secondary"
-            
-          >
-            Log Out
-          </Button>
-            
+              classes={{ root: classes.button }}
+              onClick={handleClick}
+              type="submit"
+              name="submit"
+              value="Register"
+              variant="contained"
+              color="secondary"
+
+            >
+              Log Out
+            </Button>
+
 
           </ListItem>
         </List>

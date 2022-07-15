@@ -61,12 +61,12 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
             <div>
               <TextField
                 id="outlined-basic"
-                label="Destination State"
+                label="Destination City"
                 variant="outlined"
-                value={localIncident[`${id}destinationState`]}
+                value={localIncident[`${id}destinationCity`]}
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}destinationState`,
+                    key: `${id}destinationCity`,
                     thing: event.target.value,
                   })
                 }
@@ -75,26 +75,12 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
               <br />
               <TextField
                 id="outlined-basic"
-                label="Destination County"
+                label="Destination Region"
                 variant="outlined"
-                value={localIncident[`${id}destinationCounty`]}
+                value={localIncident[`${id}destinationRegion`]}
                 onChange={(event) =>
                   submitValue({
-                    key: `${id}destinationCounty`,
-                    thing: event.target.value,
-                  })
-                }
-              ></TextField>
-              <br />
-              <br />
-              <TextField
-                id="outlined-basic"
-                label="Destination Zip Code"
-                variant="outlined"
-                value={localIncident[`${id}destinationZipCode`]}
-                onChange={(event) =>
-                  submitValue({
-                    key: `${id}destinationZipCode`,
+                    key: `${id}destinationRegion`,
                     thing: event.target.value,
                   })
                 }

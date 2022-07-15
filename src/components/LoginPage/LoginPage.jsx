@@ -2,7 +2,7 @@ import React from "react";
 import LoginForm from "../LoginForm/LoginForm";
 import { useHistory } from "react-router-dom";
 import { Grid, ThemeProvider, Link, Typography, Container } from "@material-ui/core";
-import createMuiTheme from "../GLOBALUI/Theme";
+import createTheme from "../GLOBALUI/Theme";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -16,16 +16,16 @@ function LoginPage() {
   const history = useHistory();
   const classes = useStyles();
   return (
-    <ThemeProvider theme={createMuiTheme}>
+    <ThemeProvider theme={createTheme}>
       <Container style={{ marginBottom: '25%' }}>
         {/* login form from loginform component */}
         <LoginForm />
-        <Grid container justify="center">
+        <Grid container justifyContent="center">
           <Typography variant="body1" component="h4">
             New User?
         </Typography>
         </Grid>
-        <Grid container justify="center">
+        <Grid container justifyContent="center">
           {/* registration link which redirects to registration page upon click */}
           <Link
             variant="body1"
