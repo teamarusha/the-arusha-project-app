@@ -38,41 +38,26 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
             ></TextField>
             <br />
             <br />
-            {/* incident state textfield */}
+            {/* incident city textfield */}
             <TextField
               id="outlined-basic"
-              label="Incident State"
+              label="Incident City"
               variant="outlined"
-              value={localIncident[`incidentState`]}
+              value={localIncident[`incidentCity`]}
               onChange={(event) =>
-                submitValue({ key: `incidentState`, thing: event.target.value })
+                submitValue({ key: `incidentCity`, thing: event.target.value })
               }
             ></TextField>
             <br />
             <br />
-            {/* incident county textfield */}
+            {/* incident region textfield */}
             <TextField
               id="outlined-basic"
-              label="Incident County"
+              label="Incident Region"
               variant="outlined"
-              value={localIncident[`incidentCounty`]}
+              value={localIncident[`incidentRegion`]}
               onChange={(event) =>
-                submitValue({ key: `incidentCounty`, thing: event.target.value })
-              }
-            ></TextField>
-            <br />
-            <br />
-            {/* incident zip textfield */}
-            <TextField
-              id="outlined-basic"
-              label="Incident Zip Code"
-              variant="outlined"
-              value={localIncident[`incidentZipCode`]}
-              onChange={(event) =>
-                submitValue({
-                  key: `incidentZipCode`,
-                  thing: event.target.value,
-                })
+                submitValue({ key: `incidentRegion`, thing: event.target.value })
               }
             ></TextField>
             <br />
@@ -112,7 +97,6 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
           </InputLabel>
 
             <Select
-
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               fullWidth

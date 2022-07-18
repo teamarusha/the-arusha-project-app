@@ -395,6 +395,48 @@ VALUES
 ('9'),
 ('10');
 
+CREATE TABLE "glasgow_eye" (
+    "id" SERIAL PRIMARY KEY,
+    "glasgow_eye_type" varchar(10)
+);
+
+INSERT INTO "glasgow_eye" ("glasgow_eye_type")
+VALUES
+('N/A'),
+('1'),
+('2'),
+('3'),
+('4');
+
+CREATE TABLE "glasgow_verbal" (
+    "id" SERIAL PRIMARY KEY,
+    "glasgow_verbal_type" varchar(10)
+);
+
+INSERT INTO "glasgow_verbal" ("glasgow_verbal_type")
+VALUES
+('N/A'),
+('1'),
+('2'),
+('3'),
+('4')
+('5');
+
+CREATE TABLE "glasgow_motor" (
+    "id" SERIAL PRIMARY KEY,
+    "glasgow_motor_type" varchar(10)
+);
+
+INSERT INTO "glasgow_motor" ("glasgow_motor_type")
+VALUES
+('N/A'),
+('1'),
+('2'),
+('3'),
+('4')
+('5')
+('6');
+
 CREATE TABLE "stroke_score" (
     "id" SERIAL PRIMARY KEY,
     "stroke_score_type" VARCHAR (20)
@@ -836,9 +878,8 @@ CREATE TABLE incident (
 CREATE TABLE scene (
 	id SERIAL PRIMARY KEY,
 	incident_scene_id integer REFERENCES "incident",
-	incident_state varchar (100),
-	incident_zip varchar(100),
-	incident_county varchar(100),
+	incident_city varchar (100),
+	incident_region varchar(100),
 	possible_injury_id integer REFERENCES "possible_injury",
 	alcohol_drug_use_id integer REFERENCES "alcohol_drug_use"
 );
@@ -850,9 +891,8 @@ CREATE TABLE patient (
     patient_first_name varchar(100),
     patient_last_name varchar(100),
     address varchar(100),
-    home_county varchar(100),
-    home_state varchar(100),
-    home_zip varchar(100),
+    home_region varchar(100),
+    home_city varchar(100),
     gender_id integer REFERENCES "gender",
     race_id integer REFERENCES "race",
     date_of_birth date,
@@ -864,9 +904,8 @@ CREATE TABLE patient (
 CREATE TABLE disposition (
 	id SERIAL PRIMARY KEY,
 	patient_disposition_id integer REFERENCES "patient",
-	destination_state varchar(100),
-	destination_county varchar(100),
-	destination_zip varchar(100),
+	destination_region varchar(100),
+    destination_city varchar(100),
 	transport_disposition_id integer REFERENCES "transport_disposition",
 	transport_method_id integer REFERENCES "transport_method",
 	transport_mode_id integer REFERENCES "transport_mode",
@@ -977,9 +1016,9 @@ CREATE TABLE vitals (
 	pulse_oximetry varchar(50),
 	respiratory_rate varchar(50),
 	blood_glucose varchar(50),
-	glasgow_eye varchar(50),
-	glasgow_verbal varchar(50),
-	glasgow_motor varchar(50),
+	glasgow_eye_id integer REFERENCES "glasgow_eye",
+	glasgow_verbal_id integer REFERENCES "glasgow_verbal",
+	glasgow_motor_id integer REFERENCES "glasgow_motor",
 	glasgow_qualifier varchar(50),
 	responsiveness_level_id integer REFERENCES "responsiveness_level",
 	pain_scale_id integer REFERENCES "pain_scale",

@@ -69,6 +69,8 @@ function SummaryFieldSubmit() {
 
   function checkInputs() {
     let incidentErrorMessage = `Missing input from incident form`;
+    let summaryErrorMessage = `Missing summary below`;
+    let timestampErrorMessage = `Missing unit timestamp above`
     let allErrorMessages = [];
     setAllowSubmission(true);
 
@@ -79,14 +81,24 @@ function SummaryFieldSubmit() {
     if (
       incidentMirror.alcoholDrugIndicators === "" ||
       incidentMirror.crew === "" ||
-      incidentMirror.incidentCounty === "" ||
+      incidentMirror.incidentCity === "" ||
       incidentMirror.incidentService === "" ||
-      incidentMirror.incidentState === "" ||
-      incidentMirror.incidentSummary === "" ||
-      incidentMirror.incidentZipCode === "" ||
+      incidentMirror.incidentRegion === "" ||
       incidentMirror.patientNumbers === "" ||
       incidentMirror.possibleInjury === "" ||
-      incidentMirror.triageCat === "" ||
+      incidentMirror.triageCat === ""
+    ) {
+      allErrorMessages.push(incidentErrorMessage);
+      setAllowSubmission(false);
+    }
+
+    if (incidentMirror.incidentSummary === "")
+    {
+      allErrorMessages.push(summaryErrorMessage);
+      setAllowSubmission(false);
+    }
+
+    if (
       incidentMirror.unitArrivedDestination === "" ||
       incidentMirror.unitArrivedPatient === "" ||
       incidentMirror.unitArrivedScene === "" ||
@@ -95,8 +107,9 @@ function SummaryFieldSubmit() {
       incidentMirror.unitLeftScene === "" ||
       incidentMirror.unitNotified === "" ||
       incidentMirror.unitTransferCare === ""
-    ) {
-      allErrorMessages.push(incidentErrorMessage);
+    )
+    {
+      allErrorMessages.push(timestampErrorMessage);
       setAllowSubmission(false);
     }
 
@@ -116,10 +129,9 @@ function SummaryFieldSubmit() {
       // If it isn't 0 and it is less than 4, we want to check the other inputs of transport disposition
       else if (incidentMirror[`${patient}transportDisposition`] <= 4) {
         if (
-          incidentMirror[`${patient}destinationCounty`] === '' ||
           incidentMirror[`${patient}destinationFacility`] === '' ||
-          incidentMirror[`${patient}destinationState`] === '' ||
-          incidentMirror[`${patient}destinationZipCode`] === '' ||
+          incidentMirror[`${patient}destinationRegion`] === '' ||
+          incidentMirror[`${patient}destinationCity`] === '' ||
           incidentMirror[`${patient}transportDisposition`] === '' ||
           incidentMirror[`${patient}transportMethod`] === '' ||
           incidentMirror[`${patient}transportMode`] === ''
@@ -183,9 +195,8 @@ function SummaryFieldSubmit() {
         patientsMirror[`${patient}patientDateOfBirth`] === '' ||
         patientsMirror[`${patient}patientFirstName`] === '' ||
         patientsMirror[`${patient}patientGender`] === '' ||
-        patientsMirror[`${patient}patientHomeCounty`] === '' ||
-        patientsMirror[`${patient}patientHomeState`] === '' ||
-        patientsMirror[`${patient}patientHomeZip`] === '' ||
+        patientsMirror[`${patient}patientHomeCity`] === '' ||
+        patientsMirror[`${patient}patientHomeRegion`] === '' ||
         patientsMirror[`${patient}patientLastName`] === '' ||
         patientsMirror[`${patient}patientMedConditions`] === '' ||
         patientsMirror[`${patient}patientRace`] === '' ||
@@ -237,7 +248,7 @@ function SummaryFieldSubmit() {
               <TextField
                 id="outlined-basic"
                 multiline
-                rows={12}
+                minRows={12}
                 variant="outlined"
                 fullWidth
                 value={incidentMirror.incidentSummary}

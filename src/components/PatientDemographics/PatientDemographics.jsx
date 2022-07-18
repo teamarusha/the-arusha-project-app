@@ -190,42 +190,31 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           {/* HOME STATE TEXTFIELD */}
           <TextField
             id="outlined-basic"
-            label="State"
+            label="City"
             variant="outlined"
-            value={patientsMirror[`${id}patientHomeState`]}
+            value={patientsMirror[`${id}patientHomeCity`]}
             onChange={(event) =>
               submitValue({
-                key: `${id}patientHomeState`,
-                thing: event.target.value,
-              })
-            }
-          ></TextField>{" "}
-          &nbsp; <br />
-          <br />
-          {/* HOME COUNTY TEXTFIELD */}
-          <TextField
-            id="outlined-basic"
-            label="County"
-            variant="outlined"
-            value={patientsMirror[`${id}patientHomeCounty`]}
-            onChange={(event) =>
-              submitValue({
-                key: `${id}patientHomeCounty`,
+                key: `${id}patientHomeCity`,
                 thing: event.target.value,
               })
             }
           ></TextField>
+          {/* {" "}
+          &nbsp; <br />
+          <br /> */}
+
           <br />
           <br />
-          {/* HOME ZIP CODE TEXTFIELD */}
+          {/* HOME CITY TEXTFIELD */}
           <TextField
             id="outlined-basic"
-            label="Zip Code"
+            label="Region"
             variant="outlined"
-            value={patientsMirror[`${id}patientHomeZip`]}
+            value={patientsMirror[`${id}patientHomeRegion`]}
             onChange={(event) =>
               submitValue({
-                key: `${id}patientHomeZip`,
+                key: `${id}patientHomeRegion`,
                 thing: event.target.value,
               })
             }

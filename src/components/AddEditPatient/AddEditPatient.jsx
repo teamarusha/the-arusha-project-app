@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import ConfirmDialog from "../ConfirmDialog";
+import { useState } from "react";
 
 //Material UI Imports
 import { Button } from "@material-ui/core";
@@ -26,6 +28,8 @@ function AddEditPatient({
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
+
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   // KEY PIECE OF FUNCTIONALITY FOR THE APP - DATA INITIALIZATION
   // If this is the first time reaching one of the form pages, localStorage will be empty
@@ -93,18 +97,23 @@ function AddEditPatient({
   // ----------Watchers to update Storage on patient addition----------
   useEffect(() => {
     localStorage.setItem("incident", JSON.stringify(incidentMirror));
+
   }, [incidentMirror]);
 
+  // localStorage.removeItem
   useEffect(() => {
     localStorage.setItem("patients", JSON.stringify(patientsMirror));
+
   }, [patientsMirror]);
 
   useEffect(() => {
     localStorage.setItem("treatment", JSON.stringify(treatmentMirror));
+
   }, [treatmentMirror]);
 
   useEffect(() => {
     localStorage.setItem("vitals", JSON.stringify(vitalsMirror));
+
   }, [vitalsMirror]);
 
   useEffect(() => {
@@ -125,9 +134,8 @@ function AddEditPatient({
     setIncidentMirror({
       ...incidentMirror,
       dispositionArray: [...incidentMirror.dispositionArray, newPatientID],
-      [newPatientID + "destinationState"]: "",
-      [newPatientID + "destinationCounty"]: "",
-      [newPatientID + "destinationZipCode"]: "",
+      [newPatientID + "destinationRegion"]: "",
+      [newPatientID + "destinationCity"]: "",
       [newPatientID + "transportDisposition"]: 0,
       [newPatientID + "transportMethod"]: "",
       [newPatientID + "transportMode"]: "",
@@ -140,9 +148,8 @@ function AddEditPatient({
       [newPatientID + "patientFirstName"]: "",
       [newPatientID + "patientLastName"]: "",
       [newPatientID + "patientAddress"]: "",
-      [newPatientID + "patientHomeCounty"]: "",
-      [newPatientID + "patientHomeState"]: "",
-      [newPatientID + "patientHomeZip"]: "",
+      [newPatientID + "patientHomeRegion"]: "",
+      [newPatientID + "patientHomeCity"]: "",
       [newPatientID + "patientGender"]: "",
       [newPatientID + "patientRace"]: "",
       [newPatientID + "patientDateOfBirth"]: "",
@@ -220,6 +227,17 @@ function AddEditPatient({
     });
   }
 
+  function removePatient() {
+    history.push(`/${formName}/1`);
+    //remove last patient from array
+    setPatientsMirror({
+      ...patientsMirror,
+      patientArray: [...patientsMirror.patientArray, patientsMirror.patientArray.pop()],
+    });
+    //upate change to local storage
+    localStorage.setItem("patients", JSON.stringify(patientsMirror));
+  }
+
   // Simply redirects to the patient page of a new patient
   // based on their position in the patientArray
   function changePatient(patientNumber) {
@@ -231,19 +249,12 @@ function AddEditPatient({
       {patientsMirror && (
         <div>
           {/* Add Patient Button */}
-          <Button color="primary" variant="contained" onClick={addPatient}>
-            Add Patient
-          </Button>
-          <br />
-          <br />
-          <br />
           {patientsMirror &&
             patientsMirror.patientArray.map((value) => (
               // Edit Patient Buttons
               <Button
                 color="secondary"
                 variant="contained"
-                size="small"
                 key={`${value}changePatient`}
                 disabled={id == value}
                 onClick={() => changePatient(value)}
@@ -251,7 +262,35 @@ function AddEditPatient({
                 Edit Patient {value}
               </Button>
             ))}
-
+          <br />
+          <br />
+          <br />
+          <Button
+            color="primary"
+            size="small"
+            variant="contained"
+            onClick={addPatient}
+          >
+            Add Patient
+          </Button>
+          &nbsp; &nbsp; &nbsp;
+          <Button
+            size="small"
+            color="default"
+            variant="outlined"
+            disabled={patientsMirror.patientArray.length === 1}
+            onClick={() => setConfirmOpen(true)}
+          >
+            Delete Patient
+          </Button>
+          <ConfirmDialog
+            title="Delete?"
+            open={confirmOpen}
+            setOpen={setConfirmOpen}
+            onConfirm={removePatient}
+          >
+            Are you sure you want to permanantly delete last patient?
+          </ConfirmDialog>
 
         </div>
       )}

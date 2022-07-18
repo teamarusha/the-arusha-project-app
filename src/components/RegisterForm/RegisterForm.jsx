@@ -4,7 +4,7 @@ import { TextField, Button, Typography, Container, CssBaseline, Box, Divider } f
 import KOPIMobileLogo from '../GLOBALUI/KOPILOGO/KOPIMobileLogo';
 import globalUseStyle from '../GLOBALUI/globalUseStyles';
 import { ThemeProvider } from '@material-ui/core/styles';
-import createMuiTheme from '../GLOBALUI/Theme';
+import createTheme from '../GLOBALUI/Theme';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 
@@ -80,7 +80,7 @@ function RegisterForm() {
 
 
   return (
-    <ThemeProvider theme={createMuiTheme}>
+    <ThemeProvider theme={createTheme}>
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
         <div className={classes.paper}>

@@ -84,7 +84,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                 shrink: true,
               }}
             />&nbsp; &nbsp; <br /><br />
-            <label for="appt">Time:</label>
+            <label htmlFor="appt">Time:</label>
             <input type="time" id="appt" name="appt"
               min="09:00" max="18:00"
               value={patientsMirror[`${id}symptomOnsetTime`]}
@@ -101,7 +101,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
               label="Primary Symptom"
               variant="outlined"
               multiline
-              rows={3}
+              minRows={3}
               fullWidth
               value={patientsMirror[`${id}primarySymptom`]}
               onChange={(event) =>
@@ -119,7 +119,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
               label="Other Associated Symptoms"
               variant="outlined"
               multiline
-              rows={3}
+              minRows={3}
               fullWidth
               value={patientsMirror[`${id}otherSymptoms`]}
               onChange={(event) =>
@@ -208,7 +208,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
             />
             <br /><br />
             {/* LAST KNOWN WELL TIME INPUT */}
-            <label for="appt">Time:</label>
+            <label htmlFor="appt">Time:</label>
             <input type="time" id="appt" name="appt"
               min="00:00" max="24:00"
               value={patientsMirror[`${id}lastKnownWellTime`]}

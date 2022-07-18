@@ -31,7 +31,7 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
             id="outlined-basic"
             label="Allergies"
             multiline
-            rows={3}
+            minRows={3}
             fullWidth
             variant="outlined"
             value={patientsMirror[`${id}patientAllergies`]}
@@ -52,7 +52,7 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
             variant="outlined"
             fullWidth
             multiline
-            rows={3}
+            minRows={3}
             value={patientsMirror[`${id}patientCurrMedications`]}
             onChange={(event) =>
               submitValue({
@@ -71,7 +71,7 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
             variant="outlined"
             fullWidth
             multiline
-            rows={3}
+            minRows={3}
             value={patientsMirror[`${id}patientMedConditions`]}
             onChange={(event) =>
               submitValue({
