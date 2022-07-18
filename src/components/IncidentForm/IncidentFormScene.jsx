@@ -97,7 +97,6 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
           </InputLabel>
 
             <Select
-
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               fullWidth

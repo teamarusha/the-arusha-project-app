@@ -181,14 +181,7 @@ function TimestampButton({ incidentMirror, setIncidentMirror }) {
           key1: `dispatchButton`,
           thing1: "Unit Notified",
           key2: `unitEnRoute`,
-          thing2: new Intl.DateTimeFormat("en-GB", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit"
-          }).format(timestamp),
+          thing2: "",
         })
         break;
 
@@ -197,14 +190,7 @@ function TimestampButton({ incidentMirror, setIncidentMirror }) {
           key1: `dispatchButton`,
           thing1: "Unit En Route",
           key2: `unitArrivedScene`,
-          thing2: new Intl.DateTimeFormat("en-GB", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit"
-          }).format(timestamp),
+          thing2: "",
         })
         break;
 
@@ -213,14 +199,7 @@ function TimestampButton({ incidentMirror, setIncidentMirror }) {
           key1: `dispatchButton`,
           thing1: "Arrived at Scene",
           key2: `unitArrivedPatient`,
-          thing2: new Intl.DateTimeFormat("en-GB", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit"
-          }).format(timestamp),
+          thing2: "",
         })
         break;
 
@@ -229,14 +208,7 @@ function TimestampButton({ incidentMirror, setIncidentMirror }) {
           key1: `dispatchButton`,
           thing1: "Arrived at Patient",
           key2: `unitLeftScene`,
-          thing2: new Intl.DateTimeFormat("en-GB", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit"
-          }).format(timestamp),
+          thing2: "",
         })
         break;
 
@@ -245,14 +217,7 @@ function TimestampButton({ incidentMirror, setIncidentMirror }) {
           key1: `dispatchButton`,
           thing1: "Unit Left Scene",
           key2: `unitArrivedDestination`,
-          thing2: new Intl.DateTimeFormat("en-GB", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit"
-          }).format(timestamp),
+          thing2: "",
         })
         break;
 
@@ -261,14 +226,7 @@ function TimestampButton({ incidentMirror, setIncidentMirror }) {
           key1: `dispatchButton`,
           thing1: "Unit Arrived Destination",
           key2: `unitTransferCare`,
-          thing2: new Intl.DateTimeFormat("en-GB", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit"
-          }).format(timestamp),
+          thing2: "",
         })
         break;
 
@@ -277,32 +235,16 @@ function TimestampButton({ incidentMirror, setIncidentMirror }) {
           key1: `dispatchButton`,
           thing1: "Unit Transferred Care",
           key2: `unitInService`,
-          thing2: new Intl.DateTimeFormat("en-GB", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit"
-          }).format(timestamp),
+          thing2: "",
         })
         break;
 
-      default:
-        submitValue({
-          key1: `dispatchButton`,
-          thing1: "Unit in Service",
-          key2: ``,
-          thing2: new Intl.DateTimeFormat("en-GB", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit"
-          }).format(timestamp),
-        })
-        break;
+        case "Service Complete":
+          submitValue({
+            key1: `dispatchButton`,
+            thing1: "Unit In Service",
+          })
+          break;
     }
   }
 

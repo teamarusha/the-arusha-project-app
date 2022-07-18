@@ -95,7 +95,7 @@ function Drawer() {
   function startOver() {
     //Are you sure you want to Start Over? This will permanently erase all entered information.
     dispatch({ type: "RESET_STORAGE" });
-    history.push(`/incident/${id}`)
+    history.push(`/incident/1`)
 
     // //       // Reinitialize INCIDENT Local Storage
     // localStorage.setItem("incident", JSON.stringify(incident));

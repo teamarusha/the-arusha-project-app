@@ -97,23 +97,23 @@ function AddEditPatient({
   // ----------Watchers to update Storage on patient addition----------
   useEffect(() => {
     localStorage.setItem("incident", JSON.stringify(incidentMirror));
-    
+
   }, [incidentMirror]);
 
   // localStorage.removeItem
   useEffect(() => {
     localStorage.setItem("patients", JSON.stringify(patientsMirror));
-    
+
   }, [patientsMirror]);
 
   useEffect(() => {
     localStorage.setItem("treatment", JSON.stringify(treatmentMirror));
-    
+
   }, [treatmentMirror]);
 
   useEffect(() => {
     localStorage.setItem("vitals", JSON.stringify(vitalsMirror));
-    
+
   }, [vitalsMirror]);
 
   useEffect(() => {
@@ -227,112 +227,15 @@ function AddEditPatient({
     });
   }
 
-  // function removePatient(patientNumber) {
-  //   patientsMirror.patientArray.pop(patientNumber);
-  // }
-
   function removePatient() {
-    console.log("remove patient button clicked");
-
-    patientsMirror.patientArray.pop();
-
-    let patientNumber = patientsMirror.patientArray.length;
-    let removedPatient = patientsMirror.patientArray.length + 1;
-
-    setIncidentMirror({
-      ...incidentMirror,
-      dispositionArray: [...incidentMirror.dispositionArray, patientNumber],
-      [removedPatient + "destinationRegion"]: "",
-      [removedPatient + "destinationCity"]: "",
-      [removedPatient + "transportDisposition"]: 0,
-      [removedPatient + "transportMethod"]: "",
-      [removedPatient + "transportMode"]: "",
-      [removedPatient + "destinationFacility"]: "",
-    });
-
+    history.push(`/${formName}/1`);
+    //remove last patient from array
     setPatientsMirror({
       ...patientsMirror,
-      patientArray: [...patientsMirror.patientArray, patientNumber],
-      [removedPatient + "patientFirstName"]: "",
-      [removedPatient + "patientLastName"]: "",
-      [removedPatient + "patientAddress"]: "",
-      [removedPatient + "patientHomeRegion"]: "",
-      [removedPatient + "patientHomeCity"]: "",
-      [removedPatient + "patientGender"]: "",
-      [removedPatient + "patientRace"]: "",
-      [removedPatient + "patientDateOfBirth"]: "",
-      [removedPatient + "patientAge"]: "",
-      [removedPatient + "patientAgeUnits"]: "",
-      [removedPatient + "patientMedConditions"]: "",
-      [removedPatient + "patientAllergies"]: "",
-      [removedPatient + "patientCurrMedications"]: "",
-      [removedPatient + "anatomicLocation"]: "",
-      [removedPatient + "organSystem"]: "",
-      [removedPatient + "symptomOnsetDate"]: "",
-      [removedPatient + "symptomOnsetTime"]: "",
-      [removedPatient + "lastKnownWellDate"]: "",
-      [removedPatient + "lastKnownWellTime"]: "",
-      [removedPatient + "primarySymptom"]: "",
-      [removedPatient + "otherSymptoms"]: "",
-      [removedPatient + "initialAcuity"]: "",
-      [removedPatient + "finalAcuity"]: "",
-      [removedPatient + "primaryImpression"]: "",
-      [removedPatient + "injuryLocation"]: "",
-      [removedPatient + "injuryCause"]: "",
-      [removedPatient + "cardiacArrest"]: 0,
-      [removedPatient + "cardiacArrestEtiology"]: "",
-      [removedPatient + "resuscitationAttempt"]: "",
-      [removedPatient + "cardiacArrestWitness"]: "",
-      [removedPatient + "aedUsePrior"]: "",
-      [removedPatient + "cprProvided"]: "",
-      [removedPatient + "spontaneousCirculation"]: "",
-      [removedPatient + "cardiacArrestDate"]: "",
-      [removedPatient + "cardiacArrestTime"]: "",
-      [removedPatient + "cprStopped"]: "",
-      [removedPatient + "cprInitiator"]: "",
-      [removedPatient + "aedApplicator"]: "",
-      [removedPatient + "aedDefibrillator"]: "",
+      patientArray: [...patientsMirror.patientArray, patientsMirror.patientArray.pop()],
     });
-
-    setTreatmentMirror({
-      ...treatmentMirror,
-      [removedPatient + "medicationArray"]: [1],
-      [removedPatient + "lastMedication"]: 1,
-      [removedPatient + 'medicationTimestamp1']: "",
-      [removedPatient + "medication1"]: "",
-      [removedPatient + "routeAdministered1"]: "",
-      [removedPatient + "dosage1"]: "",
-      [removedPatient + "units1"]: "",
-      [removedPatient + "medicationResponse1"]: "",
-      [removedPatient + "medsAdminBy1"]: "",
-      [removedPatient + "procedureArray"]: [1],
-      [removedPatient + "lastProcedure"]: 1,
-      [removedPatient + 'procedureTimestamp1']: "",
-      [removedPatient + "procedure1"]: "",
-      [removedPatient + "procedureAttempts1"]: "",
-      [removedPatient + "successfulProcedure1"]: "",
-      [removedPatient + "responseToProcedure1"]: "",
-      [removedPatient + "procedurePerformedBy1"]: "",
-    });
-
-    setVitalsMirror({
-      ...vitalsMirror,
-      [removedPatient + "vitalsArray"]: [1],
-      [removedPatient + "lastVital"]: 1,
-      [removedPatient + "systolicBloodPressure1"]: "",
-      [removedPatient + "heartRate1"]: "",
-      [removedPatient + "pulseOximetry1"]: "",
-      [removedPatient + "respiratoryRate1"]: "",
-      [removedPatient + "bloodGlucoseLevel1"]: "",
-      [removedPatient + "glasgowComaScoreEye1"]: "",
-      [removedPatient + "glasgowComaScoreVerbal1"]: "",
-      [removedPatient + "glasgowComaScoreMotor1"]: "",
-      [removedPatient + "glasgowComaScoreQualifier1"]: 1,
-      [removedPatient + "painScaleScore1"]: 1,
-      [removedPatient + "strokeScaleScore1"]: 1,
-      [removedPatient + "strokeScaleType1"]: 1,
-      [removedPatient + 'vitalTimestamp1']: ""
-    });
+    //upate change to local storage
+    localStorage.setItem("patients", JSON.stringify(patientsMirror));
   }
 
   // Simply redirects to the patient page of a new patient
@@ -375,18 +278,19 @@ function AddEditPatient({
             size="small"
             color="default"
             variant="outlined"
+            disabled={patientsMirror.patientArray.length === 1}
             onClick={() => setConfirmOpen(true)}
           >
             Delete Patient
           </Button>
           <ConfirmDialog
-        title="Delete?"
-        open={confirmOpen}
-        setOpen={setConfirmOpen}
-        onConfirm={removePatient}
-      >
-        Are you sure you want to permanantly delete last patient?
-      </ConfirmDialog>
+            title="Delete?"
+            open={confirmOpen}
+            setOpen={setConfirmOpen}
+            onConfirm={removePatient}
+          >
+            Are you sure you want to permanantly delete last patient?
+          </ConfirmDialog>
 
         </div>
       )}
