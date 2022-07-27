@@ -558,16 +558,16 @@ const VitalsForm = () => {
 
                               return (
                                 <TableRow hover role="checkbox" tabIndex={-1} key={id + "patientvital" + vital}>
-                                  <TableCell>{moment(localVitals[`${id}vitalTimestamp${vital}`]).format('DD/MM/YYYY')}</TableCell>
-                                  <TableCell>{moment(localVitals[`${id}vitalTimestamp${vital}`]).format('hh:mm:ss')}</TableCell>
+                                  <TableCell>{moment(localVitals[`${id}vitalTimestamp${vital}`]).format('YYYY-MM-DD')}</TableCell>
+                                  <TableCell>{moment(localVitals[`${id}vitalTimestamp${vital}`]).format('HH:mm:ss')}</TableCell>
                                   <TableCell>{localVitals[`${id}systolicBloodPressure${vital}`]}</TableCell>
                                   <TableCell>{localVitals[`${id}heartRate${vital}`]}</TableCell>
                                   <TableCell>{localVitals[`${id}pulseOximetry${vital}`]}</TableCell>
                                   <TableCell>{localVitals[`${id}respiratoryRate${vital}`]}</TableCell>
                                   <TableCell>{localVitals[`${id}bloodGlucoseLevel${vital}`]}</TableCell>
-                                  <TableCell>{localVitals[`${id}glasgowComaScoreEye${vital}`]}</TableCell>
-                                  <TableCell>{localVitals[`${id}glasgowComaScoreVerbal${vital}`]}</TableCell>
-                                  <TableCell>{localVitals[`${id}glasgowComaScoreMotor${vital}`]}</TableCell>
+                                  <TableCell>{localVitals[`${id}glasgowComaScoreEye${vital}`] == "" ? 'N/A' : dropdowns['glasgow_eye'][localVitals[`${id}glasgowComaScoreEye${vital}`] - 1]['glasgow_eye_type']}</TableCell>
+                                  <TableCell>{localVitals[`${id}glasgowComaScoreVerbal${vital}`] == "" ? 'N/A' : dropdowns['glasgow_verbal'][localVitals[`${id}glasgowComaScoreVerbal${vital}`] - 1]['glasgow_verbal_type']}</TableCell>
+                                  <TableCell>{localVitals[`${id}glasgowComaScoreMotor${vital}`]== "" ? 'N/A' : dropdowns['glasgow_motor'][localVitals[`${id}glasgowComaScoreMotor${vital}`] - 1]['glasgow_motor_type']}</TableCell>
                                   <TableCell>{localVitals[`${id}glasgowComaScoreQualifier${vital}`]}</TableCell>
                                   <TableCell>{localVitals[`${id}responsivenessLevel${vital}`] == "" ? 'N/A' : dropdowns['responsiveness_level'][localVitals[`${id}responsivenessLevel${vital}`] - 1]['responsiveness_level_type']}</TableCell>
                                   <TableCell>{localVitals[`${id}painScaleScore${vital}`] == "" ? 'N/A' : dropdowns['pain_scale'][localVitals[`${id}painScaleScore${vital}`] - 1]['pain_scale_type']}</TableCell>

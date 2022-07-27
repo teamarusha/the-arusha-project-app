@@ -249,22 +249,6 @@ function AddEditPatient({
       {patientsMirror && (
         <div>
           {/* Add Patient Button */}
-          {patientsMirror &&
-            patientsMirror.patientArray.map((value) => (
-              // Edit Patient Buttons
-              <Button
-                color="secondary"
-                variant="contained"
-                key={`${value}changePatient`}
-                disabled={id == value}
-                onClick={() => changePatient(value)}
-              >
-                Edit Patient {value}
-              </Button>
-            ))}
-          <br />
-          <br />
-          <br />
           <Button
             color="primary"
             size="small"
@@ -291,6 +275,23 @@ function AddEditPatient({
           >
             Are you sure you want to permanantly delete last patient?
           </ConfirmDialog>
+          <br />
+          <br />
+          <br />
+          {patientsMirror &&
+            patientsMirror.patientArray.map((value) => (
+              // Edit Patient Buttons
+              <Button
+                color="secondary"
+                variant="contained"
+                key={`${value}changePatient`}
+                disabled={id == value}
+                onClick={() => changePatient(value)}
+              >
+                Edit Patient {value}
+              </Button>
+            ))}
+          
 
         </div>
       )}

@@ -240,8 +240,8 @@ const TreatmentProcedureForm = ({ localTreatment, setLocalTreatment }) => {
 
                             return (
                               <TableRow hover role="checkbox" tabIndex={-1} key={id + "patientmed" + proc}>
-                                <TableCell>{moment(localTreatment[`${id}procedureTimestamp${proc}`]).format('DD/MM/YYYY')}</TableCell>
-                                <TableCell>{moment(localTreatment[`${id}procedureTimestamp${proc}`]).format('hh:mm:ss')}</TableCell>
+                                <TableCell>{moment(localTreatment[`${id}procedureTimestamp${proc}`]).format('YYYY-MM-DD')}</TableCell>
+                                <TableCell>{moment(localTreatment[`${id}procedureTimestamp${proc}`]).format('HH:mm:ss')}</TableCell>
                                 <TableCell>{dropdowns['procedure_list'][localTreatment[`${id}procedure${proc}`] - 1]['procedure_list_type']}</TableCell>
                                 <TableCell>{dropdowns['procedures_attempted'][localTreatment[`${id}procedureAttempts${proc}`] - 1]['procedures_attempted_type']}</TableCell>
                                 <TableCell>{dropdowns['procedure_successful'][localTreatment[`${id}successfulProcedure${proc}`] - 1]['procedure_successful_type']}</TableCell>

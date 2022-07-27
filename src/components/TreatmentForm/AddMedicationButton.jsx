@@ -1,16 +1,13 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
+import moment from 'moment';
 import { Button } from "@material-ui/core";
 
 function AddMedicationButton({ treatmentMirror, setTreatmentMirror }) {
-  // const treatment = useSelector((store) => store.treatment);
-
   // router/redux
-  const history = useHistory();
   const { id } = useParams();
+
+  let number = treatmentMirror[`${id}medicationArray`].length;
 
   function AddMedication() {
 
@@ -32,24 +29,12 @@ function AddMedicationButton({ treatmentMirror, setTreatmentMirror }) {
       // THIS VALUE MEANS NOTHING AFTER SUBMISSION
       let newMedicationID = treatmentMirror[`${id}medicationArray`].length + 1;
 
-      const timestamp = Date.now();
-
-
-
+      const timestamp = moment();
 
       setTreatmentMirror({
         ...treatmentMirror,
 
-        [id + "medicationTimestamp" + treatmentMirror[`${id}medicationArray`].length]:
-          new Intl.DateTimeFormat("en-GB", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit"
-          }).format(timestamp),
-
+        [id + "medicationTimestamp" + treatmentMirror[`${id}medicationArray`].length]: timestamp,
         [id + "lastMedication"]: newMedicationID,
         [id + "medicationArray"]: [
           ...treatmentMirror[`${id}medicationArray`],
@@ -70,7 +55,7 @@ function AddMedicationButton({ treatmentMirror, setTreatmentMirror }) {
       {treatmentMirror && (
         <div>
           <Button color="primary" variant="contained" onClick={AddMedication}>
-            Add Medication
+            Submit Medication {number}
           </Button>
         </div>
       )}
