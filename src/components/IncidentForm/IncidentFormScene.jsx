@@ -73,7 +73,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
               Possible Injury
           </InputLabel>
             <Select
-
+              defaultValue=""
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               fullWidth
@@ -100,6 +100,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               fullWidth
+              defaultValue={""}
               value={localIncident[`alcoholDrugIndicators`]}
               onChange={(event) =>
                 submitValue({

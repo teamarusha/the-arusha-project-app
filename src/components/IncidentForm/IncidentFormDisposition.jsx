@@ -34,6 +34,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
               Transportation Disposition
           </InputLabel>
             <Select
+              defaultValue=""
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               fullWidth
@@ -101,7 +102,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 EMS Transport Method
             </InputLabel>
               <Select
-
+                defaultValue=""
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
@@ -127,7 +128,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 Transport Mode From Scene
             </InputLabel>
               <Select
-
+                defaultValue=""
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
@@ -153,7 +154,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 Type of Destination
             </InputLabel>
               <Select
-
+                defaultValue=""
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth

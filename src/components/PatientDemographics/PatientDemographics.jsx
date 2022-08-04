@@ -128,7 +128,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
             InputLabelProps={{
               shrink: true,
             }}
-          />
+          /> 
           <br />
           <br />
           <br />

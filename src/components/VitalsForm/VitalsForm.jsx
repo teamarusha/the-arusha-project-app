@@ -208,65 +208,6 @@ const VitalsForm = () => {
           ></TextField>
           <br />
           <br />
-          {/* <TextField
-            id="outlined-basic"
-            label="Glasgow Coma Score-Eye"
-            variant="outlined"
-            fullWidth
-            value={
-              localVitals[
-              `${id}glasgowComaScoreEye${localVitals[`${id}lastVital`]}`
-              ]
-            }
-            onChange={(event) =>
-              submitValue({
-                key: `${id}glasgowComaScoreEye${localVitals[`${id}lastVital`]}`,
-                thing: event.target.value,
-              })
-            }
-          ></TextField>
-          <br />
-          <br />
-          <TextField
-            id="outlined-basic"
-            label="Glasgow Coma Score-Verbal"
-            variant="outlined"
-            fullWidth
-            value={
-              localVitals[
-              `${id}glasgowComaScoreVerbal${localVitals[`${id}lastVital`]}`
-              ]
-            }
-            onChange={(event) =>
-              submitValue({
-                key: `${id}glasgowComaScoreVerbal${localVitals[`${id}lastVital`]
-                  }`,
-                thing: event.target.value,
-              })
-            }
-          ></TextField>
-          <br />
-          <br />
-          <TextField
-            id="outlined-basic"
-            label="Glasgow Coma Score-Motor"
-            variant="outlined"
-            fullWidth
-            value={
-              localVitals[
-              `${id}glasgowComaScoreMotor${localVitals[`${id}lastVital`]}`
-              ]
-            }
-            onChange={(event) =>
-              submitValue({
-                key: `${id}glasgowComaScoreMotor${localVitals[`${id}lastVital`]
-                  }`,
-                thing: event.target.value,
-              })
-            }
-          ></TextField>
-          <br />
-          <br /> */}
           <TextField
             id="outlined-basic"
             label="Glasgow Coma Score-Qualifier"
@@ -294,7 +235,7 @@ const VitalsForm = () => {
                 Level of Responsiveness
               </InputLabel>
               <Select
-
+                defaultValue={1}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
@@ -328,7 +269,7 @@ const VitalsForm = () => {
                 Glasgow Coma Score-Eye
               </InputLabel>
               <Select
-
+                defaultValue={1}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
@@ -362,7 +303,7 @@ const VitalsForm = () => {
                 Glasgow Coma Score-Verbal
               </InputLabel>
               <Select
-
+                defaultValue={1}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
@@ -396,7 +337,7 @@ const VitalsForm = () => {
                 Glasgow Coma Score-Motor
               </InputLabel>
               <Select
-
+                defaultValue={1}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
@@ -430,7 +371,7 @@ const VitalsForm = () => {
                 Pain Scale Score
               </InputLabel>
               <Select
-
+                defaultValue={1}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
@@ -459,7 +400,7 @@ const VitalsForm = () => {
                 Stroke Scale Score
               </InputLabel>
               <Select
-
+                defaultValue={1}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
@@ -489,6 +430,7 @@ const VitalsForm = () => {
                 Stroke Scale Type
               </InputLabel>
               <Select
+                defaultValue={1}
                 classes={{ root: classes.menuItem }}
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
