@@ -156,7 +156,7 @@ function FinalReport() {
                                             <TableBody>
                                                 {vit.map((item, index) => {
                                                     return (
-                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'vitals' + item.id}>
+                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'vitals' + item.vit_id}>
                                                             <TableCell >{moment(item.vitals_timestamp).format('DD/MM/YYYY')}</TableCell>
                                                             <TableCell>{moment(item.vitals_timestamp).format('hh:mm:ss')}</TableCell>
                                                             <TableCell>{item.systolic_bp}</TableCell>
@@ -168,8 +168,6 @@ function FinalReport() {
                                                             <TableCell>{item.glasgow_verbal}</TableCell>
                                                             <TableCell>{item.glasgow_motor}</TableCell>
                                                             <TableCell>{item.glasgow_qualifier}</TableCell>
-
-
                                                             <TableCell>{item.responsiveness_level}</TableCell>
                                                             <TableCell>{item.pain_scale}</TableCell>
                                                             <TableCell>{item.stroke_score}</TableCell>
@@ -258,7 +256,7 @@ function FinalReport() {
                                                 {/* header row values */}
                                                 {med.map((item, index) => {
                                                     return (
-                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'meds' + item.id}>
+                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'meds' + item.med_id}>
                                                             <TableCell>{moment(item.med_timestamp).format('DD/MM/YYYY')}</TableCell>
                                                             <TableCell>{moment(item.med_timestamp).format('hh:mm:ss')}</TableCell>
                                                             <TableCell>{item.med_name}</TableCell>
@@ -304,7 +302,7 @@ function FinalReport() {
                                                 {/* table row values */}
                                                 {pro.map((item, index) => {
                                                     return (
-                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'pro' + item.id}>
+                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'pro' + item.pro_id}>
 
 
                                                             <TableCell>{moment(item.procedure_timestamp).format('DD/MM/YYYY')}</TableCell>

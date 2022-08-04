@@ -84,7 +84,6 @@ function Admin() {
                             {reports.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-
                                         {/* date */}
                                         <TableCell>{moment(row.unit_notified).format('DD/MM/YYYY hh:mm:ss')}</TableCell>
                                         {/* time */}
@@ -110,8 +109,8 @@ function Admin() {
                     count={reports.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper>
         </Container>
