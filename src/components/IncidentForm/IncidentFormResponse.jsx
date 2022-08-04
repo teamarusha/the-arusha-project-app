@@ -44,7 +44,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
             Triage Category
           </InputLabel>
           <Select
-             
+             defaultValue=""
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth
@@ -67,7 +67,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
             Type of Service Requested
           </InputLabel>
           <Select
-            
+            defaultValue=""
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth

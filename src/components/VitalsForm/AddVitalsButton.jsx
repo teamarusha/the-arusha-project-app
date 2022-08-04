@@ -1,6 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import moment from 'moment';
 
 //Material UI Imports
 import { Button } from "@material-ui/core";
@@ -11,27 +11,21 @@ function AddVitalsButton({ vitalsMirror, setVitalsMirror }) {
   // router/redux
   const { id } = useParams();
 
+  let number = vitalsMirror[`${id}vitalsArray`].length;
+
   function AddVitals() {
     // newProcedureID will be the next procedure added. Does not use params from the url
     // Instead it looks at the ProcedureArray and adds the next procedure based on that
     // THIS ID IS NOT THE Procedure ID FROM THE DATABASE,
     // THIS VALUE MEANS NOTHING AFTER SUBMISSION
-    let newVitalsID = vitalsMirror[`${id}vitalsArray`].length + 1;
+    const timestamp = moment();
 
-    const timestamp = Date.now();
+    let newVitalsID = vitalsMirror[`${id}vitalsArray`].length + 1;
 
     setVitalsMirror({
       ...vitalsMirror,
 
-      [id + "vitalTimestamp" + vitalsMirror[`${id}vitalsArray`].length]:
-        new Intl.DateTimeFormat("en-GB", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit"
-        }).format(timestamp),
+      [id + "vitalTimestamp" + vitalsMirror[`${id}vitalsArray`].length]: timestamp,
 
       [id + "lastVital"]: newVitalsID,
       [id + "vitalsArray"]: [...vitalsMirror[`${id}vitalsArray`], newVitalsID],
@@ -40,13 +34,14 @@ function AddVitalsButton({ vitalsMirror, setVitalsMirror }) {
       [id + "pulseOximetry" + newVitalsID]: "",
       [id + "respiratoryRate" + newVitalsID]: "",
       [id + "bloodGlucoseLevel" + newVitalsID]: "",
-      [id + "glasgowComaScoreEye" + newVitalsID]: "",
-      [id + "glasgowComaScoreVerbal" + newVitalsID]: "",
-      [id + "glasgowComaScoreMotor" + newVitalsID]: "",
+      [id + "glasgowComaScoreEye" + newVitalsID]: 1,
+      [id + "glasgowComaScoreVerbal" + newVitalsID]: 1,
+      [id + "glasgowComaScoreMotor" + newVitalsID]: 1,
       [id + "glasgowComaScoreQualifier" + newVitalsID]: "",
-      [id + "painScaleScore" + newVitalsID]: "",
-      [id + "strokeScaleScore" + newVitalsID]: "",
-      [id + "strokeScaleType" + newVitalsID]: "",
+      [id + "responsivenessLevel" + newVitalsID]: 1,
+      [id + "painScaleScore" + newVitalsID]: 1,
+      [id + "strokeScaleScore" + newVitalsID]: 1,
+      [id + "strokeScaleType" + newVitalsID]: 1,
       [id + "vitalTimestamp" + newVitalsID]: "",
     });
   }
@@ -56,7 +51,7 @@ function AddVitalsButton({ vitalsMirror, setVitalsMirror }) {
       {vitalsMirror && (
         <div>
           <Button color="primary" variant="contained" onClick={AddVitals}>
-            Add Vitals
+            Submit Vitals {number}
           </Button>
         </div>
       )}

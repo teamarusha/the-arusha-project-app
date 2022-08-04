@@ -1,19 +1,22 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import moment from 'moment';
+import { useParams } from "react-router-dom";
 
 //Material UI Imports
 import { Button } from "@material-ui/core";
+import { number } from "prop-types";
 
 function AddProcedureButton({ treatmentMirror, setTreatmentMirror }) {
   // const treatment = useSelector((store) => store.treatment);
 
   // router/redux
-  const history = useHistory();
   const { id } = useParams();
 
+  let number = 1;
+
   function AddProcedure() {
+
+    console.log(number);
 
     if (
       treatmentMirror[`${id}procedure${treatmentMirror[`${id}lastProcedure`]}`] === "" ||
@@ -33,7 +36,7 @@ function AddProcedureButton({ treatmentMirror, setTreatmentMirror }) {
       // THIS VALUE MEANS NOTHING AFTER SUBMISSION
       let newProcedureID = treatmentMirror[`${id}lastProcedure`] + 1;
 
-      const timestamp = Date.now();
+      const timestamp = moment();
 
       
 
@@ -41,16 +44,7 @@ function AddProcedureButton({ treatmentMirror, setTreatmentMirror }) {
       setTreatmentMirror({
         ...treatmentMirror,
 
-        [id + "procedureTimestamp" + treatmentMirror[`${id}procedureArray`].length]:
-          new Intl.DateTimeFormat("en-GB", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit"
-          }).format(timestamp),
-
+        [id + "procedureTimestamp" + treatmentMirror[`${id}procedureArray`].length]: timestamp,
         [id + "lastProcedure"]: newProcedureID,
         [id + "procedureArray"]: [
           ...treatmentMirror[`${id}procedureArray`],
@@ -70,7 +64,7 @@ function AddProcedureButton({ treatmentMirror, setTreatmentMirror }) {
       {treatmentMirror && (
         <div>
           <Button color="primary" variant="contained" onClick={AddProcedure}>
-            Add Procedure
+            Submit Procedure {number}
           </Button>
         </div>
       )}
