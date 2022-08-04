@@ -85,9 +85,9 @@ function Admin() {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                                         {/* date */}
-                                        <TableCell>{moment(row.unit_notified).format('DD/MM/YYYY hh:mm:ss')}</TableCell>
+                                        <TableCell>{moment(row.unit_notified).format('DD/MM/YYYY')}</TableCell>
                                         {/* time */}
-                                        <TableCell>{moment(row.unit_notified).format('hh:mm:ss')}</TableCell>
+                                        <TableCell>{moment(row.unit_notified).format('HH:mm:ss')}</TableCell>
                                         {/* patient name */}
                                         <TableCell>{row.patient_first_name} {row.patient_last_name}</TableCell>
                                         {/* responder name */}
