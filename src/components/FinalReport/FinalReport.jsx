@@ -77,14 +77,14 @@ function FinalReport() {
                                 <p>Crew ID: {report.crew_id}</p>
                                 <p>Triage Category: {report.triage_cat_type}</p>
                                 <p>Type of Service Requested: {report.incident_service_type}</p>
-                                <p>Unit Notified by Dispatch: {moment(report.unit_notified).format('DD/MM/YYYY hh:mm:ss')} </p>
-                                <p>Unit En Route: {moment(report.unit_enroute).format('DD/MM/YYYY hh:mm:ss')}</p>
-                                <p>Unit Arrived At Scene: {moment(report.unit_arrived_scene).format('DD/MM/YYYY hh:mm:ss')}</p>
-                                <p>Arrived At Patient: {moment(report.arrived_patient).format('DD/MM/YYYY hh:mm:ss')}</p>
-                                <p>Unit Left Scene: {moment(report.unit_left_scene).format('DD/MM/YYYY hh:mm:ss')}</p>
-                                <p>Patient Arrived at Destination: {moment(report.arrived_destination).format('DD/MM/YYYY hh:mm:ss')}</p>
-                                <p>Destination Patient Transfer of Care: {moment(report.transfer_of_care).format('DD/MM/YYYY hh:mm:ss')}</p>
-                                <p>Unit Back In Service: {moment(report.unit_in_service).format('DD/MM/YYYY hh:mm:ss')}</p>
+                                <p>Unit Notified by Dispatch: {moment(report.unit_notified).format('DD/MM/YYYY HH:mm:ss')} </p>
+                                <p>Unit En Route: {moment(report.unit_enroute).format('DD/MM/YYYY HH:mm:ss')}</p>
+                                <p>Unit Arrived At Scene: {moment(report.unit_arrived_scene).format('DD/MM/YYYY HH:mm:ss')}</p>
+                                <p>Arrived At Patient: {moment(report.arrived_patient).format('DD/MM/YYYY HH:mm:ss')}</p>
+                                <p>Unit Left Scene: {moment(report.unit_left_scene).format('DD/MM/YYYY HH:mm:ss')}</p>
+                                <p>Patient Arrived at Destination: {moment(report.arrived_destination).format('DD/MM/YYYY HH:mm:ss')}</p>
+                                <p>Destination Patient Transfer of Care: {moment(report.transfer_of_care).format('DD/MM/YYYY HH:mm:ss')}</p>
+                                <p>Unit Back In Service: {moment(report.unit_in_service).format('DD/MM/YYYY HH:mm:ss')}</p>
 
                             </div>
                             {/* scene information */}
@@ -113,8 +113,8 @@ function FinalReport() {
                             </div>
                             <div>
                                 <h3>SYMPTOMS</h3>
-                                <p>Symptom Onset: {moment(report.time_symptom_onset).format('DD/MM/YYYY hh:mm:ss')}</p>
-                                <p>Last Known Well: {moment(report.time_last_known_well).format('DD/MM/YYYY hh:mm:ss')}</p>
+                                <p>Symptom Onset: {moment(report.time_symptom_onset).format('DD/MM/YYYY HH:mm:ss')}</p>
+                                <p>Last Known Well: {moment(report.time_last_known_well).format('DD/MM/YYYY HH:mm:ss')}</p>
                                 <p>Chief Complaint Anatomic Location: {report.anatomic_location_type}</p>
                                 <p>Chief Complaint Organ System: {report.organ_system_type}</p>
                                 <p>Primary Symptom: {report.primary_symptom}</p>
@@ -156,9 +156,9 @@ function FinalReport() {
                                             <TableBody>
                                                 {vit.map((item, index) => {
                                                     return (
-                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'vitals' + item.id}>
+                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'vitals' + item.vit_id}>
                                                             <TableCell >{moment(item.vitals_timestamp).format('DD/MM/YYYY')}</TableCell>
-                                                            <TableCell>{moment(item.vitals_timestamp).format('hh:mm:ss')}</TableCell>
+                                                            <TableCell>{moment(item.vitals_timestamp).format('HH:mm:ss')}</TableCell>
                                                             <TableCell>{item.systolic_bp}</TableCell>
                                                             <TableCell>{item.heart_rate}</TableCell>
                                                             <TableCell>{item.pulse_oximetry}</TableCell>
@@ -168,8 +168,6 @@ function FinalReport() {
                                                             <TableCell>{item.glasgow_verbal}</TableCell>
                                                             <TableCell>{item.glasgow_motor}</TableCell>
                                                             <TableCell>{item.glasgow_qualifier}</TableCell>
-
-
                                                             <TableCell>{item.responsiveness_level}</TableCell>
                                                             <TableCell>{item.pain_scale}</TableCell>
                                                             <TableCell>{item.stroke_score}</TableCell>
@@ -213,7 +211,7 @@ function FinalReport() {
                                 {report.time_cardiac_arrest &&
                                     <div>
                                         <p>Date: {moment(report.time_cardiac_arrest).format('DD/MM/YYYY')}</p>
-                                        <p>Time: {moment(report.time_cardiac_arrest).format('hh:mm:ss')}</p>
+                                        <p>Time: {moment(report.time_cardiac_arrest).format('HH:mm:ss')}</p>
 
                                         <p>Etiology: {report.cardiac_arrest_etiology_type}</p>
                                         <p>Resuscitation Attempted by EMS: {report.resuscitation_attempt_type}</p>
@@ -258,9 +256,9 @@ function FinalReport() {
                                                 {/* header row values */}
                                                 {med.map((item, index) => {
                                                     return (
-                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'meds' + item.id}>
+                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'meds' + item.med_id}>
                                                             <TableCell>{moment(item.med_timestamp).format('DD/MM/YYYY')}</TableCell>
-                                                            <TableCell>{moment(item.med_timestamp).format('hh:mm:ss')}</TableCell>
+                                                            <TableCell>{moment(item.med_timestamp).format('HH:mm:ss')}</TableCell>
                                                             <TableCell>{item.med_name}</TableCell>
                                                             <TableCell>{item.med_admin_route_type}</TableCell>
                                                             <TableCell>{item.med_dosage}</TableCell>
@@ -304,11 +302,11 @@ function FinalReport() {
                                                 {/* table row values */}
                                                 {pro.map((item, index) => {
                                                     return (
-                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'pro' + item.id}>
+                                                        <TableRow hover role="checkbox" tabIndex={-1} key={'pro' + item.pro_id}>
 
 
                                                             <TableCell>{moment(item.procedure_timestamp).format('DD/MM/YYYY')}</TableCell>
-                                                            <TableCell>{moment(item.procedure_timestamp).format('hh:mm:ss')}</TableCell>
+                                                            <TableCell>{moment(item.procedure_timestamp).format('HH:mm:ss')}</TableCell>
                                                             <TableCell>{item.procedure_name}</TableCell>
                                                             <TableCell>{item.procedures_attempted}</TableCell>
                                                             <TableCell>{item.procedure_successful}</TableCell>

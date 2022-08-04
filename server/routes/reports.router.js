@@ -85,7 +85,7 @@ router.get('/:id', (req, res) => {
     LEFT JOIN injury_location ON injury_location.id = injury_location_id
    
     LEFT OUTER JOIN (
-      SELECT patient_medication_id, json_build_object('med_name', med_name, 'med_admin_route_type', 
+      SELECT patient_medication_id, json_build_object('med_id', medication.id, 'med_name', med_name, 'med_admin_route_type', 
         med_admin_route.med_admin_route_type, 'med_admin_by_type', med_admin_by.med_admin_by_type, 'med_dosage', 
         med_dosage, 'med_dosage_units', med_dosage_units.med_dosage_units_type, 'med_response', 
         med_response.med_response_type, 'med_timestamp', med_timestamp) as medication FROM medication
@@ -95,7 +95,7 @@ router.get('/:id', (req, res) => {
       JOIN med_response ON med_response.id = medication.med_response_id
       ) med ON med.patient_medication_id = patient.id
     LEFT OUTER JOIN (
-      SELECT patient_procedure_id, json_build_object('procedure_name', procedure_list_type, 'procedures_attempted', 
+      SELECT patient_procedure_id, json_build_object('pro_id', procedure.id, 'procedure_name', procedure_list_type, 'procedures_attempted', 
         procedures_attempted_type, 'procedure_successful', procedure_successful_type, 'procedure_response', procedure_response_type, 
         'procedure_performer', procedure_performer_type, 'procedure_timestamp', procedure_timestamp) as procedure FROM procedure
       JOIN procedure_list ON procedure_list.id = procedure.procedure_name_id
@@ -104,9 +104,9 @@ router.get('/:id', (req, res) => {
       JOIN procedure_response ON procedure_response.id = procedure.procedure_response_id
       JOIN procedure_performer ON procedure_performer.id = procedure.procedure_performer_id) pro ON pro.patient_procedure_id = patient.id
     LEFT OUTER JOIN(
-      SELECT patient_vitals_id, json_build_object('systolic_bp', systolic_bp, 'heart_rate', heart_rate, 
+      SELECT patient_vitals_id, json_build_object('vit_id', vitals.id, 'systolic_bp', systolic_bp, 'heart_rate', heart_rate, 
         'pulse_oximetry', pulse_oximetry, 'respiratory_rate', respiratory_rate, 'blood_glucose', blood_glucose, 
-        'glasgow_eye', glasgow_eye, 'glasgow_verbal', glasgow_verbal, 'glasgow_motor', glasgow_motor, 'glasgow_qualifier', 
+        'glasgow_eye', glasgow_eye_type, 'glasgow_verbal', glasgow_verbal_type, 'glasgow_motor', glasgow_motor_type, 'glasgow_qualifier', 
         glasgow_qualifier, 'responsiveness_level', responsiveness_level_type, 'pain_scale', pain_scale_type, 'stroke_score', 
         stroke_score_type, 'stroke_scale', stroke_scale_type, 'vitals_timestamp', vitals_timestamp) as vitals FROM vitals
       JOIN glasgow_eye ON glasgow_eye.id = vitals.glasgow_eye_id
