@@ -177,21 +177,34 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
               value={item.id} classes={{ root: classes.menuItem }}>{item[`spontaneous_circulation_type`]}</MenuItem>)}
           </Select> <br /><br /><br />
           {/* Timestamp of cardiac arrest */}
-          <TextField
-            id="date"
-            label="Cardiac Arrest"
-            type="date"
-            value={patientsMirror[`${id}cardiacArrestDate`]}
+          <label htmlFor="cardiacArrestDate">Date of Cardiac Arrest:</label>
+          <input 
+          id="cardiacArrestDate"
+          type="date"
+          value={patientsMirror[`${id}cardiacArrestDate`]}
             onChange={(event) =>
               submitValue({
                 key: `${id}cardiacArrestDate`,
                 thing: event.target.value,
               })
             }
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />&nbsp; &nbsp; <br /><br />
+          />
+          { /* <TextField
+          //   id="date"
+          //   label="Cardiac Arrest"
+          //   type="date"
+          //   value={patientsMirror[`${id}cardiacArrestDate`]}
+          //   onChange={(event) =>
+          //     submitValue({
+          //       key: `${id}cardiacArrestDate`,
+          //       thing: event.target.value,
+          //     })
+          //   }
+          //   InputLabelProps={{
+          //     shrink: true,
+          //   }}
+          // /> */}
+          &nbsp; &nbsp; <br /><br />
           <label htmlFor="appt">Time:</label>
           <input type="time" id="appt" name="appt"
             min="09:00" max="18:00"

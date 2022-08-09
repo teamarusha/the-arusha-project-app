@@ -69,10 +69,11 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
             </Select> <br /><br /><br />
 
             {/* Symptom Onset DATE TEXTFIELD */}
-            <TextField
+            {/* <TextField
               id="date"
               label="Symptom Onset"
               type="date"
+              defaultValue=""
               value={patientsMirror[`${id}symptomOnsetDate`]}
               onChange={(event) =>
                 submitValue({
@@ -82,8 +83,33 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
               }
               InputLabelProps={{
                 shrink: true,
-              }}
-            />&nbsp; &nbsp; <br /><br />
+              }} */}
+            {/* />&nbsp; &nbsp; <br /><br /> */}
+            {/* <TextField
+              id="outlined-basic"
+              label="Date of Symptom Onset"
+              variant="outlined"
+              value={patientsMirror[`${id}symptomOnsetDate`]}
+              onChange={(event) =>
+                submitValue({
+                  key: `${id}symptomOnsetDate`,
+                  thing: event.target.value,
+                })
+              }
+            ></TextField> */}
+            <label htmlFor="symptomOnsetDate">Date of Symptom Onset:</label>
+          <input 
+          id="symptomOnsetDate"
+          type="date"
+          value={patientsMirror[`${id}symptomOnsetDate`]}
+              onChange={(event) =>
+                submitValue({
+                  key: `${id}symptomOnsetDate`,
+                  thing: event.target.value,
+                })
+              }
+          />
+            &nbsp; &nbsp; <br /><br />
             <label htmlFor="appt">Time:</label>
             <input type="time" id="appt" name="appt"
               min="09:00" max="18:00"
@@ -191,7 +217,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
             </Select> <br /><br /><br />
 
             {/* LAST KNOWN WELL DATE TEXTFIELD */}
-            <TextField
+            {/* <TextField
               id="date"
               label="Last Known Well:"
               type="date"
@@ -205,7 +231,31 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
               InputLabelProps={{
                 shrink: true,
               }}
-            />
+            /> */}
+            {/* <TextField
+              id="date"
+              label="Date Last Known Well"
+              variant="outlined"
+              value={patientsMirror[`${id}lastKnownWellDate`]}
+              onChange={(event) =>
+                submitValue({
+                  key: `${id}lastKnownWellDate`,
+                  thing: event.target.value,
+                })
+              }
+            ></TextField> */}
+          <label htmlFor="lastKnownWellDate">Date Last Known Well:</label>
+          <input 
+          id="lastKnownWellDate"
+          type="date"
+          value={patientsMirror[`${id}lastKnownWellDate`]}
+              onChange={(event) =>
+                submitValue({
+                  key: `${id}lastKnownWellDate`,
+                  thing: event.target.value,
+                })
+              }
+          />
             <br /><br />
             {/* LAST KNOWN WELL TIME INPUT */}
             <label htmlFor="appt">Time:</label>

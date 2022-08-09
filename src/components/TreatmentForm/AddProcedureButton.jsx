@@ -12,7 +12,7 @@ function AddProcedureButton({ treatmentMirror, setTreatmentMirror }) {
   // router/redux
   const { id } = useParams();
 
-  let number = 1;
+  let number = treatmentMirror[`${id}procedureArray`].length;
 
   function AddProcedure() {
 
