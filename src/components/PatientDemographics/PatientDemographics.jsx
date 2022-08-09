@@ -114,7 +114,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           <br />
           <br />
           {/* DATE OF BIRTH TEXTFIELD */}
-          <TextField
+          {/* <TextField
             id="date"
             label="DOB:"
             type="date"
@@ -128,7 +128,46 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
             InputLabelProps={{
               shrink: true,
             }}
-          /> 
+          /> */}
+          {/* <LocalizationProvider dateAdapter={DateFnsUtils}>
+          <MobileDatePicker
+            id="date"
+            label="DOB:"
+            type="date"
+            renderInput={(params) => <TextField {...params} fullWidth />}
+            value={patientsMirror[`${id}patientDateOfBirth`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}patientDateOfBirth`,
+                thing: event.target.value,
+              })
+            }
+          />
+          </LocalizationProvider> */}
+          {/* <TextField
+            id="date"
+            label="DOB:"
+            variant="outlined"
+            value={patientsMirror[`${id}patientDateOfBirth`]}
+            onChange={(event) =>
+              submitValue({
+                key: `${id}patientDateOfBirth`,
+                thing: event.target.value,
+              })
+            }
+          ></TextField> */}
+          <label htmlFor="DOBdate">Date of Birth:</label>
+          <input 
+          id="DOBdate"
+          type="date"
+          value={patientsMirror[`${id}patientDateOfBirth`]}
+          onChange={(event) =>
+            submitValue({
+              key: `${id}patientDateOfBirth`,
+              thing: event.target.value,
+            })
+          }
+          />
           <br />
           <br />
           <br />
