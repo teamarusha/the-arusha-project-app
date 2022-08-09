@@ -38,6 +38,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
               id="demo-simple-select-autowidth"
               fullWidth
               value={patientsMirror[`${id}anatomicLocation`]}
+              error={patientsMirror[`${id}anatomicLocation`] === ''}
               onChange={(event) =>
                 submitValue({
                   key: `${id}anatomicLocation`,
@@ -57,6 +58,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
               id="demo-simple-select-autowidth"
               fullWidth
               value={patientsMirror[`${id}organSystem`]}
+              error={patientsMirror[`${id}organSystem`] === ''}
               onChange={(event) =>
                 submitValue({
                   key: `${id}organSystem`,
@@ -125,6 +127,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
             <TextField
               id="outlined-basic"
               label="Primary Symptom"
+              error={patientsMirror[`${id}primarySymptom`] === ''}
               variant="outlined"
               multiline
               minRows={3}
@@ -148,6 +151,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
               minRows={3}
               fullWidth
               value={patientsMirror[`${id}otherSymptoms`]}
+              error={patientsMirror[`${id}otherSymptoms`] === ''}
               onChange={(event) =>
                 submitValue({
                   key: `${id}otherSymptoms`,
@@ -165,6 +169,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
               id="demo-simple-select-autowidth"
               fullWidth
               value={patientsMirror[`${id}initialAcuity`]}
+              error={patientsMirror[`${id}initialAcuity`] === ''}
               onChange={(event) =>
                 submitValue({
                   key: `${id}initialAcuity`,
@@ -185,6 +190,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
               id="demo-simple-select-autowidth"
               autoWidth
               value={patientsMirror[`${id}finalAcuity`]}
+              error={patientsMirror[`${id}finalAcuity`] === ''}
               onChange={(event) =>
                 submitValue({
                   key: `${id}finalAcuity`,
@@ -203,6 +209,7 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
               classes={{ root: classes.menuItem }}
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
+              error={patientsMirror[`${id}primaryImpression`] === ''}
               fullWidth
               value={patientsMirror[`${id}primaryImpression`]}
               onChange={(event) =>

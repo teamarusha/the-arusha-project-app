@@ -38,6 +38,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             id="demo-simple-select-autowidth"
             fullWidth
             value={patientsMirror[`${id}cardiacArrest`]}
+            error={patientsMirror[`${id}cardiacArrest`] === 0}
             onChange={(event) =>
               submitValue({
                 key: `${id}cardiacArrest`,
@@ -66,6 +67,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             id="demo-simple-select-autowidth"
             fullWidth
             value={patientsMirror[`${id}cardiacArrestEtiology`]}
+            error={patientsMirror[`${id}cardiacArrestEtiology`] === ''}
             onChange={(event) =>
               submitValue({
                 key: `${id}cardiacArrestEtiology`,
@@ -86,6 +88,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             id="demo-simple-select-autowidth"
             fullWidth
             value={patientsMirror[`${id}resuscitationAttempt`]}
+            error={patientsMirror[`${id}resuscitationAttempt`] === ''}
             onChange={(event) =>
               submitValue({
                 key: `${id}resuscitationAttempt`,
@@ -105,6 +108,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth
+            error={patientsMirror[`${id}cardiacArrestWitness`] === ''}
             value={patientsMirror[`${id}cardiacArrestWitness`]}
             onChange={(event) =>
               submitValue({
@@ -124,6 +128,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             classes={{ root: classes.menuItem }}
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
+            error={patientsMirror[`${id}aedUsePrior`] === ''}
             fullWidth
             value={patientsMirror[`${id}aedUsePrior`]}
             onChange={(event) =>
@@ -144,6 +149,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             classes={{ root: classes.menuItem }}
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
+            error={patientsMirror[`${id}cprProvided`] === ''}
             fullWidth
             value={patientsMirror[`${id}cprProvided`]}
             onChange={(event) =>
@@ -165,6 +171,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth
+            error={patientsMirror[`${id}spontaneousCirculation`] === ''}
             value={patientsMirror[`${id}spontaneousCirculation`]}
             onChange={(event) =>
               submitValue({
@@ -224,6 +231,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth
+            error={patientsMirror[`${id}cprStopped`] === ''}
             value={patientsMirror[`${id}cprStopped`]}
             onChange={(event) =>
               submitValue({
@@ -246,6 +254,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             id="demo-simple-select-autowidth"
             fullWidth
             value={patientsMirror[`${id}cprInitiator`]}
+            error={patientsMirror[`${id}cprInitiator`] === ''}
             onChange={(event) =>
               submitValue({
                 key: `${id}cprInitiator`,
@@ -267,6 +276,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             id="demo-simple-select-autowidth"
             fullWidth
             value={patientsMirror[`${id}aedApplicator`]}
+            error={patientsMirror[`${id}aedApplicator`] === ''}
             onChange={(event) =>
               submitValue({
                 key: `${id}aedApplicator`,
@@ -288,6 +298,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
             id="demo-simple-select-autowidth"
             fullWidth
             value={patientsMirror[`${id}aedDefibrillator`]}
+            error={patientsMirror[`${id}aedDefibrillator`] === ''}
             onChange={(event) =>
               submitValue({
                 key: `${id}aedDefibrillator`,

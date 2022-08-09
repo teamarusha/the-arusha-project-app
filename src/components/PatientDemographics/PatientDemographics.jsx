@@ -33,6 +33,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
             id="outlined-basic"
             label="First Name"
             variant="outlined"
+            error={patientsMirror[`${id}patientFirstName`] === ''}
             value={patientsMirror[`${id}patientFirstName`]}
             onChange={(event) =>
               submitValue({
@@ -49,6 +50,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
             id="outlined-basic"
             label="Last Name"
             variant="outlined"
+            error={patientsMirror[`${id}patientLastName`] === ''}
             value={patientsMirror[`${id}patientLastName`]}
             onChange={(event) =>
               submitValue({
@@ -69,6 +71,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth
+            error={patientsMirror[`${id}patientGender`] === ''}
             value={patientsMirror[`${id}patientGender`]}
             onChange={(event) =>
               submitValue({
@@ -93,6 +96,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
             classes={{ root: classes.menuItem }}
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
+            error={patientsMirror[`${id}patientRace`] === ''}
             fullWidth
             value={patientsMirror[`${id}patientRace`]}
             onChange={(event) =>
@@ -175,6 +179,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           <TextField
             id="outlined-basic"
             label="Age"
+            error={patientsMirror[`${id}patientAge`] === ''}
             variant="outlined"
             value={patientsMirror[`${id}patientAge`]}
             onChange={(event) =>
@@ -189,6 +194,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           {/* AGE UNITS DROPDOWN MENU */}
           <InputLabel id="demo-simple-select-autowidth-label">Age Units</InputLabel>
           <Select
+            error={patientsMirror[`${id}patientAgeUnits`] === ''}
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             fullWidth
@@ -213,6 +219,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
           <br />
           {/* ADDRESS TEXTFIELD */}
           <TextField
+            error={patientsMirror[`${id}patientAddress`] === ''}
             id="outlined-basic"
             label="Home Address"
             variant="outlined"
@@ -232,6 +239,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
             label="City"
             variant="outlined"
             value={patientsMirror[`${id}patientHomeCity`]}
+            error={patientsMirror[`${id}patientHomeCity`] === ''}
             onChange={(event) =>
               submitValue({
                 key: `${id}patientHomeCity`,
@@ -250,6 +258,7 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
             id="outlined-basic"
             label="Region"
             variant="outlined"
+            error={patientsMirror[`${id}patientHomeRegion`] === ''}
             value={patientsMirror[`${id}patientHomeRegion`]}
             onChange={(event) =>
               submitValue({

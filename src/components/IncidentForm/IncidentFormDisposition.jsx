@@ -35,6 +35,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
           </InputLabel>
             <Select
               defaultValue=""
+              error={localIncident[`${id}transportDisposition`] === 0}
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               fullWidth
@@ -64,6 +65,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 id="outlined-basic"
                 label="Destination City"
                 variant="outlined"
+                error={localIncident[`${id}destinationCity`] === ''}
                 value={localIncident[`${id}destinationCity`]}
                 onChange={(event) =>
                   submitValue({
@@ -78,6 +80,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 id="outlined-basic"
                 label="Destination Region"
                 variant="outlined"
+                error={localIncident[`${id}destinationRegion`] === ''}
                 value={localIncident[`${id}destinationRegion`]}
                 onChange={(event) =>
                   submitValue({
@@ -106,6 +109,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
+                error={localIncident[`${id}transportMethod`] === ''}
                 value={localIncident[`${id}transportMethod`]}
                 onChange={(event) =>
                   submitValue({
@@ -131,6 +135,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 defaultValue=""
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
+                error={localIncident[`${id}transportMode`] === ''}
                 fullWidth
                 value={localIncident[`${id}transportMode`]}
                 onChange={(event) =>
@@ -158,6 +163,7 @@ const IncidentFormDisposition = ({ localIncident, setLocalIncident }) => {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 fullWidth
+                error={localIncident[`${id}destinationFacility`] === ''}
                 value={localIncident[`${id}destinationFacility`]}
                 onChange={(event) =>
                   submitValue({

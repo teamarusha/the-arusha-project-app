@@ -26,7 +26,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
         <TextField
           id="outlined-basic"
           label="Crew ID"
-          
+          error={localIncident.crew === ""}
           variant="outlined"
           value={localIncident[`crew`]}
           onChange={(event) =>
@@ -47,6 +47,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
              defaultValue=""
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
+            error={localIncident.triageCat === ""}
             fullWidth
             value={localIncident[`triageCat`]}
             onChange={(event) =>
@@ -70,6 +71,7 @@ const IncidentFormResponse = ({ localIncident, setLocalIncident }) => {
             defaultValue=""
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
+            error={localIncident.incidentService === ""}
             fullWidth
             value={localIncident[`incidentService`]}
             onChange={(event) =>
