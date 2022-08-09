@@ -35,6 +35,7 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
             fullWidth
             variant="outlined"
             value={patientsMirror[`${id}patientAllergies`]}
+            error={patientsMirror[`${id}patientAllergies`] === ''}
             onChange={(event) =>
               submitValue({
                 key: `${id}patientAllergies`,
@@ -50,6 +51,7 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
             id="outlined-basic"
             label="Current Medications"
             variant="outlined"
+            error={patientsMirror[`${id}patientCurrMedications`] === ''}
             fullWidth
             multiline
             minRows={3}
@@ -68,6 +70,7 @@ function PatientMedical({ patientsMirror, setPatientsMirror }) {
           <TextField
             id="outlined-basic"
             label="Previous Medical Conditions"
+            error={patientsMirror[`${id}patientMedConditions`] === ''}
             variant="outlined"
             fullWidth
             multiline

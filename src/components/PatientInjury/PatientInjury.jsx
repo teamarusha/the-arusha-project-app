@@ -39,6 +39,7 @@ function PatientInjury({ patientsMirror, setPatientsMirror }) {
             id="demo-simple-select-autowidth"
             fullWidth
             value={patientsMirror[`${id}injuryLocation`]}
+            error={patientsMirror[`${id}injuryLocation`] === ''}
             onChange={(event) =>
               submitValue({
                 key: `${id}injuryLocation`,
@@ -65,6 +66,7 @@ function PatientInjury({ patientsMirror, setPatientsMirror }) {
             id="demo-simple-select-autowidth"
             fullWidth
             value={patientsMirror[`${id}injuryCause`]}
+            error={patientsMirror[`${id}injuryCause`] === ''}
             onChange={(event) =>
               submitValue({
                 key: `${id}injuryCause`,

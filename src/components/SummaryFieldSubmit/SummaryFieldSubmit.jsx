@@ -252,6 +252,7 @@ function SummaryFieldSubmit() {
                 variant="outlined"
                 fullWidth
                 value={incidentMirror.incidentSummary}
+                error={incidentMirror.incidentSummary === ''}
                 onChange={(event) =>
                   submitValue({
                     key: `incidentSummary`,

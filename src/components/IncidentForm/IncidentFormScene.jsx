@@ -9,6 +9,11 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
   const classes = useStyles();
   const dropdowns = useSelector((store) => store.dropdowns);
 
+  // useEffect(() => {
+  //   if(localIncident.incidentCity === ""){
+  //     noEntry();
+  //   }
+  // }, [])
 
   function submitValue(newParameter) {
     setLocalIncident({
@@ -17,6 +22,14 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
     });
 
   }
+
+  // function noEntry(){
+  //   console.log('in notValid')
+  //   if(localIncident.incidentCity === ""){
+  //     return true
+  //   }
+  //   return false
+  // }
 
   return (
     <Container>
@@ -28,6 +41,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
               id="outlined-basic"
               label="# of Patients"
               variant="outlined"
+              error={localIncident.patientNumbers === ""}
               value={localIncident[`patientNumbers`]}
               onChange={(event) =>
                 submitValue({
@@ -40,6 +54,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
             <br />
             {/* incident city textfield */}
             <TextField
+              error={localIncident.incidentCity === ""}
               id="outlined-basic"
               label="Incident City"
               variant="outlined"
@@ -55,6 +70,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
               id="outlined-basic"
               label="Incident Region"
               variant="outlined"
+              error={localIncident.incidentRegion === ""}
               value={localIncident[`incidentRegion`]}
               onChange={(event) =>
                 submitValue({ key: `incidentRegion`, thing: event.target.value })
@@ -77,6 +93,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               fullWidth
+              error={localIncident.possibleInjury === ""}
               value={localIncident[`possibleInjury`]}
               onChange={(event) =>
                 submitValue({ key: `possibleInjury`, thing: event.target.value })
@@ -101,6 +118,7 @@ const IncidentFormScene = ({ localIncident, setLocalIncident }) => {
               id="demo-simple-select-autowidth"
               fullWidth
               defaultValue={""}
+              error={localIncident.alcoholDrugIndicators === ""}
               value={localIncident[`alcoholDrugIndicators`]}
               onChange={(event) =>
                 submitValue({
