@@ -160,7 +160,12 @@ function PatientDemographics({ patientsMirror, setPatientsMirror }) {
               })
             }
           ></TextField> */}
+          {patientsMirror[`${id}patientDateOfBirth`]
+          ?
           <label htmlFor="DOBdate">Date of Birth:</label>
+          :
+          <label class="label error" htmlFor="DOBdate">Date of Birth:</label>
+        }
           <input 
           id="DOBdate"
           type="date"

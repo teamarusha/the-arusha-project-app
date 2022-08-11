@@ -184,7 +184,12 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
               value={item.id} classes={{ root: classes.menuItem }}>{item[`spontaneous_circulation_type`]}</MenuItem>)}
           </Select> <br /><br /><br />
           {/* Timestamp of cardiac arrest */}
+          {patientsMirror[`${id}cardiacArrestDate`]
+          ?
           <label htmlFor="cardiacArrestDate">Date of Cardiac Arrest:</label>
+          :
+          <label class="label error" htmlFor="cardiacArrestDate">Date of Cardiac Arrest:</label>
+        }
           <input 
           id="cardiacArrestDate"
           type="date"
