@@ -264,7 +264,12 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                 })
               }
             ></TextField> */}
+          {patientsMirror[`${id}lastKnownWellDate`]
+          ?
           <label htmlFor="lastKnownWellDate">Date Last Known Well:</label>
+          :
+          <label class="label error" htmlFor="lastKnownWellDate">Date Last Known Well:</label>
+        }
           <input 
           id="lastKnownWellDate"
           type="date"
@@ -278,7 +283,12 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
           />
             <br /><br />
             {/* LAST KNOWN WELL TIME INPUT */}
+            {patientsMirror[`${id}lastKnownWellTime`]
+            ?
             <label htmlFor="appt">Time:</label>
+            :
+            <label class="label error" htmlFor="appt">Time:</label>
+            }
             <input type="time" id="appt" name="appt"
               min="00:00" max="24:00"
               value={patientsMirror[`${id}lastKnownWellTime`]}
