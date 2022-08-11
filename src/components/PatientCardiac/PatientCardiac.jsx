@@ -189,7 +189,7 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
           <label htmlFor="cardiacArrestDate">Date of Cardiac Arrest:</label>
           :
           <label class="label error" htmlFor="cardiacArrestDate">Date of Cardiac Arrest:</label>
-        }
+          }
           <input 
           id="cardiacArrestDate"
           type="date"
@@ -217,7 +217,12 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
           //   }}
           // /> */}
           &nbsp; &nbsp; <br /><br />
+          {patientsMirror[`${id}cardiacArrestTime`]
+          ?
           <label htmlFor="appt">Time:</label>
+          :
+          <label class="label error" htmlFor="appt">Time:</label>
+        }
           <input type="time" id="appt" name="appt"
             min="09:00" max="18:00"
             value={patientsMirror[`${id}cardiacArrestTime`]}
