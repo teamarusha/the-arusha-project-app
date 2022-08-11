@@ -99,14 +99,12 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
                 })
               }
             ></TextField> */}
-            {patientsMirror[`${id}symptomOnsetDate`]
+            {patientsMirror[`${id}symptomOnsetDate`] 
             ?
             <label htmlFor="symptomOnsetDate">Date of Symptom Onset:</label>
             :
             <label class="label error" htmlFor="symptomOnsetDate">Date of Symptom Onset:</label>
-
-            }
-            
+          }
           <input 
           id="symptomOnsetDate"
           type="date"
@@ -125,7 +123,6 @@ function PatientSymptoms({ patientsMirror, setPatientsMirror }) {
             :
             <label class="label error" htmlFor="appt">Time:</label>
           }
-
             <input type="time" id="appt" name="appt"
               min="09:00" max="18:00"
               value={patientsMirror[`${id}symptomOnsetTime`]}

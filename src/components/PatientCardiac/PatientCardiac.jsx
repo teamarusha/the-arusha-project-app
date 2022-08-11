@@ -190,7 +190,6 @@ function PatientCardiac({ patientsMirror, setPatientsMirror }) {
           :
           <label class="label error" htmlFor="cardiacArrestDate">Date of Cardiac Arrest:</label>
           }
-          
           <input 
           id="cardiacArrestDate"
           type="date"
